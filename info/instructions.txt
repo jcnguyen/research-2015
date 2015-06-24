@@ -1,52 +1,80 @@
-Downloading the Graphs:
+/*****************************************
+ * Downloading the Graphs
+ *****************************************/
 1. Go to http://cise.ufl.edu/research/sparse/matrices/Newman/index.html
 2. Click on a graph: "Newman/some_graph"
-3. Click "download in Matrix Market format." The file should start downloading.
+3. Click "download in Matrix Market format." The file will start downloading.
 4. Click on "Downloads" folder on the launcher
 5. Double click on some_graph.tar to unzip the file
 6. Drag the some_graph folder into a folder used to hold graphs
 
-Changing the Graphs to Zero-Index:
-1. compile main_indexzero.cpp
-		g++ main_indexzero.cpp -o indexzero
-2. run it
+/*****************************************
+ * Converting the Graphs to Zero-Index
+ *****************************************/
+1. Compile the program by running the following commands 
+   (you only have to do this once):
+		make clean
+		make
+2. Run it (choose one, based on weighted and unweighted)
 		unweighted: 
 		./indexzero -i input_filename.txt > output_filename.txt
 
 		weighted:   
 		./indexzero -i input_filename.txt -w > output_filename.txt
 
-Running the Graph through the Algorithm:
-1. Compile the Algorithm
+	where "input_filename.txt" is the name of the input graph, and 
+	"output_filename.txt" is the name of the output file 
+
+/*****************************************
+ * Running the Graph through the Algorithm
+ *****************************************/
+1. Compile the algorithm by running the following commands(
+   you only have to do this once):
 		make clean
 		make
+
 2. Convert the graph into something the machine can read
 		unweighted:
 		./convert -i graph.txt -o graph.bin
 
-		weighted:
+		weighted
 		./convert -i graph.txt -o graph.bin -w
-3. Convert the graph into a community graph
+
+3. Convert the graph into a community graph 
+   (note that this only specifies the modularity version. if you're using 
+   	the coverage version, replace "modularity" with "coverage")
 		unweighted:
-		./community graph.bin -l -1 -v > graph.tree
+		./community_modularity graph.bin -l -1 -v > graph-modularity.tree
 
 		weighted:
-		./community graph.bin -l -1 -v -w > graph.tree
+		./community_modularity graph.bin -l -1 -v -w > graph-modularity.tree
+
 4. Print the community graph into a file
 		./hierarchy graph.tree
-		// note the highest level
 		./hierarchy -l the_highest_level > graph.graph
-		// make sure to use the naming convention we discussed for graph.graph
 
-Using the Command-Line:
+	where "the_highest_level" is the highest level specified after doing 
+	"./hierarchy graph.tree"
+    
+    The naming convention for graph.graph is 
+    "abbreviationOfAlgorithm-metric.graph"
+    	ex: LM-modularity.graph
+    	    LM-coverage.graph
+    	    CNM-modularity.graph
+    	    CNM-coverage.graph
+
+/*****************************************
+ * Using the Command-Line
+ *****************************************/
 - Basic Commands:
 	1. ls - lists the files for this current folder
 	2. cd folder_name - changes directory to folder_name
 	   cd .. - moves current directory up one level
 - Compiling: there are two ways
-	1. gcc program_name.cpp -o what_you_want_to_call_the_program (note that there are no extensions)
-	2. make clean - cleans out the already compiled stuff (you want to do this so that there isn't architecture problems)
+	2. make clean - cleans out the already compiled stuff 
+	   (you want to do this so that there isn't architecture problems)
 	   make - compiles everything
-    - note: you have to be in the folder that contains these files if you want to use them
+    - note: you have to be in the folder that contains these files 
+      if you want to use them
 
 
