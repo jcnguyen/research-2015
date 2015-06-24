@@ -1,0 +1,69 @@
+
+/******************************************************
+ * community.cpp
+ ******************************************************
+40 and 62) sets the minimum_modularity required to do an iteration
+	// changed variable name
+
+105) modularity function - definition of modularity
+	// changed function name
+	// implement metric definition
+
+244 and 245) set-up; computes the modularity of the first community graph (when each node is its own community) using the modularity function as described in line 105 (the mod of current comm graph is stored in double called cur_mod and the mod of new comm graph is stored in a double called new_mod)
+	// changed variable names
+
+262) sets current modularity as the new modularity (more relevent in subsequent passes)
+	// changed variable names
+
+258 and 259) comment describing when to do an iteration (a. when there's a modularity gain OR b. change of modularity is greater than epsilon/min_modularity OR c. number of passes is complete)
+	a. increase > best_increase (285)
+	b. (new_mod - cur_mod) > min_modularity (310)
+	// changed comments
+
+284) uses modularity_gain function (implemented in .h) to find the change of modularity (which is stored in a double called increase)
+	// changed function name
+
+306) computes the modularity of the new community graph 
+	// changed function name
+
+310) see b. above
+	// changed variable names
+
+/******************************************************
+ * community.h
+ ******************************************************
+41) comment about vector<double> internal_edges and total_edges
+	// changed comment
+
+44) comment about how many iterations the program should do to incrase modularity (default is as many as needed)
+	// changed comment
+
+71, 80, *121) the method header, comment, and definition for modularity_gain; modularity gain is the increase in modularity if node was inserted in one community or the other (see community.cpp::258,259,284 - when used in community.cpp, the modularity gain is determined FOR ALL COMMUNITIES. whatever community gives the highest gain is the one that this node will go to)
+	// changed method header, comment, and function name 
+	// *implement coverage_gain
+
+86 and 87) the method header for the modularity function (see community.cpp::105) with comment
+	// changed method header name and changed comment
+
+/******************************************************
+ * main_community
+ ******************************************************
+49 and 52) information about usage
+	// changed usage info
+
+121) set-up; same as community.cpp::244,245
+	// changed variable names
+
+121 and 137) uses modularity() 
+	// changed function name
+
+156) print info
+	// changed print statement
+
+158) same as community.cpp::262
+	// change variable names
+
+
+
+*IS THERE AN EQUIVALENT TO MODULARITY_GAIN FOR COVERAGE?
+ - probs - since you're implementing coverage similarly to modularity: "whichever community yields the highest [metric] when the nodes is added to that commmunity then that node will belong to that community"
