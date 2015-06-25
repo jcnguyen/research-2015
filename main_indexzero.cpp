@@ -51,25 +51,6 @@ void convert_to_index_0(char *filename, int type) {
     }
   }
 
-  // while (!finput.eof()) {
-  //   unsigned int src, dest; // starting vertex and ending vertex
-  //   unsigned int new_src, new_dest;
-  //   double weight=1.; // weight between src and dest vertex
-
-  //   // parses line
-  //   if (type==WEIGHTED) {
-  //     finput >> src >> dest >> weight;
-  //     new_src = src - 1;
-  //     new_dest = dest - 1;
-  //     cout << new_src << " " << new_dest << " " << weight << endl;
-  //   } else {
-  //     finput >> src >> dest;
-  //     new_src = src - 1;
-  //     new_dest = dest - 1;
-  //     cout << new_src << " " << new_dest << endl;
-  //   }    
-  // }
-
   finput.close();
 }
 
