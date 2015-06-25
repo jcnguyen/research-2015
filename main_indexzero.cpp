@@ -33,24 +33,42 @@ void convert_to_index_0(char *filename, int type) {
   ifstream finput;
   finput.open(filename,fstream::in);
 
-  while (!finput.eof()) {
-    unsigned int src, dest; // starting vertex and ending vertex
-    unsigned int new_src, new_dest;
-    double weight=1.; // weight between src and dest vertex
+  unsigned int src, dest; // starting vertex and ending vertex
+  unsigned int new_src, new_dest;
+  double weight=1.; // weight between src and dest vertex
 
-    // parses line
-    if (type==WEIGHTED) {
-      finput >> src >> dest >> weight;
+  if (type == WEIGHTED) {
+    while(finput >> src >> dest >> weight) {
       new_src = src - 1;
       new_dest = dest - 1;
       cout << new_src << " " << new_dest << " " << weight << endl;
-    } else {
-      finput >> src >> dest;
+    }
+  } else if (type == UNWEIGHTED){
+    while(finput >> src >> dest) {
       new_src = src - 1;
       new_dest = dest - 1;
       cout << new_src << " " << new_dest << endl;
-    }    
+    }
   }
+
+  // while (!finput.eof()) {
+  //   unsigned int src, dest; // starting vertex and ending vertex
+  //   unsigned int new_src, new_dest;
+  //   double weight=1.; // weight between src and dest vertex
+
+  //   // parses line
+  //   if (type==WEIGHTED) {
+  //     finput >> src >> dest >> weight;
+  //     new_src = src - 1;
+  //     new_dest = dest - 1;
+  //     cout << new_src << " " << new_dest << " " << weight << endl;
+  //   } else {
+  //     finput >> src >> dest;
+  //     new_src = src - 1;
+  //     new_dest = dest - 1;
+  //     cout << new_src << " " << new_dest << endl;
+  //   }    
+  // }
 
   finput.close();
 }
@@ -60,7 +78,7 @@ void usage(char *prog_name, const char *more) {
   cerr << "usage: " << prog_name << " -i input_file -o outfile [-r] [-w outfile_weight]" << endl << endl;
   cerr << "read the graph and convert it to binary format." << endl;
   cerr << "-r\tnodes are renumbered from 0 to nb_nodes-1 (the order is kept)." << endl;
-  cerr << "-w filename\tread the graph as a weighted one and writes the weights in a separate file." << endl;
+  cerr << "-w\tread the graph as a weighted one and writes the weights in a separate file." << endl;
   cerr << "-d\tdisplays graph" << endl;
   cerr << "-h\tshow this usage message." << endl;
   exit(0);
