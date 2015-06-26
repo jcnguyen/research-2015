@@ -1,17 +1,25 @@
 /*****************************************
- * Running the CNM Algorithm
+ * Running the CNM Algorithm (unweighted only)
  *****************************************/
 1. Download the CNM algorithm
 2. Compile the program:
 	make clean
 	make
 3. Run the program:
-	./FastCommunityMH -f ./input/name-of-program.pairs -l modularity
+	./FastCommunityMH -f ./input/name-of-file.pairs -l modularity
 4. Go into the .info file
 5. Look for the line "STEP------:	106." Keep note of the number
 4. Rerun the program:
-	./FastCommunityMH -f ./input/name-of-program.pairs -l modularity -c 106
+	./FastCommunityMH -f ./input/name-of-file.pairs -l modularity -c 106
 
 SUMMARY:
-./FastCommunityMH -f ./input/name-of-program.pairs -l modularity
-./FastCommunityMH -f ./input/name-of-program.pairs -l modularity -c 106
+./FastCommunityMH -f ./input/name-of-file.pairs -l modularity
+./FastCommunityMH -f ./input/name-of-file.pairs -l modularity -c 106
+
+/*****************************************
+ * Sorting the .groups files
+ *****************************************/
+ 1. Go into the input folder:
+ 	cd input
+ 2. Sort the .graph file:
+ 	sort -n < name-cnm-modularity.groups > name-cnm-modularity.graph
