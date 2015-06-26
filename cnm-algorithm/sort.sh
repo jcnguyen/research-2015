@@ -54,7 +54,7 @@ NAME_LIST=(
 	"web-Stanford-cnm-modularity"
 )
 
-for i in "${NAME_LIST[@]}"
+for name in "${NAME_LIST[@]}"
 do
-	sort -n < "${i}.groups" > "${i}.graph"
+	sort -n < "${name}.groups" > "${name}.graph"
 done
