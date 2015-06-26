@@ -471,12 +471,12 @@ void buildDeltaQMatrix() {
 void buildFilenames() {
 
 	ioparm.f_input   = ioparm.d_in  + ioparm.filename;
-	ioparm.f_parm    = ioparm.d_out + ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".info";
-	ioparm.f_joins   = ioparm.d_out + ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".joins";
-	ioparm.f_support = ioparm.d_out + ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".supp";
-	ioparm.f_net     = ioparm.d_out + ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".wpairs";
-	ioparm.f_group   = ioparm.d_out + ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".groups";
-	ioparm.f_gstats  = ioparm.d_out + ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".hist";
+	ioparm.f_parm    = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".info";
+	ioparm.f_joins   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".joins";
+	ioparm.f_support = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".supp";
+	ioparm.f_net     = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".wpairs";
+	ioparm.f_group   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".graph";
+	ioparm.f_gstats  = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".hist";
 	
 	if (true) { ofstream flog(ioparm.f_parm.c_str(), ios::trunc); flog.close(); }
 	time_t t; t = time(&t);
@@ -486,14 +486,14 @@ void buildFilenames() {
 	flog << "---FILES--------\n";
 	flog << "DIRECTORY-:\t" << ioparm.d_out		<< "\n";
 	flog << "F_IN------:\t" << ioparm.filename   << "\n";
-	flog << "F_JOINS---:\t" << ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".joins" << "\n";
-	flog << "F_INFO----:\t" << ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".info"  << "\n";
+	flog << "F_JOINS---:\t" << ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".joins" << "\n";
+	flog << "F_INFO----:\t" << ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".info"  << "\n";
 	if (ioparm.suppFlag) {
-		flog << "F_SUPP----:\t" << ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".supp" << "\n"; }
+		flog << "F_SUPP----:\t" << ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".supp" << "\n"; }
 	if (ioparm.cutstep>0) {
-		flog << "F_NET-----:\t" << ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".wpairs" << "\n";
-		flog << "F_GROUPS--:\t" << ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".groups" << "\n";
-		flog << "F_GDIST---:\t" << ioparm.s_scratch + "-fc_"  + ioparm.s_label + ".hist"   << "\n";
+		flog << "F_NET-----:\t" << ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".wpairs" << "\n";
+		flog << "F_GROUPS--:\t" << ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".graph" << "\n";
+		flog << "F_GDIST---:\t" << ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".hist"   << "\n";
 	}
 	flog.close();
 	

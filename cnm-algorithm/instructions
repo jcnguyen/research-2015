@@ -1,0 +1,17 @@
+/*****************************************
+ * Running the CNM Algorithm
+ *****************************************/
+1. Download the CNM algorithm
+2. Compile the program:
+	make clean
+	make
+3. Run the program:
+	./FastCommunityMH -f ./input/name-of-program.pairs -l modularity
+4. Go into the .info file
+5. Look for the line "STEP------:	106." Keep note of the number
+4. Rerun the program:
+	./FastCommunityMH -f ./input/name-of-program.pairs -l modularity -c 106
+
+SUMMARY:
+./FastCommunityMH -f ./input/name-of-program.pairs -l modularity
+./FastCommunityMH -f ./input/name-of-program.pairs -l modularity -c 106
