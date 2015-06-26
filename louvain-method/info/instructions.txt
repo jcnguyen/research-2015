@@ -20,7 +20,7 @@
 		./indexzero -i input_filename.txt > output_filename.txt
 
 		weighted:   
-		./indexzero -i input_filename.txt -w > output_filename.txt
+		./indexzero -i input_filename.txt -w output_weight_filename.txt > output_filename.txt
 
 	where "input_filename.txt" is the name of the input graph, and 
 	"output_filename.txt" is the name of the output file 
@@ -38,7 +38,7 @@
 		./convert -i graph.txt -o graph.bin
 
 		weighted
-		./convert -i graph.txt -o graph.bin -w
+		./convert -i graph.txt -o graph.bin -w output_weight_filename.txt
 
 3. Convert the graph into a community graph 
    (note that this only specifies the modularity version. if you're using 
@@ -47,7 +47,7 @@
 		./community_modularity graph.bin -l -1 -v > graph-modularity.tree
 
 		weighted:
-		./community_modularity graph.bin -l -1 -v -w > graph-modularity.tree
+		./community_modularity graph.bin -l -1 -v -w output_weight_filename.txt > graph-modularity.tree
 
 4. Print the community graph into a file
 		./hierarchy graph-modularity.tree

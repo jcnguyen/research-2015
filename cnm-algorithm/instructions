@@ -19,7 +19,12 @@ SUMMARY:
 /*****************************************
  * Sorting the .groups files
  *****************************************/
- 1. Go into the input folder:
- 	cd input
- 2. Sort the .graph file:
- 	sort -n < name-cnm-modularity.groups > name-cnm-modularity.graph
+ 1. Open "sort.sh" file
+ 2. Check that the names in "NAME_LIST" array are accurate
+ 3. Go to command line
+ 4. Go to the directory that contains "sort.sh"
+ 5. Compile:
+ 	chmod +x ./sort.sh
+ 6. Run:
+ 	./sort.sh
+ 7. .graph files will be generated
