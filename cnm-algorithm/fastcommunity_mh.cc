@@ -1113,6 +1113,9 @@ void readInputFile() {
 // ------------------------------------------------------------------------------------
 // records the agglomerated list of indices for each valid community 
 
+// Format:
+// GROUPS[communityID][size]
+// nodeID...
 void recordGroupLists() {
 
 	list *current;
@@ -1132,6 +1135,8 @@ void recordGroupLists() {
 	return;
 }
 
+// Format:
+// nodeID communityID
 void recordGroupListsFormatted() {
 
 	int communityID = 0;

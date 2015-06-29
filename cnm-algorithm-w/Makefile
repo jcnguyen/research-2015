@@ -14,7 +14,7 @@ CCFLAGS = -O3 -fomit-frame-pointer -funroll-loops -fexpensive-optimizations -Wno
 LDFLAGS = 
 
 ### local program information
-EXEC=FastCommunity_wMH
+EXEC=FastCommunityMH_w
 SOURCES= fastcommunity_w_mh.cc
 
 ### intermediate objects

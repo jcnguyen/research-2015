@@ -1,0 +1,11 @@
+notes:
+when you use recordGroupListsFormatted(), the commID will be different from the original (recordGroupListsFormatted zero-indexes the commID whereas the original is based on its position in the array)
+	e.g.
+	original -> formatted
+		2			0
+		10          1
+		44			2
+		137			3
+		148			4
+		167			5
+the other files (.wpairs and .joins) will display information based on the original commID, so make sure to use recordGroupLists() if you wanna compare info between .groups and .wpairs/.joins
