@@ -25,7 +25,7 @@
 #include <unistd.h>
 
 #include "graph_binary.h"
-#include "community_coverage.h"
+#include "community-coverage.h"
 
 using namespace std;
 

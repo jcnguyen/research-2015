@@ -25,7 +25,7 @@
 #include <unistd.h>
 
 #include "graph_binary.h"
-#include "community_modularity.h"
+#include "community-modularity.h"
 
 using namespace std;
 

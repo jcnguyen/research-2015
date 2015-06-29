@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#include "community_modularity.h"
+#include "community-modularity.h"
 
 using namespace std;
 

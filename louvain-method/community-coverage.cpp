@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#include "community_coverage.h"
+#include "community-coverage.h"
 
 using namespace std;
 
