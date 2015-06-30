@@ -1,0 +1,59 @@
+/*****************************************
+ * MANUAL: Running the Graphs through the Algorithm (weighted)
+ *****************************************/
+COMMANDS
+-------------
+0. make 
+   make clean
+   chmod +x ./sort.sh
+1. ./FastCommunityMH -f ../../input/football.wpairs -l modularity
+2. ./FastCommunityMH -f ../../input/football.wpairs -l modularity -c 106
+
+DETAILS
+-------------
+0. Compile the program:
+	make clean
+	make
+	chmod +x ./sort.sh
+1. Run the program:
+	./FastCommunityMH -f ../../input/football.wpairs -l modularity
+2. Go into the .info file. 
+   Look for the line "STEP------:	106" 
+   Keep note of the number
+   Rerun the program:
+	./FastCommunityMH -f ../../input/football.wpairs -l modularity -c 106
+3. Check that the names in the array are accurate
+   Get the .graph files:
+   	./sort.sh
+
+ /*****************************************
+ * AUTOMATED (partially): Running the Graphs through the Algorithm (weighted)
+ *****************************************/
+ COMMANDS
+-------------
+0. make 
+   make clean
+   chmod +x ./runcnm.sh
+   chmod +x ./sort.sh
+1. ./runcnm.sh
+2. ./FastCommunityMH -f ../../input/football.wpairs -l modularity -c 106
+3. ./sort.sh
+
+DETAILS
+-------------
+0. Make sure the information in each .sh file is correct
+   Compile the program:
+	make clean
+	make
+	chmod +x ./runcnm.sh
+    chmod +x ./sort.sh
+1. Run the program:
+	./FastCommunityMH -f ../../input/football.wpairs -l modularity
+2. Go into the .info file. 
+   Look for the line "STEP------:	106" 
+   Keep note of the number
+   Rerun the program:
+	./FastCommunityMH -f ../../input/football.wpairs -l modularity -c 106
+3. Check that the names in the array are accurate
+   Get the .graph files:
+   	./sort.sh

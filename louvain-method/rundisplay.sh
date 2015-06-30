@@ -1,5 +1,5 @@
 #!/bin/bash
-COMMAND="./display"
+PROGRAM="./display"
 ALG="-lm"
 METRIC="-modularity"
 
@@ -61,7 +61,7 @@ GRAPH_NAME=(
 
 for name in "${GRAPH_NAME[@]}"
 do
-	DISPLAY="$COMMAND ${PATH}${name}${ALG}${METRIC}${EXT_IN} > ${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
+	DISPLAY="$PROGRAM ${PATH}${name}${ALG}${METRIC}${EXT_IN} > ${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
 	echo $name
 	$DISPLAY
 done

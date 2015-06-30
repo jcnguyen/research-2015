@@ -1,5 +1,5 @@
 #!/bin/bash
-COMMAND="./convert"
+PROGRAM="./convert"
 
 FLAG_INPUT="-i"
 FLAG_OUTPUT="-o"
@@ -64,7 +64,7 @@ GRAPH_NAME=(
 
 for name in "${GRAPH_NAME[@]}"
 do
-	CONVERT="$COMMAND $FLAG_INPUT ${PATH}${name}${EXT_IN} $FLAG_OUTPUT ${PATH}${name}${EXT_OUT}"
+	CONVERT="$PROGRAM $FLAG_INPUT ${PATH}${name}${EXT_IN} $FLAG_OUTPUT ${PATH}${name}${EXT_OUT}"
 	echo $name
 	$CONVERT
 	
