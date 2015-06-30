@@ -56,12 +56,11 @@ void convert_to_index_0(char *filename, int type) {
 
 void usage(char *prog_name, const char *more) {
   cerr << more;
-  cerr << "usage: " << prog_name << " -i input_file -o outfile [-r] [-w outfile_weight]" << endl << endl;
+  cerr << "usage: " << prog_name << " -i input_file -o outfile [-r] [-w outfile_weight] [-d]" << endl << endl;
   cerr << "read the graph and convert it to binary format." << endl;
   cerr << "-r\tnodes are renumbered from 0 to nb_nodes-1 (the order is kept)." << endl;
   cerr << "-w\tread the graph as a weighted one and writes the weights in a separate file." << endl;
-  cerr << "-d\tdisplays graph" << endl;
-  cerr << "-h\tshow this usage message." << endl;
+  cerr << "-d\tdisplays graph." << endl;
   exit(0);
 }
 

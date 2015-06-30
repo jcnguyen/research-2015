@@ -1,0 +1,103 @@
+/*****************************************
+ * MANUAL: Running the Graphs through the Algorithm
+ *****************************************/
+COMMANDS (unweighted)
+-------------
+0. make clean
+   make 
+1. ./convert -i ../../input/adjnoun.pairs -o ../../input/adjnoun.bin -d
+2. ./community-modularity ../../input/adjnoun.bin -l -1 -v ../../input/adjnoun-lm-modularity.info > ../../input/adjnoun-lm-modularity.tree
+3. ./display ../../input/adjnoun-lm-modularity.tree > ../../input/adjnoun-lm-modularity.graph
+
+COMMANDS (weighted)
+-------------
+0. make clean
+   make 
+1. ./convert -i ../../input/adjnoun.pairs -o ../../input/adjnoun.bin -d -w ../../input/adjnoun.pairs
+2. ./community-modularity ../../input/adjnoun.bin -l -1 -v ../../input/adjnoun-lm-modularity.info -w ../../input/adjnoun.pairs > ../../input/adjnoun-lm-modularity.tree
+3. ./display ../../input/adjnoun-lm-modularity.tree > ../../input/adjnoun-lm-modularity.graph
+
+DETAILS
+-------------
+0. Compile the algorithm by running the following commands(
+   you only have to do this once):
+		make clean
+		make
+
+1. Convert the graph into something the machine can read
+		unweighted:
+		./convert -i ../../input/adjnoun.pairs -o ../../input/adjnoun.bin -d
+
+		weighted
+		./convert -i ../../input/adjnoun.pairs -o ../../input/adjnoun.bin -d -w ../../input/adjnoun.pairs
+
+2. Find the communities
+   (note that this only specifies the modularity version. if you're using 
+   	the coverage version, replace "modularity" with "coverage")
+		unweighted:
+		./community-modularity ../../input/adjnoun.bin -l -1 -v ../../input/adjnoun-lm-modularity.info > ../../input/adjnoun-lm-modularity.tree
+
+		weighted:
+		./community-modularity ../../input/adjnoun.bin -l -1 -v ../../input/adjnoun-lm-modularity.info -w ../../input/adjnoun.pairs > ../../input/adjnoun-lm-modularity.tree
+
+3. Print the community graph into a file
+		./display ../../input/adjnoun-lm-modularity.tree > ../../input/adjnoun-lm-modularity.graph
+
+/*****************************************
+ * AUTOMATED: Running the Graphs through the Algorithm
+ *****************************************/
+COMMANDS (unweighted)
+-------------
+0. make clean
+   make 
+   chmod +x ./runconvert.sh
+   chmod +x ./runcommunity.sh
+   chmod +x ./display.sh
+1. ./runconvert.sh
+2. ./runcommunity.sh
+3. ./display.sh
+
+COMMANDS (weighted)
+-------------
+0. make clean
+   make
+   chmod +x ./runconvert-w.sh
+   chmod +x ./runcommunity-w.sh
+   chmod +x ./display.sh
+1. ./runconvert-w.sh
+2. ./runcommunity-w.sh
+3. ./display.sh
+
+DETAILS
+-------------
+0. Make sure the information in each .sh file is correct
+   Compile the algorithm by running the following commands(you only have to do this once):
+		make clean
+		make
+
+		unweighted:
+		chmod +x ./runconvert.sh
+   		chmod +x ./runcommunity.sh
+   		chmod +x ./display.sh
+
+   		weighted:
+   		chmod +x ./runconvert-w.sh
+   		chmod +x ./runcommunity-w.sh
+   		chmod +x ./display.sh
+
+1. Convert the graph into something the machine can read
+		unweighted:
+		./runconvert.sh
+
+		weighted
+		./runconvert-w.sh
+
+2. Find the communities
+		unweighted:
+		./runcommunity.sh
+
+		weighted:
+		./runcommunity-w.sh
+
+3. Print the community graph into a file
+		./display.sh

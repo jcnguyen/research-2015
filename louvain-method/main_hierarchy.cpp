@@ -10,7 +10,7 @@
 // Author   : E. Lefebvre, adapted by J.-L. Guillaume
 // Email    : jean-loup.guillaume@lip6.fr
 // Location : Paris, France
-// Time	    : February 2008
+// Time     : February 2008
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
@@ -32,14 +32,13 @@ char *filename = NULL;
 // How to use this exe
 void usage(char *prog_name, const char *more) {
   cerr << more;
-  cerr << "usage: " << prog_name << " input_file [options]" << endl << endl;
+  cerr << "usage: " << prog_name << " input_file [options] > graph_file" << endl << endl;
   cerr << "input_file: read the community tree from this file." << endl;
   cerr << "-l xx\t display the community structure for the level xx." << endl;
   cerr << "\t outputs the community for each node." << endl;
   cerr << "\t xx must belong to [-1,N] if N is the number of levels." << endl;
   cerr << "-n\t displays the number of levels and the size of each level." << endl;
   cerr << "\t equivalent to -l -1." << endl;
-  cerr << "-h\tshow this usage message." << endl;
   exit(0);
 }
 
@@ -57,9 +56,9 @@ void parse_args(int argc, char **argv) {
           break;
         case 'n':
           display_level = -1;
-	        break;
+          break;
         default:
-	        usage(argv[0], "Unknown option\n");
+          usage(argv[0], "Unknown option\n");
       }
     } else {
       if (filename==NULL)
@@ -94,7 +93,7 @@ int main(int argc, char **argv) {
     if (finput) {
       if (node==0) {
         l++;
-	      levels.resize(l+1);
+        levels.resize(l+1);
       }
       levels[l].push_back(community);
     }

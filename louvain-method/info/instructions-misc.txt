@@ -1,0 +1,39 @@
+/*****************************************
+ * Downloading the Graphs
+ *****************************************/
+1. Go to http://cise.ufl.edu/research/sparse/matrices/Newman/index.html
+2. Click on a graph: "Newman/some_graph"
+3. Click "download in Matrix Market format." The file will start downloading.
+4. Click on "Downloads" folder on the launcher
+5. Double click on some_graph.tar to unzip the file
+6. Drag the some_graph folder into a folder used to hold graphs
+
+/*****************************************
+ * Converting the Graphs to Zero-Index
+ *****************************************/
+1. Compile the program by running the following commands 
+   (you only have to do this once):
+		make clean
+		make
+2. Run it (choose one, based on weighted and unweighted)
+		unweighted: 
+		./indexzero -i input_filename.txt > output_filename.txt
+
+		weighted:   
+		./indexzero -i input_filename.txt -w output_weight_filename.txt > output_filename.txt
+
+	where "input_filename.txt" is the name of the input graph, and 
+	"output_filename.txt" is the name of the output file 
+
+/*****************************************
+ * Using the Command-Line
+ *****************************************/
+- Basic Commands:
+	1. ls				lists the files for this current folder
+	2. cd folder_name 	changes directory to folder_name
+	   cd .. 			moves current directory up one level
+- Compiling:
+	0. Go to the directory that contains the program
+	1. make clean 		cleans out the already compiled stuff 
+	   					(you want to do this so that there isn't architecture problems)
+	2. make 			compiles everything

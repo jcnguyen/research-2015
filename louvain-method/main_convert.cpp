@@ -32,8 +32,7 @@ void usage(char *prog_name, const char *more) {
   cerr << "read the graph and convert it to binary format." << endl;
   cerr << "-r\tnodes are renumbered from 0 to nb_nodes-1 (the order is kept)." << endl;
   cerr << "-w filename\tread the graph as a weighted one and writes the weights in a separate file." << endl;
-  cerr << "-d display graph" << endl;
-  cerr << "-h\tshow this usage message." << endl;
+  cerr << "-d\tdisplays graph." << endl;
   exit(0);
 }
 

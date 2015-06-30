@@ -32,6 +32,7 @@ using namespace std;
 char   *filename      = NULL;
 char   *filename_w    = NULL;
 char   *filename_part = NULL;
+char   *filename_v    = NULL;
 int    type           = UNWEIGHTED;
 int    nb_pass        = 0;
 double precision      = 0.000001;
@@ -41,16 +42,15 @@ bool   verbose        = false;
 
 void usage(char *prog_name, const char *more) {
   cerr << more;
-  cerr << "usage: " << prog_name << " input_file [-w weight_file] [-p part_file] [-q epsilon] [-l display_level] [-v] [-h]" << endl << endl;
+  cerr << "usage: " << prog_name << " input_file [-w weight_file] [-p part_file] [-q epsilon] [-l display_level] [-v info_file] > tree_file" << endl << endl;
   cerr << "input_file: file containing the graph to decompose in communities." << endl;
   cerr << "-w file\tread the graph as a weighted one (weights are set to 1 otherwise)." << endl;
   cerr << "-p file\tstart the computation with a given partition instead of the trivial partition." << endl;
   cerr << "\tfile must contain lines \"node community\"." << endl;
-  cerr << "-q eps\ta given pass stops when the coverage is increased by less than epsilon." << endl;
+  cerr << "-q eps\ta given pass stops when the modularity is increased by less than epsilon." << endl;
   cerr << "-l k\tdisplays the graph of level k rather than the hierachical structure." << endl;
   cerr << "\tif k=-1 then displays the hierarchical structure rather than the graph at a given level." << endl;
-  cerr << "-v\tverbose mode: gives computation time, information about the hierarchy and coverage." << endl;
-  cerr << "-h\tshow this usage message." << endl;
+  cerr << "-v file\tverbose mode: gives computation time, information about the hierarchy and modularity." << endl;
   exit(0);
 }
 
@@ -84,6 +84,8 @@ void parse_args(int argc, char **argv) {
           break;
         case 'v':
           verbose=true;
+          filename_v = argv[i+1];
+          i++;
           break;
         default:
           usage(argv[0], "Unknown option\n");
@@ -97,23 +99,26 @@ void parse_args(int argc, char **argv) {
   }
 }
 
-void display_time(const char *str) {
+void display_time(const char *str, ofstream &foutput) {
   time_t rawtime;
   time ( &rawtime );
-  cerr << str << ": " << ctime (&rawtime);
+  foutput << str << ": " << ctime (&rawtime);
 }
 
 int main(int argc, char **argv) {
   srand(time(NULL)+getpid());
-
   parse_args(argc, argv);
+
+  ofstream foutput;
+  foutput.open(filename_v, fstream::out);
+
   time_t time_begin, time_end;
   time(&time_begin);
   if (verbose)
-    display_time("Begin");
+    display_time("Begin", foutput);
 
   Community c(filename, filename_w, type, -1, precision);
-  if (filename_part!=NULL) // start at some partition as indicated by user
+  if (filename_part!=NULL) // start at a user-specified partition
     c.init_partition(filename_part); 
 
   Graph g;
@@ -123,13 +128,13 @@ int main(int argc, char **argv) {
 
   do {
     if (verbose) {
-      cerr << "level " << level << ":\n";
-      display_time("  start computation");
-      cerr << "  network size: " 
-	         << c.g.nb_nodes << " nodes, " 
-	         << c.g.nb_links << " links, "
-	         << c.g.total_weight << " weight." 
-           << endl;
+      foutput << "level " << level << ":\n";
+      display_time("  start computation", foutput);
+      foutput << "  network size: " 
+	            << c.g.nb_nodes << " nodes, " 
+	            << c.g.nb_links << " links, "
+	            << c.g.total_weight << " weight." 
+              << endl;
     }
 
     // phase 1 - see community.h
@@ -149,11 +154,11 @@ int main(int argc, char **argv) {
     c = Community(g, -1, precision);
 
     if (verbose)
-      cerr << "  coverage increased from " << cov << " to " << new_cov << endl;
+      foutput << "  coverage increased from " << cov << " to " << new_cov << endl;
 
     cov=new_cov;
     if (verbose)
-      display_time("  end computation");
+      display_time("  end computation", foutput);
 
     if (filename_part!=NULL && level==1) // do at least one more computation if partition is provided
       improvement=true;
@@ -161,9 +166,11 @@ int main(int argc, char **argv) {
 
   time(&time_end);
   if (verbose) {
-    display_time("End");
-    cerr << "Total duration: " << (time_end-time_begin) << " sec." << endl;
+    display_time("End", foutput);
+    foutput << "Total duration: " << (time_end-time_begin) << " sec." << endl;
   }
-  cerr << new_cov << endl;
+  foutput << new_cov << endl;
+
+  foutput.close();
 }
 

@@ -31,9 +31,9 @@ using namespace std;
 
 class Community {
  public:  
-  vector<double> neigh_weight; // weight of all of vertices in this community; index = vertex, double = weight 
+  vector<double> neigh_weight; // weight of the neighboring communities all of vertices in this community; index = vertex, double = weight 
   vector<unsigned int> neigh_pos; // position of each vertices; index = vertex, unsigned int = position
-  unsigned int neigh_last; // the position of the final neighbor in this community
+  unsigned int neigh_last; // the position of the final neighbor of this community
 
   Graph g; // network to compute communities for
   int size; // nummber of nodes in the network and size of all vectors

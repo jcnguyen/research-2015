@@ -72,17 +72,6 @@ Graph::Graph(unsigned int n, unsigned long m, double t, vector<unsigned long> d,
 
 void
 Graph::display() {
-/*  for (unsigned int node=0 ; node<nb_nodes ; node++) {
-    pair<vector<unsigned int>::iterator, vector<float>::iterator > p = neighbors(node);
-    for (unsigned int i=0 ; i<nb_neighbors(node) ; i++) {
-      if (node<=*(p.first+i)) {
-	if (weights.size()!=0)
-	  cout << node << " " << *(p.first+i) << " " << *(p.second+i) << endl;
-	else
-	  cout << node << " " << *(p.first+i) << endl;
-      }
-    }   
-  }*/
   for (unsigned int node=0 ; node<nb_nodes ; node++) {
     pair<vector<unsigned int>::iterator, vector<float>::iterator > p = neighbors(node);
     cout << node << ":" ;

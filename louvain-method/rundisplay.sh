@@ -1,18 +1,13 @@
 #!/bin/bash
-CONVERT="./convert"
-COMMUNITY="./community"
-FLAG_INPUT="-i"
-FLAG_OUTPUT="-o"
-FLAG_VERBOSITY="-v"
-FLAG_LEVEL=-"-l"
-LEVEL="-1"
+COMMAND="./display"
+ALG="-lm"
 METRIC="-modularity"
-EXT_CONV=".pairs"
-EXT_COMM=".bin"
-EXT_HIER=".tree"
-INPUT_PATH="../../input/"
 
-NAME=(
+EXT_IN=".tree"
+EXT_OUT=".graph"
+
+PATH="../../input/"
+GRAPH_NAME=(
 	"adjnoun"
 	"amazon0302"
 	"amazon0312"
@@ -45,15 +40,28 @@ NAME=(
 	"roadNet-TX"
 	"soc-LiveJournal1"
 	"soc-pokec-relationships"
-	"web-NorteDame"
+	"web-NotreDame"
 	"web-Stanford"
+	"lesmis"
+	"football"
+	"celegansneural"
+	"polblogs"
+	"netscience"
+	"hep-th"
+	"astro-ph"
+	"cond-mat"
+	"cond-mat-2003"
+	"cond-mat-2005"
+	"soc-sign-Slashdot081106"
+	"soc-sign-Slashdot090216"
+	"soc-sign-Slashdot090221"
+	"soc-Slashdot0902"
+	"soc-sign-epinions"
 )
 
-for name in "${NAME[@]}"
+for name in "${GRAPH_NAME[@]}"
 do
-	CONVERT_COMMAND="$CONVERT $FLAG_INPUT ${INPUT_PATH}${name}${EXT_CONV} $FLAG_OUTPUT ${INPUT_PATH}${name}${EXT_COMM} -d"
-	COMMUNITY_COMMAND="${COMMUNITY}${METRIC} ${INPUT_PATH}${name}${EXT_COMM} $FLAG_LEVEL $LEVEL $FLAG_VERBOSITY > ${INPUT_PATH}${name}${METRIC}${EXT_HIER}"
-	echo $CONVERT_COMMAND
-	$CONVERT_COMMAND
-	
+	DISPLAY="$COMMAND ${PATH}${name}${ALG}${METRIC}${EXT_IN} > ${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
+	echo $name
+	$DISPLAY
 done
