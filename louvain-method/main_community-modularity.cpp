@@ -136,15 +136,11 @@ int main(int argc, char **argv) {
     improvement = c.one_level();
     new_mod = c.modularity();
 
-    cerr << "improvement is " << improvement << endl; // todo remove
-
     if (++level==display_level) {
-      cerr << "displaying: " << endl; // todo remove
-      g.display();
+          g.display();
     }
 
     if (display_level==-1) {
-      cerr << "  displaying partition: " << endl; // todo remove
       c.display_partition();
     }
 
