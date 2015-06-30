@@ -61,7 +61,7 @@ GRAPH_NAME=(
 
 for name in "${GRAPH_NAME[@]}"
 do
-	DISPLAY="$PROGRAM ${PATH}${name}${ALG}${METRIC}${EXT_IN} > ${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
+	DISPLAY="$PROGRAM ${PATH}${name}${ALG}${METRIC}${EXT_IN}"
 	echo $name
-	$DISPLAY
+	$DISPLAY > "${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
 done

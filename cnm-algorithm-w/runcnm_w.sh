@@ -48,5 +48,6 @@ GRAPH_NAME=(
 for name in "${GRAPH_NAME[@]}"
 do
 	RUN_COMMAND="$PROGRAM $FLAG_FILE ${PATH}${name}${EXT_IN} $FLAG_LABEL $LABEL"
-	echo $RUN_COMMAND
+	echo $name
+	$RUN_COMMAND
 done

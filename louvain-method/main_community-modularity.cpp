@@ -91,10 +91,11 @@ void parse_args(int argc, char **argv) {
           usage(argv[0], "Unknown option\n");
       }
     } else {
-      if (filename==NULL)
-        filename = argv[i];
-      else
+      if (filename==NULL) {
+        filename = argv[i];  
+      } else {
         usage(argv[0], "More than one filename\n");
+      }
     }
   }
 }

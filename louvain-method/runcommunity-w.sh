@@ -34,8 +34,8 @@ GRAPH_NAME=(
 
 for name in "${GRAPH_NAME[@]}"
 do
-	COMMUNITY="${PROGRAM}${METRIC} ${PATH}${name}${EXT_IN} $FLAG_WEIGHT ${PATH}${name}${EXT_WEIGHT} $FLAG_LEVEL $LEVEL $FLAG_VERBOSITY ${PATH}${name}${ALG}${METRIC}${EXT_OUT1} > ${PATH}${name}${ALG}${METRIC}${EXT_OUT2}"
-	echo $name
-	$COMMUNITY
+	COMMUNITY="${PROGRAM}${METRIC} ${PATH}${name}${EXT_IN} $FLAG_LEVEL $LEVEL $FLAG_VERBOSITY ${PATH}${name}${ALG}${METRIC}${EXT_OUT1} $FLAG_WEIGHT ${PATH}${name}${EXT_WEIGHT}"
+	echo $name 
+	$COMMUNITY > "${PATH}${name}${ALG}${METRIC}${EXT_OUT2}"
 	
 done

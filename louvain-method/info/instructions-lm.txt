@@ -52,10 +52,10 @@ COMMANDS (unweighted)
    make 
    chmod +x ./runconvert.sh
    chmod +x ./runcommunity.sh
-   chmod +x ./display.sh
+   chmod +x ./rundisplay.sh
 1. ./runconvert.sh
 2. ./runcommunity.sh
-3. ./display.sh
+3. ./rundisplay.sh
 
 COMMANDS (weighted)
 -------------
@@ -63,10 +63,10 @@ COMMANDS (weighted)
    make
    chmod +x ./runconvert-w.sh
    chmod +x ./runcommunity-w.sh
-   chmod +x ./display.sh
+   chmod +x ./rundisplay.sh
 1. ./runconvert-w.sh
 2. ./runcommunity-w.sh
-3. ./display.sh
+3. ./rundisplay.sh
 
 DETAILS
 -------------
@@ -78,12 +78,12 @@ DETAILS
 		unweighted:
 		chmod +x ./runconvert.sh
    		chmod +x ./runcommunity.sh
-   		chmod +x ./display.sh
+   		chmod +x ./rundisplay.sh
 
    		weighted:
    		chmod +x ./runconvert-w.sh
    		chmod +x ./runcommunity-w.sh
-   		chmod +x ./display.sh
+   		chmod +x ./rundisplay.sh
 
 1. Convert the graph into something the machine can read
 		unweighted:
@@ -100,4 +100,4 @@ DETAILS
 		./runcommunity-w.sh
 
 3. Print the community graph into a file
-		./display.sh
+		./rundisplay.sh
