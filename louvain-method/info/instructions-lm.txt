@@ -1,4 +1,21 @@
 /*****************************************
+ * FILES
+ *****************************************/
+.pairs		input graph for an unweighted network
+.wpairs		input graph for a weighted network
+.bin		the binary version of the input graph
+.weights	binary version of the weights listed in the input graph; for weighted networks only
+.tree		hierarchial structure of the communities; lists the communities found at each pass
+.info	 	logistics of the run; includes info about start and end time, size of the community found at each pass, and the final modularity
+.graph		the community at the final pass; column 1 lists the nodeID and column 2 lists the corresponding communityID
+
+
+.pairs/.wpairs 
+	--convert--> .bin and .weights 
+		--community--> .tree and .info 
+			--display--> .graph
+
+/*****************************************
  * MANUAL: Running the Graphs through the Algorithm
  *****************************************/
 COMMANDS (unweighted)
