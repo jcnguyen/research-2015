@@ -1,7 +1,7 @@
 #!/bin/bash
 PROGRAM="./community"
 ALG="-lm"
-METRIC="-modularity"
+METRIC="-coverage"
 LEVEL="-1"
 
 FLAG_LEVEL="-l"

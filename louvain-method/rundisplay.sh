@@ -1,7 +1,7 @@
 #!/bin/bash
 PROGRAM="./display"
 ALG="-lm"
-METRIC="-modularity"
+METRIC="-coverage"
 
 EXT_IN=".tree"
 EXT_OUT=".graph"
@@ -62,6 +62,7 @@ GRAPH_NAME=(
 for name in "${GRAPH_NAME[@]}"
 do
 	DISPLAY="$PROGRAM ${PATH}${name}${ALG}${METRIC}${EXT_IN}"
-	echo $name
+	echo $name 
 	$DISPLAY > "${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
+	
 done

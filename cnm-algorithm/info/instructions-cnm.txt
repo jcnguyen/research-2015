@@ -3,8 +3,8 @@
  *****************************************/
 COMMANDS
 -------------
-0. make 
-   make clean
+0. make clean
+   make 
    chmod +x ./sort.sh
 1. ./FastCommunityMH -f ../../input/adjnoun.pairs -l modularity
 2. ./FastCommunityMH -f ../../input/adjnoun.pairs -l modularity -c 106
@@ -31,8 +31,8 @@ DETAILS
  *****************************************/
  COMMANDS
 -------------
-0. make 
-   make clean
+0. make clean
+   make 
    chmod +x ./runcnm.sh
    chmod +x ./sort.sh
 1. ./runcnm.sh

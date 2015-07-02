@@ -1,7 +1,7 @@
 #!/bin/bash
 PROGRAM="./community"
 ALG="-lm"
-METRIC="-modularity"
+METRIC="-coverage"
 LEVEL="-1"
 
 FLAG_LEVEL="-l"
@@ -35,7 +35,6 @@ GRAPH_NAME=(
 for name in "${GRAPH_NAME[@]}"
 do
 	COMMUNITY="${PROGRAM}${METRIC} ${PATH}${name}${EXT_IN} $FLAG_LEVEL $LEVEL $FLAG_VERBOSITY ${PATH}${name}${ALG}${METRIC}${EXT_OUT1} $FLAG_WEIGHT ${PATH}${name}${EXT_WEIGHT}"
-	echo $name 
-	$COMMUNITY > "${PATH}${name}${ALG}${METRIC}${EXT_OUT2}"
+	echo "$COMMUNITY > ${PATH}${name}${ALG}${METRIC}${EXT_OUT2}"
 	
 done
