@@ -9,9 +9,7 @@ EXT_IN=".wpairs"
 
 PATH="../../input/"
 GRAPH_NAME=(
-	"soc-sign-Slashdot081106"
-	"soc-sign-Slashdot090216"
-	"soc-sign-Slashdot090221"
+	"soc-Slashdot0902"
 )
 
 for name in "${GRAPH_NAME[@]}"

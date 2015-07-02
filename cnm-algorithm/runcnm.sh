@@ -9,10 +9,18 @@ EXT_IN=".pairs"
 
 PATH="../../input/"
 GRAPH_NAME=(
-	"com-amazon.ungraph"
-	"com-dblp.ungraph"
-	"email-Enron"
-	"loc-gowalla_edges"
+	"amazon0302"
+	"amazon0312"
+	"amazon0505"
+	"amazon0601"
+	"as-22july06"
+	"roadNet-CA"
+	"roadNet-PA"
+	"roadNet-TX"
+	"soc-LiveJournal1"
+	"soc-pokec-relationships"
+	"web-NotreDame"
+	"web-Stanford"
 )
 
 for name in "${GRAPH_NAME[@]}"

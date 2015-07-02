@@ -116,7 +116,10 @@ struct tuple {
 #endif
 
 // ordered pair structures (handy in the program)
-struct apair { int x; int y; };
+struct apair { 
+	int x; 
+	int y; 
+};
 #if !defined(DPAIR_INCLUDED)
 #define DPAIR_INCLUDED
 class dpair {
@@ -263,21 +266,28 @@ int main(int argc,char * argv[]) {
 	// Parse the command line, build filenames and then import the .pairs file
 	cout << "\nFast Community Inference.\n";
 	cout << "Copyright (c) 2004 by Aaron Clauset (aaron@cs.unm.edu)\n";
-	if (parseCommandLine(argc, argv)) {} else { return 0; }
+	
+	if (parseCommandLine(argc, argv)) {
+	} else { return 0; }
+
 	cout << "\nimporting: " << ioparm.filename << endl; // the input filename
 	buildFilenames(); // builds filename strings
 	readInputFile();  // gets adjacency matrix data
 	
 	// ----------------------------------------------------------------------
 	// Allocate data structures for main loop
-	a     = new double [gparm.maxid];
-	Q     = new double [gparm.n+1];
-	joins = new apair  [gparm.n+1];
+	a     = new double[gparm.maxid];
+	Q     = new double[gparm.n+1];
+	joins = new apair[gparm.n+1];
 	for (int i=0; i<gparm.maxid; i++) { a[i] = 0.0; }
-	for (int i=0; i<gparm.n+1;   i++) { Q[i] = 0.0; joins[i].x = 0; joins[i].y = 0; }
+	for (int i=0; i<gparm.n+1;   i++) { 
+		Q[i] = 0.0; 
+		joins[i].x = 0; 
+		joins[i].y = 0; 
+	}
 	int t = 1;
-	Qmax.y = -4294967296.0;  
-	Qmax.x = 0;
+	Qmax.y = -4294967296.0; // initialize max Q
+	Qmax.x = 0;				// at corresponding time 0
 	if (ioparm.cutstep > 0) { // will need to track agglomerations
 		groupListsSetup(); 
 	} 
@@ -1085,13 +1095,15 @@ void readInputFile() {
 	// temporary variables for this function
 	int numnodes = 0;
 	int numlinks = 0;
-	int s,f,t;
+	int s,f,t;		 // start, final, temp node
 	edge **last;
 	edge *newedge;
-	edge *current;		// pointer for checking edge existence
-	bool existsFlag;	// flag for edge existence
-	time_t t1; t1 = time(&t1);
-	time_t t2; t2 = time(&t2);
+	edge *current;   // pointer for checking edge existence
+	bool existsFlag; // flag for edge existence
+	time_t t1; 
+	t1 = time(&t1);
+	time_t t2; 
+	t2 = time(&t2);
 	
 	// First scan through the input file to discover the largest node id. 
 	// We need to do this so that we can allocate a properly sized array for 
@@ -1113,15 +1125,15 @@ void readInputFile() {
 
 	fscan.close();
 	cout << "  edgecount: ["<<numlinks<<"] total (first pass)"<<endl;
-	gparm.maxid = numnodes+2;      // store maximum index
-	elist = new edge [2*numlinks]; // create requisite number of edges
-	int ecounter = 0;              // index of next edge of elist to be used
+	gparm.maxid = numnodes+2;     // store maximum index
+	elist = new edge[2*numlinks]; // create requisite number of edges
+	int ecounter = 0;             // index of next edge of elist to be used
 
 	// Now that we know numnodes, we can allocate the space for the sparse 
 	// matrix, and then reparse the file, adding edges as necessary.
 	cout << " allocating space for network." << endl;
-	e    = new edge [gparm.maxid];  // (unordered) sparse adjacency matrix
-	last = new edge* [gparm.maxid]; // list of ptr to the last edge in each row
+	e    = new edge[gparm.maxid];  // (unordered) sparse adjacency matrix
+	last = new edge*[gparm.maxid]; // list of ptr to the last edge in each row
 	numnodes = 0; // numnodes now counts number of actual used node ids
 	numlinks = 0; // numlinks now counts number of bi-directional edges created
 	ioparm.timerFlag = false; // reset timer
@@ -1180,7 +1192,6 @@ void readInputFile() {
 			ioparm.timerFlag = true;               
 		}                                  
 		t2=time(&t2);                          
-		
 	}
 	cout << "  edgecount: ["<<numlinks<<"] total (second pass)"<<endl;
 	fin.close();
