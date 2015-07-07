@@ -1,16 +1,18 @@
-// File: community.h
+// File: community-coverage.h
 // -- community detection header file
 //-----------------------------------------------------------------------------
 // Community detection
-// Based on the article "Fast unfolding of community hierarchies in large networks"
+// Based on the article "Fast unfolding of community hierarchies in large 
+// networks"
 // Copyright (C) 2008 V. Blondel, J.-L. Guillaume, R. Lambiotte, E. Lefebvre
 //
-// This program must not be distributed without agreement of the above mentionned authors.
+// This program must not be distributed without agreement of the above 
+// mentionned authors.
 //-----------------------------------------------------------------------------
 // Author   : E. Lefebvre, adapted by J.-L. Guillaume
 // Email    : jean-loup.guillaume@lip6.fr
 // Location : Paris, France
-// Time	    : February 2008
+// Time     : February 2008
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
@@ -31,52 +33,65 @@ using namespace std;
 
 class Community {
  public:  
+
+  // --------------------------------------------------------------------------
+  // GLOBAL VARIABLES ---------------------------------------------------------
+
+  // TODO wtf are these; fix comments
   vector<double> neigh_weight; // weight of the neighboring communities all of vertices in this community; index = vertex, double = weight 
-  vector<unsigned int> neigh_pos; // position of each vertices; index = vertex, unsigned int = position
+  vector<unsigned int> neigh_pos; // the current community that a vertex is in; index = vertex, neigh_pos[i] = communityID
   unsigned int neigh_last; // the position of the final neighbor of this community
 
-  Graph g; // network to compute communities for
-  int size; // nummber of nodes in the network and size of all vectors
-  vector<int> n2c; // community to which each node belongs; index is node, int is the community id
-  vector<double> in,tot; // used to compute the coverage participation of each community; internal edges and total edges; see line 75 and 76 for def
+  Graph g;            // network to compute communities for
+  int size;           // number of nodes in the network and size of all vectors
+  vector<int> n2c;    // community to which each node belongs
+
+  // used to compute the modularity participation of each community
+  vector<double> in;  // number of half-edges in a community i
+  vector<double> tot; // number of half-edges in or out a community i
 
   // number of pass for one level computation
   // if -1, compute as many pass as needed to increase coverage
   int nb_pass;
 
-  // a new pass is computed if the last one has generated an increase 
-  // greater than min_coverage
-  // if 0, even a minor increase is enough to go for one more pass
+  // a new pass is computed if the last one has generated 
+  // an increase greater than min_coverage
+  // if min_coverage = 0, a minor increase is enough to go for one more pass
   double min_coverage;
 
-  // constructors:
+  // --------------------------------------------------------------------------
+  // CONSTRUCTORS -------------------------------------------------------------
+
   // reads graph from file using graph constructor
   // type defined the weighted/unweighted status of the graph file
   Community (char *filename, char *filename_w, int type, int nb_pass, double min_coverage);
-  // copy graph
-  Community (Graph g, int nb_pass, double min_coverage);
+  Community (Graph g, int nb_pass, double min_coverage); // copy graph
 
-  // initiliazes the partition with something else than all nodes alone
+  // --------------------------------------------------------------------------
+  // FUNCTION DECLARATIONS ----------------------------------------------------
+
+  // initiliazes the partition based on a file specification rather than with
+  // the default of each node as its own community
   void init_partition(char *filename_part);
 
   // display the community of each node
   void display();
 
-  // remove the node from its current community with which it has dnodecomm links
+  // remove node from its current community with which it has dnodecomm links
   inline void remove(int node, int comm, double dnodecomm);
 
-  // insert the node in comm with which it shares dnodecomm links
+  // insert node in the community with which it shares dnodecomm links
   inline void insert(int node, int comm, double dnodecomm);
 
-  // compute the gain of coverage if node where inserted in comm
-  // given that node has dnodecomm links to comm.  The formula is:
+  // compute the gain of coverage if node was inserted in the community,
+  // given that the node has dnodecomm links to the community. The formula is:
   inline double coverage_gain(int node, int comm, double dnodecomm, double w_degree);
 
   // compute the set of neighboring communities of node
   // for each community, gives the number of links from node to comm
   void neigh_comm(unsigned int node);
 
-  // compute the coverage of the current partition (overall coverage, not coverage of an indiv community)
+  // compute the coverage of the current graph partition
   double coverage();
 
   // displays the graph of communities as computed by one_level
@@ -92,6 +107,9 @@ class Community {
   // return true if some nodes have been moved
   bool one_level();
 };
+
+// ----------------------------------------------------------------------------
+// INLINE FUNCTION DEFINITIONS ------------------------------------------------
 
 inline void Community::remove(int node, int comm, double dnodecomm) {
   assert(node>=0 && node<size);

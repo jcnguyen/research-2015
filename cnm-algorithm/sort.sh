@@ -1,12 +1,17 @@
 #!/bin/bash
-ALG="-cnm"
-METRIC="-modularity"
+# verify that the areas with "# change" marker are correct
 
+# program info
+ALG="-cnm"
+METRIC="-modularity"		   # change
+
+# extensions
 EXT_IN=".groups"
 EXT_OUT=".graph"
 
+# input file info
 PATH="../../input/"
-GRAPH_NAME=(
+GRAPH_NAME=(				   # change
 	"adjnoun"
 	"amazon0302"
 	"amazon0312"
@@ -37,13 +42,17 @@ GRAPH_NAME=(
 	"roadNet-CA"
 	"roadNet-PA"
 	"roadNet-TX"
-	"soc-LiveJournal1"
-	"soc-pokec-relationships"
-	"web-NotreDame"
 	"web-Stanford"
+	"lesmis"
+	"football"
+	"celegansneural"
+	"soc-sign-Slashdot081106"
+	"soc-sign-Slashdot090216"
+	"soc-sign-Slashdot090221"
 )
 
 for name in "${GRAPH_NAME[@]}"
 do
 	sort -n < "${PATH}${name}${ALG}${METRIC}${EXT_IN}" > "${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
+	# sort -n < ../../input/{name}-cnm{METRIC}.groups > ../../input/{name}-cnm{METRIC}.graph
 done

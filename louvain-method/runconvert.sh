@@ -1,16 +1,22 @@
 #!/bin/bash
+# verify that the areas with "# change" marker are correct
+
+# program info
 PROGRAM="./convert"
 
+# flags - see description of alg for additional flags
 FLAG_INPUT="-i"
 FLAG_OUTPUT="-o"
 FLAG_RENUM="-r"
 FLAG_DISPLAY="-d"
 
+# extensions
 EXT_IN=".pairs"
 EXT_OUT=".bin"
 
+# input file info
 PATH="../../input/"
-GRAPH_NAME=(
+GRAPH_NAME=(				   # change
 	"adjnoun"
 	"amazon0302"
 	"amazon0312"
@@ -52,5 +58,6 @@ do
 	CONVERT="$PROGRAM $FLAG_INPUT ${PATH}${name}${EXT_IN} $FLAG_OUTPUT ${PATH}${name}${EXT_OUT}"
 	echo $name
 	$CONVERT
+	# ./convert -i ../../input/{name}.pairs -o ../../input/{name}.bin
 	
 done

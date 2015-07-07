@@ -1,13 +1,18 @@
 #!/bin/bash
+# verify that the areas with "# change" marker are correct
+
+# program info
 PROGRAM="./display"
 ALG="-lm"
-METRIC="-coverage"
+METRIC="-coverage"			   # change
 
+# extensions
 EXT_IN=".tree"
 EXT_OUT=".graph"
 
+# input file info
 PATH="../../input/"
-GRAPH_NAME=(
+GRAPH_NAME=(				   # change
 	"adjnoun"
 	"amazon0302"
 	"amazon0312"
@@ -64,5 +69,5 @@ do
 	DISPLAY="$PROGRAM ${PATH}${name}${ALG}${METRIC}${EXT_IN}"
 	echo $name 
 	$DISPLAY > "${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
-	
+	# ./display ../../input/{name}-lm{METRIC}.tree > ../../input/{name}-lm{METRIC}.graph
 done

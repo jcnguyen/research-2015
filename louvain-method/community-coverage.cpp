@@ -1,16 +1,18 @@
-// File: community.h
-// -- community detection source file
+// File: community-coverage.cpp
+// -- community detection using coverage file
 //-----------------------------------------------------------------------------
 // Community detection
-// Based on the article "Fast unfolding of community hierarchies in large networks"
+// Based on the article "Fast unfolding of community hierarchies in large 
+// networks"
 // Copyright (C) 2008 V. Blondel, J.-L. Guillaume, R. Lambiotte, E. Lefebvre
 //
-// This program must not be distributed without agreement of the above mentionned authors.
+// This program must not be distributed without agreement of the above 
+// mentionned authors.
 //-----------------------------------------------------------------------------
 // Author   : E. Lefebvre, adapted by J.-L. Guillaume
 // Email    : jean-loup.guillaume@lip6.fr
 // Location : Paris, France
-// Time	    : February 2008
+// Time     : February 2008
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
@@ -18,6 +20,8 @@
 
 using namespace std;
 
+// ----------------------------------------------------------------------------
+// CONSTRUCTORS ---------------------------------------------------------------
 Community::Community(char *filename, char *filename_w, int type, int nbp, double minc) {
   g = Graph(filename, filename_w, type); // create a binary graph
   size = g.nb_nodes;
@@ -62,13 +66,16 @@ Community::Community(Graph gc, int nbp, double minc) {
   min_coverage = minc;
 }
 
+// ----------------------------------------------------------------------------
+// FUNCTION DEFINITIONS -------------------------------------------------------
+
 void Community::init_partition(char * filename) {
   ifstream finput;
   finput.open(filename,fstream::in);
 
   // read partition
   while (!finput.eof()) {
-    unsigned int node, comm; // node, community
+    unsigned int node, comm;
     finput >> node >> comm;
     
     if (finput) {

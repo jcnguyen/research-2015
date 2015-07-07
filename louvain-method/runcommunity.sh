@@ -1,18 +1,24 @@
 #!/bin/bash
+# verify that the areas with "# change" marker are correct
+
+# program info
 PROGRAM="./community"
 ALG="-lm"
-METRIC="-coverage"
+METRIC="-coverage"			   # change
 LEVEL="-1"
 
+# flags - see description of alg for additional flags
 FLAG_LEVEL="-l"
 FLAG_VERBOSITY="-v"
 
+# extensions
 EXT_IN=".bin"
 EXT_OUT1=".info"
 EXT_OUT2=".tree"
 
+# input file info
 PATH="../../input/"
-GRAPH_NAME=(
+GRAPH_NAME=(				   # change
 	"adjnoun"
 	"amazon0302"
 	"amazon0312"
@@ -54,5 +60,5 @@ do
 	COMMUNITY="${PROGRAM}${METRIC} ${PATH}${name}${EXT_IN} $FLAG_LEVEL $LEVEL $FLAG_VERBOSITY ${PATH}${name}${ALG}${METRIC}${EXT_OUT1}"
 	echo $name
 	$COMMUNITY  > "${PATH}${name}${ALG}${METRIC}${EXT_OUT2}"
-	
+	# ./community{METRIC} ../../input/{name}.bin -l -1 -v ../../input/{name}-lm{METRIC}.info > ../../input/{name}-lm{METRIC}.tree
 done

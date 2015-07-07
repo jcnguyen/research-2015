@@ -1,26 +1,21 @@
 #!/bin/bash
-PROGRAM="./FastCommunityMH"
-METRIC="modularity"
+# verify that the areas with "# change" marker are correct
 
+# program info
+PROGRAM="./FastCommunityMH"
+METRIC="modularity"		  	   # change
+
+# flags - see description of alg for additional flags
 FLAG_FILE="-f"
 FLAG_LABEL="-l"
 
+# extensions
 EXT_IN=".pairs"
 
+# input file info
 PATH="../../input/"
-GRAPH_NAME=(
-	"amazon0302"
-	"amazon0312"
-	"amazon0505"
-	"amazon0601"
-	"as-22july06"
-	"roadNet-CA"
-	"roadNet-PA"
-	"roadNet-TX"
-	"soc-LiveJournal1"
+GRAPH_NAME=(				   # change
 	"soc-pokec-relationships"
-	"web-NotreDame"
-	"web-Stanford"
 )
 
 for name in "${GRAPH_NAME[@]}"
@@ -28,4 +23,5 @@ do
 	RUN_COMMAND="$PROGRAM $FLAG_FILE ${PATH}${name}${EXT_IN} $FLAG_LABEL $METRIC"
 	echo $name
 	$RUN_COMMAND
+	# ./FastCommunityMH -f ../../input/{name}.pairs -l {METRIC}
 done

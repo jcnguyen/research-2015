@@ -1,16 +1,18 @@
-// File: community.h
-// -- community detection source file
+// File: community-modularity.cpp
+// -- community detection using modularity file
 //-----------------------------------------------------------------------------
 // Community detection
-// Based on the article "Fast unfolding of community hierarchies in large networks"
+// Based on the article "Fast unfolding of community hierarchies in large 
+// networks"
 // Copyright (C) 2008 V. Blondel, J.-L. Guillaume, R. Lambiotte, E. Lefebvre
 //
-// This program must not be distributed without agreement of the above mentionned authors.
+// This program must not be distributed without agreement of the above 
+// mentionned authors.
 //-----------------------------------------------------------------------------
 // Author   : E. Lefebvre, adapted by J.-L. Guillaume
 // Email    : jean-loup.guillaume@lip6.fr
 // Location : Paris, France
-// Time	    : February 2008
+// Time     : February 2008
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
@@ -18,6 +20,8 @@
 
 using namespace std;
 
+// ----------------------------------------------------------------------------
+// CONSTRUCTORS ---------------------------------------------------------------
 Community::Community(char *filename, char *filename_w, int type, int nbp, double minm) {
   g = Graph(filename, filename_w, type); // create a binary graph
   size = g.nb_nodes;
@@ -31,7 +35,7 @@ Community::Community(char *filename, char *filename_w, int type, int nbp, double
   tot.resize(size);
 
   for (int i=0 ; i<size ; i++) {
-    n2c[i] = i; // initially, each node is its own community
+    n2c[i] = i; // initially each node is its own community
     tot[i] = g.weighted_degree(i);
     in[i]  = g.nb_selfloops(i);
   }
@@ -62,13 +66,16 @@ Community::Community(Graph gc, int nbp, double minm) {
   min_modularity = minm;
 }
 
+// ----------------------------------------------------------------------------
+// FUNCTION DEFINITIONS -------------------------------------------------------
+
 void Community::init_partition(char * filename) {
   ifstream finput;
   finput.open(filename,fstream::in);
 
   // read partition
   while (!finput.eof()) {
-    unsigned int node, comm; // node, community
+    unsigned int node, comm;
     finput >> node >> comm;
     
     if (finput) {
@@ -109,6 +116,11 @@ double Community::modularity() {
   for (int i=0 ; i<size ; i++) {
     if (tot[i]>0)
       q += (double)in[i]/m2 - ((double)tot[i]/m2)*((double)tot[i]/m2);
+      // q = \sum_{i} ( e_{i,i} - a_{i}^2 )
+      // where 
+      //  e_{i,i} = in[i]/m2 is the fraction of half-edges in commmunity i
+      //  a_{i}   = tot[i]/m2 is the fraction of half-edges in or out of comm i
+      //    sum(degrees)
   }
 
   return q;
@@ -272,11 +284,12 @@ bool Community::one_level() {
 
       // computation of all neighboring communities of current node
       neigh_comm(node);
+      
       // remove node from its current community
       remove(node, node_comm, neigh_weight[node_comm]);
 
       // compute the nearest community for node
-      // default choice for future insertion is the former community (TODO is this tiebreaking?)
+      // default choice for future insertion is the former community 
       int best_comm        = node_comm;
       double best_nblinks  = 0.;
       double best_increase = 0.;
