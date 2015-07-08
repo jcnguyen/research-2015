@@ -104,7 +104,7 @@ struct nodenub {
 };
 
 // ----------------------------------------------------------------------------
-// Tuple object - defined by an real value and (row,col) indices
+// Tuple object - defined by a real value and (row,col) indices
 #if !defined(TUPLE_INCLUDED)
 #define TUPLE_INCLUDED
 struct tuple {
@@ -117,8 +117,8 @@ struct tuple {
 
 // ordered pair structures (handy in the program)
 struct apair { 
-	int x; 
-	int y; 
+	int	   x; 
+	int    y; 
 };
 #if !defined(DPAIR_INCLUDED)
 #define DPAIR_INCLUDED
@@ -190,10 +190,10 @@ void recordNetwork();
 // PROGRAM PARAMETERS ---------------------------------------------------------
 
 struct netparameters {
-	int       n;     // number of nodes in network
-	int       m;     // number of edges in network
-	int       maxid; // maximum node id
-	int       minid; // minimum node id
+	int       n;         // number of nodes in network
+	int       m;         // number of edges in network
+	int       maxid; 	 // maximum node id
+	int       minid; 	 // minimum node id
 }; netparameters gparm;
 
 struct groupstats {
@@ -205,10 +205,8 @@ struct groupstats {
 }; groupstats gstats;
 
 struct outparameters {
-	short int textFlag;  // 0: no console output
-						 // 1: writes file outputs
-	bool      suppFlag;  // T: no support(t) file
-						 // F: yes support(t) file
+	short int textFlag;  // 0: no console output;  1: writes file outputs
+	bool      suppFlag;  // T: no support(t) file; F: yes support(t) file
 	short int fileFlag;        
 	string    filename;  // name of input file
 	string    d_in;      // (dir) directory for input file
