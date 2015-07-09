@@ -42,17 +42,14 @@ GRAPH_NAME=(				   # change
 	"roadNet-CA"
 	"roadNet-PA"
 	"roadNet-TX"
+	"soc-LiveJournal1"
+	"soc-pokec-relationships"
+	"web-NotreDame"
 	"web-Stanford"
-	"lesmis"
-	"football"
-	"celegansneural"
-	"soc-sign-Slashdot081106"
-	"soc-sign-Slashdot090216"
-	"soc-sign-Slashdot090221"
 )
 
 for name in "${GRAPH_NAME[@]}"
 do
-	sort -n < "${PATH}${name}${ALG}${METRIC}${EXT_IN}" > "${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
+	echo sort -n "${PATH}${name}${ALG}${METRIC}${EXT_IN}" -o "${PATH}${name}${ALG}${METRIC}${EXT_OUT}"
 	# sort -n < ../../input/{name}-cnm{METRIC}.groups > ../../input/{name}-cnm{METRIC}.graph
 done

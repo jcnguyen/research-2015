@@ -251,12 +251,12 @@ double supportAve;
 int main(int argc,char * argv[]) {
 
 	// default values for parameters which may be modified from the commandline
-	ioparm.timer     = 20;
-	ioparm.fileFlag  = NONE;
-	ioparm.suppFlag  = false;
-	ioparm.textFlag  = 0;
-	ioparm.filename  = "community.pairs";
-	ioparm.s_label   = "a";
+	ioparm.timer    = 20;
+	ioparm.fileFlag = NONE;
+	ioparm.suppFlag = false;
+	ioparm.textFlag = 0;
+	ioparm.filename = "community.pairs";
+	ioparm.s_label  = "a";
 	time_t t1;  
 	t1 = time(&t1);
 	time_t t2;  
@@ -272,20 +272,22 @@ int main(int argc,char * argv[]) {
 
 	cout << "\nimporting: " << ioparm.filename << endl; // the input filename
 	buildFilenames(); // builds filename strings
-	readInputFile();  // gets adjacency matrix data
+	readInputFile();  // gets adjacency matrix e data
 	
 	// ----------------------------------------------------------------------
 	// Allocate data structures for main loop
 	a     = new double[gparm.maxid];
 	Q     = new double[gparm.n+1];
 	joins = new apair[gparm.n+1];
-	for (int i=0; i<gparm.maxid; i++) { a[i] = 0.0; }
-	for (int i=0; i<gparm.n+1;   i++) { 
-		Q[i] = 0.0; 
+	for (int i=0; i<gparm.maxid; i++) { 
+		a[i]       = 0.0; 
+	}
+	for (int i=0; i<gparm.n+1; i++) { 
+		Q[i]       = 0.0; 
 		joins[i].x = 0; 
 		joins[i].y = 0; 
 	}
-	int t = 1;
+	int t  = 1;
 	Qmax.y = -4294967296.0; // initialize max Q
 	Qmax.x = 0;				// at corresponding time 0
 	if (ioparm.cutstep > 0) { // will need to track agglomerations
@@ -502,6 +504,7 @@ void buildDeltaQMatrix() {
 
 void buildFilenames() {
 
+	// builds file names
 	ioparm.f_input   = ioparm.d_in  + ioparm.filename;
 	ioparm.f_parm    = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".info";
 	ioparm.f_joins   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".joins";
@@ -510,8 +513,14 @@ void buildFilenames() {
 	ioparm.f_group   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".groups";
 	ioparm.f_gstats  = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".hist";
 	
-	if (true) { ofstream flog(ioparm.f_parm.c_str(), ios::trunc); flog.close(); }
-	time_t t; t = time(&t);
+	if (true) { 
+		ofstream flog(ioparm.f_parm.c_str(), ios::trunc); 
+		flog.close(); 
+	}
+
+	// writes .info file
+	time_t t; 
+	t = time(&t);
 	ofstream flog(ioparm.f_parm.c_str(), ios::app);
 	flog << "FASTCOMMUNITY_INFERENCE_ALGORITHM\n";
 	flog << "START-----:\t" << asctime(localtime(&t));

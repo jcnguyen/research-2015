@@ -266,33 +266,34 @@ int main(int argc,char * argv[]) {
 	cout << "\nFast Community Inference.\n";
 	cout << "Copyright (c) 2004 by Aaron Clauset (aaron@cs.unm.edu)\n";
 	
-	if (parseCommandLine(argc, argv)) {
+	if (parseCommandLine(argc, argv)) { // unable to parse command line
 	} else { return 0; }
 
 	cout << "\nimporting: " << ioparm.filename << endl; // the input filename
 	buildFilenames(); // builds filename strings
-	readInputFile();  // gets adjacency matrix data
+	readInputFile();  // gets adjacency matrix e data
 	
 	// ----------------------------------------------------------------------
 	// Allocate data structures for main loop
-	a     = new double[gparm.maxid];
-	Q     = new double[gparm.n+1];
-	joins = new apair[gparm.n+1];
-	for (int i=0; i<gparm.maxid; i++) { a[i] = 0.0; }
-	for (int i=0; i<gparm.n+1;   i++) { 
-		Q[i] = 0.0; 
+	a     = new double[gparm.maxid];	// initialize A_i
+	Q     = new double[gparm.n+1];		// initialize Q(t)
+	joins = new apair[gparm.n+1];		// initialize list of joins
+	for (int i=0; i<gparm.maxid; i++) { // allocate A_i
+		a[i] 	   = 0.0; 
+	}
+	for (int i=0; i<gparm.n+1;   i++) { // allocate Q(t) and list of joins
+		Q[i] 	   = 0.0; 
 		joins[i].x = 0; 
 		joins[i].y = 0; 
 	}
-	int t = 1;
-	Qmax.y = -4294967296.0;   // initialize max Q
-	Qmax.x = 0;				  // at corresponding time 0
-	if (ioparm.cutstep > 0) { // will need to track agglomerations
+	int t  = 1;							// initialize time step value
+	Qmax.y = -4294967296.0;  			// initialize max Q
+	Qmax.x = 0;				  			// at corresponding time 0
+	if (ioparm.cutstep > 0) { 			// will need to track agglomerations
 		groupListsSetup(); 
 	} 
-	
 	cout << "now building initial dQ[]" << endl;
-	buildDeltaQMatrix();      // builds dQ[] and h
+	buildDeltaQMatrix();      			// builds dQ[] and h
 	
 	// initialize f_joins, f_support files
 	ofstream fjoins(ioparm.f_joins.c_str(), ios::trunc);
@@ -416,12 +417,12 @@ void buildDeltaQMatrix() {
 	// (e), we now need to construct the intial dQ matrix according to the 
 	// definition of dQ which may be derived from the definition of 
 	// modularity Q: 
-	// 		 Q(t)    = \sum_{i} ( e_{i,i} - a_{i}^2 ) 
-	//               = Tr(e) - ||e^2||
-	// where t       = time
+	// 		Q(t) = \sum_{i} ( e_{i,i} - a_{i}^2 ) 
+	//           = Tr(e) - ||e^2||
+	// where t = time
 	// thus  
-	//    	 dQ_{i,j} = 2*( e_{i,j} - a_{i}a_{j} )
-	// where a_{i}   = \sum_{j} e_{i,j} (i.e., the sum over the ith row)
+	// 		dQ_{i,j} = 2*( e_{i,j} - a_{i}a_{j} )
+	// where a_{i} = \sum_{j} e_{i,j} (i.e., the sum over the ith row)
 	// 
 	// To create dQ, we must insert each value of dQ_{i,j} into a binary
 	// search tree, for the jth column. That is, dQ is simply an array of such
@@ -436,11 +437,10 @@ void buildDeltaQMatrix() {
 	
 	// First we compute e_{i,j}, and compute+store the a_{i} values. 
 	// These will be used shortly when we compute each dQ_{i,j}.
+	// TODO modularity - replace this block with the initial steps for coverage
 	edge *current;
-
-	// TODO modularity
-	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/m
-	for (int i=1; i<gparm.maxid; i++) {  	// for each row
+	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/(2m)
+	for (int i=1; i<gparm.maxid; i++) {  	// for each row, compute a_{i}
 		a[i] = 0.0;                       
 		if (e[i].so != 0) {              	// ensure it exists
 			current = &e[i];             	// grab first edge
@@ -454,13 +454,15 @@ void buildDeltaQMatrix() {
 	}
 
 	// now we create an empty (ordered) sparse matrix dq[]
-	dq = new nodenub [gparm.maxid]; // initialize dq matrix
+	dq = new nodenub[gparm.maxid]; // initialize dq matrix
 	for (int i=0; i<gparm.maxid; i++) {      
-		dq[i].heap_ptr = NULL;      // no pointer in the heap at first
-		if (e[i].so != 0) { dq[i].v = new vektor(2+(int)floor(gparm.m*a[i])); }
-		else {          dq[i].v = NULL; }
+		dq[i].heap_ptr = NULL;     // no pointer in the heap at first
+		if (e[i].so != 0) {  	   // node exists
+			dq[i].v = new vektor(2+(int)floor(gparm.m*a[i])); 
+		} else { 
+			dq[i].v = NULL; }
 	}
-	h = new maxheap(gparm.n); 	    // allocate max-heap of size = num of nodes
+	h = new maxheap(gparm.n); 	   // allocate max-heap of size = num of nodes
 	
 	// Now we do all the work, which happens as we compute and insert each
 	// dQ_{i,j} into the corresponding (ordered) sparse vector dq[i]. 
@@ -470,12 +472,12 @@ void buildDeltaQMatrix() {
 	// item address, which we then store in the nodenub heap_ptr for that
 	// row's vector.
 	double dQ;
-	tuple  dQmax; 		            // for heaping the row maxes
-	tuple* itemaddress;             // stores address of item in maxheap
+	tuple  dQmax; 		// for heaping the row maxes
+	tuple* itemaddress; // stores address of item in maxheap
 
 	for (int i=1; i<gparm.maxid; i++) {
 		if (e[i].so != 0) {
-			current = &e[i]; 	    // grab first edge
+			current = &e[i]; // grab first edge
 			// TODO modularity
 			dQ = 2.0*(eij-(a[current->so]*a[current->si])); // compute dQ
 			dQmax.m = dQ;		                      // assume it's at max
@@ -506,6 +508,7 @@ void buildDeltaQMatrix() {
 
 void buildFilenames() {
 
+	// build file names
 	ioparm.f_input   = ioparm.d_in  + ioparm.filename;
 	ioparm.f_parm    = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".info";
 	ioparm.f_joins   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".joins";
@@ -514,7 +517,11 @@ void buildFilenames() {
 	ioparm.f_group   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".groups";
 	ioparm.f_gstats  = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".hist";
 	
-	if (true) { ofstream flog(ioparm.f_parm.c_str(), ios::trunc); flog.close(); }
+	// starts writing the param file
+	if (true) { 
+		ofstream flog(ioparm.f_parm.c_str(), ios::trunc); 
+		flog.close(); 
+	}
 	time_t t; t = time(&t);
 	ofstream flog(ioparm.f_parm.c_str(), ios::app);
 	flog << "FASTCOMMUNITY_INFERENCE_ALGORITHM\n";
@@ -561,12 +568,12 @@ void groupListsSetup() {
 	c = new stub [gparm.maxid];
 	for (int i=0; i<gparm.maxid; i++) {
 		if (e[i].so != 0) {			   // note: internal indexing
-			newList = new list;		   // create new community member
+			newList        = new list; // create new community member
 			newList->index = i;		   // with index i
 			c[i].members   = newList;  // point ith community at newList
-			c[i].size       = 1; 	   // point ith community at newList
-			c[i].last       = newList; // point last[] at that element too
-			c[i].valid  = true; 	   // mark as valid community
+			c[i].size      = 1; 	   // point ith community at newList
+			c[i].last      = newList;  // point last[] at that element too
+			c[i].valid     = true; 	   // mark as valid community
 		}
 	}
 	
@@ -643,7 +650,8 @@ void groupListsUpdate(const int x, const int y) {
 
 // ----------------------------------------------------------------------------
 
-// TODO possibly modularity?
+// TODO possibly modularity - equivalent to remove and insert in lm
+// TODO you should be cool without changing this, as long as your data structures are good
 void mergeCommunities(int i, int j) {
 	
 	// To do the join operation for a pair of communities (i,j), we must 
@@ -967,20 +975,25 @@ bool parseCommandLine(int argc,char * argv[]) {
 	// -c <int>    		record the aglomerated network at step <int>
 	
 	if (argc <= 1) { // if no arguments, return statement about program usage.
-		cout << "\nThis program runs the fast community structure inference algorithm due to ";
-		cout << "Clauset, Newman and Moore on an input graph in the .pairs format. This version ";
-		cout << "is the full max-heap version originally described in cond-mat/0408187. The program ";
-		cout << "requires the input network connectivity to be formatted in the following specific ";
-		cout << "way: the graph must be simple and connected, where each edge is written on ";
-		cout << "a line in the format 'u v' (e.g., 3481 3483).\n";
-		cout << "To run the program, you must specify the input network file (-f file.pairs). ";
-		cout << "Additionally, you can differentiate runs on the same input file with a label ";
-		cout << "(-l test_run) which is imbedded in all corresponding output files. ";
-		cout << "Because the algorithm is deterministic, you can specify a point (-c C) at which to ";
-		cout << "cut the dendrogram; the program will write out various information about the clustered ";
-		cout << "network: a list of clusters, the clustered connectivity, and the cluster size ";
-		cout << "distribution. Typically, one wants this value to be the time at which modularity Q ";
-		cout << "was maximized (that time is recorded in the .info file for a given run).\n";
+		cout << "\nThis program runs the fast community structure inference ";
+		cout << "algorithm due to Clauset, Newman and Moore on an input graph ";
+		cout << "in the .pairs format. This version is the full max-heap ";
+		cout << "version originally described in cond-mat/0408187. The ";
+		cout << "program requires the input network connectivity to be ";
+		cout << "formatted in the following specific way: the graph must be ";
+		cout << "simple and connected, where each edge is written on a line ";
+		cout << "in the format 'u v' (e.g., 3481 3483).\n";
+		cout << "To run the program, you must specify the input network file ";
+		cout << "(-f file.pairs). Additionally, you can differentiate runs on ";
+		cout << "the same input file with a label (-l test_run) which is ";
+		cout << "imbedded in all corresponding output files. Because the ";
+		cout << "algorithm is deterministic, you can specify a point (-c C) ";
+		cout << "at which to cut the dendrogram; the program will write out ";
+		cout << "various information about the clustered network: a list of ";
+		cout << "clusters, the clustered connectivity, and the cluster size ";
+		cout << "distribution. Typically, one wants this value to be the time ";
+		cout << "at which modularity Q was maximized (that time is recorded ";
+		cout << "in the .info file for a given run).\n";
 		cout << "Examples:\n";
 		cout << "  ./FastCommunity -f network.pairs -l test_run\n";
 		cout << "  ./FastCommunity -f network.pairs -l test_run -c 1232997\n";
@@ -990,35 +1003,42 @@ bool parseCommandLine(int argc,char * argv[]) {
 
 	while (argct < argc) {
 		temp = argv[argct];
-		
 		if (temp == "-files") {
 			cout << "\nBasic files generated:\n";
 			cout << "-- .INFO\n";
-			cout << "   Various information about the program's running. Includes a listing of ";
-			cout << "the files it generates, number of vertices and edges processed, the maximum ";
-			cout << "modularity found and the corresponding step (you can re-run the program with ";
-			cout << "this value in the -c argument to have it output the contents of the clusters, ";
-			cout << "etc. when it reaches that step again (not the most efficient solution, but it ";
-			cout << "works)), start/stop time, and when -c is used, it records some information about ";
-			cout << "the distribution of cluster sizes.\n";
+			cout << "   Various information about the program's running. ";
+			cout << "Includes a listing of the files it generates, number of ";
+			cout << "vertices and edges processed, the maximum modularity ";
+			cout << "found and the corresponding step (you can re-run the ";
+			cout << "program with this value in the -c argument to have it ";
+			cout << "output the contents of the clusters, etc. when it ";
+			cout << "reaches that step again (not the most efficient ";
+			cout << "solution, but it works)), start/stop time, and when -c ";
+			cout << "is used, it records some information about the ";
+			cout << "distribution of cluster sizes.\n";
 			cout << "-- .JOINS\n";
-			cout << "   The dendrogram and modularity information from the algorithm. The file format ";
-			cout << "is tab-delimited columns of data, where the columns are:\n";
-			cout << " 1. the community index which absorbs\n";
-			cout << " 2. the community index which was absorbed\n";
+			cout << "   The dendrogram and modularity information from the ";
+			cout << "algorithm. The file format is tab-delmited columns of ";
+			cout << "data, where the columns are:\n";
+			cout << " 1. the community index which was absorbed\n";
+			cout << " 2. the community index which grows\n";
 			cout << " 3. the modularity value Q after the join\n";
 			cout << " 4. the time step of the join\n";
-			cout << "\nOptional files generated (at time t=C when -c C argument used):\n";
+			cout << "\nOptional files generated (at time t=C when -c C ";
+			cout << "argument used):\n";
 			cout << "-- .WPAIRS\n";
-			cout << "   The connectivity of the clustered graph in a .wpairs file format ";
-			cout << "(i.e., weighted edges). The edge weights should be the dQ values associated ";
-			cout << "with that clustered edge at time C. From this format, it's easy to ";
-			cout << "convert into another for visualization (e.g., pajek's .net format).\n";
+			cout << "   The connectivity of the clustered graph in a .wpairs ";
+			cout << "file format (i.e., weighted edges). The edge weights ";
+			cout << "should be the dQ values associated with that clustered ";
+			cout << "edge at time C. From this format, it's easy to convert ";
+			cout << "into another for visualization ";
+			cout << "(e.g., pajek's .net format).\n";
 			cout << "-- .HIST\n";
 			cout << "   The size distribution of the clusters.\n";
 			cout << "-- .GROUPS\n";
-			cout << "   A list of each group and the names of the vertices which compose it (this is ";
-			cout << "particularly useful for verifying that the clustering makes sense - tedious but ";
+			cout << "   A list of each group and the names of the vertices ";
+			cout << "which compose it (this is particularly useful for ";
+			cout << "verifying that the clustering makes sense - tedious but ";
 			cout << "important).\n";
 			cout << "\n";
 			return false;
@@ -1029,7 +1049,9 @@ bool parseCommandLine(int argc,char * argv[]) {
 			pos = temp.find(ext,0);
 
 			if (pos == string::npos) { 
-				cout << " Error: Input file must have terminating .pairs extension.\n"; return false; 
+				cout << " Error: Input file must have ";
+				cout << "terminating .pairs extension.\n"; 
+				return false; 
 			}
 
 			ext = "/";
@@ -1053,9 +1075,12 @@ bool parseCommandLine(int argc,char * argv[]) {
 			ioparm.s_scratch = ioparm.filename.substr(0,pos);
 		} else if (temp == "-l") { // s_label
 			argct++;
-			if (argct < argc) { ioparm.s_label = argv[argct]; }
-			else { " Warning: missing modifier for -l argument; using default.\n"; }
-			
+			if (argct < argc) { 
+				ioparm.s_label = argv[argct]; 
+			} else { 
+				cout << " Warning: missing modifier for -l argument; ";
+				cout << "using default.\n"; 
+			}
 		} else if (temp == "-t") { // timer value
 			argct++;
 			if (argct < argc) {
@@ -1063,11 +1088,15 @@ bool parseCommandLine(int argc,char * argv[]) {
 				ioparm.timer = atoi(argv[argct]);
 				cout << ioparm.timer << endl;
 				if (ioparm.timer == 0 || strlen(argv[argct]) > temp.length()) {
-					cout << " Warning: malformed modifier for -t; using default.\n"; argct--;
+					cout << " Warning: malformed modifier for -t; ";
+					cout << "using default.\n"; 
+					argct--;
 					ioparm.timer = 20;
 				} 
 			} else {
-				cout << " Warning: missing modifier for -t argument; using default.\n"; argct--;
+				cout << " Warning: malformed modifier for -t; ";
+				cout << "using default.\n"; 
+				argct--;
 			}
 		} else if (temp == "-c") { // cut value
 			argct++;
@@ -1075,16 +1104,20 @@ bool parseCommandLine(int argc,char * argv[]) {
 //              along = strtol(argv[argct],endptr,10);
 				ioparm.cutstep = atoi(argv[argct]);
 				if (ioparm.cutstep == 0) {
-					cout << " Warning: malformed modifier for -c; disabling output.\n"; argct--;
+					cout << " Warning: malformed modifier for -c; ";
+					cout << "disabling output.\n"; 
+					argct--;
 				} 
 			} else {
-				cout << " Warning: missing modifier for -t argument; using default.\n"; argct--;
+				cout << " Warning: missing modifier for -t argument; ";
+				cout << "using default.\n"; 
+				argct--;
 			}
 		}
-		else if (temp == "-s")   {    ioparm.suppFlag = true;    }
-		else if (temp == "-v")   {    ioparm.textFlag = 1;       }
-		else if (temp == "--v")  {    ioparm.textFlag = 2;       }
-		else if (temp == "---v") {    ioparm.textFlag = 3;       }
+		else if (temp == "-s")   { ioparm.suppFlag = true; }
+		else if (temp == "-v")   { ioparm.textFlag = 1;    }
+		else if (temp == "--v")  { ioparm.textFlag = 2;    }
+		else if (temp == "---v") { ioparm.textFlag = 3;    }
 		else { 
 			cout << "Unknown commandline argument: " << argv[argct] << endl; 
 		}
@@ -1110,7 +1143,7 @@ void readInputFile() {
 	time_t t2; 
 	t2 = time(&t2);
 	
-	// First scan through the input file to discover the largest node id. 
+	// First scan through the input file to find the largest node id. 
 	// We need to do this so that we can allocate a properly sized array for 
 	// the sparse matrix representation.
 	cout << " scanning input file for basic information." << endl;
@@ -1127,15 +1160,14 @@ void readInputFile() {
 		}                                  
 		t2=time(&t2);                       	
 	}
-
 	fscan.close();
 	cout << "  edgecount: ["<<numlinks<<"] total (first pass)"<<endl;
-	gparm.maxid = numnodes+2;      // store maximum index
-	elist = new edge[2*numlinks];  // create requisite number of edges
-	int ecounter = 0;              // index of next edge of elist to be used
+	gparm.maxid  = numnodes+2;           // store maximum index
+	elist        = new edge[2*numlinks]; // create requisite number of edges
 
 	// Now that we know numnodes, we can allocate the space for the sparse 
 	// matrix, and then reparse the file, adding edges as necessary.
+	int ecounter = 0; // index of next edge of elist to be used
 	cout << " allocating space for network." << endl;
 	e    = new edge[gparm.maxid];  // (unordered) sparse adjacency matrix
 	last = new edge*[gparm.maxid]; // list of ptr to the last edge in each row
@@ -1150,13 +1182,13 @@ void readInputFile() {
 		s++;                 // increment s,f to prevent using e[0] 
 		f++; 
 		if (f < s) { t = s; s = f; f = t; } // guarantee s < f
-		numlinks++;           // increment link count (preemptive)
-		if (e[s].so == 0) {   // if first edge with s, add s and (s,f)
+		numlinks++;          // increment link count (preemptive)
+		if (e[s].so == 0) {  // if first edge with s, add s and (s,f)
 			e[s].so = s;     
 			e[s].si = f;     
-			last[s] = &e[s];  // point last[s] at self
-			numnodes++;       // increment node count
-		} else {              // try to add (s,f) to s-edgelist
+			last[s] = &e[s]; // point last[s] at self
+			numnodes++;      // increment node count
+		} else {             // try to add (s,f) to s-edgelist
 			current = &e[s];                    
 			existsFlag = false;                  
 			while (current != NULL) {    // check if (s,f) already in edgelist
@@ -1167,7 +1199,7 @@ void readInputFile() {
 				}                 
 				current = current->next; // look at next edge
 			}                             
-			if (!existsFlag) { // if not already exists, append it
+			if (!existsFlag) {                // if it doesn't exists, append it
 				newedge = &elist[ecounter++]; // grab next-free-edge
 				newedge -> so = s;               
 				newedge -> si = f;               
@@ -1176,13 +1208,13 @@ void readInputFile() {
 			}                               
 		}                                    
 		
-		if (e[f].so == 0) {    // if first edge with f, add f and (f,s)
+		if (e[f].so == 0) {  // if first edge with f, add f and (f,s)
 			e[f].so = f;                   
 			e[f].si = s;                 
-			last[f] = &e[f];   // point last[s] at self
-			numnodes++;        // increment node count
-		} else {               // try to add (f,s) to f-edgelist
-			if (!existsFlag) { // if (s,f) wasn't in s-edgelist, then
+			last[f] = &e[f]; // point last[s] at self
+			numnodes++;      // increment node count
+		} else {             // try to add (f,s) to f-edgelist
+			if (!existsFlag) {                // (s,f) wasn't in s-edgelist
 				newedge = &elist[ecounter++]; // (f,s) not in f-edgelist
 				newedge -> so = f;              
 				newedge -> si = s;               
@@ -1190,7 +1222,8 @@ void readInputFile() {
 				last[f]         = newedge;    // point last[f] to newedge
 			}                                
 		}                                   
-		existsFlag = false; // reset existsFlag
+		existsFlag = false;  // reset existsFlag
+
 		if (t2-t1>ioparm.timer) { // check timer; if necessarsy, display
 			cout << "  edgecount: ["<<numlinks<<"]"<<endl;
 			t1 = t2;                            
