@@ -5,23 +5,19 @@
 PROGRAM="./FastCommunityMH_w"
 METRIC="modularity"		  	   # change
 
-# flags - see description of alg for additional flags
-FLAG_FILE="-f"
-FLAG_LABEL="-l"
-
 # extensions
 EXT_IN=".wpairs"
 
 # input file info
-PATH="../../input/"
+LOC="../../input/"			   # change
 GRAPH_NAME=(				   # change
 	"soc-Slashdot0902"
 )
 
 for name in "${GRAPH_NAME[@]}"
 do
-	RUN_COMMAND="$PROGRAM $FLAG_FILE ${PATH}${name}${EXT_IN} $FLAG_LABEL $METRIC"
 	echo $name
-	$RUN_COMMAND
+	FILE_INPUT="${LOC}${name}${EXT_IN}"
+	$PROGRAM -f $FILE_INPUT -l $METRIC
 	# ./FastCommunityMH_w -f ../../input/{name}.wpairs -l {METRIC}
 done

@@ -19,30 +19,19 @@ EXT_OUT2=".tree"
 EXT_WEIGHT=".weights"
 
 # input file info
-PATH="../../input/"
+LOC="../../input/"			   # change
 GRAPH_NAME=(				   # change
-	"lesmis"
 	"football"
-	"celegansneural"
-	"polblogs"
-	"netscience"
-	"hep-th"
-	"astro-ph"
-	"cond-mat"
-	"cond-mat-2003"
-	"cond-mat-2005"
-	"soc-sign-Slashdot081106"
-	"soc-sign-Slashdot090216"
-	"soc-sign-Slashdot090221"
-	"soc-Slashdot0902"
-	"soc-sign-epinions"
 )
 
 for name in "${GRAPH_NAME[@]}"
 do
-	COMMUNITY="${PROGRAM}${METRIC} ${PATH}${name}${EXT_IN} $FLAG_LEVEL $LEVEL $FLAG_VERBOSITY ${PATH}${name}${ALG}${METRIC}${EXT_OUT1} $FLAG_WEIGHT ${PATH}${name}${EXT_WEIGHT}"
 	echo $name
-	$COMMUNITY > "${PATH}${name}${ALG}${METRIC}${EXT_OUT2}"
+	FILE_INPUT="${LOC}${name}${EXT_IN}"
+	FILE_OUTPUT1="${LOC}${name}${ALG}${METRIC}${EXT_OUT1}"
+	FILE_OUTPUT2="${LOC}${name}${ALG}${METRIC}${EXT_OUT2}"
+	FILE_WEIGHT="${LOC}${name}${EXT_WEIGHT}"
+	${PROGRAM}${METRIC} $FILE_INPUT -l $LEVEL -v $FILE_OUTPUT1 -w $FILE_WEIGHT > $FILE_OUTPUT2
 	# ./community{METRIC} ../../input/{name}.bin -l -1 -v ../../input/{name}-lm{METRIC}.info -w ../../input/{name}.weights > ../../input/{name}-lm{METRIC}.tree
 	
 done
