@@ -129,19 +129,18 @@ inline void Community::insert(int node, int comm, double dnodecomm) {
 
 inline double Community::coverage_gain(int node, int comm, double dnodecomm, double w_degree) {
   // assert(node>=0 && node<size);
-
-  // double inc = (double)in[comm];
   // double tot_weight = (double)g.total_weight;
   // return inc/tot_weight;
 
   assert(node>=0 && node<size);
 
+  double inc = (double)in[comm];
   double totc = (double)tot[comm];
   double degc = (double)w_degree;
   double m2   = (double)g.total_weight;
   double dnc  = (double)dnodecomm;
   
-  return (dnc - totc*degc/m2);
+  return (dnc - inc*degc/m2);
 }
 
 

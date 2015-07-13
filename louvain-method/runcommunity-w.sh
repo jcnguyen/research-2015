@@ -21,7 +21,18 @@ EXT_WEIGHT=".weights"
 # input file info
 LOC="../../input/"			   # change
 GRAPH_NAME=(				   # change
+	"lesmis"
 	"football"
+	"celegansneural"
+	"netscience"
+	"hep-th"
+	"astro-ph"
+	"cond-mat"
+	"cond-mat-2003"
+	"cond-mat-2005"
+	"soc-sign-Slashdot081106"
+	"soc-sign-Slashdot090216"
+	"soc-sign-Slashdot090221"
 )
 
 for name in "${GRAPH_NAME[@]}"
