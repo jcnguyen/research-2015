@@ -395,7 +395,7 @@ int main(int argc,char * argv[]) {
 	// Record some results
 	t1 = time(&t1);
 	ofstream fout(ioparm.f_parm.c_str(), ios::app);
-	fout << "---MODULARITY---\n";
+	fout << "---COVERAGE---\n";
 	fout << "MAXQ------:\t" << Qmax.y  << "\n";
 	fout << "STEP------:\t" << Qmax.x  << "\n";
 	fout << "EXIT------:\t" << asctime(localtime(&t1));
@@ -440,18 +440,18 @@ void buildDeltaQMatrix() {
 	// TODO modularity - replace this block with the initial steps for coverage
 	edge *current;
 	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/(2m)
-	for (int i=1; i<gparm.maxid; i++) {  	// for each row, compute a_{i}
-		a[i] = 0.0;                       
-		if (e[i].so != 0) {              	// ensure it exists
-			current = &e[i];             	// grab first edge
-			a[i]    = eij;                  // initialize a[i]
-			while (current->next != NULL) { // loop through remaining edges
-				a[i] += eij;                // add another eij
-				current = current->next;    
-			}
-			Q[0] += -1.0*a[i]*a[i];         // calculate initial value of Q
-		}
-	}
+	// for (int i=1; i<gparm.maxid; i++) {  	// for each row, compute a_{i}
+	// 	a[i] = 0.0;                       
+	// 	if (e[i].so != 0) {              	// ensure it exists
+	// 		current = &e[i];             	// grab first edge
+	// 		a[i]    = eij;                  // initialize a[i]
+	// 		while (current->next != NULL) { // loop through remaining edges
+	// 			a[i] += eij;                // add another eij
+	// 			current = current->next;    
+	// 		}
+	// 	}
+	// }
+	Q[0] = 0;         						// calculate initial value of Q
 
 	// now we create an empty (ordered) sparse matrix dq[]
 	dq = new nodenub[gparm.maxid]; // initialize dq matrix
@@ -479,7 +479,7 @@ void buildDeltaQMatrix() {
 		if (e[i].so != 0) {
 			current = &e[i]; // grab first edge
 			// TODO modularity
-			dQ = 2.0*(eij-(a[current->so]*a[current->si])); // compute dQ
+			dQ = 2.0*(eij); // compute dQ
 			dQmax.m = dQ;		                      // assume it's at max
 			dQmax.i = current->so;                    // store its (row,col)
 			dQmax.j = current->si;                         
@@ -487,7 +487,7 @@ void buildDeltaQMatrix() {
 			while (current->next != NULL) {        
 				current = current->next;              // go to next edge
 				// TODO modularity
-				dQ = 2.0*(eij-(a[current->so]*a[current->si])); // new dQ
+				dQ = 2.0*(eij); // new dQ
 				if (dQ > dQmax.m) { // if dQ larger than current max
 					dQmax.m = dQ;                     // replace max
 					dQmax.j = current->si;            // store its (col)

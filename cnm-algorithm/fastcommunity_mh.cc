@@ -469,9 +469,9 @@ void buildDeltaQMatrix() {
 	// we insert the tuple into the max-heap hQmax. That insertion returns the
 	// item address, which we then store in the nodenub heap_ptr for that
 	// row's vector.
-	double    dQ;
-	tuple   dQmax; 			// for heaping the row maxes
-	tuple*    itemaddress;  // stores address of item in maxheap
+	double dQ;
+	tuple  dQmax; 			// for heaping the row maxes
+	tuple* itemaddress;  // stores address of item in maxheap
 
 	for (int i=1; i<gparm.maxid; i++) {
 		if (e[i].so != 0) {

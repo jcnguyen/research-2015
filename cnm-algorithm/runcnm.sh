@@ -3,7 +3,7 @@
 
 # program info
 PROGRAM="./FastCommunityMH"
-METRIC="modularity"		  	   # change
+METRIC="coverage"		  	   # change
 
 # extensions
 EXT_IN=".pairs"
@@ -11,7 +11,9 @@ EXT_IN=".pairs"
 # input file info
 LOC="../../input/"			   # change
 GRAPH_NAME=(				   # change
-	"adjnoun"
+	"karate"
+	"dolphins"
+	"polbooks"
 )
 
 for name in "${GRAPH_NAME[@]}"

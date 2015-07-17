@@ -15,7 +15,7 @@ LDFLAGS =
 
 ### local program information
 EXEC=FastCommunityMH
-SOURCES= fastcommunity_mh.cc
+SOURCES= fastcommunity_mh-coverage.cc
 
 ### intermediate objects
 OBJECTS = $(SOURCES: .cc=.o)

@@ -135,7 +135,6 @@ inline double Community::coverage_gain(int node, int comm, double dnodecomm, dou
   assert(node>=0 && node<size);
 
   double inc = (double)in[comm];
-  double totc = (double)tot[comm];
   double degc = (double)w_degree;
   double m2   = (double)g.total_weight;
   double dnc  = (double)dnodecomm;
