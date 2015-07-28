@@ -73,8 +73,10 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 #include "maxheap.h"
@@ -205,7 +207,7 @@ struct groupstats {
 }; groupstats gstats;
 
 struct outparameters {
-	short int textFlag;  // 0: no console output;  1: writes file outputs
+	short int textFlag;  // 0: no console output ; 1: writes file outputs
 	bool      suppFlag;  // T: no support(t) file; F: yes support(t) file
 	short int fileFlag;        
 	string    filename;  // name of input file
@@ -295,11 +297,12 @@ int main(int argc,char * argv[]) {
 	cout << "now building initial dQ[]" << endl;
 	buildDeltaQMatrix();      			// builds dQ[] and h
 	
-	// initialize f_joins, f_support files
+	// begin writing the f_joins file
 	ofstream fjoins(ioparm.f_joins.c_str(), ios::trunc);
 	fjoins << -1 << "\t" << -1 << "\t" << Q[0] << "\t0\n";
 	fjoins.close();
 
+	// begin writing the f_support file (if flag is specified)
 	if (ioparm.suppFlag) {
 		ofstream fsupp(ioparm.f_support.c_str(), ios::trunc);
 		dqSupport();
@@ -312,11 +315,14 @@ int main(int argc,char * argv[]) {
 	cout << "starting algorithm now." << endl;
 	tuple dQmax, dQnew;
 	int isupport, jsupport;
+
 	while (h->heapSize() > 2) {
-		
 		// ---------------------------------
 		// Find largest dQ
-		if (ioparm.textFlag > 0) { h->printHeapTop10(); cout << endl; }
+		if (ioparm.textFlag > 0) { 
+			h->printHeapTop10(); 
+			cout << endl; 
+		}
 		dQmax = h->popMaximum();                // convention: insert i into j
 		if (dQmax.m < -4000000000.0) { break; } // no more joins possible
 		cout << "Q["<<t-1<<"] = "<<Q[t-1];
@@ -360,6 +366,7 @@ int main(int argc,char * argv[]) {
 			{ fjoins << 0.0; } else { fjoins << Q[t]; }
 		fjoins << "\t" << t << "\n";
 		fjoins.close();
+
 		// Note that it is the .joins file which contains both the dendrogram 
 		// and the corresponding Q values. The file format is tab-delimited 
 		// columns of data, where the columns are:
@@ -370,8 +377,14 @@ int main(int argc,char * argv[]) {
 		
 		// ---------------------------------
 		// If cutstep valid, then do some work
-		if (t <= ioparm.cutstep) { groupListsUpdate(joins[t].x, joins[t].y); }
-		if (t == ioparm.cutstep) { recordNetwork(); recordGroupListsFormatted(); groupListsStats(); }
+		if (t <= ioparm.cutstep) { 
+			groupListsUpdate(joins[t].x, joins[t].y); 
+		}
+		if (t == ioparm.cutstep) { 
+			recordNetwork(); 
+			recordGroupListsFormatted(); 
+			groupListsStats(); 
+		}
 
 		// ---------------------------------
 		// Record the support data to file
@@ -385,9 +398,12 @@ int main(int argc,char * argv[]) {
 			fsupp << jsupport << "\n";
 			fsupp.close();
 		}
-		if (Q[t] > Qmax.y) { Qmax.y = Q[t]; Qmax.x = t; }
-		
+		if (Q[t] > Qmax.y) { 
+			Qmax.y = Q[t]; 
+			Qmax.x = t; 
+		}
 		t++; // increment time
+
 	} // end community merging loop
 	cout << "Q["<<t-1<<"] = "<<Q[t-1] << endl;
 	
@@ -440,17 +456,17 @@ void buildDeltaQMatrix() {
 	// TODO modularity - replace this block with the initial steps for coverage
 	edge *current;
 	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/(2m)
-	// for (int i=1; i<gparm.maxid; i++) {  	// for each row, compute a_{i}
-	// 	a[i] = 0.0;                       
-	// 	if (e[i].so != 0) {              	// ensure it exists
-	// 		current = &e[i];             	// grab first edge
-	// 		a[i]    = eij;                  // initialize a[i]
-	// 		while (current->next != NULL) { // loop through remaining edges
-	// 			a[i] += eij;                // add another eij
-	// 			current = current->next;    
-	// 		}
-	// 	}
-	// }
+	for (int i=1; i<gparm.maxid; i++) {  	// for each row, compute a_{i}
+		a[i] = 0.0;                       
+		if (e[i].so != 0) {              	// ensure it exists
+			current = &e[i];             	// grab first edge
+			a[i]    = eij;                  // initialize a[i]
+			while (current->next != NULL) { // loop through remaining edges
+				a[i] += eij;                // add another eij
+				current = current->next;    
+			}
+		}
+	}
 	Q[0] = 0;         						// calculate initial value of Q
 
 	// now we create an empty (ordered) sparse matrix dq[]
@@ -517,7 +533,7 @@ void buildFilenames() {
 	ioparm.f_group   = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".groups";
 	ioparm.f_gstats  = ioparm.d_out + ioparm.s_scratch + "-cnm-"  + ioparm.s_label + ".hist";
 	
-	// starts writing the param file
+	// begin writing the f_parm file
 	if (true) { 
 		ofstream flog(ioparm.f_parm.c_str(), ios::trunc); 
 		flog.close(); 
@@ -965,7 +981,7 @@ bool parseCommandLine(int argc,char * argv[]) {
 	int count;
 
 	// Description of commandline arguments
-	// -f <filename>    give the target .pairs file to be processed
+	// -f <filename>	give the target .pairs file to be processed
 	// -l <text>        the text label for this run; used to build output 
 	//					filenames
 	// -t <int>     	period of timer for reporting progress of computation 
@@ -974,7 +990,8 @@ bool parseCommandLine(int argc,char * argv[]) {
 	// -v --v ---v      differing levels of screen output verbosity
 	// -c <int>    		record the aglomerated network at step <int>
 	
-	if (argc <= 1) { // if no arguments, return statement about program usage.
+	// if no arguments, return statement about program usage
+	if (argc <= 1) { 
 		cout << "\nThis program runs the fast community structure inference ";
 		cout << "algorithm due to Clauset, Newman and Moore on an input graph ";
 		cout << "in the .pairs format. This version is the full max-heap ";
@@ -1003,7 +1020,7 @@ bool parseCommandLine(int argc,char * argv[]) {
 
 	while (argct < argc) {
 		temp = argv[argct];
-		if (temp == "-files") {
+		if (temp == "-files") { // print about the output files
 			cout << "\nBasic files generated:\n";
 			cout << "-- .INFO\n";
 			cout << "   Various information about the program's running. ";
@@ -1042,7 +1059,7 @@ bool parseCommandLine(int argc,char * argv[]) {
 			cout << "important).\n";
 			cout << "\n";
 			return false;
-		} else if (temp == "-f") { // input file name
+		} else if (temp == "-f") { // the input file name
 			argct++;
 			temp = argv[argct];
 			ext = ".pairs";
@@ -1054,8 +1071,10 @@ bool parseCommandLine(int argc,char * argv[]) {
 				return false; 
 			}
 
+			// get the input and output directory
 			ext = "/";
-			count = 0; pos = string::npos;
+			count = 0; 
+			pos = string::npos;
 			for (int i=0; i < temp.size(); i++) { 
 				if (temp[i] == '/') { pos = i; } 
 			}

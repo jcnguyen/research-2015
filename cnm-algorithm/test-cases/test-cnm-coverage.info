@@ -1,0 +1,24 @@
+FASTCOMMUNITY_INFERENCE_ALGORITHM
+START-----:	Tue Jul 28 11:02:02 2015
+---FILES--------
+DIRECTORY-:	test-cases/
+F_IN------:	test.pairs
+F_JOINS---:	test-cnm-coverage.joins
+F_INFO----:	test-cnm-coverage.info
+F_SUPP----:	test-cnm-coverage.supp
+F_NET-----:	test-cnm-coverage.wpairs
+F_GROUPS--:	test-cnm-coverage.groups
+F_GDIST---:	test-cnm-coverage.hist
+---NET_STATS----
+MAXID-----:	6
+NUMNODES--:	7
+NUMEDGES--:	10
+---GROUPS-------
+NUMGROUPS-:	2
+MINSIZE---:	3
+MEANSIZE--:	3.5
+MAXSIZE---:	4
+---COVERAGE---
+MAXQ------:	0.9
+STEP------:	5
+EXIT------:	Tue Jul 28 11:02:02 2015

@@ -74,11 +74,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 #include "maxheap.h"
 #include "vektor.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
