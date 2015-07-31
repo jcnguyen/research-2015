@@ -357,8 +357,7 @@ int main(int argc,char * argv[]) {
 		
 		// ---------------------------------
 		// Record join to file
-		// open file for writing the next join
-		ofstream fjoins(ioparm.f_joins.c_str(), ios::app); 
+		ofstream fjoins(ioparm.f_joins.c_str(), ios::app); // open file
 
 		// convert to external format
 		fjoins << joins[t].x-1 << "\t" << joins[t].y-1 << "\t"; 

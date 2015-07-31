@@ -73,14 +73,14 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <stdlib.h>
+#include <stdio.h>
 #include <fstream>
 #include <string.h>
 #include <time.h>
 #include <math.h>
 #include "maxheap.h"
 #include "vektor.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 using namespace std;
 
@@ -89,11 +89,11 @@ using namespace std;
 // in linked-list
 class edge {
 public:
-	int  so;	 // originating node
-	int  si;     // terminating node
-	edge *next;  // pointer for linked list of edges
-	edge();      // default constructor
-	~edge();     // default destructor
+	int  so;	// originating node
+	int  si;    // terminating node
+	edge *next; // pointer for linked list of edges
+	edge();     // default constructor
+	~edge();    // default destructor
 };
 edge::edge()  { so = 0; si = 0; next = NULL; }
 edge::~edge() {}
@@ -101,8 +101,8 @@ edge::~edge() {}
 // ----------------------------------------------------------------------------
 // Nodenub object - defined by a *node pointer and *node pointer 
 struct nodenub {
-	tuple  *heap_ptr;	// pointer to node(max,i,j) in max-heap of row maxes
-	vektor *v;			// pointer stored vector for (i,j)
+	tuple  *heap_ptr; // pointer to node(max,i,j) in max-heap of row maxes
+	vektor *v;		  // pointer stored vector for (i,j)
 };
 
 // ----------------------------------------------------------------------------
@@ -110,25 +110,25 @@ struct nodenub {
 #if !defined(TUPLE_INCLUDED)
 #define TUPLE_INCLUDED
 struct tuple {
-	double m;  // stored value
-	int    i;  // row index
-	int    j;  // column index
-	int    k;  // heap index
+	double m; // stored value
+	int    i; // row index
+	int    j; // column index
+	int    k; // heap index
 };
 #endif
 
 // ordered pair structures (handy in the program)
 struct apair { 
-	int x; 
-	int y; 
+	int	   x; 
+	int    y; 
 };
 #if !defined(DPAIR_INCLUDED)
 #define DPAIR_INCLUDED
 class dpair {
 public:
-	int x; 
+	int    x; 
 	double y; 
-	dpair *next;
+	dpair  *next;
 	dpair(); 
 	~dpair();
 };
@@ -152,10 +152,10 @@ list::~list() {}
 // Community stub object - stub for a community list
 class stub {
 public:
-	bool valid;		// is this community valid?
-	int  size;		// size of community
-	list *members;	// pointer to list of community members
-	list *last;		// pointer to end of list
+	bool valid;	   // is this community valid?
+	int  size;	   // size of community
+	list *members; // pointer to list of community members
+	list *last;	   // pointer to end of list
 	stub();   
 	~stub();
 };
@@ -192,41 +192,39 @@ void recordNetwork();
 // PROGRAM PARAMETERS ---------------------------------------------------------
 
 struct netparameters {
-	int       n;          // number of nodes in network
-	int       m;          // number of edges in network
-	int       maxid;      // maximum node id
-	int       minid;      // minimum node id
+	int       n;         // number of nodes in network
+	int       m;         // number of edges in network
+	int       maxid; 	 // maximum node id
+	int       minid; 	 // minimum node id
 }; netparameters gparm;
 
 struct groupstats {
-	int       numgroups;  // number of groups
-	double    meansize;   // mean size of groups
-	int       maxsize;    // size of largest group
-	int       minsize;    // size of smallest group
-	double    *sizehist;  // distribution of sizes
+	int       numgroups; // number of groups
+	double    meansize;  // mean size of groups
+	int       maxsize;   // size of largest group
+	int       minsize;   // size of smallest group
+	double    *sizehist; // distribution of sizes
 }; groupstats gstats;
 
 struct outparameters {
-	short int textFlag;   // 0: no console output
-						  // 1: writes file outputs
-	bool      suppFlag;   // T: no support(t) file
-						  // F: yes support(t) file
-	short int fileFlag;        
-	string    filename;   // name of input file
-	string    d_in;       // (dir ) directory for input file
-	string    d_out;      // (dir ) director for output file
-	string    f_parm;     // (file) parameters output
-	string    f_input;    // (file) input data file
-	string    f_joins;    // (file) community hierarchy
-	string    f_support;  // (file) dQ support as a function of time
-	string    f_net;      // (file) .wpairs file for .cutstep network
-	string    f_group;    // (file) .list of indices in communities at .cutstep
-	string    f_gstats;   // (file) distribution of community sizes at .cutstep
-	string    s_label;    // (temp) text label for run
-	string    s_scratch;  // (temp) text for building filenames
-	int       timer;      // timer for displaying progress reports 
-	bool      timerFlag;  // flag for setting timer
-	int       cutstep;    // step at which to record aglomerated network
+	short int textFlag;  // 0: no console output ; 1: writes file outputs
+	bool      suppFlag;  // T: no support(t) file; F: yes support(t) file
+	short int fileFlag;           
+	string    filename;  // name of input file
+	string    d_in;      // (dir) directory for input file
+	string    d_out;     // (dir) directory for output file
+	string    f_parm;    // (file) parameters output
+	string    f_input;   // (file) input data file
+	string    f_joins;   // (file) community hierarchy
+	string    f_support; // (file) dQ support as a function of time
+	string    f_net;     // (file) .wpairs file for .cutstep network
+	string    f_group;   // (file) .list of indices in communities at .cutstep
+	string    f_gstats;  // (file) distribution of community sizes at .cutstep
+	string    s_label;   // (temp) text label for run
+	string    s_scratch; // (temp) text for building filenames
+	int       timer;     // timer for displaying progress reports 
+	bool      timerFlag; // flag for setting timer
+	int       cutstep;   // step at which to record aglomerated network
 }; outparameters ioparm;
 
 // ----------------------------------------------------------------------------
@@ -250,6 +248,7 @@ double supportAve;
 
 // ----------------------------------------------------------------------------
 // MAIN PROGRAM ---------------------------------------------------------------
+
 int main(int argc,char * argv[]) {
 
 	// default values for parameters which may be modified from the commandline
@@ -269,7 +268,7 @@ int main(int argc,char * argv[]) {
 	cout << "\nFast Community Inference.\n";
 	cout << "Copyright (c) 2004 by Aaron Clauset (aaron@cs.unm.edu)\n";
 	
-	if (parseCommandLine(argc, argv)) {
+	if (parseCommandLine(argc, argv)) { // unable to parse command line
 	} else { return 0; }
 
 	cout << "\nimporting: " << ioparm.filename << endl; // the input filename
@@ -278,32 +277,32 @@ int main(int argc,char * argv[]) {
 	
 	// ----------------------------------------------------------------------
 	// Allocate data structures for main loop
-	a     = new double[gparm.maxid];
-	Q     = new double[gparm.n+1];
-	joins = new apair[gparm.n+1];
-	for (int i=0; i<gparm.maxid; i++) { 
-		a[i]       = 0.0; 
+	a     = new double[gparm.maxid];	// initialize A_i
+	Q     = new double[gparm.n+1];		// initialize Q(t)
+	joins = new apair[gparm.n+1];		// initialize list of joins
+	for (int i=0; i<gparm.maxid; i++) { // allocate A_i
+		a[i] 	   = 0.0; 
 	}
-	for (int i=0; i<gparm.n+1; i++) { 
-		Q[i]       = 0.0; 
+	for (int i=0; i<gparm.n+1;   i++) { // allocate Q(t) and list of joins
+		Q[i] 	   = 0.0; 
 		joins[i].x = 0; 
 		joins[i].y = 0; 
 	}
-	int t  = 1;
-	Qmax.y = -4294967296.0; // initialize max Q
-	Qmax.x = 0;				// at corresponding time 0
-	if (ioparm.cutstep > 0) { // will need to track agglomerations
+	int t  = 1;							// initialize time step value
+	Qmax.y = -4294967296.0;  			// initialize max Q
+	Qmax.x = 0;				  			// at corresponding time 0
+	if (ioparm.cutstep > 0) { 			// will need to track agglomerations
 		groupListsSetup(); 
 	} 
-	
 	cout << "now building initial dQ[]" << endl;
-	buildDeltaQMatrix(); // builds dQ[] and h
+	buildDeltaQMatrix();      			// builds dQ[] and h
 	
-	// initialize f_joins, f_support files
+	// begin writing the f_joins file
 	ofstream fjoins(ioparm.f_joins.c_str(), ios::trunc);
 	fjoins << -1 << "\t" << -1 << "\t" << Q[0] << "\t0\n";
 	fjoins.close();
 
+	// begin writing the f_support file (if flag is specified)
 	if (ioparm.suppFlag) {
 		ofstream fsupp(ioparm.f_support.c_str(), ios::trunc);
 		dqSupport();
@@ -316,12 +315,15 @@ int main(int argc,char * argv[]) {
 	cout << "starting algorithm now." << endl;
 	tuple dQmax, dQnew;
 	int isupport, jsupport;
+
 	while (h->heapSize() > 2) {
-		
 		// ---------------------------------
 		// Find largest dQ
-		if (ioparm.textFlag > 0) { h->printHeapTop10(); cout << endl; }
-		dQmax = h->popMaximum(); // convention: insert i into j
+		if (ioparm.textFlag > 0) { 
+			h->printHeapTop10(); 
+			cout << endl; 
+		}
+		dQmax = h->popMaximum();                // convention: insert i into j
 		if (dQmax.m < -4000000000.0) { break; } // no more joins possible
 		cout << "Q["<<t-1<<"] = "<<Q[t-1];
 		
@@ -337,27 +339,25 @@ int main(int argc,char * argv[]) {
 			cout << "  join: " << dQmax.i << " -> " << dQmax.j << "\t";
 			cout << "(" << isupport << " -> " << jsupport << ")\n";
 			mergeCommunities(dQmax.i, dQmax.j); // merge community i into j
-			joins[t].x = dQmax.i; // record merge of i(x) into j(y)
+			joins[t].x = dQmax.i;               // log merge of i(x) into j(y)
 			joins[t].y = dQmax.j; 
 		} else {                  
 			cout << "  join: " << dQmax.i << " <- " << dQmax.j << "\t";
 			cout << "(" << isupport << " <- " << jsupport << ")\n";
 			
 			// take community j's heap pointer
-			dq[dQmax.i].heap_ptr = dq[dQmax.j].heap_ptr; 
-			dq[dQmax.i].heap_ptr->i = dQmax.i; // mark it as i's
-			dq[dQmax.i].heap_ptr->j = dQmax.j; // mark it as i's
+			dq[dQmax.i].heap_ptr    = dq[dQmax.j].heap_ptr; 
+			dq[dQmax.i].heap_ptr->i = dQmax.i;  // mark it as i's
+			dq[dQmax.i].heap_ptr->j = dQmax.j;  // mark it as i's
 			mergeCommunities(dQmax.j, dQmax.i); // merge community j into i
-			joins[t].x = dQmax.j; // record merge of j(x) into i(y)
+			joins[t].x = dQmax.j; 				// log merge of j(x) into i(y)
 			joins[t].y = dQmax.i;  
 		}                           
-		Q[t] = dQmax.m + Q[t-1]; // record Q(t)
+		Q[t] = dQmax.m + Q[t-1];				// record Q(t)
 		
 		// ---------------------------------
 		// Record join to file
-
-		// open file for writing the next join
-		ofstream fjoins(ioparm.f_joins.c_str(), ios::app); 
+		ofstream fjoins(ioparm.f_joins.c_str(), ios::app); // open file 
 
 		// convert to external format
 		fjoins << joins[t].x-1 << "\t" << joins[t].y-1 << "\t"; 
@@ -365,6 +365,7 @@ int main(int argc,char * argv[]) {
 			{ fjoins << 0.0; } else { fjoins << Q[t]; }
 		fjoins << "\t" << t << "\n";
 		fjoins.close();
+
 		// Note that it is the .joins file which contains both the dendrogram 
 		// and the corresponding Q values. The file format is tab-delimited 
 		// columns of data, where the columns are:
@@ -375,8 +376,14 @@ int main(int argc,char * argv[]) {
 		
 		// ---------------------------------
 		// If cutstep valid, then do some work
-		if (t <= ioparm.cutstep) { groupListsUpdate(joins[t].x, joins[t].y); }
-		if (t == ioparm.cutstep) { recordNetwork(); recordGroupListsFormatted(); groupListsStats(); }
+		if (t <= ioparm.cutstep) { 
+			groupListsUpdate(joins[t].x, joins[t].y); 
+		}
+		if (t == ioparm.cutstep) { 
+			recordNetwork(); 
+			recordGroupListsFormatted(); 
+			groupListsStats(); 
+		}
 
 		// ---------------------------------
 		// Record the support data to file
@@ -390,10 +397,13 @@ int main(int argc,char * argv[]) {
 			fsupp << jsupport << "\n";
 			fsupp.close();
 		}
-		if (Q[t] > Qmax.y) { Qmax.y = Q[t]; Qmax.x = t; }
-		
+		if (Q[t] > Qmax.y) { 
+			Qmax.y = Q[t]; 
+			Qmax.x = t; 
+		}
 		t++; // increment time
-	} // ------------- end community merging loop
+
+	} // end community merging loop
 	cout << "Q["<<t-1<<"] = "<<Q[t-1] << endl;
 	
 	// ----------------------------------------------------------------------
