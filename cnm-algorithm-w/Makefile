@@ -14,8 +14,8 @@ CCFLAGS = -O3 -fomit-frame-pointer -funroll-loops -fexpensive-optimizations -Wno
 LDFLAGS = 
 
 ### local program information
-EXEC=FastCommunityMH_w
-SOURCES= fastcommunity_w_mh.cc
+EXEC=FastCommunityMH_w-coverage
+SOURCES= fastcommunity_w_mh-coverage.cc
 
 ### intermediate objects
 OBJECTS = $(SOURCES: .cc=.o)

@@ -11,6 +11,9 @@ EXT_IN=".pairs"
 # input file info
 LOC="../../input/"			   # change
 GRAPH_NAME=(				   # change
+	"adjnoun"
+	"amazon0302"
+	"amazon0312"
 	"amazon0505"
 	"amazon0601"
 	"as-22july06"
@@ -46,6 +49,6 @@ for name in "${GRAPH_NAME[@]}"
 do
 
 	FILE_INPUT="${LOC}${name}${EXT_IN}"
-	$PROGRAM -f $FILE_INPUT -l $METRIC
+	$PROGRAM -f $FILE_INPUT -l $METRIC "-c "
 	# ./FastCommunityMH -f ../../input/{name}.pairs -l {METRIC}
 done

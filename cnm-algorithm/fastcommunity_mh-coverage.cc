@@ -410,7 +410,7 @@ int main(int argc,char * argv[]) {
 	// Record some results
 	t1 = time(&t1);
 	ofstream fout(ioparm.f_parm.c_str(), ios::app);
-	fout << "---COVERAGE---\n";
+	fout << "---COVERAGE---\n"; // (COVERAGE)
 	fout << "MAXQ------:\t" << Qmax.y  << "\n";
 	fout << "STEP------:\t" << Qmax.x  << "\n";
 	fout << "EXIT------:\t" << asctime(localtime(&t1));
@@ -452,7 +452,7 @@ void buildDeltaQMatrix() {
 	// First we compute e_{i,j}, and compute+store the a_{i} values. 
 	// These will be used shortly when we compute each dQ_{i,j}.
 	edge *current;
-	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/(2m) (COVERAGE)
+	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/(2m) 
 	for (int i=1; i<gparm.maxid; i++) {  	// for each row, compute a_{i}
 		a[i] = 0.0;                       
 		if (e[i].so != 0) {              	// ensure it exists
@@ -464,7 +464,7 @@ void buildDeltaQMatrix() {
 			}
 		}
 	}
-	Q[0] = 0;         						// calculate initial value of Q
+	Q[0] = 0; // calculate initial value of Q (COVERAGE)
 
 	// now we create an empty (ordered) sparse matrix dq[]
 	dq = new nodenub[gparm.maxid]; // initialize dq matrix
@@ -1345,6 +1345,3 @@ void recordNetwork() {
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 ///////////////////////////////////////////////////////////////////////////////
-
-
-

@@ -367,10 +367,11 @@ int main(int argc,char * argv[]) {
 		fjoins << "\t" << t << "\n";
 		fjoins.close();
 
-		// Note that it is the .joins file which contains both the dendrogram and the corresponding
-		// Q values. The file format is tab-delimited columns of data, where the columns are:
-		// 1. the community which grows
-		// 2. the community which was absorbed
+		// Note that it is the .joins file which contains both the dendrogram 
+		// and the corresponding Q values. The file format is tab-delimited 
+		// columns of data, where the columns are:
+		// 1. the community which was absorbed
+		// 2. the community which grows
 		// 3. the modularity value Q after the join
 		// 4. the time step value
 		
@@ -410,7 +411,7 @@ int main(int argc,char * argv[]) {
 	// Record some results
 	t1 = time(&t1);
 	ofstream fout(ioparm.f_parm.c_str(), ios::app);
-	fout << "---MODULARITY---\n";
+	fout << "---MODULARITY---\n"; // (MODULARITY)
 	fout << "MAXQ------:\t" << Qmax.y  << "\n";
 	fout << "STEP------:\t" << Qmax.x  << "\n";
 	fout << "EXIT------:\t" << asctime(localtime(&t1));
@@ -420,10 +421,10 @@ int main(int argc,char * argv[]) {
 	return 1;
 }
 
-// ------------------------------------------------------------------------------------ //
-// ------------------------------------------------------------------------------------ //
-// ------------------------------------------------------------------------------------ //
-// FUNCTION DEFINITIONS --------------------------------------------------------------- //
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// FUNCTION DEFINITIONS -------------------------------------------------------
 
 void buildDeltaQMatrix() {
 	
@@ -453,9 +454,9 @@ void buildDeltaQMatrix() {
 	// These will be used shortly when we compute each dQ_{i,j}.
 	edge   *current;
 	int    deg[gparm.maxid];
-	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/m
+	double eij = (double)(0.5/gparm.m); 	// intially each e_{i,j} = 1/m 
 	for (int i=1; i<gparm.maxid; i++) {  	// for each row
-		a[i]   = 0.0;				
+		a[i] = 0.0;				
 		if (e[i].so != 0) {              	// ensure it exists
 			current = &e[i];             	// grab first edge
 			deg[i]  = 0;					
@@ -464,7 +465,7 @@ void buildDeltaQMatrix() {
 				deg[i]++;					// increment degree count
 				current = current->next;			
 			}
-			Q[0] += -1.0*a[i]*a[i];		    // calculate initial value of Q
+			Q[0] += -1.0*a[i]*a[i]; // calculate initial value of Q (MODULARITY)
 		} else { 
 			deg[i] = -1; 
 		}					
@@ -497,7 +498,7 @@ void buildDeltaQMatrix() {
 		if (e[i].so != 0) {
 			current = &e[i];       // grab first edge
 			eij     = (current->we)/(2.0*gparm.w);				 // compute eij
-			dQ      = 2.0*(eij-(a[current->so]*a[current->si])); // compute dQ
+			dQ      = 2.0*(eij-(a[current->so]*a[current->si])); // compute dQ (MODULARITY)
 			dQmax.m = dQ;		   // assume it's at max
 			dQmax.i = current->so; // store its (row,col)
 			dQmax.j = current->si;					
@@ -505,7 +506,7 @@ void buildDeltaQMatrix() {
 			while (current->next != NULL) {		
 				current = current->next;   // go to next edge
 				eij     = (current->we)/(2.0*gparm.w);			     // new eij
-				dQ      = 2.0*(eij-(a[current->so]*a[current->si])); // new dQ
+				dQ      = 2.0*(eij-(a[current->so]*a[current->si])); // new dQ (MODULARITY)
 				if (dQ > dQmax.m) {        // if dQ larger than current max
 					dQmax.m = dQ;          // replace max
 					dQmax.j = current->si; // store its (col)
@@ -579,7 +580,7 @@ void dqSupport() {
 	return;
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 void groupListsSetup() {
 	list *newList;
@@ -656,7 +657,7 @@ void groupListsStats() {
 	return;
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 void groupListsUpdate(const int x, const int y) {
 	
@@ -671,7 +672,7 @@ void groupListsUpdate(const int x, const int y) {
 	return;
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 void mergeCommunities(int i, int j) {
 	
@@ -867,7 +868,7 @@ void mergeCommunities(int i, int j) {
 		dq[j].v->printTree(); 
 	}
 	
-	// ---------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	// SEARCHING FOR IJX-CHAINS -----------------------------------------------
 	// So far, we've treated all of [i]'s previous connections, and updated 
 	// the elements of dQ[] which corresponded to neighbors of [i] (which may 
@@ -953,7 +954,7 @@ void mergeCommunities(int i, int j) {
 	a[j] += a[i];													// (step 7)
 	a[i] = 0.0;
 	
-	// ---------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	// Finally, now we need to clean up by deleting the vector [i] since we'll
 	// never need it again, and it'll conserve memory. For safety, we also set
 	// the pointers to be NULL to prevent inadvertent access to the deleted 
@@ -970,7 +971,7 @@ void mergeCommunities(int i, int j) {
  
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 bool parseCommandLine(int argc,char * argv[]) {
 	int    argct = 1;
@@ -1150,7 +1151,7 @@ bool parseCommandLine(int argc,char * argv[]) {
 	return true;
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 void readInputFile() {
 	
@@ -1286,7 +1287,7 @@ void readInputFile() {
 	return;
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // records the agglomerated list of indices for each valid community 
 
 // Format:
@@ -1322,7 +1323,7 @@ void recordGroupListsFormatted() {
 		if (c[i].valid) {
 			current = c[i].members;
 			while (current != NULL) {
-				fgroup << current->index-1 << " " << communityID <<"\n";			// external format
+				fgroup << current->index-1 << " " << communityID <<"\n";
 				current = current->next;			
 			}
 			communityID++;	
@@ -1333,7 +1334,7 @@ void recordGroupListsFormatted() {
 	return;
 }
 
-// ------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // records the network as currently agglomerated
 
 void recordNetwork() {
@@ -1360,9 +1361,6 @@ void recordNetwork() {
 	return;
 }
 
-// ------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------
-
-
-
-
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////
