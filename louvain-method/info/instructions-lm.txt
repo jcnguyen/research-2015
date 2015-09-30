@@ -3,6 +3,7 @@
  *****************************************/
 .pairs		input graph for an unweighted network
 .wpairs		input graph for a weighted network
+
 .bin		the binary version of the input graph
 .weights	binary version of the weights listed in the input graph; for weighted networks only
 .tree		hierarchial structure of the communities; lists the communities found at each pass
@@ -11,7 +12,7 @@
 
 
 .pairs/.wpairs 
-	--convert--> .bin and .weights 
+	--convert--> .bin and .weights (for weighted graphs only)
 		--community--> .tree and .info 
 			--display--> .graph
 
@@ -30,8 +31,8 @@ COMMANDS (weighted)
 -------------
 0. make clean
    make 
-1. ./convert -i ../../input/adjnoun.pairs -o ../../input/adjnoun.bin -d -w ../../input/adjnoun.pairs
-2. ./community-modularity ../../input/adjnoun.bin -l -1 -v ../../input/adjnoun-lm-modularity.info -w ../../input/adjnoun.pairs > ../../input/adjnoun-lm-modularity.tree
+1. ./convert -i ../../input/adjnoun.pairs -o ../../input/adjnoun.bin -d -w ../../input/adjnoun.weights
+2. ./community-modularity ../../input/adjnoun.bin -l -1 -v ../../input/adjnoun-lm-modularity.info -w ../../input/adjnoun.weights > ../../input/adjnoun-lm-modularity.tree
 3. ./display ../../input/adjnoun-lm-modularity.tree > ../../input/adjnoun-lm-modularity.graph
 
 DETAILS
