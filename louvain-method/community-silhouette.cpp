@@ -16,7 +16,7 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#include "silhouette-coverage.h"
+#include "communinty-silhouette.h"
 
 using namespace std;
 
