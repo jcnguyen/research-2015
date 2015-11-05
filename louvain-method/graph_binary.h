@@ -35,12 +35,12 @@ using namespace std;
 class Graph {
  public:
   unsigned int nb_nodes; // num of vertices
-  unsigned long nb_links; // num of edges
+  unsigned long nb_links; // num of 2*edges
   double total_weight; // weight of graph
 
-  vector<unsigned long> degrees; // degree of each node (index is the node)
+  vector<unsigned long> degrees; // cumulative degree for each node
   vector<unsigned int> links; // list of neighboring vertices of a node
-  vector<float> weights; // weights between node and neighbor
+  vector<float> weights; // weights of each edge in graph
 
   Graph();
 
