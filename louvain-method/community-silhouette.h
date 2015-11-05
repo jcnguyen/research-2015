@@ -38,12 +38,14 @@ class Community {
   // GLOBAL VARIABLES ---------------------------------------------------------
 
   // TODO wtf are these; fix comments
-  vector<double> neigh_weight; // weight of the neighboring communities all of vertices in this community; index = vertex, double = weight 
-  vector<unsigned int> neigh_pos; // the current community that a vertex is in; index = vertex, neigh_pos[i] = communityID
+  // weight of the neighboring communities all of vertices in this community; index = vertex, double = weight 
+  vector<double> neigh_weight; 
+  // the current community that a vertex is in; index = vertex, neigh_pos[i] = communityID
+  vector<unsigned int> neigh_pos; 
   unsigned int neigh_last; // the position of the final neighbor of this community
 
-  Graph g;            // network to compute communities for
-  int size;           // number of nodes in the network and size of all vectors
+  Graph g;            // input graph
+  int size;           // number of nodes in the graph
   vector<int> n2c;    // community to which each node belongs
 
   // used to compute the modularity participation of each community
