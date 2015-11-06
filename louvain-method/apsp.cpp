@@ -1,26 +1,18 @@
-// floyd warshall alg to find all pairs shortest path
-// original found on geeks for geeks and altered for the louvain alg 
-// jennifer nguyen and anastasia voloshinov
-// nov 5 2015
-// complex networks research
+// C Program for Floyd Warshall Algorithm
+#include<stdio.h>
+ 
+#define V 7
 
-#include <stdlib.h>
-#include "graph_binary.h"
- 
- 
 /* Define Infinite as a large enough value. This value will be used
   for vertices not connected to each other */
-const INF = 9999999
+#define INF 99999
  
 // A function to print the solution matrix
 void printSolution(int dist[][V]);
  
 // Solves the all-pairs shortest path problem using Floyd Warshall algorithm
-void floydWarshell (Graph g) // input is binary graph g and v = g.nb_nodes
+void floydWarshell (int** graph)
 {
-	// number of vertices in the graph
-	V = g.nb_nodes;
-
     /* dist[][] will be the output matrix that will finally have the shortest 
       distances between every pair of vertices */
     int dist[V][V], i, j, k;
@@ -30,7 +22,7 @@ void floydWarshell (Graph g) // input is binary graph g and v = g.nb_nodes
        on shortest paths considering no intermediate vertex. */
     for (i = 0; i < V; i++)
         for (j = 0; j < V; j++)
-            dist[i][j] = ;
+            dist[i][j] = graph[i][j];
  
     /* Add all vertices one by one to the set of intermediate vertices.
       ---> Before start of a iteration, we have shortest distances between all
@@ -78,24 +70,24 @@ void printSolution(int dist[][V])
 }
  
 // driver program to test above function
-int main()
-{
-    /* Let us create the following weighted graph
-            10
-       (0)------->(3)
-        |         /|\
-      5 |          |
-        |          | 1
-       \|/         |
-       (1)------->(2)
-            3           */
-    int graph[V][V] = { {0,   5,  INF, 10},
-                        {INF, 0,   3, INF},
-                        {INF, INF, 0,   1},
-                        {INF, INF, INF, 0}
-                      };
+// int main()
+// {
+//     /* Let us create the following weighted graph
+//             10
+//        (0)------->(3)
+//         |         /|\
+//       5 |          |
+//         |          | 1
+//        \|/         |
+//        (1)------->(2)
+//             3           */
+//     int graph[V][V] = { {0,   5,  INF, 10},
+//                         {INF, 0,   3, INF},
+//                         {INF, INF, 0,   1},
+//                         {INF, INF, INF, 0}
+//                       };
  
-    // Print the solution
-    floydWarshell(graph);
-    return 0;
-}
+//     // Print the solution
+//     floydWarshell(graph);
+//     return 0;
+// }

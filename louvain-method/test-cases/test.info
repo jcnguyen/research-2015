@@ -1,20 +1,11 @@
-Begin: Thu Nov  5 23:18:26 2015
+Begin: Thu Nov  5 23:32:29 2015
 Created community 
 Creating matrix
-----------------
-0 2 5 0 0 0 0 
-2 0 9 8 0 0 0 
-5 9 0 0 0 0 0 
-0 8 0 0 6 5 4 
-0 0 0 6 0 3 7 
-0 0 0 5 3 0 6 
-0 0 0 4 7 6 0 
-----------------
 level 0:
-  start computation: Thu Nov  5 23:18:26 2015
+  start computation: Thu Nov  5 23:32:29 2015
   network size: 7 nodes, 20 links, 0 weight.
   coverage increased from 0 to 0
-  end computation: Thu Nov  5 23:18:26 2015
-End: Thu Nov  5 23:18:26 2015
+  end computation: Thu Nov  5 23:32:29 2015
+End: Thu Nov  5 23:32:29 2015
 Total duration: 0 sec.
 0

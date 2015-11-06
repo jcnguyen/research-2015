@@ -26,6 +26,7 @@
 
 #include "graph_binary.h"
 #include "community-silhouette.h"
+#include "apsp.cpp"
 
 using namespace std;
 
@@ -177,6 +178,16 @@ int main(int argc, char **argv) {
   // for (int i = 0; i < c.g.nb_nodes; i++){ 
   //   for (int j = 0; j < c.g.nb_nodes; j++) {
   //     foutput << adjMatrix[i][j] << " ";
+  //   }
+  //   foutput << endl;
+  // }
+  // foutput << "----------------" << endl;
+
+  floydWarshell(adjMatrix);
+  // foutput << "----------------" << endl;
+  // for (int i = 0; i < c.g.nb_nodes; i++){ 
+  //   for (int j = 0; j < c.g.nb_nodes; j++) {
+  //     foutput << sol[i][j] << " ";
   //   }
   //   foutput << endl;
   // }
