@@ -23,7 +23,7 @@ using namespace std;
 
 // ----------------------------------------------------------------------------
 // CONSTRUCTORS ---------------------------------------------------------------
-Community::Community(char *filename, char *filename_w, int type, int nbp, double minm) {
+Community::Community(char *filename, char *filename_w, int type, int nbp, double minp) {
   g = Graph(filename, filename_w, type); // create a binary graph
   size = g.nb_nodes;
   num_possible_edges = .5 * size * (size - 1);
@@ -45,10 +45,10 @@ Community::Community(char *filename, char *filename_w, int type, int nbp, double
   }
 
   nb_pass = nbp;
-  min_modularity = minm;
+  min_perf = minp;
 }
 
-Community::Community(Graph gc, int nbp, double minm) {
+Community::Community(Graph gc, int nbp, double minp) {
   g = gc;
   size = g.nb_nodes;
 
@@ -67,7 +67,7 @@ Community::Community(Graph gc, int nbp, double minm) {
   }
 
   nb_pass = nbp;
-  min_modularity = minm;
+  min_modularity = minp;
 }
 
 // ----------------------------------------------------------------------------
@@ -166,7 +166,7 @@ double Community::performance() {
 */
 double Community::initial_performance() {
 
-    int g = num_possible_edges - num_edges;
+    int g = num_possible_edges - num_edges;   // TODO: how does this work for later iterations of the algorithm?
 
 /* Alternate method to find the number of 
 * nonexistent external edges (g(G) for unweighted graph): 
@@ -314,8 +314,8 @@ bool Community::one_level() {
   bool improvement=false ;
   int nb_moves;
   int nb_pass_done = 0;
-  double new_mod   = modularity();
-  double cur_mod   = new_mod;
+  //double new_mod   = modularity();
+  //double cur_mod   = new_mod;
 
   // chose the random order in which we examine the vertices
   vector<int> random_order(size);
@@ -328,18 +328,23 @@ bool Community::one_level() {
     random_order[rand_pos] = tmp;
   }
 
-  // repeat while 
-  //   there is an improvement of modularity
-  //   or there is an improvement of modularity greater than a given epsilon 
-  //   or a predefined number of pass have been done
+  // potential increase from placing a node into a neighboring community
+  double increase;
+
+  /*
+  * repeat while 
+  *   there is an improvement of performance
+  *   or there is an improvement of performance greater than a given epsilon 
+  *   or a predefined number of passes have been completed
+  */
   do {
-    cur_mod = new_mod;
-    nb_moves = 0;
-    nb_pass_done++;
+    // cur_mod = new_mod;
+    nb_moves = 0;   // number of nodes moved into new communities
+    nb_pass_done++;   // count the number of passes
 
     // for each node: remove the node from its community and insert it in the best community
     for (int node_tmp=0 ; node_tmp<size ; node_tmp++) {
-  //      int node = node_tmp;
+        // int node = node_tmp;
         int node = random_order[node_tmp];
         int node_comm     = n2c[node];
         double w_degree = g.weighted_degree(node);
@@ -349,7 +354,9 @@ bool Community::one_level() {
         
         // remove node from its current community
         remove(node, node_comm, neigh_weight[node_comm]);
-        // TODO: calculate the change in the numerator due to removal of node
+        
+        // calculate the change in the numerator due to removal of node
+        remove_perf_change = remove_perf_change(int node, int comm, double dnodecomm);
 
         // compute the nearest community for node
         // default choice for future insertion is the former community 
@@ -359,8 +366,10 @@ bool Community::one_level() {
 
         // consider putting the node into each of its neighboring communities
         for (unsigned int i=0 ; i<neigh_last ; i++) {
-          double increase = performance_gain(node, neigh_pos[i], neigh_weight[neigh_pos[i]], w_degree);
+          increase = performance_gain(node, neigh_pos[i], neigh_weight[neigh_pos[i]], w_degree);
 
+
+          // TODO: deal with the case where it's best to just leave the node in its own community?
           // if a new best increase is calculated, update accordingly
           if (increase>best_increase) {
             best_comm     = neigh_pos[i];
@@ -372,11 +381,20 @@ bool Community::one_level() {
         // insert node in the nearest community
         insert(node, best_comm, best_nblinks);
        
+        // save old performance for calculation in while loop boolean guard
+        old_perf = cur_perf;
+
+        // update performance accordingly; change will be >= 0
+        // remove_perf_change can be negative
+        cur_perf = cur_perf + remove_perf_change + best_increase;
+
         // if we put the node in a different community, we made an improvement
-        if (best_comm!=node_comm)
+        if (best_comm!=node_comm) {
           nb_moves++;
+        }
     }
 
+    // TODO what is this doing?
     double total_tot=0;
     double total_in=0;
     for (unsigned int i=0 ; i<tot.size() ;i++) {
@@ -384,11 +402,10 @@ bool Community::one_level() {
       total_in+=in[i];
     }
 
-    //new_mod = modularity();
     if (nb_moves>0)
       improvement=true;
     
-  } while (nb_moves>0 && new_mod-cur_mod>min_modularity); // TODO: change
+  } while (nb_moves>0 && cur_perf-old_perf>min_perf); // TODO: change
 
   return improvement;
 }
