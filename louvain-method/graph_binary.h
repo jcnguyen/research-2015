@@ -36,7 +36,6 @@ class Graph {
  public:
   unsigned int nb_nodes; // num of vertices
   unsigned long nb_links; // num of 2*edges
-  unsigned long nb_links; // num of edges * 2
   double total_weight; // weight of graph
 
   vector<unsigned long> degrees; // cumulative degree for each node

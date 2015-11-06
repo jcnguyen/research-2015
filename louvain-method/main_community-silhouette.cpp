@@ -147,8 +147,8 @@ int** createMatrix(unsigned int nb_nodes, vector<float> weights, ofstream &foutp
 	return adjMatrix;
 }
 
-
 int main(int argc, char **argv) {
+
 	srand(time(NULL)+getpid());
 	parse_args(argc, argv);
 
@@ -174,6 +174,8 @@ int main(int argc, char **argv) {
 	foutput << "Creating matrix" << endl; // TODO delete
 
 	int** adjMatrix = createMatrix(c.g.nb_nodes, c.g.weights, foutput, filename_test);
+
+	floydWarshall(adjMatrix);
 	// foutput << "----------------" << endl;
 	// for (int i = 0; i < c.g.nb_nodes; i++){ 
 	//   for (int j = 0; j < c.g.nb_nodes; j++) {
@@ -182,8 +184,16 @@ int main(int argc, char **argv) {
 	//   foutput << endl;
 	// }
 	// foutput << "----------------" << endl;
+	// int graph[V][V] = { {0,   2,   5,   INF, INF, INF, INF},
+ //                        {2,   0,   9,   8,   INF, INF, INF},
+ //                        {5,   9,   0,   INF, INF, INF, INF},
+ //                        {INF, 8,   INF, 0,   6,   5,   4},
+ //                        {INF, INF, INF, 6,   0,   3,   7},
+ //                        {INF, INF, INF, 5,   3,   0,   6},
+ //                        {INF, INF, INF, 4,   6,   7,   INF}
+ //                      };
 
-	floydWarshell(adjMatrix);
+	// floydWarshall1(graph);
 	// foutput << "----------------" << endl;
 	// for (int i = 0; i < c.g.nb_nodes; i++){ 
 	//   for (int j = 0; j < c.g.nb_nodes; j++) {
