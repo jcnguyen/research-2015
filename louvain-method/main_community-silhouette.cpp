@@ -123,6 +123,32 @@ void printSolution(float dist[][V])
     }
 }
 
+float** createMatrix(int nb_nodes) {
+
+  int s, f, w;
+
+  // initializing adjMatrix
+  float** adjMatrix = new float*[nb_nodes];
+  for (unsigned int i = 0; i < nb_nodes; ++i)
+  {
+     adjMatrix[i] = new float[nb_nodes];
+  }
+
+  ifstream fin(ioparm.f_input.c_str(), ios::in);
+  if (weights.size()!=0) { // weighted graph
+	while (fin >> s >> f >> w) {
+		adjMatrix[s][f] = w;
+	}
+  } else {
+  	while (fin >> s >> f) {
+  		adjMatrix[s][f] = 1;
+  	}
+  }
+
+  return adjMatrix;
+}
+
+
 int main(int argc, char **argv) {
   srand(time(NULL)+getpid());
   parse_args(argc, argv);
@@ -194,4 +220,3 @@ int main(int argc, char **argv) {
 
   foutput.close();
 }
-

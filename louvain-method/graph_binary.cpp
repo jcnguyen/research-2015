@@ -69,35 +69,6 @@ Graph::Graph(unsigned int n, unsigned long m, double t, vector<unsigned long> d,
   weights      = w;
 }
 
-float** Graph::convert() {
-  // initializing adjMatrix
-  float** adjMatrix = new float*[nb_nodes];
-  for (unsigned int i = 0; i < nb_nodes; ++i)
-  {
-     adjMatrix[i] = new float[nb_nodes];
-  }
-
-  for (unsigned int node=0 ; node<nb_nodes ; node++) {
-    pair<vector<unsigned int>::iterator, vector<float>::iterator > p = neighbors(node);
-    // cout << node << ":" ;
-    for (unsigned int i=0 ; i<nb_neighbors(node) ; i++) {
-      if (true) {
-        if (weights.size()!=0)
-          // cout << " (" << *(p.first+i) << " " << *(p.second+i) << ")";
-          dd = p.first+i;
-          adjMatrix[node][dd] = (p.second+i)
-        else
-          // cout << " " << *(p.first+i);
-          adjMatrix[node][p.first+i] = 1;
-      }
-    }
-    // cout << endl;
-  }
-
-  return adjMatrix;
-}
-
-
 void Graph::display() {
   for (unsigned int node=0 ; node<nb_nodes ; node++) {
     pair<vector<unsigned int>::iterator, vector<float>::iterator > p = neighbors(node);
