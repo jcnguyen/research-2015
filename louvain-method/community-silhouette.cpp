@@ -16,7 +16,7 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#include "communinty-silhouette.h"
+#include "community-silhouette.h"
 
 using namespace std;
 
@@ -109,7 +109,7 @@ void Community::display() {
   cerr << endl;
 }
 
-double Community::silhouette() {
+double Community::coverage() {
   double cov  = 0.;
   double tot_weight = (double)g.total_weight;
 

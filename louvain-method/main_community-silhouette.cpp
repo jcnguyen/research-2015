@@ -10,7 +10,7 @@
 // Author   : E. Lefebvre, adapted by J.-L. Guillaume
 // Email    : jean-loup.guillaume@lip6.fr
 // Location : Paris, France
-// Time	    : February 2008
+// Time     : February 2008
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
@@ -29,6 +29,7 @@
 
 using namespace std;
 
+char   *filename_test = NULL;
 char   *filename      = NULL;
 char   *filename_w    = NULL;
 char   *filename_part = NULL;
@@ -87,6 +88,10 @@ void parse_args(int argc, char **argv) {
           filename_v = argv[i+1];
           i++;
           break;
+        case 't':
+        	filename_test = argv[i+1];
+        	i++;
+        	break;
         default:
           usage(argv[0], "Unknown option\n");
       }
@@ -105,46 +110,39 @@ void display_time(const char *str, ofstream &foutput) {
   foutput << str << ": " << ctime (&rawtime);
 }
 
-// TODO delete
-void printSolution(float dist[][V])
-{
-    printf ("Following matrix shows the shortest distances"
-            " between every pair of vertices \n");
-    for (int i = 0; i < V; i++)
-    {
-        for (int j = 0; j < V; j++)
-        {
-            if (dist[i][j] == INF)
-                printf("%7s", "INF");
-            else
-                printf ("%7f", dist[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-float** createMatrix(int nb_nodes) {
+int** createMatrix(unsigned int nb_nodes, vector<float> weights, ofstream &foutput, char* filename) {
 
   int s, f, w;
 
   // initializing adjMatrix
-  float** adjMatrix = new float*[nb_nodes];
-  for (unsigned int i = 0; i < nb_nodes; ++i)
-  {
-     adjMatrix[i] = new float[nb_nodes];
+  int** adjMatrix = new int*[nb_nodes];
+  for (unsigned int i = 0; i < nb_nodes; ++i) {
+    adjMatrix[i] = new int[nb_nodes];
+  }
+  for (int i = 0; i < nb_nodes; i++) { 
+    for (int j = 0; j < nb_nodes; j++) {
+      adjMatrix[i][j] = 0;
+    }
   }
 
-  ifstream fin(ioparm.f_input.c_str(), ios::in);
+  ifstream fin;
+  fin.open(filename,fstream::in);
+
   if (weights.size()!=0) { // weighted graph
-	while (fin >> s >> f >> w) {
-		adjMatrix[s][f] = w;
-	}
+    while (!fin.eof()) {
+    	fin >> s >> f >> w;
+      adjMatrix[s][f] = w;
+      adjMatrix[f][s] = w;
+    }
   } else {
-  	while (fin >> s >> f) {
-  		adjMatrix[s][f] = 1;
-  	}
+    while (!fin.eof()) {
+    	fin >> s >> f;
+      adjMatrix[s][f] = 1;
+      adjMatrix[f][s] = 1;
+    }
   }
 
+  fin.close();
   return adjMatrix;
 }
 
@@ -165,22 +163,33 @@ int main(int argc, char **argv) {
   if (filename_part!=NULL) // start at a user-specified partition
     c.init_partition(filename_part); 
 
+  foutput << "Created community " << endl; // TODO delete
+
   Graph g;
   bool improvement=true;
   double cov=c.coverage(), new_cov;
   int level=0;
 
-  // TODO delete
-  printSolution(g.convert())
+  foutput << "Creating matrix" << endl; // TODO delete
+
+  int** adjMatrix = createMatrix(c.g.nb_nodes, c.g.weights, foutput, filename_test);
+  // foutput << "----------------" << endl;
+  // for (int i = 0; i < c.g.nb_nodes; i++){ 
+  //   for (int j = 0; j < c.g.nb_nodes; j++) {
+  //     foutput << adjMatrix[i][j] << " ";
+  //   }
+  //   foutput << endl;
+  // }
+  // foutput << "----------------" << endl;
 
   do {
     if (verbose) {
       foutput << "level " << level << ":\n";
       display_time("  start computation", foutput);
       foutput << "  network size: " 
-	            << c.g.nb_nodes << " nodes, " 
-	            << c.g.nb_links << " links, "
-	            << c.g.total_weight << " weight." 
+              << c.g.nb_nodes << " nodes, " 
+              << c.g.nb_links << " links, "
+              << c.g.total_weight << " weight." 
               << endl;
     }
 

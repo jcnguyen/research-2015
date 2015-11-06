@@ -2,10 +2,11 @@
 CC=g++
 CFLAGS=-ansi -O3 -Wall
 LDFLAGS=-ansi -lm -Wall
-EXEC=convert community-modularity community-coverage hierarchy display indexzero
+EXEC=convert community-modularity community-coverage community-silhouette hierarchy display indexzero
 OBJ1=graph.o
 OBJ2=graph_binary.o community-modularity.o
 OBJ3=graph_binary.o community-coverage.o
+OBJ4=graph_binary.o community-silhouette.o
 
 
 all: $(EXEC)
@@ -17,6 +18,9 @@ community-modularity : $(OBJ2) main_community-modularity.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 community-coverage : $(OBJ3) main_community-coverage.o
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+community-silhouette : $(OBJ4) main_community-silhouette.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 hierarchy : main_hierarchy.o
