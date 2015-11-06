@@ -175,7 +175,17 @@ int main(int argc, char **argv) {
 
 	int** adjMatrix = createMatrix(c.g.nb_nodes, c.g.weights, foutput, filename_test);
 
-	floydWarshall(adjMatrix);
+	int** apsp = floydWarshall(c.g.nb_nodes, adjMatrix);
+	foutput << "----------------" << endl;
+	for (int i = 0; i < c.g.nb_nodes; i++){ 
+	  for (int j = 0; j < c.g.nb_nodes; j++) {
+	    foutput << apsp[i][j] << " ";
+	  }
+	  foutput << endl;
+	}
+	foutput << "----------------" << endl;
+
+
 	// foutput << "----------------" << endl;
 	// for (int i = 0; i < c.g.nb_nodes; i++){ 
 	//   for (int j = 0; j < c.g.nb_nodes; j++) {
