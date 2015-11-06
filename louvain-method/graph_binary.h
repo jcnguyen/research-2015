@@ -55,6 +55,7 @@ class Graph {
   
   Graph(unsigned int n, unsigned long m, double t, vector<unsigned long> d, vector<unsigned int> l, vector<float> w);
 
+  float** convert();
   void display(void);
   void display_reverse(void);
   void display_binary(char *outfile);

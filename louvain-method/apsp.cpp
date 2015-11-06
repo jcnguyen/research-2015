@@ -1,19 +1,26 @@
-// C Program for Floyd Warshall Algorithm
-#include<stdio.h>
+// floyd warshall alg to find all pairs shortest path
+// original found on geeks for geeks and altered for the louvain alg 
+// jennifer nguyen and anastasia voloshinov
+// nov 5 2015
+// complex networks research
+
+#include <stdlib.h>
+#include "graph_binary.h"
  
-// Number of vertices in the graph
-#define V 4
  
 /* Define Infinite as a large enough value. This value will be used
   for vertices not connected to each other */
-#define INF 99999
+const INF = 9999999
  
 // A function to print the solution matrix
 void printSolution(int dist[][V]);
  
 // Solves the all-pairs shortest path problem using Floyd Warshall algorithm
-void floydWarshell (int graph[][V])
+void floydWarshell (Graph g) // input is binary graph g and v = g.nb_nodes
 {
+	// number of vertices in the graph
+	V = g.nb_nodes;
+
     /* dist[][] will be the output matrix that will finally have the shortest 
       distances between every pair of vertices */
     int dist[V][V], i, j, k;
@@ -23,7 +30,7 @@ void floydWarshell (int graph[][V])
        on shortest paths considering no intermediate vertex. */
     for (i = 0; i < V; i++)
         for (j = 0; j < V; j++)
-            dist[i][j] = graph[i][j];
+            dist[i][j] = ;
  
     /* Add all vertices one by one to the set of intermediate vertices.
       ---> Before start of a iteration, we have shortest distances between all

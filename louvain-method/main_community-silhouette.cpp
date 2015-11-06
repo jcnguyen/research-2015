@@ -105,6 +105,24 @@ void display_time(const char *str, ofstream &foutput) {
   foutput << str << ": " << ctime (&rawtime);
 }
 
+// TODO delete
+void printSolution(float dist[][V])
+{
+    printf ("Following matrix shows the shortest distances"
+            " between every pair of vertices \n");
+    for (int i = 0; i < V; i++)
+    {
+        for (int j = 0; j < V; j++)
+        {
+            if (dist[i][j] == INF)
+                printf("%7s", "INF");
+            else
+                printf ("%7f", dist[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 int main(int argc, char **argv) {
   srand(time(NULL)+getpid());
   parse_args(argc, argv);
@@ -125,6 +143,9 @@ int main(int argc, char **argv) {
   bool improvement=true;
   double cov=c.coverage(), new_cov;
   int level=0;
+
+  // TODO delete
+  printSolution(g.convert())
 
   do {
     if (verbose) {
