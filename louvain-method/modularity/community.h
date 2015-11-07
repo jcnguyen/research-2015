@@ -1,4 +1,4 @@
-// File: community-performance.h
+// File: community-modularity.h
 // -- community detection header file
 //-----------------------------------------------------------------------------
 // Community detection
@@ -16,8 +16,8 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#ifndef COMMUNITY_PERFORMANCE_H
-#define COMMUNITY_PERFORMANCE_H
+#ifndef COMMUNITY_H
+#define COMMUNITY_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -37,16 +37,13 @@ class Community {
   // --------------------------------------------------------------------------
   // GLOBAL VARIABLES ---------------------------------------------------------
 
-  // TODO unsure if jennifer's comments correct?
+  // TODO wtf are these; fix comments
   vector<double> neigh_weight; // weight of the neighboring communities all of vertices in this community; index = vertex, double = weight 
   vector<unsigned int> neigh_pos; // the current community that a vertex is in; index = vertex, neigh_pos[i] = communityID
   unsigned int neigh_last; // the position of the final neighbor of this community
 
   Graph g;            // network to compute communities for
   int size;           // number of nodes in the network and size of all vectors
-  int num_possible_edges; // total possible number of edges between all vertices
-  int num_edges;    // the number of actual edges in g
-  int remove_perf_change;     // change in performance due to removal of node from a community
   vector<int> n2c;    // community to which each node belongs
 
   // used to compute the modularity participation of each community
@@ -58,18 +55,17 @@ class Community {
   int nb_pass;
 
   // a new pass is computed if the last one generated 
-  // an increase greater than min_perf
-  // if min_perf = 0, a minor increase is enough to go for one more pass
-  double min_perf;
+  // an increase greater than min_modularity
+  // if min_modularity = 0, a minor increase is enough to go for one more pass
+  double min_modularity;
 
   // --------------------------------------------------------------------------
   // CONSTRUCTORS -------------------------------------------------------------
 
   // reads graph from file using graph constructor
   // type defines the weighted/unweighted status of the graph file
-  // nb_pass is the maximum number of passes of the algorithms
-  Community (char *filename, char *filename_w, int type, int nb_pass, double min_perf);
-  Community (Graph g, int nb_pass, double min_perf); // copy graph
+  Community (char *filename, char *filename_w, int type, int nb_pass, double min_modularity);
+  Community (Graph g, int nb_pass, double min_modularity); // copy graph
 
   // --------------------------------------------------------------------------
   // FUNCTION DECLARATIONS ----------------------------------------------------
@@ -87,25 +83,25 @@ class Community {
   // insert node in the community with which it shares dnodecomm links
   inline void insert(int node, int comm, double dnodecomm);
 
-  inline void Community::remove_perf_change(int node, int comm, double dnodecomm);
-
-  // compute the gain of performance if node was inserted in the community,
+  // compute the gain of modularity if node was inserted in the community,
   // given that the node has dnodecomm links to the community. The formula is:
-  // TODO: formula
+  //  dQ = [ ( In(comm) + 2d(node,comm) )/2m - 
+  //         ( ( tot(comm) + deg(node) )/2m )^2 ] -
+  //       [   In(comm)/2m - ( tot(comm)/2m )^2 - ( deg(node)/2m )^2 ]
   // where 
   //  In(comm)    = number of half-links strictly inside comm
   //  Tot(comm)   = number of half-links inside or outside comm (sum(degrees))
   //  d(node,com) = number of links from node to comm
   //  deg(node)   = node degree
   //  m           = number of links (edges)
-  inline double performance_gain(int node, int comm, double dnodecomm, double w_degree);
+  inline double modularity_gain(int node, int comm, double dnodecomm, double w_degree);
 
   // compute the set of neighboring communities of a node
   // for each community, gives the number of links from node to comm
   void neigh_comm(unsigned int node);
 
-  // compute the performance of the current graph partition
-  double performance();
+  // compute the modularity of the current graph partition
+  double modularity();
 
   // displays the graph of communities as computed by one_level
   void partition2graph();
@@ -127,87 +123,28 @@ class Community {
 inline void Community::remove(int node, int comm, double dnodecomm) {
   assert(node>=0 && node<size);
 
-  tot[comm] -= g.weighted_degree(node); // subtract from # of external edges
-  in[comm]  -= 2*dnodecomm + g.nb_selfloops(node); // subtract from # of internal edges
-  n2c[node]  = -1; // not in a community
+  tot[comm] -= g.weighted_degree(node);
+  in[comm]  -= 2*dnodecomm + g.nb_selfloops(node);
+  n2c[node]  = -1;
 }
 
-/*
-* @param node - the node to be removed
-* @param comm - community containing node
-* @param dnodecomm - number of links from node to comm
-* 
-* @return performance change from removing node from comm
-*/
-inline void Community::remove_perf_change(int node, int comm, double dnodecomm) {
+inline void Community::insert(int node, int comm, double dnodecomm) {
   assert(node>=0 && node<size);
-  int change = 0;
-  
-  // look at all possible edges, existent or nonexistent, with one end at node
-  for(int i=0; i<size; i++) {
 
-      // Removing node from comm only changes its relations with
-      // vertices in comm. To all other vertices, it is still just
-      // some vertex in a different community.
-      if (n2c[i] == comm) {
-
-          // since node and vertices v in comm are no longer in the same
-          // community, we increase g(G) for nonexistent edges (node,v),
-          if (A[node][i] == NO_EDGE) {
-              change += 1;    // TODO: change for weighted graphs
-          } 
-
-          // removing node from its community deducts from f(G)
-          // those edges that went from (node, v), where v is a vertex in comm 
-          else {
-              change -= A[node][i];
-          }
-
-      }
-  }
-
-  return (float)change/(float)num_possible_edges;
+  tot[comm] += g.weighted_degree(node);
+  in[comm]  += 2*dnodecomm + g.nb_selfloops(node);
+  n2c[node]  = comm;
 }
 
-/* 
-* computes the potential performance gain
-*
-* TODO: remove some of these inputs?
-* @param node - node to place
-* @param comm - community to put node into
-* @param dnodecomm - number of links from node to comm
-* @param w_degree - node degree
-* @return - change in performance 
-*/
-inline double Community::performance_gain(int node, int comm, double dnodecomm, double w_degree) {
+inline double Community::modularity_gain(int node, int comm, double dnodecomm, double w_degree) {
   assert(node>=0 && node<size);
-  int change = 0;
+
+  double totc = (double)tot[comm];
+  double degc = (double)w_degree;
+  double m2   = (double)g.total_weight;
+  double dnc  = (double)dnodecomm;
   
-  // look at all possible edges, existent or nonexistent, with one end at node
-  for(int i=0; i<size; i++) {
-
-      // Adding a node into comm only changes its relations with
-      // vertices in comm. To all other vertices, it is still just
-      // some vertex in a different community.
-      if (n2c[i] == comm) {
-
-          // subtract from g(G) the nonexistent edges (node, v),
-          // where v is in comm. We don't count nonexistent edges
-          // within the community toward our performance score
-          if (A[node][i] == NO_EDGE) {
-              change -= 1;    // TODO: change for weighted graphs
-          } 
-
-          // adding node to comm adds to f(G)
-          // for existent edges (node, v) where v is a vertex in comm
-          else {
-              change += A[node][i];
-          }
-      }
-  }
-
-  return (float)change/(float)num_possible_edges;
+  return (dnc - totc*degc/m2);
 }
 
-#endif 
-// COMMUNITY_PERFORMANCE_H
+#endif // COMMUNITY_H

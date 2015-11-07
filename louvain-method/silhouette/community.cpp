@@ -16,14 +16,14 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#include "community-coverage.h"
+#include "community.h"
 
 using namespace std;
 
 // ----------------------------------------------------------------------------
 // CONSTRUCTORS ---------------------------------------------------------------
 Community::Community(char *filename, char *filename_w, int type, int nbp, double minc) {
-  g = Graph(filename, filename_w, type); // create a binary graph
+  g = Graph(filename, filename_w, type); // create a graph
   size = g.nb_nodes;
 
   neigh_weight.resize(size,-1);
@@ -319,4 +319,3 @@ bool Community::one_level() {
 
   return improvement;
 }
-

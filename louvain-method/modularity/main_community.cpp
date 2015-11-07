@@ -25,7 +25,7 @@
 #include <unistd.h>
 
 #include "graph_binary.h"
-#include "community-coverage.h"
+#include "community.h"
 
 using namespace std;
 
@@ -91,10 +91,11 @@ void parse_args(int argc, char **argv) {
           usage(argv[0], "Unknown option\n");
       }
     } else {
-      if (filename==NULL)
-        filename = argv[i];
-      else
+      if (filename==NULL) {
+        filename = argv[i];  
+      } else {
         usage(argv[0], "More than one filename\n");
+      }
     }
   }
 }
@@ -123,7 +124,7 @@ int main(int argc, char **argv) {
 
   Graph g;
   bool improvement=true;
-  double cov=c.coverage(), new_cov;
+  double mod=c.modularity(), new_mod;
   int level=0;
 
   do {
@@ -131,7 +132,7 @@ int main(int argc, char **argv) {
       foutput << "level " << level << ":\n";
       display_time("  start computation", foutput);
       foutput << "  network size: " 
-	            << c.g.nb_nodes << " nodes, " 
+              << c.g.nb_nodes << " nodes, " 
 	            << c.g.nb_links << " links, "
 	            << c.g.total_weight << " weight." 
               << endl;
@@ -139,7 +140,7 @@ int main(int argc, char **argv) {
 
     // phase 1 - see community.h
     improvement = c.one_level();
-    new_cov = c.coverage();
+    new_mod = c.modularity();
 
     if (++level==display_level) {
       g.display();
@@ -154,9 +155,9 @@ int main(int argc, char **argv) {
     c = Community(g, -1, precision);
 
     if (verbose)
-      foutput << "  coverage increased from " << cov << " to " << new_cov << endl;
+      foutput << "  modularity increased from " << mod << " to " << new_mod << endl;
 
-    cov=new_cov;
+    mod=new_mod;
     if (verbose)
       display_time("  end computation", foutput);
 
@@ -169,7 +170,7 @@ int main(int argc, char **argv) {
     display_time("End", foutput);
     foutput << "Total duration: " << (time_end-time_begin) << " sec." << endl;
   }
-  foutput << new_cov << endl;
+  foutput << new_mod << endl;
 
   foutput.close();
 }

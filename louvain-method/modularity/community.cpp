@@ -1,5 +1,5 @@
-// File: community-coverage.cpp
-// -- community detection using coverage file
+// File: community-modularity.cpp
+// -- community detection using modularity file
 //-----------------------------------------------------------------------------
 // Community detection
 // Based on the article "Fast unfolding of community hierarchies in large 
@@ -16,14 +16,14 @@
 //-----------------------------------------------------------------------------
 // see readme.txt for more details
 
-#include "community-silhouette.h"
+#include "community.h"
 
 using namespace std;
 
 // ----------------------------------------------------------------------------
 // CONSTRUCTORS ---------------------------------------------------------------
-Community::Community(char *filename, char *filename_w, int type, int nbp, double minc) {
-  g = Graph(filename, filename_w, type); // create a graph
+Community::Community(char *filename, char *filename_w, int type, int nbp, double minm) {
+  g = Graph(filename, filename_w, type); // create a binary graph
   size = g.nb_nodes;
 
   neigh_weight.resize(size,-1);
@@ -35,16 +35,16 @@ Community::Community(char *filename, char *filename_w, int type, int nbp, double
   tot.resize(size);
 
   for (int i=0 ; i<size ; i++) {
-    n2c[i] = i; // initially, each node is its own community
+    n2c[i] = i; // initially each node is its own community
     tot[i] = g.weighted_degree(i);
     in[i]  = g.nb_selfloops(i);
   }
 
   nb_pass = nbp;
-  min_coverage = minc;
+  min_modularity = minm;
 }
 
-Community::Community(Graph gc, int nbp, double minc) {
+Community::Community(Graph gc, int nbp, double minm) {
   g = gc;
   size = g.nb_nodes;
 
@@ -63,7 +63,7 @@ Community::Community(Graph gc, int nbp, double minc) {
   }
 
   nb_pass = nbp;
-  min_coverage = minc;
+  min_modularity = minm;
 }
 
 // ----------------------------------------------------------------------------
@@ -109,16 +109,21 @@ void Community::display() {
   cerr << endl;
 }
 
-double Community::coverage() {
-  double cov  = 0.;
-  double tot_weight = (double)g.total_weight;
+double Community::modularity() {
+  double q  = 0.;
+  double m2 = (double)g.total_weight;
 
   for (int i=0 ; i<size ; i++) {
     if (tot[i]>0)
-      cov += (double)in[i]/tot_weight;
+      q += (double)in[i]/m2 - ((double)tot[i]/m2)*((double)tot[i]/m2);
+      // q = \sum_{i} ( e_{i,i} - a_{i}^2 )
+      // where 
+      //  e_{i,i} = in[i]/m2 is the fraction of half-edges in commmunity i
+      //  a_{i}   = tot[i]/m2 is the fraction of half-edges in or out of comm i
+      //    sum(degrees)
   }
 
-  return cov;
+  return q;
 }
 
 void Community::neigh_comm(unsigned int node) {
@@ -248,8 +253,8 @@ bool Community::one_level() {
   bool improvement=false ;
   int nb_moves;
   int nb_pass_done = 0;
-  double new_cov   = coverage();
-  double cur_cov   = new_cov;
+  double new_mod   = modularity();
+  double cur_mod   = new_mod;
 
   vector<int> random_order(size);
   for (int i=0 ; i<size ; i++)
@@ -262,11 +267,11 @@ bool Community::one_level() {
   }
 
   // repeat while 
-  //   there is an improvement of coverage
-  //   or there is an improvement of coverage greater than a given epsilon 
+  //   there is an improvement of modularity
+  //   or there is an improvement of modularity greater than a given epsilon 
   //   or a predefined number of pass have been done
   do {
-    cur_cov = new_cov;
+    cur_mod = new_mod;
     nb_moves = 0;
     nb_pass_done++;
 
@@ -279,18 +284,18 @@ bool Community::one_level() {
 
       // computation of all neighboring communities of current node
       neigh_comm(node);
+      
       // remove node from its current community
       remove(node, node_comm, neigh_weight[node_comm]);
 
       // compute the nearest community for node
-      // default choice for future insertion is the former community (TODO is this tiebreaking?)
+      // default choice for future insertion is the former community 
       int best_comm        = node_comm;
       double best_nblinks  = 0.;
       double best_increase = 0.;
       for (unsigned int i=0 ; i<neigh_last ; i++) {
-        double increase = coverage_gain(node, neigh_pos[i], neigh_weight[neigh_pos[i]], w_degree);
-        // cerr << "increase: " << increase << ", best: " << best_increase<< endl; // todo
-        if (increase>=best_increase) {
+        double increase = modularity_gain(node, neigh_pos[i], neigh_weight[neigh_pos[i]], w_degree);
+        if (increase>best_increase) {
           best_comm     = neigh_pos[i];
           best_nblinks  = neigh_weight[neigh_pos[i]];
           best_increase = increase;
@@ -311,11 +316,12 @@ bool Community::one_level() {
       total_in+=in[i];
     }
 
-    new_cov = coverage();
+    new_mod = modularity();
     if (nb_moves>0)
       improvement=true;
     
-  } while (nb_moves>0 && new_cov-cur_cov>min_coverage);
+  } while (nb_moves>0 && new_mod-cur_mod>min_modularity);
 
   return improvement;
 }
+

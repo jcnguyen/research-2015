@@ -25,7 +25,7 @@
 #include <unistd.h>
 
 #include "graph_binary.h"
-#include "community-performance.h"
+#include "community.h"
 
 using namespace std;
 
@@ -91,11 +91,10 @@ void parse_args(int argc, char **argv) {
           usage(argv[0], "Unknown option\n");
       }
     } else {
-      if (filename==NULL) {
-        filename = argv[i];  
-      } else {
+      if (filename==NULL)
+        filename = argv[i];
+      else
         usage(argv[0], "More than one filename\n");
-      }
     }
   }
 }
@@ -118,16 +117,13 @@ int main(int argc, char **argv) {
   if (verbose)
     display_time("Begin", foutput);
 
-  // create graph
-  // -1 means complete as many passes of the algorithm as are required to reach max modularity
-  // precision is the minimum for potential modularity improvement for us to continue the algorithm
   Community c(filename, filename_w, type, -1, precision);
   if (filename_part!=NULL) // start at a user-specified partition
     c.init_partition(filename_part); 
 
   Graph g;
   bool improvement=true;
-  double mod=c.modularity(), new_mod;
+  double cov=c.coverage(), new_cov;
   int level=0;
 
   do {
@@ -135,15 +131,15 @@ int main(int argc, char **argv) {
       foutput << "level " << level << ":\n";
       display_time("  start computation", foutput);
       foutput << "  network size: " 
-              << c.g.nb_nodes << " nodes, " 
+	            << c.g.nb_nodes << " nodes, " 
 	            << c.g.nb_links << " links, "
 	            << c.g.total_weight << " weight." 
               << endl;
     }
 
-    // phase 1 - see community-performance.h
+    // phase 1 - see community.h
     improvement = c.one_level();
-    new_mod = c.modularity(); // TODO: change this
+    new_cov = c.coverage();
 
     if (++level==display_level) {
       g.display();
@@ -154,15 +150,13 @@ int main(int argc, char **argv) {
     }
 
     // phase 2
-    // TODO: why is it creating a graph from g and then c from g?
-    // Possible answer: it's renumbering the graph
-    g = c.partition2graph_binary(); // display community as graph
-    c = Community(g, -1, precision); 
+    g = c.partition2graph_binary();
+    c = Community(g, -1, precision);
 
     if (verbose)
-      foutput << "  performance increased from " << mod << " to " << new_mod << endl; // TODO: change this
+      foutput << "  coverage increased from " << cov << " to " << new_cov << endl;
 
-    mod=new_mod; // TODO: change this to perf
+    cov=new_cov;
     if (verbose)
       display_time("  end computation", foutput);
 
@@ -171,15 +165,11 @@ int main(int argc, char **argv) {
   } while(improvement);
 
   time(&time_end);
-
-  // print out information about runtime
   if (verbose) {
     display_time("End", foutput);
     foutput << "Total duration: " << (time_end-time_begin) << " sec." << endl;
   }
-
-  // print out the new performance score
-  foutput << new_mod << endl;
+  foutput << new_cov << endl;
 
   foutput.close();
 }

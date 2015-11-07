@@ -25,7 +25,7 @@
 #include <unistd.h>
 
 #include "graph_binary.h"
-#include "community-silhouette.h"
+#include "community.h"
 #include "apsp.cpp"
 
 using namespace std;
