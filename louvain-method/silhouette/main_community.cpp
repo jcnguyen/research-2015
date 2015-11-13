@@ -112,7 +112,6 @@ void display_time(const char *str, ofstream &foutput) {
 }
 
 int** createMatrix(unsigned int nb_nodes, vector<float> weights, ofstream &foutput, char* filename) {
-
 	int s, f, w;
 
 	// initializing adjMatrix
@@ -173,8 +172,10 @@ int main(int argc, char **argv) {
 
 	foutput << "Creating matrix" << endl; // TODO delete
 
+	// create adjacency matrix
 	int** adjMatrix = createMatrix(c.g.nb_nodes, c.g.weights, foutput, filename_test);
 
+	// create apsp matrix
 	int** apsp = floydWarshall(c.g.nb_nodes, adjMatrix);
 	foutput << "----------------" << endl;
 	for (int i = 0; i < c.g.nb_nodes; i++){ 
@@ -184,34 +185,6 @@ int main(int argc, char **argv) {
 	  foutput << endl;
 	}
 	foutput << "----------------" << endl;
-
-
-	// foutput << "----------------" << endl;
-	// for (int i = 0; i < c.g.nb_nodes; i++){ 
-	//   for (int j = 0; j < c.g.nb_nodes; j++) {
-	//     foutput << adjMatrix[i][j] << " ";
-	//   }
-	//   foutput << endl;
-	// }
-	// foutput << "----------------" << endl;
-	// int graph[V][V] = { {0,   2,   5,   INF, INF, INF, INF},
- //                        {2,   0,   9,   8,   INF, INF, INF},
- //                        {5,   9,   0,   INF, INF, INF, INF},
- //                        {INF, 8,   INF, 0,   6,   5,   4},
- //                        {INF, INF, INF, 6,   0,   3,   7},
- //                        {INF, INF, INF, 5,   3,   0,   6},
- //                        {INF, INF, INF, 4,   6,   7,   INF}
- //                      };
-
-	// floydWarshall1(graph);
-	// foutput << "----------------" << endl;
-	// for (int i = 0; i < c.g.nb_nodes; i++){ 
-	//   for (int j = 0; j < c.g.nb_nodes; j++) {
-	//     foutput << sol[i][j] << " ";
-	//   }
-	//   foutput << endl;
-	// }
-	// foutput << "----------------" << endl;
 
 	do {
 		if (verbose) {

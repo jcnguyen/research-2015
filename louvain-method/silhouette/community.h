@@ -93,6 +93,8 @@ class Community {
   // for each community, gives the number of links from node to comm
   void neigh_comm(unsigned int node);
 
+  double silhouetteAux(int** apsp);
+
   // compute the coverage of the current graph partition
   double coverage();
 

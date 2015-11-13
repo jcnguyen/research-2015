@@ -109,6 +109,94 @@ void Community::display() {
   cerr << endl;
 }
 
+double Community::silhouetteAux(int** apsp) {
+  // initialize community matrix
+  int** whatCommunity = new int*[size];
+  for (int i = 0; i < size; ++i) {
+    whatCommunity[i] = new int[n2c.size];
+  }
+
+  // add vertex into corresponding community vector
+  for (i = 0; i < n2c.size(); i++) {
+    whatCommunity[n2c[i]].push_back(i);
+  }
+  //--------------------------------------------------------------------//
+
+  vector<double> allCommunitySilhouettes[size];
+
+  // for every community
+  for (c = 0; c < size; c++) {
+    sizeOfCommunity = whatCommunity[c].size();
+    vector<double> silhouetteWidths;
+
+    // for every node in community c
+    for (i = 0; i < sizeOfCommunity; i++) {
+      double averageInnerDistance = 0.0;
+
+      // find avg of shortest distance between v_i and every other vertex in same community
+      if (sizeOfCommunity == 1) { // singleton
+        averageInnerDistance = 1.0;
+      } else {
+        for (k = 0; k < sizeOfCommunity; k++) {
+          vertexK = whatCommunity[c][k];
+          if (i != vertexK) {
+            averageInnerDistance += apsp[i][vertexK]
+          }
+        }
+        averageInnerDistance = averageInnerDistance/(sizeOfCommunity - 1);
+      }
+
+      vector<double> distanceOptions[sizeOfCommunity];
+      distanceOptions[c] = 0;
+
+      // finds distance between v_i and every vertex in different community
+      for (n = 0; n < size; n++) {
+        double currentDistance = 0;
+
+        // not in our community c
+        if (n != c) {
+          sizeOfCommunityN =  whatCommunity[n].size();
+
+          for (k = 0; k < sizeOfCommunityN; k++) {
+            vertexK = whatCommunity[n][k];
+            currentDistance += apsp[i][vertexK];
+          }
+          currentDistance = currentDistance/(sizeOfCommunityN - 1)
+          distanceOptions[n] = currentDistance;
+        }
+
+      }
+
+      double minimumOfAverageOutsideDistance = min_element( distanceOptions.begin(), distanceOptions.end() );
+      double maxOfDistances = 0;
+
+      if {averageInnerDistance > minimumOfAverageOutsideDistance}
+        maxOfDistances = averageInnerDistance;
+      else
+        maxOfDistances = minimumOfAverageOutsideDistance;
+
+      silhouetteWidth[i] = (minimumOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances; 
+
+    }
+
+    // calculate the silhouette width for the entrie community
+    double communitySilhouette = 0;
+    for (k = 0; k < sizeOfCommunity; k++) {
+      communitySilhouette += silhouetteWidth[k]
+    }
+
+    allCommunitySilhouettes[c] = communitySilhouette/sizeOfCommunity
+
+  }
+
+  double globalSilhouetteIndex = 0;
+  for (k = 0; k < size; k++) {
+    globalSilhouetteIndex += allCommunitySilhouettes[k];
+  }
+
+  return globalSilhouetteIndex/size
+}
+
 double Community::coverage() {
   double cov  = 0.;
   double tot_weight = (double)g.total_weight;
@@ -243,17 +331,18 @@ Graph Community::partition2graph_binary() {
   return g2;
 }
 
-// TODO Computes community partition for 1 node
+// Computes community partition for one pass
 bool Community::one_level() {
-  bool improvement=false ;
-  int nb_moves;
-  int nb_pass_done = 0;
-  double new_cov   = coverage();
-  double cur_cov   = new_cov;
+  bool   improvement  = false;
+  int    nb_moves;
+  int    nb_pass_done = 0;
+  double new_cov      = coverage();
+  double cur_cov      = new_cov;
 
   vector<int> random_order(size);
   for (int i=0 ; i<size ; i++)
     random_order[i]=i;
+
   for (int i=0 ; i<size-1 ; i++) {
     int rand_pos = rand()%(size-i)+i;
     int tmp      = random_order[i];

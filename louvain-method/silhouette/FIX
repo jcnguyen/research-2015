@@ -1,0 +1,11 @@
+DO NOT RUN
+./convert -i test.txt -o test.bin
+./community test.bin -l -1 -v test-lm-modularity.info > test-lm-modularity.tree
+./display test-lm-modularity.tree > test-lm-modularity.graph
+
+
+
+
+./convert -i ../test-cases/test.pairs -o test.bin
+./community test.bin -t ../test-cases/test.pairs -l -1 -v test-lm-modularity.info > test-lm-modularity.tree
+./display test-lm-modularity.tree > test-lm-modularity.graph

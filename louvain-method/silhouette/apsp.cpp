@@ -105,7 +105,7 @@ int** floydWarshall (unsigned int nb_nodes, int** graph) {
 
 	// initializing adjMatrix
 	int** dist = new int*[nb_nodes];
-	for (unsigned int i = 0; i < nb_nodes; ++i) {
+	for (int i = 0; i < nb_nodes; ++i) {
 		dist[i] = new int[nb_nodes];
 	}
  

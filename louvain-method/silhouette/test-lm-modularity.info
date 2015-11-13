@@ -1,0 +1,21 @@
+Begin: Thu Nov 12 14:43:04 2015
+Created community 
+Creating matrix
+level 0:
+  start computation: Thu Nov 12 14:43:04 2015
+  network size: 7 nodes, 20 links, 20 weight.
+  coverage increased from 0 to 0.7
+  end computation: Thu Nov 12 14:43:04 2015
+level 1:
+  start computation: Thu Nov 12 14:43:04 2015
+  network size: 3 nodes, 6 links, 20 weight.
+  coverage increased from 0.7 to 0.9
+  end computation: Thu Nov 12 14:43:04 2015
+level 2:
+  start computation: Thu Nov 12 14:43:04 2015
+  network size: 2 nodes, 4 links, 20 weight.
+  coverage increased from 0.9 to 0.9
+  end computation: Thu Nov 12 14:43:04 2015
+End: Thu Nov 12 14:43:04 2015
+Total duration: 0 sec.
+0.9
