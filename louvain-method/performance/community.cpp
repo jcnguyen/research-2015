@@ -18,6 +18,10 @@
 // see readme.txt for more details
 
 #include "community.h"
+=======
+//TODO: we do need to use self-loops in this algorithm
+// does CNM accept input with self-loops?
+#include "community-performance.h"
 
 using namespace std;
 
