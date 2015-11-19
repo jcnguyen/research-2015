@@ -211,3 +211,9 @@ inline double Community::performance_gain(int node, int comm, double dnodecomm, 
 
 #endif 
 // COMMUNITY_H
+
+/*
+Add in self-loops
+In the adjacency matrix, include the diagonal, bc we care about self-loops
+
+*/
