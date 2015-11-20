@@ -15,10 +15,10 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
-/**
+/*
  * Serializable means that the object can be converted into a byte stream
  * so that the byte stream can be reverted back into a copy of the object (de-serialization).
- **/
+ */
 public class Network implements Serializable {
     private static final long serialVersionUID = 1;
     protected int nNodes;
@@ -34,9 +34,8 @@ public class Network implements Serializable {
      * into a Network object
      *
      * @param fileName - serialized input to turn into a Network
-     * @throws ClassNotFoundException - TODO 
-     * @throws IOException if file - TODO
-     * @return Network - object representation of graph
+     * @throws ClassNotFoundException - 
+     * @throws IOException if file
      **/
     public static Network load(String fileName) throws ClassNotFoundException, IOException {
     	Network network;
@@ -51,33 +50,20 @@ public class Network implements Serializable {
     }
 
     /**
-     * Constructor
      * 
-     * @param nNodes - number of nodes
-     * @param edge - adjacency matrix
+     * @param nNodes
+     * @param edge
      */
     public Network(int nNodes, int[][] edge)
     {
         this(nNodes, null, edge, null);
     }
 
-    /**
-     * 
-     * @param nNodes - number of nodes
-     * @param nodeWeight - 
-     * @param edge - adjacency matrix
-     */
     public Network(int nNodes, double[] nodeWeight, int[][] edge)
     {
         this(nNodes, nodeWeight, edge, null);
     }
 
-    /**
-     * 
-     * @param nNodes
-     * @param edge
-     * @param edgeWeight
-     */
     public Network(int nNodes, int[][] edge, double[] edgeWeight)
     {
         this(nNodes, null, edge, edgeWeight);

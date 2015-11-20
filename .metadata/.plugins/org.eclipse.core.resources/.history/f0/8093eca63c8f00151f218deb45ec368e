@@ -51,10 +51,9 @@ public class Network implements Serializable {
     }
 
     /**
-     * Constructor
      * 
-     * @param nNodes - number of nodes
-     * @param edge - adjacency matrix
+     * @param nNodes
+     * @param edge
      */
     public Network(int nNodes, int[][] edge)
     {
@@ -63,21 +62,15 @@ public class Network implements Serializable {
 
     /**
      * 
-     * @param nNodes - number of nodes
-     * @param nodeWeight - 
-     * @param edge - adjacency matrix
+     * @param nNodes
+     * @param nodeWeight
+     * @param edge
      */
     public Network(int nNodes, double[] nodeWeight, int[][] edge)
     {
         this(nNodes, nodeWeight, edge, null);
     }
 
-    /**
-     * 
-     * @param nNodes
-     * @param edge
-     * @param edgeWeight
-     */
     public Network(int nNodes, int[][] edge, double[] edgeWeight)
     {
         this(nNodes, null, edge, edgeWeight);
