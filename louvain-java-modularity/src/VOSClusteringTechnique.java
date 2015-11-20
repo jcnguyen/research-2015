@@ -14,6 +14,11 @@ public class VOSClusteringTechnique
     protected Clustering clustering;
     protected double resolution;
 
+    /**
+     * 
+     * @param network - object representation of graph
+     * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
+     */
     public VOSClusteringTechnique(Network network, double resolution)
     {
         this.network = network;
@@ -22,6 +27,12 @@ public class VOSClusteringTechnique
         this.resolution = resolution;
     }
 
+    /**
+     * 
+     * @param network - object representation of graph
+     * @param clustering - object representation of the communities in graph
+     * @param resolution - granularity level at which communities are detected
+     */
     public VOSClusteringTechnique(Network network, Clustering clustering, double resolution)
     {
         this.network = network;
@@ -29,36 +40,64 @@ public class VOSClusteringTechnique
         this.resolution = resolution;
     }
 
+    /**
+     * 
+     * @return network - object representation of a graph
+     */
     public Network getNetwork()
     {
         return network;
     }
 
+    /**
+     * 
+     * @return clustering - object representation of the communities in graph
+     */
     public Clustering getClustering()
     {
         return clustering;
     }
 
+    /**
+     * 
+     * @return resolution - granularity level at which communities are detected
+     */
     public double getResolution()
     {
         return resolution;
     }
 
+    /**
+     * 
+     * @param network - object representation of graph
+     */
     public void setNetwork(Network network)
     {
         this.network = network;
     }
 
+    /**
+     * 
+     * @param clustering - object representation of the communities in graph 
+     */
     public void setClustering(Clustering clustering)
     {
         this.clustering = clustering;
     }
-
+    
+    /**
+     * 
+     * @param resolution - granularity level at which communities are detected 
+     */
     public void setResolution(double resolution)
     {
         this.resolution = resolution;
     }
 
+    /**
+     * 
+     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     */
     public double calcQualityFunction()
     {
         double qualityFunction;
@@ -66,19 +105,22 @@ public class VOSClusteringTechnique
         int i, j, k;
 
         qualityFunction = 0;
-
+        /*for each node in network, if neighbors are in the same cluster, adds their edge weight to total*/
         for (i = 0; i < network.nNodes; i++)
         {
-            j = clustering.cluster[i];
-            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++)
-                if (clustering.cluster[network.neighbor[k]] == j)
-                    qualityFunction += network.edgeWeight[k];
+            j = clustering.cluster[i];  /*j is the cluster of node i*/
+            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (edge?!) that i has??*/
+                /*if the cluster of the neighbor is the same as cluster of i, add the edge weight of neighbor to quality function*/
+                if (clustering.cluster[network.neighbor[k]] == j) 
+                    qualityFunction += network.edgeWeight[k];  // TODO: does edgeweight take in a vertex or an edge?!
         }
         qualityFunction += network.totalEdgeWeightSelfLinks;
 
+        /*each element of clusterWeight stores the total weight of the nodes in that cluster*/
         clusterWeight = new double[clustering.nClusters];
         for (i = 0; i < network.nNodes; i++)
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+        /*subtract square of total weights of nodes in each cluser from the quality function*/
         for (i = 0; i < clustering.nClusters; i++)
             qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
 
@@ -87,11 +129,23 @@ public class VOSClusteringTechnique
         return qualityFunction;
     }
 
+    /**
+     * 
+     * @return runs the local moving algorithm, with new random num generator as input
+     */
     public boolean runLocalMovingAlgorithm()
     {
         return runLocalMovingAlgorithm(new Random());
     }
 
+    /**
+     * 
+     * Finds what partition of nodes maximizes the modularity, buts nodes
+     * in those clusters
+     *
+     * @param random - a random num generator 
+     * @return whether or not we updated what nodes are in what communties 
+     */
     public boolean runLocalMovingAlgorithm(Random random)
     {
         boolean update;
@@ -100,19 +154,22 @@ public class VOSClusteringTechnique
         int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
+        /*don't need to run alg if only 1 node*/ 
         if (network.nNodes == 1)
             return false;
 
         update = false;
 
-        clusterWeight = new double[network.nNodes];
-        nNodesPerCluster = new int[network.nNodes];
+        clusterWeight = new double[network.nNodes]; /*elements contain the total node weights of everything in that cluster*/
+        nNodesPerCluster = new int[network.nNodes]; /*elements contain num nodes in that cluster*/
         for (i = 0; i < network.nNodes; i++)
         {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
             nNodesPerCluster[clustering.cluster[i]]++;
         }
 
+        /*keep track of the num clusters with no nodes in them,
+         as well as what clusters these are*/
         nUnusedClusters = 0;
         unusedCluster = new int[network.nNodes];
         for (i = 0; i < network.nNodes; i++)
@@ -128,11 +185,16 @@ public class VOSClusteringTechnique
         neighboringCluster = new int[network.nNodes - 1];
         nStableNodes = 0;
         i = 0;
+
+        /*stay in loop until a local optimal modularity value is moved, 
+        moving any node would not increase it*/
         do
         {
-            j = nodePermutation[i];
+            j = nodePermutation[i]; /*start with some node*/
 
             nNeighboringClusters = 0;
+            /*for each neighboring node, find the cluster of that node, 
+            find the number of neighboring clusters, find total edge weight for each neighbor cluster */
             for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++)
             {
                 l = clustering.cluster[network.neighbor[k]];
@@ -144,7 +206,9 @@ public class VOSClusteringTechnique
                 edgeWeightPerCluster[l] += network.edgeWeight[k];
             }
 
-            clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j];
+            /*remove j from its cluster. update number nodes in cluster and
+            see if cluser became empty, update*/
+            clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
             nNodesPerCluster[clustering.cluster[j]]--;
             if (nNodesPerCluster[clustering.cluster[j]] == 0)
             {
@@ -154,6 +218,10 @@ public class VOSClusteringTechnique
 
             bestCluster = -1;
             maxQualityFunction = 0;
+
+            /*simulate adding j to each neighboring cluster, 
+            see if any of these give a better quality function, 
+            find one that gives the best quality function that j should go in*/
             for (k = 0; k < nNeighboringClusters; k++)
             {
                 l = neighboringCluster[k];
@@ -171,11 +239,13 @@ public class VOSClusteringTechnique
                 nUnusedClusters--;
             }
 
+            /*add j into the best cluster it should be in*/
             clusterWeight[bestCluster] += network.nodeWeight[j];
             nNodesPerCluster[bestCluster]++;
-            if (bestCluster == clustering.cluster[j])
+            /*if it ends up in original cluster, update stable nodes*/
+            if (bestCluster == clustering.cluster[j]) 
                 nStableNodes++;
-            else
+            else /*j was moved to a new cluster that is better*/
             {
                 clustering.cluster[j] = bestCluster;
                 nStableNodes = 1;
@@ -186,6 +256,8 @@ public class VOSClusteringTechnique
         }
         while (nStableNodes < network.nNodes);
 
+        /*update nunmber of clusters that exist now, and
+        what nodes are in what cluster*/
         newCluster = new int[network.nNodes];
         clustering.nClusters = 0;
         for (i = 0; i < network.nNodes; i++)
@@ -200,25 +272,37 @@ public class VOSClusteringTechnique
         return update;
     }
 
+    /**
+     *
+     * @return running Louvain Algorithm with new random num generator as param
+     */
     public boolean runLouvainAlgorithm()
     {
         return runLouvainAlgorithm(new Random());
     }
 
+    /**
+     * 
+     * @param random - a random num generator 
+     * @return whether or not we updated what nodes are in what communties 
+     */
     public boolean runLouvainAlgorithm(Random random)
     {
         boolean update, update2;
         VOSClusteringTechnique VOSClusteringTechnique;
 
+        /*no update if only one node*/
         if (network.nNodes == 1)
             return false;
 
+        /*see if moving any nodes will increase modularity*/
         update = runLocalMovingAlgorithm(random);
 
         if (clustering.nClusters < network.nNodes)
         {
             VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
 
+            /*run louvain again to see if another update*/
             update2 = VOSClusteringTechnique.runLouvainAlgorithm(random);
 
             if (update2)
@@ -232,11 +316,22 @@ public class VOSClusteringTechnique
         return update;
     }
 
+    /**
+     * 
+     * @param maxNInterations - max iterations you want to run Louvain
+     * @return run the algorithm 
+     */
     public boolean runIteratedLouvainAlgorithm(int maxNIterations)
     {
         return runIteratedLouvainAlgorithm(maxNIterations, new Random());
     }
 
+    /**
+     * 
+     * @param maxNInterations - max iterations you want to run Louvain
+     * @param random - random number generator 
+     * @return run the algorithm 
+     */
     public boolean runIteratedLouvainAlgorithm(int maxNIterations, Random random)
     {
         boolean update;
