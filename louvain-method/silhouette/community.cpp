@@ -1,4 +1,4 @@
-// File: community-coverage.cpp
+ // File: community-coverage.cpp
 // -- community detection using coverage file
 //-----------------------------------------------------------------------------
 // Community detection

@@ -3,7 +3,7 @@
  
 /* Define Infinite as a large enough value. This value will be used
   for vertices not connected to each other */
-#define INF 9999
+#define INF 99999
  
 // // Solves the all-pairs shortest path problem using Floyd Warshall algorithm
 // void floydWarshall1 (int graph[][nb_nodes]) {

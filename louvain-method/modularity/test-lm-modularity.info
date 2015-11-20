@@ -1,0 +1,14 @@
+Begin: Thu Nov 19 16:30:50 2015
+level 0:
+  start computation: Thu Nov 19 16:30:50 2015
+  network size: 7 nodes, 20 links, 20 weight.
+  modularity increased from -0.15 to 0.355
+  end computation: Thu Nov 19 16:30:50 2015
+level 1:
+  start computation: Thu Nov 19 16:30:50 2015
+  network size: 2 nodes, 4 links, 20 weight.
+  modularity increased from 0.355 to 0.355
+  end computation: Thu Nov 19 16:30:50 2015
+End: Thu Nov 19 16:30:50 2015
+Total duration: 0 sec.
+0.355
