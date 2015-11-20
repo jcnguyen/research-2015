@@ -9,10 +9,15 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class Arrays2
-{
-    public static double calcSum(double[] value)
-    {
+public class Arrays2 {
+
+    /**
+     * Calculates the sum of the values of an array.
+     *
+     * @param value  the array
+     * @return the sum of the array
+     **/
+    public static double calcSum(double[] value) {
         double sum;
         int i;
 
@@ -22,8 +27,15 @@ public class Arrays2
         return sum;
     }
 
-    public static double calcSum(double[] value, int beginIndex, int endIndex)
-    {
+    /**
+     * Calculates the sum of the values between two indices in an array.
+     *
+     * @param value       the array
+     * @param beginIndex  the beginning index to start the sum (included)
+     * @param endIndex    the final index to end the sum (not included)
+     * @return the sum between two indices of the array
+     **/
+    public static double calcSum(double[] value, int beginIndex, int endIndex) {
         double sum;
         int i;
 
@@ -33,8 +45,13 @@ public class Arrays2
         return sum;
     }
 
-    public static double calcAverage(double[] value)
-    {
+    /**
+     * Calculates the average of the values in an array.
+     *
+     * @param value  the array
+     * @return the average of the array
+     **/
+    public static double calcAverage(double[] value) {
         double average;
         int i;
 
@@ -45,8 +62,13 @@ public class Arrays2
         return average;
     }
 
-    public static double calcMedian(double[] value)
-    {
+    /**
+     * Determines the median value of an array.
+     *
+     * @param value  the array
+     * @return the median value of the array
+     **/
+    public static double calcMedian(double[] value) {
         double median;
         double[] sortedValue;
 
@@ -59,8 +81,13 @@ public class Arrays2
         return median;
     }
 
-    public static double calcMinimum(double[] value)
-    {
+    /**
+     * Determines the minimum value of an array.
+     *
+     * @param value  the array
+     * @return the minimum vallue of the array
+     **/
+    public static double calcMinimum(double[] value) {
         double minimum;
         int i;
 
@@ -70,8 +97,13 @@ public class Arrays2
         return minimum;
     }
 
-    public static double calcMaximum(double[] value)
-    {
+    /**
+     * Determines the maximum value of a double array.
+     *
+     * @param value  the array
+     * @return the maximum value of the array
+     **/
+    public static double calcMaximum(double[] value) {
         double maximum;
         int i;
 
@@ -81,8 +113,13 @@ public class Arrays2
         return maximum;
     }
 
-    public static int calcMaximum(int[] value)
-    {
+    /**
+     * Determines the maximum value of an int array.
+     *
+     * @param value  the array
+     * @return the maximum value of the array
+     **/
+    public static int calcMaximum(int[] value) {
         int i, maximum;
 
         maximum = value[0];
@@ -91,21 +128,31 @@ public class Arrays2
         return maximum;
     }
 
-    public static int[] generateRandomPermutation(int nElements)
-    {
+    /**
+     * Generates a new array of permutations with integer values [0, size of new array).
+     *
+     * @param nElements  the size of the new array
+     * @return an array of permutations
+     **/
+    public static int[] generateRandomPermutation(int nElements) {
         return generateRandomPermutation(nElements, new Random());
     }
 
-    public static int[] generateRandomPermutation(int nElements, Random random)
-    {
+    /**
+     * Generates a new array of permutations with integer values [0, size of new array).
+     *
+     * @param nElements  the size of the new array
+     * @param random     the random generator
+     * @return an array of permutations
+     **/
+    public static int[] generateRandomPermutation(int nElements, Random random) {
         int i, j, k;
         int[] permutation;
 
         permutation = new int[nElements];
         for (i = 0; i < nElements; i++)
             permutation[i] = i;
-        for (i = 0; i < nElements; i++)
-        {
+        for (i = 0; i < nElements; i++) {
             j = random.nextInt(nElements);
             k = permutation[i];
             permutation[i] = permutation[j];
@@ -113,4 +160,5 @@ public class Arrays2
         }
         return permutation;
     }
+
 }
