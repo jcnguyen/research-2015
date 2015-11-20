@@ -50,7 +50,6 @@ public class Network implements Serializable {
         return network;
     }
 
-    /************************BEGIN CONSTRUCTORS************************/
     /*******************************************************
      These overloaded constructors call the primary constructor with 4 parameters 
      *******************************************************/
@@ -155,7 +154,9 @@ public class Network implements Serializable {
         this.nodeWeight = (nodeWeight != null) ? (double[])nodeWeight.clone() : getTotalEdgeWeightPerNode();
     }
 
-    /************************END CONSTRUCTORS************************/
+    /*******************************************************
+	END CONSTRUCTORS
+    *******************************************************/
     
     /**
      * Serializes a network object

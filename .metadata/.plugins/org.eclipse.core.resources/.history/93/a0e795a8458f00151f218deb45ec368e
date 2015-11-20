@@ -50,24 +50,40 @@ public class Network implements Serializable {
         return network;
     }
 
-    /************************BEGIN CONSTRUCTORS************************/
-    /*******************************************************
-     These overloaded constructors call the primary constructor with 4 parameters 
-     *******************************************************/
+    /**
+     * Overloaded constructor; calls primary constructor
+     * 
+     * @param nNodes - number of nodes
+     * @param edge - adjacency matrix
+     */
     public Network(int nNodes, int[][] edge) {
         this(nNodes, null, edge, null);
     }
 
+    /**
+     * Overloaded constructor; calls primary constructor
+     * 
+     * @param nNodes - number of nodes
+     * @param nodeWeight - TODO
+     * @param edge - adjacency matrix
+     */
     public Network(int nNodes, double[] nodeWeight, int[][] edge) {
         this(nNodes, nodeWeight, edge, null);
     }
 
+    /**
+     * Overloaded constructor; calls primary constructor
+     * 
+     * @param nNodes - number of nodes
+     * @param edge - adjacency matrix
+     * @param edgeWeight - edge weights matrix
+     */
     public Network(int nNodes, int[][] edge, double[] edgeWeight) {
         this(nNodes, null, edge, edgeWeight);
     }
 
     /**
-     * Primary constructor w/ 4 parameters
+     * Primary constructor w/ 4 args
      * 
      * @param nNodes - number of nodes
      * @param nodeWeight - TODO
@@ -112,18 +128,18 @@ public class Network implements Serializable {
         this.nodeWeight = (nodeWeight != null) ? (double[])nodeWeight.clone() : getTotalEdgeWeightPerNode();
     }
 
-    /*******************************************************
-    These overloaded constructors call the primary constructor with 5 parameters 
-    *******************************************************/    
-    public Network(int nNodes, int[] firstNeighborIndex, int[] neighbor) {
+    public Network(int nNodes, int[] firstNeighborIndex, int[] neighbor)
+    {
         this(nNodes, null, firstNeighborIndex, neighbor, null);
     }
 
-    public Network(int nNodes, double[] nodeWeight, int[] firstNeighborIndex, int[] neighbor) {
+    public Network(int nNodes, double[] nodeWeight, int[] firstNeighborIndex, int[] neighbor)
+    {
         this(nNodes, nodeWeight, firstNeighborIndex, neighbor, null);
     }
 
-    public Network(int nNodes, int[] firstNeighborIndex, int[] neighbor, double[] edgeWeight) {
+    public Network(int nNodes, int[] firstNeighborIndex, int[] neighbor, double[] edgeWeight)
+    {
         this(nNodes, null, firstNeighborIndex, neighbor, edgeWeight);
     }
 
@@ -155,8 +171,6 @@ public class Network implements Serializable {
         this.nodeWeight = (nodeWeight != null) ? (double[])nodeWeight.clone() : getTotalEdgeWeightPerNode();
     }
 
-    /************************END CONSTRUCTORS************************/
-    
     /**
      * Serializes a network object
      * 
