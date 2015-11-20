@@ -31,8 +31,7 @@ public class Clustering implements Cloneable, Serializable {
      * @param  fileName                the file that contains the clustering
      * @throws ClassNotFoundException  occurs if program is unable to load a 
      *                                 class
-     * @throws IOException             occurs if an input or output error 
-     *                                 occurs
+     * @throws IOException             occurs if there's an input/output error 
      * @return a clustering from a file
      **/
     public static Clustering load(String fileName
@@ -100,7 +99,7 @@ public class Clustering implements Cloneable, Serializable {
      * Saves this clustering into a file.
      *
      * @param  fileName     the file where this clustering is saved
-     * @throws IOException  occurs if an input or output error occurs
+     * @throws IOException  occurs if there's an input or output error
      */
     public void save(String fileName) throws IOException {
         ObjectOutputStream objectOutputStream;
