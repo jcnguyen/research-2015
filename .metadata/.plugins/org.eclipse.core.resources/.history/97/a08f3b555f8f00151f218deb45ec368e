@@ -303,7 +303,8 @@ public class Network implements Serializable {
     }
 
     /**
-     * @return a network where node weights are equal to 1
+     * Create network without 
+     * @return
      */
     public Network createNetworkWithoutNodeWeights() {
         Network networkWithoutNodeWeights;
@@ -312,8 +313,6 @@ public class Network implements Serializable {
         networkWithoutNodeWeights.nNodes = nNodes;
         networkWithoutNodeWeights.nEdges = nEdges;
         networkWithoutNodeWeights.nodeWeight = new double[nNodes];
-        
-        // sets all node weights to 1
         Arrays.fill(networkWithoutNodeWeights.nodeWeight, 1);
         networkWithoutNodeWeights.firstNeighborIndex = firstNeighborIndex;
         networkWithoutNodeWeights.neighbor = neighbor;
@@ -342,9 +341,6 @@ public class Network implements Serializable {
         return networkWithoutEdgeWeights;
     }
 
-    /**
-     * @return a network where all edge weights and node weights are 1
-     */
     public Network createNetworkWithoutNodeAndEdgeWeights()
     {
         Network networkWithoutNodeAndEdgeWeights;
@@ -353,22 +349,15 @@ public class Network implements Serializable {
         networkWithoutNodeAndEdgeWeights.nNodes = nNodes;
         networkWithoutNodeAndEdgeWeights.nEdges = nEdges;
         networkWithoutNodeAndEdgeWeights.nodeWeight = new double[nNodes];
-        
-        // sets node weights to 1
         Arrays.fill(networkWithoutNodeAndEdgeWeights.nodeWeight, 1);
         networkWithoutNodeAndEdgeWeights.firstNeighborIndex = firstNeighborIndex;
         networkWithoutNodeAndEdgeWeights.neighbor = neighbor;
         networkWithoutNodeAndEdgeWeights.edgeWeight = new double[nEdges];
-        
-        // sets edge weights to 1
         Arrays.fill(networkWithoutNodeAndEdgeWeights.edgeWeight, 1);
         networkWithoutNodeAndEdgeWeights.totalEdgeWeightSelfLinks = 0;
         return networkWithoutNodeAndEdgeWeights;
     }
 
-    /**
-     * @return a normalized network
-     */
     public Network createNormalizedNetwork1()
     {
         double totalNodeWeight;
@@ -380,14 +369,10 @@ public class Network implements Serializable {
         normalizedNetwork.nNodes = nNodes;
         normalizedNetwork.nEdges = nEdges;
         normalizedNetwork.nodeWeight = new double[nNodes];
-        
-        // set all node weights to 1
         Arrays.fill(normalizedNetwork.nodeWeight, 1);
         normalizedNetwork.firstNeighborIndex = firstNeighborIndex;
         normalizedNetwork.neighbor = neighbor;
 
-        // normalized edge weight at j based on formula:
-        // edge weight of j / 
         normalizedNetwork.edgeWeight = new double[nEdges];
         totalNodeWeight = getTotalNodeWeight();
         for (i = 0; i < nNodes; i++)
@@ -409,53 +394,25 @@ public class Network implements Serializable {
         normalizedNetwork.nNodes = nNodes;
         normalizedNetwork.nEdges = nEdges;
         normalizedNetwork.nodeWeight = new double[nNodes];
-        
-        // set all node weights to 1
         Arrays.fill(normalizedNetwork.nodeWeight, 1);
         normalizedNetwork.firstNeighborIndex = firstNeighborIndex;
         normalizedNetwork.neighbor = neighbor;
 
         normalizedNetwork.edgeWeight = new double[nEdges];
-        
-        // look at all the edges
-        for (i = 0; i < nNodes; i++) {
-            for (j = firstNeighborIndex[i]; j < firstNeighborIndex[i + 1]; j++) {
-
-            	// normalize edge weights for a given node based on TODO
+        for (i = 0; i < nNodes; i++)
+            for (j = firstNeighborIndex[i]; j < firstNeighborIndex[i + 1]; j++)
                 normalizedNetwork.edgeWeight[j] = edgeWeight[j] / (2 / (nNodes / nodeWeight[i] + nNodes / nodeWeight[neighbor[j]]));
-            }
-        }
-        
+
         normalizedNetwork.totalEdgeWeightSelfLinks = 0;
 
         return normalizedNetwork;
     }
 
-    /**
-     * Overloaded method
-     * @param nEdges - edges to TODO
-     * @return a pruned network
-     */
     public Network createPrunedNetwork(int nEdges)
     {
         return createPrunedNetwork(nEdges, new Random());
     }
 
-    /**
-     * Simplifies the current network via edge pruning. That is, it removes the
-     * nEdges edges whose removal would least decrease connectivity.
-     * See "Simplification of Networks for Edge Pruning" by Zhou, Mahler, and Toivonen
-     * FMI about pruned networks. This method appears to be an implementation of the
-     * naive algorithm under that paper's section 4.1.
-     * 
-     * This method is not called anywhere else in the code.
-     * 
-     * TODO: why randomizing?
-     * 
-     * @param nEdges
-     * @param random - seed for random permutations
-     * @return a pruned subset of the current network
-     */
     public Network createPrunedNetwork(int nEdges, Random random)
     {
         double edgeWeightThreshold, randomNumberThreshold;
@@ -529,12 +486,8 @@ public class Network implements Serializable {
         return prunedNetwork;
     }
 
-    /**
-     * A subnetwork is a logical division of a network.
-     * @param node
-     * @return
-     */
-    public Network createSubnetwork(int[] node) {
+    public Network createSubnetwork(int[] node)
+    {
         double[] subnetworkEdgeWeight;
         int i, j, k;
         int[] subnetworkNode, subnetworkNeighbor;

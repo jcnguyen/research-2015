@@ -431,31 +431,11 @@ public class Network implements Serializable {
         return normalizedNetwork;
     }
 
-    /**
-     * Overloaded method
-     * @param nEdges - edges to TODO
-     * @return a pruned network
-     */
     public Network createPrunedNetwork(int nEdges)
     {
         return createPrunedNetwork(nEdges, new Random());
     }
 
-    /**
-     * Simplifies the current network via edge pruning. That is, it removes the
-     * nEdges edges whose removal would least decrease connectivity.
-     * See "Simplification of Networks for Edge Pruning" by Zhou, Mahler, and Toivonen
-     * FMI about pruned networks. This method appears to be an implementation of the
-     * naive algorithm under that paper's section 4.1.
-     * 
-     * This method is not called anywhere else in the code.
-     * 
-     * TODO: why randomizing?
-     * 
-     * @param nEdges
-     * @param random - seed for random permutations
-     * @return a pruned subset of the current network
-     */
     public Network createPrunedNetwork(int nEdges, Random random)
     {
         double edgeWeightThreshold, randomNumberThreshold;
@@ -529,12 +509,8 @@ public class Network implements Serializable {
         return prunedNetwork;
     }
 
-    /**
-     * A subnetwork is a logical division of a network.
-     * @param node
-     * @return
-     */
-    public Network createSubnetwork(int[] node) {
+    public Network createSubnetwork(int[] node)
+    {
         double[] subnetworkEdgeWeight;
         int i, j, k;
         int[] subnetworkNode, subnetworkNeighbor;

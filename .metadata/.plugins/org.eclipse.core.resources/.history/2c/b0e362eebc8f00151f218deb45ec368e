@@ -446,9 +446,7 @@ public class Network implements Serializable {
      * nEdges edges whose removal would least decrease connectivity.
      * See "Simplification of Networks for Edge Pruning" by Zhou, Mahler, and Toivonen
      * FMI about pruned networks. This method appears to be an implementation of the
-     * naive algorithm under that paper's section 4.1.
-     * 
-     * This method is not called anywhere else in the code.
+     * naive algorithm under that paper's section 4.1
      * 
      * TODO: why randomizing?
      * 
@@ -529,11 +527,6 @@ public class Network implements Serializable {
         return prunedNetwork;
     }
 
-    /**
-     * A subnetwork is a logical division of a network.
-     * @param node
-     * @return
-     */
     public Network createSubnetwork(int[] node) {
         double[] subnetworkEdgeWeight;
         int i, j, k;
