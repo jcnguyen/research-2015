@@ -143,10 +143,14 @@ public class ModularityOptimizer {
                     System.out.println();
                 System.out.format("Modularity: %.4f%n", maxModularity);
             } else
-                System.out.format("Maximum modularity in %d random starts: %.4f%n", nRandomStarts, maxModularity);
+                System.out.format(
+                    "Maximum modularity in %d random starts: %.4f%n", 
+                    nRandomStarts, maxModularity);
 
-            System.out.format("Number of communities: %d%n", clustering.getNClusters());
-            System.out.format("Elapsed time: %d seconds%n", Math.round((endTime - beginTime) / 1000.0));
+            System.out.format("Number of communities: %d%n", 
+                clustering.getNClusters());
+            System.out.format("Elapsed time: %d seconds%n", 
+                Math.round((endTime - beginTime) / 1000.0));
             System.out.println();
         }
 
@@ -172,7 +176,7 @@ public class ModularityOptimizer {
 
         BufferedReader bufferedReader;
         double[] edgeWeight1, edgeWeight2, nodeWeight;
-        int i, j, nEdges, nLines, nNodes;
+        int i, j, nEdges, nLines, nNodes, start, destination;
         int[] firstNeighborIndex, neighbor, nNeighbors, node1, node2;
         Network network;
         String[] splittedLine;
@@ -192,14 +196,26 @@ public class ModularityOptimizer {
         edgeWeight1 = new double[nLines];
         i = -1;
         for (j = 0; j < nLines; j++) {
+
             splittedLine = bufferedReader.readLine().split(" ");
-            node1[j] = Integer.parseInt(splittedLine[0]);
+
+            start = Integer.parseInt(splittedLine[0]);
+            destination = Integer.parseInt(splittedLine[1]);
+            if (start < destination) {
+                node1[j] = start;
+                node2[j] = destination;
+            } else if (start > destination) {
+                node1[j] = destination;
+                node2[j] = start;
+            }
+
             if (node1[j] > i)
                 i = node1[j];
-            node2[j] = Integer.parseInt(splittedLine[1]);
             if (node2[j] > i)
                 i = node2[j];
-            edgeWeight1[j] = (splittedLine.length > 2) ? Double.parseDouble(splittedLine[2]) : 1;
+
+            edgeWeight1[j] = (splittedLine.length > 2) ? Double.parseDouble(
+                splittedLine[2]) : 1;
         }
         nNodes = i + 1;
         bufferedReader.close();
@@ -249,11 +265,13 @@ public class ModularityOptimizer {
 
         // construct the network based on the modularity function
         if (modularityFunction == 1) // standard modularity function
-            network = new Network(nNodes, firstNeighborIndex, neighbor, edgeWeight2);
+            network = new Network(
+                nNodes, firstNeighborIndex, neighbor, edgeWeight2);
         else { // alternative modularity function
             nodeWeight = new double[nNodes];
             Arrays.fill(nodeWeight, 1);
-            network = new Network(nNodes, nodeWeight, firstNeighborIndex, neighbor, edgeWeight2);
+            network = new Network(
+                nNodes, nodeWeight, firstNeighborIndex, neighbor, edgeWeight2);
         }
 
         return network;
