@@ -35,6 +35,12 @@ public class ModularityOptimizer {
         String inputFileName, outputFileName;
         VOSClusteringTechnique VOSClusteringTechnique;
 
+        System.out.println("-------------------------------------");
+        System.out.println("Modularity Optimizer");
+        System.out.println("Version 1.3.0");
+        System.out.println("by Ludo Waltman and Nees Jan van Eck");
+        System.out.println("-------------------------------------");
+
         // read in the arguments
         if (args.length == 9) {
             inputFileName = args[0];
@@ -46,15 +52,8 @@ public class ModularityOptimizer {
             nIterations = Integer.parseInt(args[6]);
             randomSeed = Long.parseLong(args[7]);
             printOutput = (Integer.parseInt(args[8]) > 0);
-
-            if (printOutput) {
-                System.out.println("Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck");
-                System.out.println();
-            }
         } else {
             console = System.console();
-            System.out.println("Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck");
-            System.out.println();
             inputFileName = console.readLine("Input file name: ");
             outputFileName = console.readLine("Output file name: ");
             modularityFunction = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): "));
@@ -68,18 +67,13 @@ public class ModularityOptimizer {
         }
 
         // read input file
-        if (printOutput) {
-            System.out.println("Reading input file...");
-            System.out.println();
-        }
+        if (printOutput) System.out.println("Reading input file...");
         network = readInputFile(inputFileName, modularityFunction);
-        if (printOutput) {
-            System.out.println("...finish reading input file.");
-            System.out.println();
-        }
+        if (printOutput) System.out.println("Finish reading input file.");
 
         // print network characteristics
         if (printOutput) {
+            System.out.println();
             System.out.format("Number of nodes: %d%n", network.getNNodes());
             System.out.format("Number of edges: %d%n", network.getNEdges());
             System.out.println();
@@ -97,13 +91,14 @@ public class ModularityOptimizer {
                 network.totalEdgeWeightSelfLinks)) : 
             resolution);
 
+        // TODO comment  
         beginTime = System.currentTimeMillis();
         clustering = null;
         maxModularity = Double.NEGATIVE_INFINITY;
         random = new Random(randomSeed);
         for (i = 0; i < nRandomStarts; i++) {
             if (printOutput && (nRandomStarts > 1))
-                System.out.format("Random start: %d%n", i + 1);
+                System.out.format("\tRandom start: %d%n", i + 1);
 
             VOSClusteringTechnique = new VOSClusteringTechnique(network, resolution2);
 
@@ -111,7 +106,7 @@ public class ModularityOptimizer {
             update = true;
             do {
                 if (printOutput && (nIterations > 1))
-                    System.out.format("Iteration: %d%n", j + 1);
+                    System.out.format("\tIteration: %d%n", j + 1);
 
                 if (algorithm == 1)
                     update = VOSClusteringTechnique.runLouvainAlgorithm(random);
@@ -124,7 +119,7 @@ public class ModularityOptimizer {
                 modularity = VOSClusteringTechnique.calcQualityFunction();
 
                 if (printOutput && (nIterations > 1))
-                    System.out.format("1Modularity: %.4f%n", modularity);
+                    System.out.format("\t1Modularity: %.4f%n", modularity);
             }
             while ((j < nIterations) && update);
 
@@ -135,7 +130,7 @@ public class ModularityOptimizer {
 
             if (printOutput && (nRandomStarts > 1)) {
                 if (nIterations == 1)
-                    System.out.format("Modularity: %.4f%n", modularity);
+                    System.out.format("\tModularity: %.4f%n", modularity);
                 System.out.println();
             }
         }
@@ -147,8 +142,7 @@ public class ModularityOptimizer {
                 if (nIterations > 1)
                     System.out.println();
                 System.out.format("Modularity: %.4f%n", maxModularity);
-            }
-            else
+            } else
                 System.out.format("Maximum modularity in %d random starts: %.4f%n", nRandomStarts, maxModularity);
 
             System.out.format("Number of communities: %d%n", clustering.getNClusters());
@@ -157,15 +151,9 @@ public class ModularityOptimizer {
         }
 
         // write to output file
-        if (printOutput) {
-            System.out.println("Writing output file...");
-            System.out.println();
-        }
+        if (printOutput) System.out.println("Writing output file...");
         writeOutputFile(outputFileName, clustering);
-        if (printOutput) {
-            System.out.println("...finish writing input file.");
-            System.out.println();
-        }
+        if (printOutput) System.out.println("Finish writing to output file.");
     }
 
     /** 
@@ -203,7 +191,7 @@ public class ModularityOptimizer {
         node2 = new int[nLines];
         edgeWeight1 = new double[nLines];
         i = -1;
-        for (j = 0; j < nLines; j++) { // TODO THIS IS WHERE THE PROBLEM IS FIXXX OR THE ONE BELOW COULD BE THE PROBLEM
+        for (j = 0; j < nLines; j++) {
             splittedLine = bufferedReader.readLine().split(" ");
             node1[j] = Integer.parseInt(splittedLine[0]);
             if (node1[j] > i)
@@ -220,8 +208,9 @@ public class ModularityOptimizer {
         // each edge is counted once
         nNeighbors = new int[nNodes];
         for (i = 0; i < nLines; i++) {
+
             // prevent double counting
-            if (node1[i] < node2[i]) { // TODO could this be a problem 
+            if (node1[i] < node2[i]) {
                 nNeighbors[node1[i]]++;
                 nNeighbors[node2[i]]++;
             }
@@ -240,7 +229,7 @@ public class ModularityOptimizer {
         neighbor = new int[nEdges];
         edgeWeight2 = new double[nEdges];
         Arrays.fill(nNeighbors, 0);
-        for (i = 0; i < nLines; i++)
+        for (i = 0; i < nLines; i++) {
             if (node1[i] < node2[i]) {
                 j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];
                 neighbor[j] = node2[i];
@@ -251,6 +240,12 @@ public class ModularityOptimizer {
                 edgeWeight2[j] = edgeWeight1[i];
                 nNeighbors[node2[i]]++;
             }
+        }
+
+        // // TODO delete
+        // for (int jj = 0; jj < nEdges; jj++) {
+        //     System.out.println("neighbor[jj]");
+        // }
 
         // construct the network based on the modularity function
         if (modularityFunction == 1) // standard modularity function
