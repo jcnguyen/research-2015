@@ -258,11 +258,6 @@ public class ModularityOptimizer {
             }
         }
 
-        // // TODO delete
-        // for (int jj = 0; jj < nEdges; jj++) {
-        //     System.out.println("neighbor[jj]");
-        // }
-
         // construct the network based on the modularity function
         if (modularityFunction == 1) // standard modularity function
             network = new Network(
@@ -297,7 +292,7 @@ public class ModularityOptimizer {
         bufferedWriter = new BufferedWriter(new FileWriter(fileName));
 
         for (i = 0; i < nNodes; i++) {
-            bufferedWriter.write(Integer.toString(clustering.getCluster(i))); // TODO output written here. change to: i + Integer.toString(clustering.getCluster(i))
+            bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i))); // TODO output written here. change to: i + Integer.toString(clustering.getCluster(i))
             bufferedWriter.newLine();
         }
 
