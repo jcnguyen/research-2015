@@ -1,0 +1,26 @@
+firstNeighborIndex
+	-a protected int array
+	- length nNodes + 1
+	- firstNeighborIndex[i]-firstNeighborValue[i-1] = nNeighbors[i-1]
+	- value of last spot of array is |E|, nEdges
+	- TODO: why is this helpful? are the vertices numbered in some way?
+
+neighbor
+	- a protected int array 
+	- length
+
+edgeWeight
+	- protected double array
+
+in ModularityOptimizer.java:
+
+nNeighbors
+	- int array
+	- length nNodes
+	- i'th place is the number of neighbors that node i has
+
+edgeWeight1
+
+edgeWeight2
+
+node1 and node2 are int arrays that store the input from the graph input fule. For some edge e, node1[e] stores the start vertex, and node2[e] stores the destination vertex. It is enforced that start vertex < destination vertex.

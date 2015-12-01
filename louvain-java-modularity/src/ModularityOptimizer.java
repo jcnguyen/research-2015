@@ -191,16 +191,18 @@ public class ModularityOptimizer {
         // read in the start and end nodes of each line and 
         // compute the total number of nodes
         bufferedReader = new BufferedReader(new FileReader(fileName));
-        node1 = new int[nLines];
-        node2 = new int[nLines];
+        node1 = new int[nLines];    // first column 
+        node2 = new int[nLines];    // second column
         edgeWeight1 = new double[nLines];
         i = -1;
         for (j = 0; j < nLines; j++) {
 
+            // read in start and destination vertices
             splittedLine = bufferedReader.readLine().split(" ");
-
             start = Integer.parseInt(splittedLine[0]);
             destination = Integer.parseInt(splittedLine[1]);
+
+            // enforce the starting node is lower than the dest node
             if (start < destination) {
                 node1[j] = start;
                 node2[j] = destination;
@@ -208,17 +210,25 @@ public class ModularityOptimizer {
                 node1[j] = destination;
                 node2[j] = start;
             }
+            //TODO: how does the code deal w/ self loops; where start=destination
 
+            // update the counter of number of nodes
+            // i keeps track of the max 
             if (node1[j] > i)
                 i = node1[j];
             if (node2[j] > i)
                 i = node2[j];
 
+            // if there's a 3rd argument in the line, we know we have edge weights
+            // store weights in edgeWeight1
             edgeWeight1[j] = (splittedLine.length > 2) ? Double.parseDouble(
                 splittedLine[2]) : 1;
         }
         nNodes = i + 1;
         bufferedReader.close();
+
+        /** DONE READING INPUT - 
+        now calculate useful information about the graph **/
 
         // compute the number of neighbors each node has
         // each edge is counted once
@@ -232,7 +242,8 @@ public class ModularityOptimizer {
             }
         }
 
-        // TODO comment
+        // count the number of edges
+        // set firstNeighborIndex[i]-firstNeighborValue[i-1] = nNeighbors[i-1]
         firstNeighborIndex = new int[nNodes + 1];
         nEdges = 0;
         for (i = 0; i < nNodes; i++) {
@@ -244,9 +255,17 @@ public class ModularityOptimizer {
         // TODO comment
         neighbor = new int[nEdges];
         edgeWeight2 = new double[nEdges];
+
+        // initialize nNeighbors to 0
         Arrays.fill(nNeighbors, 0);
+
+        // for every input edge
         for (i = 0; i < nLines; i++) {
+
+            // prevent duplicates
             if (node1[i] < node2[i]) {
+
+                
                 j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];
                 neighbor[j] = node2[i];
                 edgeWeight2[j] = edgeWeight1[i];
