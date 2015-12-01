@@ -21,6 +21,7 @@ import java.util.Random;
  **/
 public class Network implements Serializable {
     private static final long serialVersionUID = 1;
+    private static final int inf = 1000000;
     protected int nNodes;
     protected int nEdges;
     protected double[] nodeWeight;
@@ -817,4 +818,30 @@ public class Network implements Serializable {
 
         return subnetwork;
     }
+
+
+    public double[][] getMatrix()
+    {
+        
+        double[][] matrix;
+        matrix = new double[nNodes][nNodes];
+
+        /*initialize all matrix values to inf*/
+        for(i=0;i<nNodes;i++) {
+            for(j=0;k=j<nNodes;j++) {
+                matrix[i][j] = inf;
+            }
+        }
+
+        int destinationNode;
+        for(i=0;i<nNodes;i++) { // iterate through first neighbor index 
+            /*for all neighboring vertices of i, get the edge weight between them */
+            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) { // get all weights/destination vertex given a start vertex i
+                destinationNode=neighbor[k]; 
+                matrix[i][destinatioNode] = edgeWeight2[k]; 
+            }
+        }
+    return matrix;
+    }
+
 }
