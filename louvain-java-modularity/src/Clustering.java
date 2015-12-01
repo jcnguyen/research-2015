@@ -296,6 +296,4 @@ public class Clustering implements Cloneable, Serializable {
    t = 1: cluster0 = {0, 1, 2}, cluster1 = {3, 4, 5, 6}
      cluster = |0|0|0|1|1|1|1|
                 0 1 2 3 4 5 6    
-   }
-   }
  **/

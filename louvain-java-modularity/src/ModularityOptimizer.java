@@ -198,9 +198,10 @@ public class ModularityOptimizer {
         for (j = 0; j < nLines; j++) {
 
             splittedLine = bufferedReader.readLine().split(" ");
-
             start = Integer.parseInt(splittedLine[0]);
             destination = Integer.parseInt(splittedLine[1]);
+
+            // enforce start node < destination node
             if (start < destination) {
                 node1[j] = start;
                 node2[j] = destination;
@@ -221,18 +222,15 @@ public class ModularityOptimizer {
         bufferedReader.close();
 
         // compute the number of neighbors each node has
-        // each edge is counted once
         nNeighbors = new int[nNodes];
         for (i = 0; i < nLines; i++) {
-
-            // prevent double counting
-            if (node1[i] < node2[i]) {
-                nNeighbors[node1[i]]++;
-                nNeighbors[node2[i]]++;
-            }
+            nNeighbors[node1[i]]++;
+            nNeighbors[node2[i]]++;
         }
 
-        // TODO comment
+        // stores the cumulative number of edges for each node and 
+        // finds number of half-edges
+        // TODO what's the purpose of firstNeighborIndex?
         firstNeighborIndex = new int[nNodes + 1];
         nEdges = 0;
         for (i = 0; i < nNodes; i++) {
@@ -241,21 +239,38 @@ public class ModularityOptimizer {
         }
         firstNeighborIndex[nNodes] = nEdges;
 
-        // TODO comment
+        // TODO delete: prints out firstNeighborIndex
+        // System.out.println("index firstNeighborIndex");
+        // for (int jj = 0; jj < nNodes + 1; jj++) {
+        //     System.out.println(jj + " " + firstNeighborIndex[jj]);
+        // }
+
+        // computes the neighbor array and weight of each half-edge
+        // TODO what is neighbor? note that index i into neighbor and edgeWeight2 is the half-edge i
+        // TODO it seems like neighbor connects a half-edge to a node,but why and how
         neighbor = new int[nEdges];
         edgeWeight2 = new double[nEdges];
         Arrays.fill(nNeighbors, 0);
         for (i = 0; i < nLines; i++) {
-            if (node1[i] < node2[i]) {
-                j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];
-                neighbor[j] = node2[i];
-                edgeWeight2[j] = edgeWeight1[i];
-                nNeighbors[node1[i]]++;
-                j = firstNeighborIndex[node2[i]] + nNeighbors[node2[i]];
-                neighbor[j] = node1[i];
-                edgeWeight2[j] = edgeWeight1[i];
-                nNeighbors[node2[i]]++;
-            }
+            j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];
+            neighbor[j] = node2[i];
+            edgeWeight2[j] = edgeWeight1[i];
+            nNeighbors[node1[i]]++;
+
+            j = firstNeighborIndex[node2[i]] + nNeighbors[node2[i]];
+            neighbor[j] = node1[i];
+            edgeWeight2[j] = edgeWeight1[i];
+            nNeighbors[node2[i]]++;
+        }
+
+        // TODO delete: prints out neighbor and edgeWeight2 array
+        System.out.println("i neighbor edgeWeight2");
+        for (int jj = 0; jj < nEdges; jj++) {
+            System.out.println(jj + " " + neighbor[jj] + " " + edgeWeight2[jj]);
+        }
+        System.out.println("nNeighbors");
+        for (int jj = 0; jj < nNodes; jj++) {
+            System.out.println(jj + " " + nNeighbors[jj]);
         }
 
         // construct the network based on the modularity function
