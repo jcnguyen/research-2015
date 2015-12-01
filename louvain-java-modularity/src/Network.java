@@ -28,6 +28,8 @@ public class Network implements Serializable {
     protected int[] firstNeighborIndex;
     protected int[] neighbor;
     protected double[] edgeWeight;
+
+    // the total weight of all self loops in the graph
     protected double totalEdgeWeightSelfLinks;
 
     /**
@@ -106,8 +108,12 @@ public class Network implements Serializable {
                 edgeWeight2[nEdges] = (edgeWeight != null) ? edgeWeight[j] : 1;
                 nEdges++;
             }
-            else
+            else {
+
+                // calculate total weight of self loops in the graph,
+                // assuming 1 if unweighted graph
                 totalEdgeWeightSelfLinks += (edgeWeight != null) ? edgeWeight[j] : 1;
+            }
         }
         
         for (; i <= nNodes; i++)

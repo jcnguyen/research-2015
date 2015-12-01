@@ -265,7 +265,8 @@ public class ModularityOptimizer {
         // initialize nNeighbors to 0
         Arrays.fill(nNeighbors, 0);
 
-        // for every input edge, in the order given in the input file
+        // for every edge, in the order given in the input file
+        // initialize 
         for (i = 0; i < nLines; i++) {
 
             j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];
