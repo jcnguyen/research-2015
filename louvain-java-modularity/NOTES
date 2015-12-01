@@ -31,3 +31,8 @@ destination: half-edge
 4: 8, 15, 18
 5: 9, 12, 19
 6: 10, 13, 16
+
+
+indices of neighbors are half-edges
+elements in neighbors are vertices
+so neighhbor[i] means that for half-edge i, it is connected to some destination node neighbor[i]
