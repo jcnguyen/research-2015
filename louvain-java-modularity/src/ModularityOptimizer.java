@@ -299,6 +299,18 @@ public class ModularityOptimizer {
                 nNodes, nodeWeight, firstNeighborIndex, neighbor, edgeWeight2);
         }
 
+        // // TODO delete: tests matrix stuff
+        // double[][] adjMatrix = network.getMatrix();
+        // System.out.println(adjMatrix);
+        // /*initialize all matrix values to inf*/
+        // for(i=0;i<nNodes;i++) {
+        //     for(j=0;j<nNodes;j++) {
+        //         System.out.print(adjMatrix[i][j] + " ");
+        //     }
+        //     System.out.println();
+        // }
+        // /////////////////////////////////////
+
         return network;
     }
 

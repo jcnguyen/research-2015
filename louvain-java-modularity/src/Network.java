@@ -826,9 +826,12 @@ public class Network implements Serializable {
         double[][] matrix;
         matrix = new double[nNodes][nNodes];
 
+        int i;
+        int j;
+        int k;
         /*initialize all matrix values to inf*/
         for(i=0;i<nNodes;i++) {
-            for(j=0;k=j<nNodes;j++) {
+            for(j=0;j<nNodes;j++) {
                 matrix[i][j] = inf;
             }
         }
@@ -836,9 +839,9 @@ public class Network implements Serializable {
         int destinationNode;
         for(i=0;i<nNodes;i++) { // iterate through first neighbor index 
             /*for all neighboring vertices of i, get the edge weight between them */
-            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) { // get all weights/destination vertex given a start vertex i
+            for (k = firstNeighborIndex[i]; k < firstNeighborIndex[i + 1]; k++) { // get all weights/destination vertex given a start vertex i
                 destinationNode=neighbor[k]; 
-                matrix[i][destinatioNode] = edgeWeight2[k]; 
+                matrix[i][destinationNode] = edgeWeight[k]; 
             }
         }
     return matrix;
