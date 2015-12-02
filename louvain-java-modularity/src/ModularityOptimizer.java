@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ModularityOptimizer {
+    private static final int INF = 1000000; // TODO delete
 
     /** 
      * The main sequence. TODO
@@ -96,6 +97,7 @@ public class ModularityOptimizer {
         clustering = null;
         maxModularity = Double.NEGATIVE_INFINITY;
         random = new Random(randomSeed);
+
         for (i = 0; i < nRandomStarts; i++) {
             if (printOutput && (nRandomStarts > 1))
                 System.out.format("\tRandom start: %d%n", i + 1);
@@ -298,18 +300,6 @@ public class ModularityOptimizer {
             network = new Network(
                 nNodes, nodeWeight, firstNeighborIndex, neighbor, edgeWeight2);
         }
-
-        // // TODO delete: tests matrix stuff
-        // double[][] adjMatrix = network.getMatrix();
-        // System.out.println(adjMatrix);
-        // /*initialize all matrix values to inf*/
-        // for(i=0;i<nNodes;i++) {
-        //     for(j=0;j<nNodes;j++) {
-        //         System.out.print(adjMatrix[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
-        // /////////////////////////////////////
 
         return network;
     }
