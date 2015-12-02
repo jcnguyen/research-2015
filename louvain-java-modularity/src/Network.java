@@ -21,7 +21,7 @@ import java.util.Random;
  **/
 public class Network implements Serializable {
     private static final long serialVersionUID = 1;
-    private static final int INF = 1000000;
+    private static final double INF = Double.POSITIVE_INFINITY;
     protected int nNodes;
     protected int nEdges;
     protected double[] nodeWeight;
@@ -819,27 +819,29 @@ public class Network implements Serializable {
         return subnetwork;
     }
 
-
+    /**
+     * @return an adjacency matrix
+     **/
     public double[][] getMatrix() {
         
-        int i, j, k;
-        int start, destination;
+        int start, destination, edge;
         double[][] matrix;
 
-        matrix = new double[nNodes][nNodes];
 
-        /*initialize all matrix values to INF*/
+        // initialize matrix
+        matrix = new double[nNodes][nNodes];
         for(start = 0; start < nNodes; start++) {
             for(destination = 0; destination < nNodes; destination++) {
                 matrix[start][destination] = INF;
             }
         }
 
-        for(start = 0; start < nNodes; start++) { // iterate through first neighbor index 
-            /*for all neighboring vertices of i, get the edge weight between them */
-            for (k = firstNeighborIndex[i]; k < firstNeighborIndex[i + 1]; k++) { // get all weights/destination vertex given a start vertex i
-                destination = neighbor[k]; 
-                matrix[start][destination] = edgeWeight[k]; 
+        // update matrix with the appropriate edge weight
+        for(start = 0; start < nNodes; start++) { // iterate through firstNeighborIndex 
+            // given a start vertex, get the incident edge/weight and corresponding destinatinon vertex
+            for (edge = firstNeighborIndex[start]; edge < firstNeighborIndex[start + 1]; edge++) {
+                destination = neighbor[edge]; 
+                matrix[start][destination] = edgeWeight[edge]; 
             }
         }
 

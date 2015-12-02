@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ModularityOptimizer {
-    private static final int INF = 1000000; // TODO delete
 
     /** 
      * The main sequence. TODO

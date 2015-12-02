@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class VOSClusteringTechnique
 {
-    private static final int INF = 1000000;
+    private static final double INF = Double.POSITIVE_INFINITY;
     protected Network network;
     protected Clustering clustering;
     protected double resolution;
