@@ -273,9 +273,9 @@ public class Clustering implements Cloneable, Serializable {
     }
 
     /**
-     * Merges a clustering to this clustering.
+     * Update this clustering according to a new, passed-in clustering.
      *
-     * @param clustering  the clustering to merge with this clustering
+     * @param clustering  the clustering to copy
      **/
     public void mergeClusters(Clustering clustering) {
         int i;

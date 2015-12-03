@@ -330,6 +330,7 @@ public class VOSClusteringTechnique {
             {
                 update = true;
 
+                // updates our clustering such that we can run this iterative loop
                 clustering.mergeClusters(VOSClusteringTechnique.clustering);
             }
         }
