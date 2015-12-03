@@ -106,6 +106,8 @@ public class VOSClusteringTechnique {
     }
 
     /**
+     * Only called by Modularity Optimizer, to calculate the modularity of the final
+     * community groupings.
      * 
      * @return qualityFunction - calculating the metric (modularity in this case) for the graph
      */
@@ -129,11 +131,13 @@ public class VOSClusteringTechnique {
 
         /*each element of clusterWeight stores the total weight of the nodes in that cluster*/
         clusterWeight = new double[clustering.nClusters];
-        for (i = 0; i < network.nNodes; i++)
+        for (i = 0; i < network.nNodes; i++) {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+        }
         /*subtract square of total weights of nodes in each cluser from the quality function*/
-        for (i = 0; i < clustering.nClusters; i++)
+        for (i = 0; i < clustering.nClusters; i++) {
             qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
+        }
 
         qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
 
