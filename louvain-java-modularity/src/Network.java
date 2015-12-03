@@ -673,6 +673,12 @@ public class Network implements Serializable {
         return createSubnetwork(identifyComponents(), 0);
     }
 
+    /**
+    * This method is used by the Louvain algorithm.
+    *
+    * @param Clustering - mapping of each vertex to its cluster
+    * @return reducedNetwork - a new network with |V| = number of clusters
+    **/
     public Network createReducedNetwork(Clustering clustering)
     {
         double[] reducedNetworkEdgeWeight1, reducedNetworkEdgeWeight2;
@@ -701,6 +707,8 @@ public class Network implements Serializable {
             {
                 l = nodePerCluster[i][k];
 
+                // every new vertex represents a community of 1 or more vertices
+                // nodeWeight[v] is the number of nodes, from the original network, represented by this new vertex
                 reducedNetwork.nodeWeight[i] += nodeWeight[l];
 
                 for (m = firstNeighborIndex[l]; m < firstNeighborIndex[l + 1]; m++)

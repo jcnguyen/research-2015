@@ -28,7 +28,9 @@ edgeWeight1
 nodeWeight
 	- int array
 	- length |V|
-	- either manually set or, for vertex i, is the sum of the weights of the edges incident on i
+	- in the original graph, for vertex i, it begans as the sum of the weights of the edges incident on i
+	- in subsequent graphs, after we've created reduced graphs,
+	nodeWeight[v] corresponds to the number of vertices from the original graph contained within new vertex v
 
 firstNeighborIndex and neighbor together are exactly an adjacency list
 
