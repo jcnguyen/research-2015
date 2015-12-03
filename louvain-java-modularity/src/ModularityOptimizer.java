@@ -281,16 +281,6 @@ public class ModularityOptimizer {
             nNeighbors[node2[i]]++;
         }
 
-        // TODO delete: prints out neighbor and edgeWeight2 array
-        System.out.println("i neighbor edgeWeight2");
-        for (int jj = 0; jj < nEdges; jj++) {
-            System.out.println(jj + " " + neighbor[jj] + " " + edgeWeight2[jj]);
-        }
-        System.out.println("nNeighbors");
-        for (int jj = 0; jj < nNodes; jj++) {
-            System.out.println(jj + " " + nNeighbors[jj]);
-        }
-
         // construct the network based on the modularity function
         if (modularityFunction == 1) // standard modularity function
             network = new Network(

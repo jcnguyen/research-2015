@@ -12,6 +12,7 @@
  */
 
 import java.util.Random;
+import java.util.Arrays;
 
 public class VOSClusteringTechnique {
     private static final double INF = Double.POSITIVE_INFINITY;
@@ -104,163 +105,6 @@ public class VOSClusteringTechnique {
     {
         this.resolution = resolution;
     }
-
-    /**
-     * Only called by Modularity Optimizer, to calculate the modularity of the final
-     * community groupings.
-     * 
-     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
-     */
-    public double calcQualityFunction()
-    {
-        double qualityFunction;
-        double[] clusterWeight;
-        int i, j, k;
-
-        qualityFunction = 0;
-        /*for each node in network, if neighbors are in the same cluster, adds their edge weight to total*/
-        for (i = 0; i < network.nNodes; i++)
-        {
-            j = clustering.cluster[i];  /*j is the cluster of node i*/
-            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (e    dge?!) that i has??*/
-                /*if the cluster of the neighbor is the same as cluster of i, add the edge weight of neighbor to quality function*/
-                if (clustering.cluster[network.neighbor[k]] == j) 
-                    qualityFunction += network.edgeWeight[k];  // TODO: does edgeweight take in a vertex or an edge?!
-        }
-        qualityFunction += network.totalEdgeWeightSelfLinks;
-
-        /*each element of clusterWeight stores the total weight of the nodes in that cluster*/
-        clusterWeight = new double[clustering.nClusters];
-        for (i = 0; i < network.nNodes; i++) {
-            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
-        }
-        /*subtract square of total weights of nodes in each cluser from the quality function*/
-        for (i = 0; i < clustering.nClusters; i++) {
-            qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
-        }
-
-        qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
-
-        return qualityFunction;
-    }
-
-
-
-
-    /**
-     * 
-     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
-     */
-    public double calcSilhouetteFunction()
-    {
-        int i, j, k, c, n, nodeK;
-        int nNodes = network.nNodes;
-        int numCommunities = clustering.nClusters;
-        int[] numNodesInCluster = clustering.getNNodesPerCluster();
-        int[][] nodesInCluster = clustering.getNodesPerCluster();
-
-        double[][] adjMatrix = network.getMatrix();
-        double[][] shortestPath = floydWarshall(adjMatrix, nNodes);
-
-        double averageInnderDistance;
-        double currentDistance = 0;
-        double sizeOfCommunityN;
-        double minOfAverageOutsideDistance;
-        double maxOfDistances;
-        double communitySilhouette;
-        double globalSilhouetteIndex = 0;
-
-        double[] allCommunitySilhouettes = new double[numCommunities-1];
-
-
-        //for every community
-        for (c=0; c<numCommunities;c++) {
-            
-            sizeOfCommunity = numNodesInCluster[c];
-
-            // stores the silhouette for each vertex in this community
-            double[] silhouetteWidth = new double[sizeOfCommunity];
-
-            //for every node in community c
-            for(i=0;i<sizeOfCommunity;i++) {
-
-                averageInnerDistance = 0.0;
-
-                //find avg of shortest distance between v_i and every other vertex in same community
-                if (sizeOfCommunity == 1) { //singleton
-                    averageInnerDistance = 1.0;
-                } 
-                else {
-                    for (k=0; k<numNodesInCluster;k++) {
-                        nodeK = nodesInCluster[c][k];
-                        if (i != nodeK) {
-                            averageInnerDistance += shortestPath[i][nodeK];
-                        }
-                    }
-                    averageInnerDistance = averageInnerDistance/(sizeOfCommunity-1);
-                } 
-
-
-                // at index c, stores average distance between vertex i and all vertices in c
-                double[] distanceOptions = new double[sizeOfCommunity];
-                distanceOptions[c] = 0;
-
-                // finds distance between v_i and every vertex in different community
-                for (n = 0; n<numCommunities; n++) {
-                    currentDistance = 0;
-
-                    // for every other community
-                    if (n != c) {
-                        sizeofCommunityN = numNodesInCluster[n];
-
-                        for (k=0;k<sizeOfCommunityN; k++) {
-                            nodeK = nodesInCluster[n][k];
-                            currentDistance += shortestPath[i][nodeK];
-                        }
-                        currentDistance = currentDistance/(sizeOfCommunityN -1);
-                        distanceOptions[n] = currentDistance;
-                    }
-                }
-
-                // get the min of all the average distances
-                Arrays.sort(distanceOptions);
-                minOfAverageOutsideDistance = distanceOptions[0];
-
-                // get the max between the average distance within and
-                // min average distance
-                if (averageInnerDistance > minOfAverageOutsideDistance) {
-                    maxOfDistances = averageInnerDistance;
-                }
-                else {
-                    maxOfDistances = minOfAverageOutsideDistance;
-                }
-
-                silhouetteWidth[i] = ((minOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances); 
-            }
-
-            // calculate the silhouette width for the entire community
-            communitySilhouette = 0;
-            for (k=0;k<sizeOfCommunity;k++) {
-                communitySilhouette += silhouetteWidth[k];
-            }
-
-            allCommunitySilhouettes[c] = communitySilhouette/sizeOfCommunity;
-        }
-
-        // get the silhouette of entire graph
-        for (k=0;k<numCommunities;k++) {
-            globalSilhouetteIndex += allCommunitySilhouettes[k];
-        }
-
-        return globalSilhouetteIndex/numCommunities;
-    }
-
-
-
-
-
-
-
 
     /**
      * 
@@ -695,8 +539,163 @@ public class VOSClusteringTechnique {
     }
 
     /***********************************************************************
+     * MODULARITY
+     ***********************************************************************/
+
+    /**
+     * Only called by Modularity Optimizer, to calculate the modularity of the final
+     * community groupings.
+     * 
+     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     */
+    // public double calcQualityFunction()
+    public double calcSilhouetteFunction()
+    {
+        double qualityFunction;
+        double[] clusterWeight;
+        int i, j, k;
+
+        qualityFunction = 0;
+        /*for each node in network, if neighbors are in the same cluster, adds their edge weight to total*/
+        for (i = 0; i < network.nNodes; i++)
+        {
+            j = clustering.cluster[i];  /*j is the cluster of node i*/
+            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (e    dge?!) that i has??*/
+                /*if the cluster of the neighbor is the same as cluster of i, add the edge weight of neighbor to quality function*/
+                if (clustering.cluster[network.neighbor[k]] == j) 
+                    qualityFunction += network.edgeWeight[k];  // TODO: does edgeweight take in a vertex or an edge?!
+        }
+        qualityFunction += network.totalEdgeWeightSelfLinks;
+
+        /*each element of clusterWeight stores the total weight of the nodes in that cluster*/
+        clusterWeight = new double[clustering.nClusters];
+        for (i = 0; i < network.nNodes; i++) {
+            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+        }
+        /*subtract square of total weights of nodes in each cluser from the quality function*/
+        for (i = 0; i < clustering.nClusters; i++) {
+            qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
+        }
+
+        qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
+
+        return qualityFunction;
+    }
+
+    /***********************************************************************
      * SILHOUETTE INDEX
      ***********************************************************************/
+
+    /**
+     * 
+     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     */
+    // public double calcSilhouetteFunction()
+    public double calcQualityFunction()
+    {
+        int i, j, k, c, n; // iterators
+        int nodeK; // other node
+        int nNodes = network.nNodes;
+        int numCommunities = clustering.nClusters;
+        int[] numNodesInCluster = clustering.getNNodesPerCluster();
+        int[][] nodesInCluster = clustering.getNodesPerCluster();
+
+        double[][] adjMatrix = network.getMatrix();
+        double[][] shortestPath = floydWarshall(adjMatrix, nNodes);
+
+        double averageInnerDistance;
+        double currentDistance = 0;
+        int sizeOfCommunityN;
+        int sizeOfCommunity;
+        double minOfAverageOutsideDistance;
+        double maxOfDistances;
+        double communitySilhouette;
+        double globalSilhouetteIndex = 0;
+
+        double[] allCommunitySilhouettes = new double[numCommunities];
+
+        //for every community
+        for (c = 0; c < numCommunities; c++) {
+            
+            sizeOfCommunity = numNodesInCluster[c];
+
+            // stores the silhouette for each vertex in this community
+            double[] silhouetteWidth = new double[sizeOfCommunity];
+
+            //for every node in community c
+            for(i = 0; i < sizeOfCommunity; i++) {
+
+                averageInnerDistance = 0.0;
+
+                //find avg of shortest distance between v_i and every other vertex in same community
+                if (sizeOfCommunity == 1) { //singleton
+                    averageInnerDistance = 1.0;
+                }  else {
+                    for (k=0; k<sizeOfCommunity;k++) {
+                        nodeK = nodesInCluster[c][k];
+                        if (i != nodeK) {
+                            averageInnerDistance += shortestPath[i][nodeK];
+                        }
+                    }
+                    averageInnerDistance = averageInnerDistance/(sizeOfCommunity-1);
+                } 
+
+
+                // at index c, stores average distance between vertex i and all vertices in c
+                double[] distanceOptions = new double[sizeOfCommunity];
+                distanceOptions[c] = 0;
+
+                // finds distance between v_i and every vertex in different community
+                for (n = 0; n < numCommunities; n++) {
+                    currentDistance = 0;
+
+                    // for every other community
+                    if (n != c) {
+                        sizeOfCommunityN = numNodesInCluster[n];
+
+                        for (k=0;k<sizeOfCommunityN; k++) {
+                            nodeK = nodesInCluster[n][k];
+                            currentDistance += shortestPath[i][nodeK];
+                        }
+                        currentDistance = currentDistance/(sizeOfCommunityN -1);
+                        distanceOptions[n] = currentDistance;
+                    }
+                }
+
+                // get the min of all the average distances
+                Arrays.sort(distanceOptions);
+                minOfAverageOutsideDistance = distanceOptions[0];
+
+                // get the max between the average distance within and
+                // min average distance
+                if (averageInnerDistance > minOfAverageOutsideDistance) {
+                    maxOfDistances = averageInnerDistance;
+                }
+                else {
+                    maxOfDistances = minOfAverageOutsideDistance;
+                }
+
+                silhouetteWidth[i] = ((minOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances); 
+            }
+
+            // calculate the silhouette width for the entire community
+            communitySilhouette = 0;
+            for (k=0;k<sizeOfCommunity;k++) {
+                communitySilhouette += silhouetteWidth[k];
+            }
+
+            allCommunitySilhouettes[c] = communitySilhouette/sizeOfCommunity;
+        }
+
+        // get the silhouette of entire graph
+        for (k=0;k<numCommunities;k++) {
+            globalSilhouetteIndex += allCommunitySilhouettes[k];
+        }
+
+        return globalSilhouetteIndex/numCommunities;
+    }
+
+
     public double[][] floydWarshall(double[][] graph, int nNodes) {
         double[][] dist;
         int i, j, k;
