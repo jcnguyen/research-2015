@@ -6,16 +6,10 @@
  * @version 1.3.1, 11/23/14
  */
 
-/*
- * APSH contributed by Aakash Hasija
- * at geeksforgeeks.org
- */
-
 import java.util.Random;
 
 public class VOSClusteringTechnique
 {
-    private static final int INF = 1000000;
     protected Network network;
     protected Clustering clustering;
     protected double resolution;
@@ -115,7 +109,7 @@ public class VOSClusteringTechnique
         for (i = 0; i < network.nNodes; i++)
         {
             j = clustering.cluster[i];  /*j is the cluster of node i*/
-            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (edge?!) that i has??*/
+            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (e    dge?!) that i has??*/
                 /*if the cluster of the neighbor is the same as cluster of i, add the edge weight of neighbor to quality function*/
                 if (clustering.cluster[network.neighbor[k]] == j) 
                     qualityFunction += network.edgeWeight[k];  // TODO: does edgeweight take in a vertex or an edge?!
@@ -134,6 +128,42 @@ public class VOSClusteringTechnique
 
         return qualityFunction;
     }
+
+    
+        /**
+     * 
+     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     */
+    public double calcSilhouetteFunction()
+    {
+        int i, j, k, c;
+        int nNodes = network.nNodes;
+        int[] numNodesInCluster = clustering.getNNodesPerCluster()
+
+        //for every community
+        for (c=0; c<clustering.nClusters;c++) {
+            
+            sizeOfCommunity = numNodesInCluster[c];
+            //for every node in community c
+            for(i=0;i<sizeOfCommunity;i++) {
+                double averageInnerDistance = 0.0;
+
+                //find avg of shortest distance between v_i and every other vertex in same community
+                if (sizeOfCommunity == 1) { //singleton
+                    averageInnerDistance = 1.0;
+                } 
+                else {
+                    for (k=0; k<)
+                } 
+            }
+        }
+
+
+
+        return ;
+    }
+
+
 
     /**
      * 
@@ -555,60 +585,4 @@ public class VOSClusteringTechnique
 
         clustering.mergeClusters(VOSClusteringTechnique.clustering);
     }
-
-
-
-    /***********************************************************************
-     * SILHOUETTE INDEX
-     ***********************************************************************/
-    public double[][] floydWarshall(double[][] graph, int nNodes)
-        {
-            double[][] dist;
-            int i, j, k;
-
-            dist = new double[nNodes][nNodes];
-     
-            /* Initialize the solution matrix same as input graph matrix.
-               Or we can say the initial values of shortest distances
-               are based on shortest paths considering no intermediate
-               vertex. */
-            for (i = 0; i < nNodes; i++) {
-                for (j = 0; j < nNodes; j++) {
-                    if (i == j) {
-                        dist[i][j] = 0;
-                    } else {
-                        dist[i][j] = graph[i][j];
-                    }
-                }
-            }
-     
-            /* Add all vertices one by one to the set of intermediate
-               vertices.
-              ---> Before start of a iteration, we have shortest
-                   distances between all pairs of vertices such that
-                   the shortest distances consider only the vertices in
-                   set {0, 1, 2, .. k-1} as intermediate vertices.
-              ----> After the end of a iteration, vertex no. k is added
-                    to the set of intermediate vertices and the set
-                    becomes {0, 1, 2, .. k} */
-            for (k = 0; k < nNodes; k++)
-            {
-                // Pick all vertices as source one by one
-                for (i = 0; i < nNodes; i++)
-                {
-                    // Pick all vertices as destination for the
-                    // above picked source
-                    for (j = 0; j < nNodes; j++)
-                    {
-                        // If vertex k is on the shortest path from
-                        // i to j, then update the value of dist[i][j]
-                        if (dist[i][k] + dist[k][j] < dist[i][j])
-                            dist[i][j] = dist[i][k] + dist[k][j];
-                    }
-                }
-            }
-     
-            // Print the shortest distance matrix
-            return dist;
-        }
 }
