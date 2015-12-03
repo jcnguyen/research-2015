@@ -1,5 +1,7 @@
 /**
- * Arrays2
+ * Arrays2.java
+ *
+ * Contains various methods for manipulating arrays.
  *
  * @author Ludo Waltman
  * @author Nees Jan van Eck
@@ -9,9 +11,6 @@
 import java.util.Arrays;
 import java.util.Random;
 
-/**
- * Auxiliary methods to an array.
- **/
 public class Arrays2 {
 
     /**

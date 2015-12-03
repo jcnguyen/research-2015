@@ -1,5 +1,7 @@
 /**
- * Clustering
+ * Clustering.java
+ *
+ * A clustering is the set of all the clusters of a network. 
  *
  * @author Ludo Waltman
  * @author Nees Jan van Eck
@@ -14,23 +16,19 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 
-/**
- * All the clusters in the graph (at a specific time).
- **/
 public class Clustering implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1;
 
     protected int nNodes;    // total number of nodes
     protected int nClusters; // number of clusters
-    protected int[] cluster; // the cluster of each node
+    protected int[] cluster; // the cluster that each node i belongs to
 
     /**
-     * Loads a clustering off a file.
+     * Loads a clustering off of a file.
      * 
      * @param  fileName                the file that contains the clustering
-     * @throws ClassNotFoundException  occurs if program is unable to load a 
-     *                                 class
+     * @throws ClassNotFoundException  occurs if a class is unable to load a 
      * @throws IOException             occurs if there's an input/output error 
      * @return a clustering from a file
      **/
@@ -52,8 +50,7 @@ public class Clustering implements Cloneable, Serializable {
     /** 
      * Constructs a clustering using a defined number of nodes.
      * 
-     * @param nNodes  the number of nodes in that will be in 
-     *                this clustering
+     * @param nNodes  the number of nodes in the network
      **/
     public Clustering(int nNodes) {
         this.nNodes = nNodes;

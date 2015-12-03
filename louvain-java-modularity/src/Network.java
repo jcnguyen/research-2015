@@ -58,6 +58,7 @@ public class Network implements Serializable {
     }
 
     /************************BEGIN CONSTRUCTORS************************/
+
     /*******************************************************
      These overloaded constructors call the primary constructor with 4 parameters 
      *******************************************************/
@@ -82,8 +83,7 @@ public class Network implements Serializable {
      * @param edge - adjacency matrix
      * @param edgeWeight - edge weights
      */
-    public Network(int nNodes, double[] nodeWeight, int[][] edge, double[] edgeWeight)
-    {
+    public Network(int nNodes, double[] nodeWeight, int[][] edge, double[] edgeWeight) {
         double[] edgeWeight2;
         int i, j;
         int[] neighbor;
@@ -150,7 +150,7 @@ public class Network implements Serializable {
      * @param nNodes - number of nodes
      * @param nodeWeight - node weights
      * @param firstNeighborIndex - keeps track of number of neighbors per vertex;
-     *                             used to help index into neighbor
+     *          used to help index into neighbor
      * @param neighbor - adjacency list representation of the graph
      * @param edgeWeight - edge weights, corresponds to neighbor
      */
@@ -189,8 +189,7 @@ public class Network implements Serializable {
      * @param fileName
      * @throws IOException
      */
-    public void save(String fileName) throws IOException
-    {
+    public void save(String fileName) throws IOException {
         ObjectOutputStream objectOutputStream;
 
         objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
@@ -203,41 +202,34 @@ public class Network implements Serializable {
     /**
      * @return the number of nodes
      */
-    public int getNNodes()
-    {
+    public int getNNodes() {
         return nNodes;
     }
 
     /**
      * @return TODO
      */
-    public double getTotalNodeWeight()
-    {
+    public double getTotalNodeWeight() {
         return Arrays2.calcSum(nodeWeight);
     }
 
-    public double[] getNodeWeights()
-    {
+    public double[] getNodeWeights() {
         return (double[])nodeWeight.clone();
     }
 
-    public double getNodeWeight(int node)
-    {
+    public double getNodeWeight(int node) {
         return nodeWeight[node];
     }
 
-    public int getNEdges()
-    {
+    public int getNEdges() {
         return nEdges / 2;
     }
 
-    public int getNEdges(int node)
-    {
+    public int getNEdges(int node) {
         return firstNeighborIndex[node + 1] - firstNeighborIndex[node];
     }
 
-    public int[] getNEdgesPerNode()
-    {
+    public int[] getNEdgesPerNode() {
         int i;
         int[] nEdgesPerNode;
 
@@ -247,8 +239,7 @@ public class Network implements Serializable {
         return nEdgesPerNode;
     }
 
-    public int[][] getEdges()
-    {
+    public int[][] getEdges() {
         int i;
         int[][] edge;
 
@@ -260,13 +251,11 @@ public class Network implements Serializable {
         return edge;
     }
 
-    public int[] getEdges(int node)
-    {
+    public int[] getEdges(int node) {
         return Arrays.copyOfRange(neighbor, firstNeighborIndex[node], firstNeighborIndex[node + 1]);
     }
 
-    public int[][] getEdgesPerNode()
-    {
+    public int[][] getEdgesPerNode() {
         int i;
         int[][] edgePerNode;
 
@@ -276,13 +265,11 @@ public class Network implements Serializable {
         return edgePerNode;
     }
 
-    public double getTotalEdgeWeight()
-    {
+    public double getTotalEdgeWeight() {
         return Arrays2.calcSum(edgeWeight) / 2;
     }
 
-    public double getTotalEdgeWeight(int node)
-    {
+    public double getTotalEdgeWeight(int node) {
         return Arrays2.calcSum(edgeWeight, firstNeighborIndex[node], firstNeighborIndex[node + 1]);
     }
 
@@ -290,8 +277,7 @@ public class Network implements Serializable {
     * @return totalEdgeWeightPerNode[] - also known as nodeWeight
     *           - the i'th spot is the sum of the weights of the edges incident on vertex i
     **/
-    public double[] getTotalEdgeWeightPerNode()
-    {
+    public double[] getTotalEdgeWeightPerNode() {
         double[] totalEdgeWeightPerNode;
         int i;
 
@@ -301,13 +287,11 @@ public class Network implements Serializable {
         return totalEdgeWeightPerNode;
     }
 
-    public double[] getEdgeWeights()
-    {
+    public double[] getEdgeWeights() {
         return (double[])edgeWeight.clone();
     }
 
-    public double[] getEdgeWeights(int node)
-    {
+    public double[] getEdgeWeights(int node) {
         return Arrays.copyOfRange(edgeWeight, firstNeighborIndex[node], firstNeighborIndex[node + 1]);
     }
 
@@ -315,8 +299,7 @@ public class Network implements Serializable {
     * @return edgeWeightPerNode[][] - a 2D array where the i'th row is a list of
     *                                   the weights of the edges incident on i
     **/
-    public double[][] getEdgeWeightsPerNode()
-    {
+    public double[][] getEdgeWeightsPerNode() {
         double[][] edgeWeightPerNode;
         int i;
 
@@ -326,8 +309,7 @@ public class Network implements Serializable {
         return edgeWeightPerNode;
     }
 
-    public double getTotalEdgeWeightSelfLinks()
-    {
+    public double getTotalEdgeWeightSelfLinks() {
         return totalEdgeWeightSelfLinks;
     }
 
@@ -374,8 +356,7 @@ public class Network implements Serializable {
     /**
      * @return a network where all edge weights and node weights are 1
      */
-    public Network createNetworkWithoutNodeAndEdgeWeights()
-    {
+    public Network createNetworkWithoutNodeAndEdgeWeights() {
         Network networkWithoutNodeAndEdgeWeights;
 
         networkWithoutNodeAndEdgeWeights = new Network();
@@ -398,8 +379,7 @@ public class Network implements Serializable {
     /**
      * @return a normalized network
      */
-    public Network createNormalizedNetwork1()
-    {
+    public Network createNormalizedNetwork1() {
         double totalNodeWeight;
         int i, j;
         Network normalizedNetwork;
@@ -428,8 +408,7 @@ public class Network implements Serializable {
         return normalizedNetwork;
     }
 
-    public Network createNormalizedNetwork2()
-    {
+    public Network createNormalizedNetwork2() {
         int i, j;
         Network normalizedNetwork;
 
@@ -465,8 +444,7 @@ public class Network implements Serializable {
      * @param nEdges - edges to TODO
      * @return a pruned network
      */
-    public Network createPrunedNetwork(int nEdges)
-    {
+    public Network createPrunedNetwork(int nEdges) {
         return createPrunedNetwork(nEdges, new Random());
     }
 
@@ -485,8 +463,7 @@ public class Network implements Serializable {
      * @param random - seed for random permutations
      * @return a pruned subset of the current network
      */
-    public Network createPrunedNetwork(int nEdges, Random random)
-    {
+    public Network createPrunedNetwork(int nEdges, Random random) {
         double edgeWeightThreshold, randomNumberThreshold;
         double[] edgeWeight, randomNumber;
         int i, j, k, nEdgesAboveThreshold, nEdgesAtThreshold;
@@ -502,8 +479,7 @@ public class Network implements Serializable {
         i = 0;
         for (j = 0; j < nNodes; j++)
             for (k = firstNeighborIndex[j]; k < firstNeighborIndex[j + 1]; k++)
-                if (neighbor[k] < j)
-                {
+                if (neighbor[k] < j) {
                     edgeWeight[i] = this.edgeWeight[k];
                     i++;
                 }
@@ -523,8 +499,7 @@ public class Network implements Serializable {
         i = 0;
         for (j = 0; j < nNodes; j++)
             for (k = firstNeighborIndex[j]; k < firstNeighborIndex[j + 1]; k++)
-                if ((neighbor[k] < j) && (this.edgeWeight[k] == edgeWeightThreshold))
-                {
+                if ((neighbor[k] < j) && (this.edgeWeight[k] == edgeWeightThreshold)) {
                     randomNumber[i] = generateRandomNumber(j, neighbor[k], nodePermutation);
                     i++;
                 }
@@ -541,11 +516,9 @@ public class Network implements Serializable {
         prunedNetwork.neighbor = new int[nEdges];
         prunedNetwork.edgeWeight = new double[nEdges];
         i = 0;
-        for (j = 0; j < nNodes; j++)
-        {
+        for (j = 0; j < nNodes; j++) {
             for (k = firstNeighborIndex[j]; k < firstNeighborIndex[j + 1]; k++)
-                if ((this.edgeWeight[k] > edgeWeightThreshold) || ((this.edgeWeight[k] == edgeWeightThreshold) && (generateRandomNumber(j, neighbor[k], nodePermutation) >= randomNumberThreshold)))
-                {
+                if ((this.edgeWeight[k] > edgeWeightThreshold) || ((this.edgeWeight[k] == edgeWeightThreshold) && (generateRandomNumber(j, neighbor[k], nodePermutation) >= randomNumberThreshold))) {
                     prunedNetwork.neighbor[i] = neighbor[k];
                     prunedNetwork.edgeWeight[i] = this.edgeWeight[k];
                     i++;
@@ -573,16 +546,13 @@ public class Network implements Serializable {
 
         subnetwork.nNodes = node.length;
 
-        if (subnetwork.nNodes == 1)
-        {
+        if (subnetwork.nNodes == 1) {
             subnetwork.nEdges = 0;
             subnetwork.nodeWeight = new double[] {nodeWeight[node[0]]};
             subnetwork.firstNeighborIndex = new int[2];
             subnetwork.neighbor = new int[0];
             subnetwork.edgeWeight = new double[0];
-        }
-        else
-        {
+        } else {
             subnetworkNode = new int[nNodes];
             Arrays.fill(subnetworkNode, -1);
             for (i = 0; i < node.length; i++)
@@ -593,13 +563,11 @@ public class Network implements Serializable {
             subnetwork.firstNeighborIndex = new int[subnetwork.nNodes + 1];
             subnetworkNeighbor = new int[nEdges];
             subnetworkEdgeWeight = new double[nEdges];
-            for (i = 0; i < subnetwork.nNodes; i++)
-            {
+            for (i = 0; i < subnetwork.nNodes; i++) {
                 j = node[i];
                 subnetwork.nodeWeight[i] = nodeWeight[j];
                 for (k = firstNeighborIndex[j]; k < firstNeighborIndex[j + 1]; k++)
-                    if (subnetworkNode[neighbor[k]] >= 0)
-                    {
+                    if (subnetworkNode[neighbor[k]] >= 0) {
                         subnetworkNeighbor[subnetwork.nEdges] = subnetworkNode[neighbor[k]];
                         subnetworkEdgeWeight[subnetwork.nEdges] = edgeWeight[k];
                         subnetwork.nEdges++;
@@ -615,8 +583,7 @@ public class Network implements Serializable {
         return subnetwork;
     }
 
-    public Network createSubnetwork(boolean[] nodeInSubnetwork)
-    {
+    public Network createSubnetwork(boolean[] nodeInSubnetwork) {
         int i, j;
         int[] node;
 
@@ -635,8 +602,7 @@ public class Network implements Serializable {
         return createSubnetwork(node);
     }
 
-    public Network createSubnetwork(Clustering clustering, int cluster)
-    {
+    public Network createSubnetwork(Clustering clustering, int cluster) {
         double[] subnetworkEdgeWeight;
         int[] subnetworkNeighbor, subnetworkNode;
         int[][] nodePerCluster;
@@ -650,8 +616,7 @@ public class Network implements Serializable {
         return subnetwork;
     }
 
-    public Network[] createSubnetworks(Clustering clustering)
-    {
+    public Network[] createSubnetworks(Clustering clustering) {
         double[] subnetworkEdgeWeight;
         int i;
         int[] subnetworkNeighbor, subnetworkNode;
@@ -668,8 +633,7 @@ public class Network implements Serializable {
         return subnetwork;
     }
 
-    public Network createSubnetworkLargestComponent()
-    {
+    public Network createSubnetworkLargestComponent() {
         return createSubnetwork(identifyComponents(), 0);
     }
 
@@ -679,8 +643,7 @@ public class Network implements Serializable {
     * @param Clustering - mapping of each vertex to its cluster
     * @return reducedNetwork - a new network with |V| = number of clusters
     **/
-    public Network createReducedNetwork(Clustering clustering)
-    {
+    public Network createReducedNetwork(Clustering clustering) {
         double[] reducedNetworkEdgeWeight1, reducedNetworkEdgeWeight2;
         int i, j, k, l, m, n;
         int[] reducedNetworkNeighbor1, reducedNetworkNeighbor2;
@@ -700,24 +663,19 @@ public class Network implements Serializable {
         reducedNetworkNeighbor2 = new int[clustering.nClusters - 1];
         reducedNetworkEdgeWeight2 = new double[clustering.nClusters];
         nodePerCluster = clustering.getNodesPerCluster();
-        for (i = 0; i < clustering.nClusters; i++)
-        {
+        for (i = 0; i < clustering.nClusters; i++) {
             j = 0;
-            for (k = 0; k < nodePerCluster[i].length; k++)
-            {
+            for (k = 0; k < nodePerCluster[i].length; k++) {
                 l = nodePerCluster[i][k];
 
                 // every new vertex represents a community of 1 or more vertices
                 // nodeWeight[v] is the number of nodes, from the original network, represented by this new vertex
                 reducedNetwork.nodeWeight[i] += nodeWeight[l];
 
-                for (m = firstNeighborIndex[l]; m < firstNeighborIndex[l + 1]; m++)
-                {
+                for (m = firstNeighborIndex[l]; m < firstNeighborIndex[l + 1]; m++) {
                     n = clustering.cluster[neighbor[m]];
-                    if (n != i)
-                    {
-                        if (reducedNetworkEdgeWeight2[n] == 0)
-                        {
+                    if (n != i) {
+                        if (reducedNetworkEdgeWeight2[n] == 0) {
                             reducedNetworkNeighbor2[j] = n;
                             j++;
                         }
@@ -728,8 +686,7 @@ public class Network implements Serializable {
                 }
             }
 
-            for (k = 0; k < j; k++)
-            {
+            for (k = 0; k < j; k++) {
                 reducedNetworkNeighbor1[reducedNetwork.nEdges + k] = reducedNetworkNeighbor2[k];
                 reducedNetworkEdgeWeight1[reducedNetwork.nEdges + k] = reducedNetworkEdgeWeight2[reducedNetworkNeighbor2[k]];
                 reducedNetworkEdgeWeight2[reducedNetworkNeighbor2[k]] = 0;
@@ -743,8 +700,7 @@ public class Network implements Serializable {
         return reducedNetwork;
     }
 
-    public Clustering identifyComponents()
-    {
+    public Clustering identifyComponents() {
         boolean[] nodeVisited;
         Clustering clustering;
         int i, j, k, l;
@@ -763,11 +719,9 @@ public class Network implements Serializable {
                 node[0] = i;
                 j = 1;
                 k = 0;
-                do
-                {
+                do {
                     for (l = firstNeighborIndex[node[k]]; l < firstNeighborIndex[node[k] + 1]; l++)
-                        if (!nodeVisited[neighbor[l]])
-                        {
+                        if (!nodeVisited[neighbor[l]]) {
                             clustering.cluster[neighbor[l]] = clustering.nClusters;
                             nodeVisited[neighbor[l]] = true;
                             node[j] = neighbor[l];
@@ -785,22 +739,16 @@ public class Network implements Serializable {
         return clustering;
     }
 
-    private Network()
-    {
-    }
+    private Network(){}
 
-    private double generateRandomNumber(int node1, int node2, int[] nodePermutation)
-    {
+    private double generateRandomNumber(int node1, int node2, int[] nodePermutation) {
         int i, j;
         Random random;
 
-        if (node1 < node2)
-        {
+        if (node1 < node2) {
             i = node1;
             j = node2;
-        }
-        else
-        {
+        } else {
             i = node2;
             j = node1;
         }
@@ -808,8 +756,7 @@ public class Network implements Serializable {
         return random.nextDouble();
     }
 
-    private Network createSubnetwork(Clustering clustering, int cluster, int[] node, int[] subnetworkNode, int[] subnetworkNeighbor, double[] subnetworkEdgeWeight)
-    {
+    private Network createSubnetwork(Clustering clustering, int cluster, int[] node, int[] subnetworkNode, int[] subnetworkNeighbor, double[] subnetworkEdgeWeight) {
         int i, j, k;
         Network subnetwork;
 
@@ -817,29 +764,24 @@ public class Network implements Serializable {
 
         subnetwork.nNodes = node.length;
 
-        if (subnetwork.nNodes == 1)
-        {
+        if (subnetwork.nNodes == 1) {
             subnetwork.nEdges = 0;
             subnetwork.nodeWeight = new double[] {nodeWeight[node[0]]};
             subnetwork.firstNeighborIndex = new int[2];
             subnetwork.neighbor = new int[0];
             subnetwork.edgeWeight = new double[0];
-        }
-        else
-        {
+        } else {
             for (i = 0; i < node.length; i++)
                 subnetworkNode[node[i]] = i;
 
             subnetwork.nEdges = 0;
             subnetwork.nodeWeight = new double[subnetwork.nNodes];
             subnetwork.firstNeighborIndex = new int[subnetwork.nNodes + 1];
-            for (i = 0; i < subnetwork.nNodes; i++)
-            {
+            for (i = 0; i < subnetwork.nNodes; i++) {
                 j = node[i];
                 subnetwork.nodeWeight[i] = nodeWeight[j];
                 for (k = firstNeighborIndex[j]; k < firstNeighborIndex[j + 1]; k++)
-                    if (clustering.cluster[neighbor[k]] == cluster)
-                    {
+                    if (clustering.cluster[neighbor[k]] == cluster) {
                         subnetworkNeighbor[subnetwork.nEdges] = subnetworkNode[neighbor[k]];
                         subnetworkEdgeWeight[subnetwork.nEdges] = edgeWeight[k];
                         subnetwork.nEdges++;
@@ -873,8 +815,7 @@ public class Network implements Serializable {
         }
 
         // update matrix with the appropriate edge weight
-        for(start = 0; start < nNodes; start++) { // iterate through firstNeighborIndex 
-            // given a start vertex, get the incident edge/weight and corresponding destinatinon vertex
+        for(start = 0; start < nNodes; start++) {
             for (edge = firstNeighborIndex[start]; edge < firstNeighborIndex[start + 1]; edge++) {
                 destination = neighbor[edge]; 
                 matrix[start][destination] = edgeWeight[edge]; 

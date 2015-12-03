@@ -743,7 +743,6 @@ public class VOSClusteringTechnique {
             }
         }
  
-        // Print the shortest distance matrix
         return dist;
     }
 }
