@@ -21,13 +21,19 @@ import java.util.Random;
  **/
 public class Network implements Serializable {
     private static final long serialVersionUID = 1;
-    private static final int INF = 1000000;
+    private static final double INF = Double.POSITIVE_INFINITY;
     protected int nNodes;
     protected int nEdges;
     protected double[] nodeWeight;
+
+    // firstNeighborIndex and neighbor together are exactly an adjacency list
     protected int[] firstNeighborIndex;
     protected int[] neighbor;
+
+    // weight of edge i, corresponding to edge i in neighbor
     protected double[] edgeWeight;
+
+    // the total weight of all self loops in the graph
     protected double totalEdgeWeightSelfLinks;
 
     /**
@@ -68,10 +74,11 @@ public class Network implements Serializable {
     }
 
     /**
-     * Primary constructor w/ 4 parameters
+     * Primary constructor w/ 4 parameters.
+     * This constructor is not called by ModularityOptimizer.
      * 
      * @param nNodes - number of nodes
-     * @param nodeWeight - TODO
+     * @param nodeWeight - array of node weights
      * @param edge - adjacency matrix
      * @param edgeWeight - edge weights
      */
@@ -83,16 +90,15 @@ public class Network implements Serializable {
 
         this.nNodes = nNodes;
         
-        System.out.println("Are nNodes and edge[0].length equal?" + (nNodes == edge[0].length));
-
         nEdges = 0;
-        firstNeighborIndex = new int[nNodes + 1]; // TODO: shouldn't nNodes = edge[0].length?
+        firstNeighborIndex = new int[nNodes + 1];
         neighbor = new int[edge[0].length];		// array of length: number of vertices
         edgeWeight2 = new double[edge[0].length];
         totalEdgeWeightSelfLinks = 0;
         i = 1;
         
-        // 
+        // represent the information in the adj. matrix "edge"
+        // in the adj. list neighbor (with firstNeighborIndex as a helper)
         for (j = 0; j < edge[0].length; j++) {
             if (edge[0][j] != edge[1][j]) {
                 if (edge[0][j] >= i) {
@@ -106,8 +112,12 @@ public class Network implements Serializable {
                 edgeWeight2[nEdges] = (edgeWeight != null) ? edgeWeight[j] : 1;
                 nEdges++;
             }
-            else
+            else {
+
+                // calculate total weight of self loops in the graph,
+                // assuming 1 if unweighted graph
                 totalEdgeWeightSelfLinks += (edgeWeight != null) ? edgeWeight[j] : 1;
+            }
         }
         
         for (; i <= nNodes; i++)
@@ -129,6 +139,7 @@ public class Network implements Serializable {
         this(nNodes, nodeWeight, firstNeighborIndex, neighbor, null);
     }
 
+    /* This is the constructor called in ModularityOptimizer.java */
     public Network(int nNodes, int[] firstNeighborIndex, int[] neighbor, double[] edgeWeight) {
         this(nNodes, null, firstNeighborIndex, neighbor, edgeWeight);
     }
@@ -136,28 +147,37 @@ public class Network implements Serializable {
     /**
      * Primary constructor with 5 inputs
      * 
-     * @param nNodes
-     * @param nodeWeight
-     * @param firstNeighborIndex
-     * @param neighbor
-     * @param edgeWeight
+     * @param nNodes - number of nodes
+     * @param nodeWeight - node weights
+     * @param firstNeighborIndex - keeps track of number of neighbors per vertex;
+     *                             used to help index into neighbor
+     * @param neighbor - adjacency list representation of the graph
+     * @param edgeWeight - edge weights, corresponds to neighbor
      */
-    public Network(int nNodes, double[] nodeWeight, int[] firstNeighborIndex, int[] neighbor, double[] edgeWeight)
-    {
+    public Network(int nNodes, double[] nodeWeight, int[] firstNeighborIndex, int[] neighbor, double[] edgeWeight) {
+        
+        // store essential information about the graph
         this.nNodes = nNodes;
-
         nEdges = neighbor.length;
         this.firstNeighborIndex = (int[])firstNeighborIndex.clone();
         this.neighbor = (int[])neighbor.clone();
-        if (edgeWeight != null)
+
+        // if the graph is weighted, store edge weights
+        if (edgeWeight != null) {
             this.edgeWeight = (double[])edgeWeight.clone();
-        else
-        {
+        }
+
+        // if the graph is unweighted, initialize all edge weights to 1
+        else {
             this.edgeWeight = new double[nEdges];
             Arrays.fill(this.edgeWeight, 1);
         }
+
+        // we begin with no self loops
         totalEdgeWeightSelfLinks = 0;
 
+        // if we're given info about node weights, store that
+        // otherwise, the weight per node is the sum of the weights of the edges
         this.nodeWeight = (nodeWeight != null) ? (double[])nodeWeight.clone() : getTotalEdgeWeightPerNode();
     }
 
@@ -266,6 +286,10 @@ public class Network implements Serializable {
         return Arrays2.calcSum(edgeWeight, firstNeighborIndex[node], firstNeighborIndex[node + 1]);
     }
 
+    /**
+    * @return totalEdgeWeightPerNode[] - also known as nodeWeight
+    *           - the i'th spot is the sum of the weights of the edges incident on vertex i
+    **/
     public double[] getTotalEdgeWeightPerNode()
     {
         double[] totalEdgeWeightPerNode;
@@ -287,6 +311,10 @@ public class Network implements Serializable {
         return Arrays.copyOfRange(edgeWeight, firstNeighborIndex[node], firstNeighborIndex[node + 1]);
     }
 
+    /**
+    * @return edgeWeightPerNode[][] - a 2D array where the i'th row is a list of
+    *                                   the weights of the edges incident on i
+    **/
     public double[][] getEdgeWeightsPerNode()
     {
         double[][] edgeWeightPerNode;
@@ -645,6 +673,12 @@ public class Network implements Serializable {
         return createSubnetwork(identifyComponents(), 0);
     }
 
+    /**
+    * This method is used by the Louvain algorithm.
+    *
+    * @param Clustering - mapping of each vertex to its cluster
+    * @return reducedNetwork - a new network with |V| = number of clusters
+    **/
     public Network createReducedNetwork(Clustering clustering)
     {
         double[] reducedNetworkEdgeWeight1, reducedNetworkEdgeWeight2;
@@ -673,6 +707,8 @@ public class Network implements Serializable {
             {
                 l = nodePerCluster[i][k];
 
+                // every new vertex represents a community of 1 or more vertices
+                // nodeWeight[v] is the number of nodes, from the original network, represented by this new vertex
                 reducedNetwork.nodeWeight[i] += nodeWeight[l];
 
                 for (m = firstNeighborIndex[l]; m < firstNeighborIndex[l + 1]; m++)
@@ -819,27 +855,29 @@ public class Network implements Serializable {
         return subnetwork;
     }
 
-
+    /**
+     * @return an adjacency matrix
+     **/
     public double[][] getMatrix() {
         
-        int i, j, k;
-        int start, destination;
+        int start, destination, edge;
         double[][] matrix;
 
-        matrix = new double[nNodes][nNodes];
 
-        /*initialize all matrix values to INF*/
+        // initialize matrix
+        matrix = new double[nNodes][nNodes];
         for(start = 0; start < nNodes; start++) {
             for(destination = 0; destination < nNodes; destination++) {
                 matrix[start][destination] = INF;
             }
         }
 
-        for(start = 0; start < nNodes; start++) { // iterate through first neighbor index 
-            /*for all neighboring vertices of i, get the edge weight between them */
-            for (k = firstNeighborIndex[i]; k < firstNeighborIndex[i + 1]; k++) { // get all weights/destination vertex given a start vertex i
-                destination = neighbor[k]; 
-                matrix[start][destination] = edgeWeight[k]; 
+        // update matrix with the appropriate edge weight
+        for(start = 0; start < nNodes; start++) { // iterate through firstNeighborIndex 
+            // given a start vertex, get the incident edge/weight and corresponding destinatinon vertex
+            for (edge = firstNeighborIndex[start]; edge < firstNeighborIndex[start + 1]; edge++) {
+                destination = neighbor[edge]; 
+                matrix[start][destination] = edgeWeight[edge]; 
             }
         }
 

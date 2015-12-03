@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ModularityOptimizer {
-    private static final int INF = 1000000; // TODO delete
 
     /** 
      * The main sequence. TODO
@@ -258,15 +257,17 @@ public class ModularityOptimizer {
         // }
 
         // computes the neighbor array and weight of each half-edge
-        // TODO what is neighbor? note that index i into neighbor and edgeWeight2 is the half-edge i
-        // TODO it seems like neighbor connects a half-edge to a node,but why and how
+        // i'th spot in neighbor is the destination vertex d of the edge between v_c and d,
+        // where v_c is the vertex corresponding to the "chunk" of neighbor that contains i
+        // i'th spot in edgeWeight2 is the weight of the edge indicated in 
         neighbor = new int[nEdges];
         edgeWeight2 = new double[nEdges];
 
         // initialize nNeighbors to 0
         Arrays.fill(nNeighbors, 0);
 
-        // for every input edge, in the order given in the input file
+        // for every edge, in the order given in the input file
+        // initialize 
         for (i = 0; i < nLines; i++) {
 
             j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];

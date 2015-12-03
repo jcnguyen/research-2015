@@ -168,14 +168,19 @@ public class Clustering implements Cloneable, Serializable {
 
         nodePerCluster = new int[nClusters][];
         nNodesPerCluster = getNNodesPerCluster();
-        for (i = 0; i < nClusters; i++) { // initialize the inner arrays
+
+        // initialize the inner arrays
+        for (i = 0; i < nClusters; i++) { 
             nodePerCluster[i] = new int[nNodesPerCluster[i]];
             nNodesPerCluster[i] = 0;
         }
-        for (i = 0; i < nNodes; i++) { // fill out the inner arrays
+        
+        // fill out the inner arrays
+        for (i = 0; i < nNodes; i++) { 
             nodePerCluster[cluster[i]][nNodesPerCluster[cluster[i]]] = i;
             nNodesPerCluster[cluster[i]]++;
         }
+
         return nodePerCluster;
     }
 
@@ -250,8 +255,6 @@ public class Clustering implements Cloneable, Serializable {
 
         // sort the clusters based on the number of nodes
         Arrays.sort(clusterNNodes);
-
-        // TODO
         newCluster = new int[nClusters];
         i = 0;
         do {
@@ -268,9 +271,9 @@ public class Clustering implements Cloneable, Serializable {
     }
 
     /**
-     * Merges a clustering to this clustering.
+     * Update this clustering according to a new, passed-in clustering.
      *
-     * @param clustering  the clustering to merge with this clustering
+     * @param clustering  the clustering to copy
      **/
     public void mergeClusters(Clustering clustering) {
         int i;

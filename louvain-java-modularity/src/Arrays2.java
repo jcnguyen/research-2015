@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Auxillary methods to an array.
+ * Auxiliary methods to an array.
  **/
 public class Arrays2 {
 

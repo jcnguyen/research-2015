@@ -1,0 +1,37 @@
+firstNeighborIndex
+	-a protected int array
+	- length nNodes + 1
+	- firstNeighborIndex[i]-firstNeighborValue[i-1] = nNeighbors[i-1]
+	- value of last spot of array is |E|, nEdges
+	- the range firstNeighborIndex[i] to firstNeighborValue[i-1] allows you to index into neighbor. This range exactly corresponds to one of the sections that is chunked by vertex. That's why when you iterate from neighbor[firstNeighborValue[i]] to neighbr[firstNeighborValue[i-1]], you're looking at all the edges with start vertex i.
+
+neighbor
+	- a protected int array 
+	- length nEdges
+    - i'th spot in neighbor is the destination vertex d of the edge between v_c and d, where v_c is the vertex corresponding to the "chunk" of neighbor that contains i
+	- chunked by start vertex
+
+edgeWeight
+	- protected double array
+	- length nEdges
+	- the i'th spot is the weight of the edge at neighbor[i]
+	- edgeWeight2 and neighbor correspond to each other
+
+nNeighbors
+	- int array
+	- length nNodes
+	- i'th place is the number of neighbors that node i has
+
+edgeWeight1
+	- edge weights from reading in the input file
+
+nodeWeight
+	- int array
+	- length |V|
+	- in the original graph, for vertex i, it begans as the sum of the weights of the edges incident on i
+	- in subsequent graphs, after we've created reduced graphs,
+	nodeWeight[v] corresponds to the number of vertices from the original graph contained within new vertex v
+
+firstNeighborIndex and neighbor together are exactly an adjacency list
+
+node1 and node2 are int arrays that store the input from the graph input file. For some edge e, node1[e] stores the start vertex, and node2[e] stores the destination vertex. It is enforced that start vertex < destination vertex.
