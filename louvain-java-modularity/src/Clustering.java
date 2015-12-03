@@ -168,14 +168,19 @@ public class Clustering implements Cloneable, Serializable {
 
         nodePerCluster = new int[nClusters][];
         nNodesPerCluster = getNNodesPerCluster();
-        for (i = 0; i < nClusters; i++) { // initialize the inner arrays
+
+        // initialize the inner arrays
+        for (i = 0; i < nClusters; i++) { 
             nodePerCluster[i] = new int[nNodesPerCluster[i]];
             nNodesPerCluster[i] = 0;
         }
-        for (i = 0; i < nNodes; i++) { // fill out the inner arrays
+        
+        // fill out the inner arrays
+        for (i = 0; i < nNodes; i++) { 
             nodePerCluster[cluster[i]][nNodesPerCluster[cluster[i]]] = i;
             nNodesPerCluster[cluster[i]]++;
         }
+
         return nodePerCluster;
     }
 

@@ -257,8 +257,9 @@ public class ModularityOptimizer {
         // }
 
         // computes the neighbor array and weight of each half-edge
-        // TODO what is neighbor? note that index i into neighbor and edgeWeight2 is the half-edge i
-        // TODO it seems like neighbor connects a half-edge to a node,but why and how
+        // i'th spot in neighbor is the destination vertex d of the edge between v_c and d,
+        // where v_c is the vertex corresponding to the "chunk" of neighbor that contains i
+        // i'th spot in edgeWeight2 is the weight of the edge indicated in 
         neighbor = new int[nEdges];
         edgeWeight2 = new double[nEdges];
 

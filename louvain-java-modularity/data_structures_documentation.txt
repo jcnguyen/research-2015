@@ -8,7 +8,7 @@ firstNeighborIndex
 neighbor
 	- a protected int array 
 	- length nEdges
-	- i'th spot is the destination vertex d of the edge between v_i and d
+    - i'th spot in neighbor is the destination vertex d of the edge between v_c and d, where v_c is the vertex corresponding to the "chunk" of neighbor that contains i
 	- chunked by start vertex
 
 edgeWeight
@@ -25,5 +25,11 @@ nNeighbors
 edgeWeight1
 	- edge weights from reading in the input file
 
+nodeWeight
+	- int array
+	- length |V|
+	- either manually set or, for vertex i, is the sum of the weights of the edges incident on i
 
-node1 and node2 are int arrays that store the input from the graph input fule. For some edge e, node1[e] stores the start vertex, and node2[e] stores the destination vertex. It is enforced that start vertex < destination vertex.
+firstNeighborIndex and neighbor together are exactly an adjacency list
+
+node1 and node2 are int arrays that store the input from the graph input file. For some edge e, node1[e] stores the start vertex, and node2[e] stores the destination vertex. It is enforced that start vertex < destination vertex.

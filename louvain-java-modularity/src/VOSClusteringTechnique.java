@@ -7,7 +7,7 @@
  */
 
 /*
- * APSH contributed by Aakash Hasija
+ * APSP contributed by Aakash Hasija
  * at geeksforgeeks.org
  */
 
@@ -146,7 +146,7 @@ public class VOSClusteringTechnique
 
     /**
      * 
-     * Finds what partition of nodes maximizes the modularity, buts nodes
+     * Finds what partition of nodes maximizes the modularity, puts nodes
      * in those clusters
      *
      * @param random - a random num generator 
