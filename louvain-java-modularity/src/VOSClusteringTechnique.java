@@ -150,6 +150,123 @@ public class VOSClusteringTechnique {
     }
 
 
+
+
+    /**
+     * 
+     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     */
+    public double calcSilhouetteFunction()
+    {
+        int i, j, k, c, n, nodeK;
+        int nNodes = network.nNodes;
+        int numCommunities = clustering.nClusters;
+        int[] numNodesInCluster = clustering.getNNodesPerCluster();
+        int[][] nodesInCluster = clustering.getNodesPerCluster();
+
+        double[][] adjMatrix = network.getMatrix();
+        double[][] shortestPath = floydWarshall(adjMatrix, nNodes);
+
+        double averageInnderDistance;
+        double currentDistance = 0;
+        double sizeOfCommunityN;
+        double minOfAverageOutsideDistance;
+        double maxOfDistances;
+        double communitySilhouette;
+        double globalSilhouetteIndex = 0;
+
+        double[] allCommunitySilhouettes = new double[numCommunities-1];
+
+
+        //for every community
+        for (c=0; c<numCommunities;c++) {
+            
+            sizeOfCommunity = numNodesInCluster[c];
+
+            // stores the silhouette for each vertex in this community
+            double[] silhouetteWidth = new double[sizeOfCommunity];
+
+            //for every node in community c
+            for(i=0;i<sizeOfCommunity;i++) {
+
+                averageInnerDistance = 0.0;
+
+                //find avg of shortest distance between v_i and every other vertex in same community
+                if (sizeOfCommunity == 1) { //singleton
+                    averageInnerDistance = 1.0;
+                } 
+                else {
+                    for (k=0; k<numNodesInCluster;k++) {
+                        nodeK = nodesInCluster[c][k];
+                        if (i != nodeK) {
+                            averageInnerDistance += shortestPath[i][nodeK];
+                        }
+                    }
+                    averageInnerDistance = averageInnerDistance/(sizeOfCommunity-1);
+                } 
+
+
+                // at index c, stores average distance between vertex i and all vertices in c
+                double[] distanceOptions = new double[sizeOfCommunity];
+                distanceOptions[c] = 0;
+
+                // finds distance between v_i and every vertex in different community
+                for (n = 0; n<numCommunities; n++) {
+                    currentDistance = 0;
+
+                    // for every other community
+                    if (n != c) {
+                        sizeofCommunityN = numNodesInCluster[n];
+
+                        for (k=0;k<sizeOfCommunityN; k++) {
+                            nodeK = nodesInCluster[n][k];
+                            currentDistance += shortestPath[i][nodeK];
+                        }
+                        currentDistance = currentDistance/(sizeOfCommunityN -1);
+                        distanceOptions[n] = currentDistance;
+                    }
+                }
+
+                // get the min of all the average distances
+                Arrays.sort(distanceOptions);
+                minOfAverageOutsideDistance = distanceOptions[0];
+
+                // get the max between the average distance within and
+                // min average distance
+                if (averageInnerDistance > minOfAverageOutsideDistance) {
+                    maxOfDistances = averageInnerDistance;
+                }
+                else {
+                    maxOfDistances = minOfAverageOutsideDistance;
+                }
+
+                silhouetteWidth[i] = ((minOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances); 
+            }
+
+            // calculate the silhouette width for the entire community
+            communitySilhouette = 0;
+            for (k=0;k<sizeOfCommunity;k++) {
+                communitySilhouette += silhouetteWidth[k];
+            }
+
+            allCommunitySilhouettes[c] = communitySilhouette/sizeOfCommunity;
+        }
+
+        // get the silhouette of entire graph
+        for (k=0;k<numCommunities;k++) {
+            globalSilhouetteIndex += allCommunitySilhouettes[k];
+        }
+
+        return globalSilhouetteIndex/numCommunities;
+    }
+
+
+
+
+
+
+
+
     /**
      * 
      * @return runs the local moving algorithm, with new random num generator as input
