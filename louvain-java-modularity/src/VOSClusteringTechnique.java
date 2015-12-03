@@ -10,20 +10,36 @@ import java.util.Random;
 
 public class VOSClusteringTechnique
 {
+
+/*
+ * APSP contributed by Aakash Hasija
+ * at geeksforgeeks.org
+ */
+
+import java.util.Random;
+
+public class VOSClusteringTechnique {
+    private static final double INF = Double.POSITIVE_INFINITY;
+
+    // the network and its communities
     protected Network network;
     protected Clustering clustering;
     protected double resolution;
 
     /**
-     * 
+     * This constructor is called where every vertex is in its own cluster.
+     *
      * @param network - object representation of graph
      * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
      */
     public VOSClusteringTechnique(Network network, double resolution)
     {
         this.network = network;
+
+        // on initialization, every node is in its own community
         clustering = new Clustering(network.nNodes);
         clustering.initSingletonClusters();
+
         this.resolution = resolution;
     }
 
@@ -95,6 +111,8 @@ public class VOSClusteringTechnique
     }
 
     /**
+     * Only called by Modularity Optimizer, to calculate the modularity of the final
+     * community groupings.
      * 
      * @return qualityFunction - calculating the metric (modularity in this case) for the graph
      */
@@ -118,51 +136,18 @@ public class VOSClusteringTechnique
 
         /*each element of clusterWeight stores the total weight of the nodes in that cluster*/
         clusterWeight = new double[clustering.nClusters];
-        for (i = 0; i < network.nNodes; i++)
+        for (i = 0; i < network.nNodes; i++) {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+        }
         /*subtract square of total weights of nodes in each cluser from the quality function*/
-        for (i = 0; i < clustering.nClusters; i++)
+        for (i = 0; i < clustering.nClusters; i++) {
             qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
+        }
 
         qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
 
         return qualityFunction;
     }
-
-    
-        /**
-     * 
-     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
-     */
-    public double calcSilhouetteFunction()
-    {
-        int i, j, k, c;
-        int nNodes = network.nNodes;
-        int[] numNodesInCluster = clustering.getNNodesPerCluster()
-
-        //for every community
-        for (c=0; c<clustering.nClusters;c++) {
-            
-            sizeOfCommunity = numNodesInCluster[c];
-            //for every node in community c
-            for(i=0;i<sizeOfCommunity;i++) {
-                double averageInnerDistance = 0.0;
-
-                //find avg of shortest distance between v_i and every other vertex in same community
-                if (sizeOfCommunity == 1) { //singleton
-                    averageInnerDistance = 1.0;
-                } 
-                else {
-                    for (k=0; k<)
-                } 
-            }
-        }
-
-
-
-        return ;
-    }
-
 
 
     /**
@@ -176,8 +161,11 @@ public class VOSClusteringTechnique
 
     /**
      * 
-     * Finds what partition of nodes maximizes the modularity, buts nodes
-     * in those clusters
+     * Finds what partition of nodes maximizes the modularity, puts nodes
+     * in those clusters.
+     *
+     * Note that while this method only returns a boolean, its work is saved in 
+     * the instance variable clustering.
      *
      * @param random - a random num generator 
      * @return whether or not we updated what nodes are in what communties 
@@ -243,7 +231,7 @@ public class VOSClusteringTechnique
             }
 
             /*remove j from its cluster. update number nodes in cluster and
-            see if cluser became empty, update*/
+            see if cluster became empty, update*/
             clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
             nNodesPerCluster[clustering.cluster[j]]--;
             if (nNodesPerCluster[clustering.cluster[j]] == 0)
@@ -302,8 +290,9 @@ public class VOSClusteringTechnique
                 newCluster[i] = clustering.nClusters;
                 clustering.nClusters++;
             }
-        for (i = 0; i < network.nNodes; i++)
+        for (i = 0; i < network.nNodes; i++) {
             clustering.cluster[i] = newCluster[clustering.cluster[i]];
+        }
 
         return update;
     }
@@ -325,6 +314,12 @@ public class VOSClusteringTechnique
     public boolean runLouvainAlgorithm(Random random)
     {
         boolean update, update2;
+        
+        /* TODO: why is this code allowed to name the variable the same as the type?
+        * this is super confusing...made me think that in the lines below, we were
+        * doing recursion! But actually, we're just calling it on this stupidly named
+        * variable. How does Java even allow this?
+        */
         VOSClusteringTechnique VOSClusteringTechnique;
 
         /*no update if only one node*/
@@ -345,6 +340,7 @@ public class VOSClusteringTechnique
             {
                 update = true;
 
+                // updates our clustering such that we can run this iterative loop
                 clustering.mergeClusters(VOSClusteringTechnique.clustering);
             }
         }
