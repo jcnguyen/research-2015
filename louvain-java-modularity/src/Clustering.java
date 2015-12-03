@@ -255,8 +255,6 @@ public class Clustering implements Cloneable, Serializable {
 
         // sort the clusters based on the number of nodes
         Arrays.sort(clusterNNodes);
-
-        // TODO
         newCluster = new int[nClusters];
         i = 0;
         do {
