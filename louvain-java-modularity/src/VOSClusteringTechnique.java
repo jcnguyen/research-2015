@@ -159,6 +159,7 @@ public class VOSClusteringTechnique {
                 nUnusedClusters++;
             }
 
+        // array of nodes in a random order
         nodePermutation = Arrays2.generateRandomPermutation(network.nNodes, random);
 
         edgeWeightPerCluster = new double[network.nNodes];
@@ -173,7 +174,8 @@ public class VOSClusteringTechnique {
             j = nodePermutation[i]; /*start with some node*/
 
             nNeighboringClusters = 0;
-            /*for each neighboring node, find the cluster of that node, 
+
+            /* for each neighboring node of j, find the cluster of that node, 
             find the number of neighboring clusters, find total edge weight for each neighbor cluster */
             for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++)
             {
@@ -187,7 +189,7 @@ public class VOSClusteringTechnique {
             }
 
             /*remove j from its cluster. update number nodes in cluster and
-            see if cluster became empty, update*/
+            if the cluster became empty, add it to unusedClusters */
             clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
             nNodesPerCluster[clustering.cluster[j]]--;
             if (nNodesPerCluster[clustering.cluster[j]] == 0)
@@ -196,23 +198,33 @@ public class VOSClusteringTechnique {
                 nUnusedClusters++;
             }
 
+            // prepare to simulate adding j to each neighboring cluster
             bestCluster = -1;
             maxQualityFunction = 0;
 
             /*simulate adding j to each neighboring cluster, 
             see if any of these give a better quality function, 
             find one that gives the best quality function that j should go in*/
-            for (k = 0; k < nNeighboringClusters; k++)
-            {
+            for (k = 0; k < nNeighboringClusters; k++) {
+
+                // target cluster
                 l = neighboringCluster[k];
+
+                // calculate modularity change
                 qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
-                if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster)))
-                {
+                
+                // if we've found a better cluster, or if we have found an equivalent cluster
+                // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
+                if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
                     bestCluster = l;
                     maxQualityFunction = qualityFunction;
                 }
+
+                // TODO: why?
                 edgeWeightPerCluster[l] = 0;
             }
+
+            // TODO: if no improvement, why do we mess with unused clusters?
             if (maxQualityFunction == 0)
             {
                 bestCluster = unusedCluster[nUnusedClusters - 1];
@@ -222,6 +234,7 @@ public class VOSClusteringTechnique {
             /*add j into the best cluster it should be in*/
             clusterWeight[bestCluster] += network.nodeWeight[j];
             nNodesPerCluster[bestCluster]++;
+
             /*if it ends up in original cluster, update stable nodes*/
             if (bestCluster == clustering.cluster[j]) 
                 nStableNodes++;
@@ -232,6 +245,8 @@ public class VOSClusteringTechnique {
                 update = true;
             }
 
+            // iterate through all the nodes in our randomly determined order
+            // if we reach the end, start over again at the beginning (node 0)
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
         }
         while (nStableNodes < network.nNodes);
@@ -271,11 +286,6 @@ public class VOSClusteringTechnique {
     {
         boolean update, update2;
         
-        /* TODO: why is this code allowed to name the variable the same as the type?
-        * this is super confusing...made me think that in the lines below, we were
-        * doing recursion! But actually, we're just calling it on this stupidly named
-        * variable. How does Java even allow this?
-        */
         VOSClusteringTechnique VOSClusteringTechnique;
 
         /*no update if only one node*/
@@ -296,7 +306,7 @@ public class VOSClusteringTechnique {
             {
                 update = true;
 
-                // updates our clustering such that we can run this iterative loop
+                // updates this instance's clustering such that we can run this iterative loop
                 clustering.mergeClusters(VOSClusteringTechnique.clustering);
             }
         }
@@ -548,8 +558,8 @@ public class VOSClusteringTechnique {
      * 
      * @return qualityFunction - calculating the metric (modularity in this case) for the graph
      */
-    // public double calcQualityFunction()
-    public double calcSilhouetteFunction()
+
+    public double calcModularityFunction() 
     {
         double qualityFunction;
         double[] clusterWeight;
