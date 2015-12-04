@@ -590,6 +590,7 @@ public class VOSClusteringTechnique {
      * 
      * @return qualityFunction - calculating the metric (modularity in this case) for the graph
      */
+    // TODO
     // public double calcSilhouetteFunction()
     public double calcQualityFunction()
     {
@@ -614,6 +615,11 @@ public class VOSClusteringTechnique {
 
         double[] allCommunitySilhouettes = new double[numCommunities];
 
+        // TODO delete
+        for (int jj = 0; jj < numNodesInCluster.length; jj++) {
+            System.out.println("index: " + jj + " " + numNodesInCluster[jj] + " ");
+        }
+
         //for every community
         for (c = 0; c < numCommunities; c++) {
             
@@ -628,10 +634,11 @@ public class VOSClusteringTechnique {
                 averageInnerDistance = 0.0;
 
                 //find avg of shortest distance between v_i and every other vertex in same community
+                // System.out.println("sizeOfCommunity: " + sizeOfCommunity); // TODO delete
                 if (sizeOfCommunity == 1) { //singleton
                     averageInnerDistance = 1.0;
                 }  else {
-                    for (k=0; k<sizeOfCommunity;k++) {
+                    for (k = 0; k < sizeOfCommunity; k++) { // all node in community
                         nodeK = nodesInCluster[c][k];
                         if (i != nodeK) {
                             averageInnerDistance += shortestPath[i][nodeK];
@@ -640,12 +647,11 @@ public class VOSClusteringTechnique {
                     averageInnerDistance = averageInnerDistance/(sizeOfCommunity-1);
                 } 
 
+                // System.out.println("avgInnerDistance: " + silhouetteWidth[i]); // TODO delete
 
-                // at index c, stores average distance between vertex i and all vertices in c
+                // finds distance between vertex i and every vertex in different community
                 double[] distanceOptions = new double[sizeOfCommunity];
                 distanceOptions[c] = 0;
-
-                // finds distance between v_i and every vertex in different community
                 for (n = 0; n < numCommunities; n++) {
                     currentDistance = 0;
 
@@ -653,11 +659,11 @@ public class VOSClusteringTechnique {
                     if (n != c) {
                         sizeOfCommunityN = numNodesInCluster[n];
 
-                        for (k=0;k<sizeOfCommunityN; k++) {
+                        for (k = 0; k < sizeOfCommunityN; k++) {
                             nodeK = nodesInCluster[n][k];
                             currentDistance += shortestPath[i][nodeK];
                         }
-                        currentDistance = currentDistance/(sizeOfCommunityN -1);
+                        currentDistance = currentDistance/(sizeOfCommunityN);
                         distanceOptions[n] = currentDistance;
                     }
                 }
@@ -670,12 +676,12 @@ public class VOSClusteringTechnique {
                 // min average distance
                 if (averageInnerDistance > minOfAverageOutsideDistance) {
                     maxOfDistances = averageInnerDistance;
-                }
-                else {
+                } else {
                     maxOfDistances = minOfAverageOutsideDistance;
                 }
 
                 silhouetteWidth[i] = ((minOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances); 
+                // System.out.println("SI at " + i + ": " + silhouetteWidth[i]); TOOD delete
             }
 
             // calculate the silhouette width for the entire community
