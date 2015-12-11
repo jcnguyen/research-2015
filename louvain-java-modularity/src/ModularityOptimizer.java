@@ -117,7 +117,14 @@ public class ModularityOptimizer {
                     VOSClusteringTechnique.runSmartLocalMovingAlgorithm(random);
                 j++;
 
-                modularity = VOSClusteringTechnique.calcQualityFunction();
+                // TODO METRIC STUFF HERE
+                if (modularityFunction <=2) {
+                    modularity = VOSClusteringTechnique.calcQualityFunction();
+                } else if (modularityFunction == 3) {// silhouette index
+                    modularity = VOSClusteringTechnique.calcSilhouetteFunction();
+                } else { // default
+                    modularity = VOSClusteringTechnique.calcQualityFunction();
+                }
 
                 if (printOutput && (nIterations > 1))
                     System.out.format("\t1Modularity: %.4f%n", modularity);

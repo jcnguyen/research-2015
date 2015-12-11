@@ -131,7 +131,6 @@ public class VOSClusteringTechnique {
         boolean update;
         double maxQualityFunction, qualityFunction;
         double[] clusterWeight, edgeWeightPerCluster;
-        double[][] shortestPath;
         int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
@@ -167,17 +166,11 @@ public class VOSClusteringTechnique {
         nStableNodes = 0;
         i = 0;
 
-        // TODO comment: note that we do matrix/shortest paths here
-        double[][] adjMatrix = network.getMatrix();
-        shortestPath = floydWarshall(adjMatrix, network.nNodes);
-
-
         /*stay in loop until a local optimal modularity value is moved, 
         moving any node would not increase it*/
         do
         {
             j = nodePermutation[i]; /*start with some node*/
-            // TODO call SI on current clustering with j in current position
 
             nNeighboringClusters = 0;
             /*for each neighboring node, find the cluster of that node, 
@@ -211,10 +204,6 @@ public class VOSClusteringTechnique {
             find one that gives the best quality function that j should go in*/
             for (k = 0; k < nNeighboringClusters; k++)
             {
-                // TODO figure out what variables to change to accurately simulate adding j into cluster k
-                // TODO find the new SI
-                // TODO compage new and old SI. If new is greater, than that is the best cluster, update the current best SI
-                // TODO somehow make sure to undo the variable stuff of adding j to cluster k
                 l = neighboringCluster[k];
                 qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster)))
@@ -348,9 +337,11 @@ public class VOSClusteringTechnique {
 
                 // TODO METRIC STUFF HERE
                 if (modularityFunction <= 2) { // modularity
-                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
                 } else if (modularityFunction == 3) { // silhouette index
-                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
+                } else { // default
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
                 }
 
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
@@ -726,6 +717,10 @@ public class VOSClusteringTechnique {
     /***********************************************************************
      * SILHOUETTE INDEX
      ***********************************************************************/
+
+    public double calcSilhouetteFunction() {
+        return calcSilhouetteFunction(floydWarshall(network.getMatrix(), network.nNodes));
+    }
 
     /**
      * 
