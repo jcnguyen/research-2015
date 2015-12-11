@@ -19,10 +19,8 @@ Running
 3. Change the directory to the src directory of the Louvain Method Java code. 
    $ cd ../research-2015/louvain-java-modularity/src
    where ".." is the path to the research folder.
-
-4. To compile, run the following in the command line:
+4. To compile,
    $ javac ModularityOptimizer.java
-
 5. To run, 
    $ java ModularityOptimizer input output metric resolution algorithm n_random_starts n_iterations random_seed print
 
@@ -46,7 +44,6 @@ random_seed      Seed of the random number generator
 print            Whether or not to print output to the console 
                    0 = no
                    1 = yes
-
 
 Test Run
 ----------
