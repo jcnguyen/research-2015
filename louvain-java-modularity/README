@@ -1,0 +1,27 @@
+http://www.ludowaltman.nl/slm/
+
+Download
+----------
+github
+test cases
+
+Running
+----------
+(ON COMMAND LINE)
+To compile, cd into the src folder and run: javac ModularityOptimizer.java
+
+To run, 
+java ModularityOptimizer input output metric resolution algorithm n_random_starts n_iterations random_seed print
+
+
+input            Name of the input file
+output           Name of the output file
+metric           Metric (1 = standard modularity; 2 = alternative modularity; )
+resolution       Value of the resolution parameter
+algorithm        Algorithm for modularity optimization (1 = original Louvain algorithm; 2 = Louvain algorithm with multilevel refinement; 3 = SLM algorithm)
+n_random_starts  Number of random starts
+n_iterations     Number of iterations per random start
+random_seed      Seed of the random number generator
+print            Whether or not to print output to the console (0 = no; 1 = yes)
+
+run: java ModularityOptimizer ../karate.pairs ../karate.output 1 1.0 1 10 10 0 1
