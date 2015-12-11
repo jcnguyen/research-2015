@@ -205,7 +205,7 @@ public class VOSClusteringTechnique {
             for (k = 0; k < nNeighboringClusters; k++)
             {
                 l = neighboringCluster[k];
-                qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
+                qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster)))
                 {
                     bestCluster = l;
