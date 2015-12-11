@@ -272,6 +272,8 @@ public class VOSClusteringTechnique {
         int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
+        int maxSI, originalSI;
+
         /*don't need to run alg if only 1 node*/ 
         if (network.nNodes == 1)
             return false;
@@ -310,7 +312,11 @@ public class VOSClusteringTechnique {
         moving any node would not increase it*/
         do {
             j = nodePermutation[i]; /*start with some node*/
-            // TODO call SI on current clustering with j in current position
+           
+            // TODO call SI on current clustering with j in current position,
+            // save the original SI to usee for comparison at end
+            maxSI = calcSilhouetteFunction(shortestPath);
+            originalSI = maxSI;
 
             nNeighboringClusters = 0;
             /*for each neighboring node, find the cluster of that node, 
@@ -334,7 +340,10 @@ public class VOSClusteringTechnique {
             }
 
             bestCluster = -1;
-            maxQualityFunction = 0;
+            //maxQualityFunction = 0;
+
+            // save the original cluster of j??
+            int originalCuster = clustering.cluster[j];
 
             /*simulate adding j to each neighboring cluster, 
             see if any of these give a better quality function, 
@@ -346,23 +355,35 @@ public class VOSClusteringTechnique {
                 // TODO somehow make sure to undo the variable stuff of adding j to cluster k
                 l = neighboringCluster[k];
 
-                // TODO METRIC STUFF HERE
-                if (modularityFunction <= 2) { // modularity
-                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
-                } else if (modularityFunction == 3) { // silhouette index
-                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
-                }
+                // move j into cluster l (TODO: is l the same index here as for cluster?? )
+                clustering.setCluster(j, l);
 
-                if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
+                // TODO METRIC STUFF HERE
+               // if (modularityFunction <= 2) { // modularity
+                 //   qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                //} else if (modularityFunction == 3) { // silhouette index
+                  //  qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                //}
+
+                qualityFunction = calcSilhouetteFunction(shortestPath);
+
+                if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && (l < bestCluster))) {
                     bestCluster = l;
-                    maxQualityFunction = qualityFunction;
+                    maxSI = qualityFunction;
                 }
                 edgeWeightPerCluster[l] = 0;
             }
-            if (maxQualityFunction == 0) {  // TODO if best cluster is original, do something 
-                bestCluster = unusedCluster[nUnusedClusters - 1];
+            if (maxSI == originalSI) {  // TODO if best cluster is original, do something 
+                bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster??
                 nUnusedClusters--;
+
+                // move j back to original cluster
+                clustering.setCluster(j, originalCluster);
+
             }
+
+            // TODO what exactly do we need to do for this with updating clustering
+            // put j into best cluster in clustering:
 
             /*add j into the best cluster it should be in*/
             clusterWeight[bestCluster] += network.nodeWeight[j];
@@ -374,6 +395,9 @@ public class VOSClusteringTechnique {
                 clustering.cluster[j] = bestCluster;
                 nStableNodes = 1;
                 update = true;
+
+                // TODO : put k into this new cluster
+                clustering.setCluster(j, bestCluster);
             }
 
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
@@ -806,8 +830,7 @@ public class VOSClusteringTechnique {
                 }
 
                 // get the min of all the average distances
-                Arrays.sort(distanceOptions);
-                minOfAverageOutsideDistance = distanceOptions[0];
+                minOfAverageOutsideDistance = Arrays2.calcMinimum(distanceOptions);
 
                 // get the max between the average distance within and
                 // min average distance
