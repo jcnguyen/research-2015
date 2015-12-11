@@ -216,6 +216,7 @@ public class VOSClusteringTechnique {
                 // if we've found a better cluster, or if we have found an equivalent cluster
                 // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
+
                     bestCluster = l;
                     maxQualityFunction = qualityFunction;
                 }
@@ -226,6 +227,7 @@ public class VOSClusteringTechnique {
 
             // TODO: if no improvement, why do we mess with unused clusters?
             if (maxQualityFunction == 0)
+
             {
                 bestCluster = unusedCluster[nUnusedClusters - 1];
                 nUnusedClusters--;
@@ -268,13 +270,177 @@ public class VOSClusteringTechnique {
         return update;
     }
 
+    public boolean runLocalMovingAlgorithm2(Random random, int modularityFunction) {
+        boolean update;
+        double maxQualityFunction, qualityFunction;
+        double[] clusterWeight, edgeWeightPerCluster;
+        double[][] adjMatrix, shortestPath;
+        int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
+        int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
+
+        int maxSI, originalSI;
+
+        /*don't need to run alg if only 1 node*/ 
+        if (network.nNodes == 1)
+            return false;
+
+        update = false;
+
+        clusterWeight = new double[network.nNodes]; /*elements contain the total node weights of everything in that cluster*/
+        nNodesPerCluster = new int[network.nNodes]; /*elements contain num nodes in that cluster*/
+        for (i = 0; i < network.nNodes; i++) {
+            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+            nNodesPerCluster[clustering.cluster[i]]++;
+        }
+
+        /*keep track of the num clusters with no nodes in them,
+         as well as what clusters these are*/
+        nUnusedClusters = 0;
+        unusedCluster = new int[network.nNodes];
+        for (i = 0; i < network.nNodes; i++)
+            if (nNodesPerCluster[i] == 0) {
+                unusedCluster[nUnusedClusters] = i;
+                nUnusedClusters++;
+            }
+
+        nodePermutation = Arrays2.generateRandomPermutation(network.nNodes, random);
+
+        edgeWeightPerCluster = new double[network.nNodes];
+        neighboringCluster = new int[network.nNodes - 1];
+        nStableNodes = 0;
+        i = 0;
+
+        // TODO comment: note that we do matrix/shortest paths here
+        adjMatrix = network.getMatrix();
+        shortestPath = floydWarshall(adjMatrix, network.nNodes);
+
+        /*stay in loop until a local optimal modularity value is moved, 
+        moving any node would not increase it*/
+        do {
+            j = nodePermutation[i]; /*start with some node*/
+           
+            // TODO call SI on current clustering with j in current position,
+            // save the original SI to usee for comparison at end
+            maxSI = calcSilhouetteFunction(shortestPath);
+            originalSI = maxSI;
+
+            nNeighboringClusters = 0;
+            /*for each neighboring node, find the cluster of that node, 
+            find the number of neighboring clusters, find total edge weight for each neighbor cluster */
+            for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++) {
+                l = clustering.cluster[network.neighbor[k]];
+                if (edgeWeightPerCluster[l] == 0) {
+                    neighboringCluster[nNeighboringClusters] = l;
+                    nNeighboringClusters++;
+                }
+                edgeWeightPerCluster[l] += network.edgeWeight[k];
+            }
+
+            /*remove j from its cluster. update number nodes in cluster and
+            see if cluster became empty, update*/
+            clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
+            nNodesPerCluster[clustering.cluster[j]]--;
+            if (nNodesPerCluster[clustering.cluster[j]] == 0) {
+                unusedCluster[nUnusedClusters] = clustering.cluster[j];
+                nUnusedClusters++;
+            }
+
+            bestCluster = -1;
+            //maxQualityFunction = 0;
+
+            // save the original cluster of j??
+            int originalCuster = clustering.cluster[j];
+
+            /*simulate adding j to each neighboring cluster, 
+            see if any of these give a better quality function, 
+            find one that gives the best quality function that j should go in*/
+            for (k = 0; k < nNeighboringClusters; k++) {
+                // TODO figure out what variables to change to accurately simulate adding j into cluster k
+                // TODO find the new SI
+                // TODO compage new and old SI. If new is greater, than that is the best cluster, update the current best SI
+                // TODO somehow make sure to undo the variable stuff of adding j to cluster k
+                l = neighboringCluster[k];
+
+                // move j into cluster l (TODO: is l the same index here as for cluster?? )
+                clustering.setCluster(j, l);
+
+                // TODO METRIC STUFF HERE
+               // if (modularityFunction <= 2) { // modularity
+                 //   qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                //} else if (modularityFunction == 3) { // silhouette index
+                  //  qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                //}
+
+                qualityFunction = calcSilhouetteFunction(shortestPath);
+                if (modularityFunction <= 2) { // modularity
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
+                } else if (modularityFunction == 3) { // silhouette index
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
+                } else { // default
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
+                }
+
+                if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && (l < bestCluster))) {
+                    bestCluster = l;
+                    maxSI = qualityFunction;
+                }
+                edgeWeightPerCluster[l] = 0;
+            }
+            if (maxSI == originalSI) {  // TODO if best cluster is original, do something 
+                bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster??
+                nUnusedClusters--;
+
+                // move j back to original cluster
+                clustering.setCluster(j, originalCluster);
+
+            }
+
+            // TODO what exactly do we need to do for this with updating clustering
+            // put j into best cluster in clustering:
+
+            /*add j into the best cluster it should be in*/
+            clusterWeight[bestCluster] += network.nodeWeight[j];
+            nNodesPerCluster[bestCluster]++;
+            /*if it ends up in original cluster, update stable nodes*/
+            if (bestCluster == clustering.cluster[j]) 
+                nStableNodes++;
+            else { /*j was moved to a new cluster that is better*/
+                clustering.cluster[j] = bestCluster;
+                nStableNodes = 1;
+                update = true;
+
+                // TODO : put k into this new cluster
+                clustering.setCluster(j, bestCluster);
+            }
+
+            i = (i < network.nNodes - 1) ? (i + 1) : 0;
+        }
+        while (nStableNodes < network.nNodes);
+
+        /*update nunmber of clusters that exist now, and
+        what nodes are in what cluster*/
+        newCluster = new int[network.nNodes];
+        clustering.nClusters = 0;
+        for (i = 0; i < network.nNodes; i++)
+            if (nNodesPerCluster[i] > 0) {
+                newCluster[i] = clustering.nClusters;
+                clustering.nClusters++;
+            }
+        for (i = 0; i < network.nNodes; i++) {
+            clustering.cluster[i] = newCluster[clustering.cluster[i]];
+        }
+
+        return update;
+    }
+
+
     /**
      *
      * @return running Louvain Algorithm with new random num generator as param
      */
-    public boolean runLouvainAlgorithm()
+    public boolean runLouvainAlgorithm(int modularityFunction)
     {
-        return runLouvainAlgorithm(new Random());
+        return runLouvainAlgorithm(new Random(), modularityFunction);
     }
 
     /**
@@ -282,8 +448,7 @@ public class VOSClusteringTechnique {
      * @param random - a random num generator 
      * @return whether or not we updated what nodes are in what communties 
      */
-    public boolean runLouvainAlgorithm(Random random)
-    {
+    public boolean runLouvainAlgorithm(Random random, int modularityFunction) {
         boolean update, update2;
         
         VOSClusteringTechnique VOSClusteringTechnique;
@@ -293,17 +458,15 @@ public class VOSClusteringTechnique {
             return false;
 
         /*see if moving any nodes will increase modularity*/
-        update = runLocalMovingAlgorithm(random);
+        update = runLocalMovingAlgorithm2(random, modularityFunction);
 
-        if (clustering.nClusters < network.nNodes)
-        {
+        if (clustering.nClusters < network.nNodes) {
             VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
 
             /*run louvain again to see if another update*/
-            update2 = VOSClusteringTechnique.runLouvainAlgorithm(random);
+            update2 = VOSClusteringTechnique.runLouvainAlgorithm(random, modularityFunction);
 
-            if (update2)
-            {
+            if (update2) {
                 update = true;
 
                 // updates this instance's clustering such that we can run this iterative loop
@@ -319,9 +482,9 @@ public class VOSClusteringTechnique {
      * @param maxNInterations - max iterations you want to run Louvain
      * @return run the algorithm 
      */
-    public boolean runIteratedLouvainAlgorithm(int maxNIterations)
+    public boolean runIteratedLouvainAlgorithm(int maxNIterations, int modularityFunction)
     {
-        return runIteratedLouvainAlgorithm(maxNIterations, new Random());
+        return runIteratedLouvainAlgorithm(maxNIterations, new Random(), modularityFunction);
     }
 
     /**
@@ -330,7 +493,7 @@ public class VOSClusteringTechnique {
      * @param random - random number generator 
      * @return run the algorithm 
      */
-    public boolean runIteratedLouvainAlgorithm(int maxNIterations, Random random)
+    public boolean runIteratedLouvainAlgorithm(int maxNIterations, Random random, int modularityFunction)
     {
         boolean update;
         int i;
@@ -338,7 +501,7 @@ public class VOSClusteringTechnique {
         i = 0;
         do
         {
-            update = runLouvainAlgorithm(random);
+            update = runLouvainAlgorithm(random, modularityFunction);
             i++;
         }
         while ((i < maxNIterations) && update);
@@ -560,6 +723,7 @@ public class VOSClusteringTechnique {
      */
 
     public double calcModularityFunction() 
+
     {
         double qualityFunction;
         double[] clusterWeight;
@@ -596,23 +760,23 @@ public class VOSClusteringTechnique {
      * SILHOUETTE INDEX
      ***********************************************************************/
 
+    public double calcSilhouetteFunction() {
+        return calcSilhouetteFunction(floydWarshall(network.getMatrix(), network.nNodes));
+    }
+
     /**
      * 
      * @return qualityFunction - calculating the metric (modularity in this case) for the graph
      */
     // TODO
-    // public double calcSilhouetteFunction()
-    public double calcQualityFunction()
+    // public double calcQualityFunction()
+    public double calcSilhouetteFunction(double[][] shortestPath)
     {
         int i, j, k, c, n; // iterators
         int nodeK; // other node
-        int nNodes = network.nNodes;
         int numCommunities = clustering.nClusters;
         int[] numNodesInCluster = clustering.getNNodesPerCluster();
         int[][] nodesInCluster = clustering.getNodesPerCluster();
-
-        double[][] adjMatrix = network.getMatrix();
-        double[][] shortestPath = floydWarshall(adjMatrix, nNodes);
 
         double averageInnerDistance;
         double currentDistance = 0;
@@ -679,8 +843,7 @@ public class VOSClusteringTechnique {
                 }
 
                 // get the min of all the average distances
-                Arrays.sort(distanceOptions);
-                minOfAverageOutsideDistance = distanceOptions[0];
+                minOfAverageOutsideDistance = Arrays2.calcMinimum(distanceOptions);
 
                 // get the max between the average distance within and
                 // min average distance

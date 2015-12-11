@@ -53,10 +53,11 @@ public class ModularityOptimizer {
             randomSeed = Long.parseLong(args[7]);
             printOutput = (Integer.parseInt(args[8]) > 0);
         } else {
+            // TODO change 
             console = System.console();
             inputFileName = console.readLine("Input file name: ");
             outputFileName = console.readLine("Output file name: ");
-            modularityFunction = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): "));
+            modularityFunction = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): ")); 
             resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g., 1.0): "));
             algorithm = Integer.parseInt(console.readLine("Algorithm (1 = Louvain; 2 = Louvain with multilevel refinement; 3 = smart local moving): "));
             nRandomStarts = Integer.parseInt(console.readLine("Number of random starts (e.g., 10): "));
@@ -85,9 +86,8 @@ public class ModularityOptimizer {
         }
 
         // calculate resolution based on modularity function
-        resolution2 = (
-            (modularityFunction == 1) ? (resolution / (2 * 
-                network.getTotalEdgeWeight() + 
+        resolution2 = ((modularityFunction != 2) ? 
+            (resolution / (2 * network.getTotalEdgeWeight() + 
                 network.totalEdgeWeightSelfLinks)) : 
             resolution);
 
@@ -110,14 +110,21 @@ public class ModularityOptimizer {
                     System.out.format("\tIteration: %d%n", j + 1);
 
                 if (algorithm == 1)
-                    update = VOSClusteringTechnique.runLouvainAlgorithm(random);
+                    update = VOSClusteringTechnique.runLouvainAlgorithm(random, modularityFunction);
                 else if (algorithm == 2)
                     update = VOSClusteringTechnique.runLouvainAlgorithmWithMultilevelRefinement(random);
                 else if (algorithm == 3)
                     VOSClusteringTechnique.runSmartLocalMovingAlgorithm(random);
                 j++;
 
-                modularity = VOSClusteringTechnique.calcQualityFunction();
+                // TODO METRIC STUFF HERE
+                if (modularityFunction <=2) {
+                    modularity = VOSClusteringTechnique.calcQualityFunction();
+                } else if (modularityFunction == 3) {// silhouette index
+                    modularity = VOSClusteringTechnique.calcSilhouetteFunction();
+                } else { // default
+                    modularity = VOSClusteringTechnique.calcQualityFunction();
+                }
 
                 if (printOutput && (nIterations > 1))
                     System.out.format("\t1Modularity: %.4f%n", modularity);
@@ -166,6 +173,7 @@ public class ModularityOptimizer {
      * an input file that contains the list of edges.
      *
      * @param  fileName            the input file
+     * // TODO change this param
      * @param  modularityFunction  1 for standard modularity function
      *                             2 for alternative modularity function
      * @throws IOException         occurs if there's an input or output error
@@ -282,7 +290,7 @@ public class ModularityOptimizer {
         }
 
         // construct the network based on the modularity function
-        if (modularityFunction == 1) // standard modularity function
+        if (modularityFunction != 2) // standard modularity function
             network = new Network(
                 nNodes, firstNeighborIndex, neighbor, edgeWeight2);
         else { // alternative modularity function

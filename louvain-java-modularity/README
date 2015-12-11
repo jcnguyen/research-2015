@@ -1,0 +1,66 @@
+Java code for the Louvain method. Original code can be found here:
+http://www.ludowaltman.nl/slm/
+
+For use in our complex network research: 
+http://research.pomona.edu/complexnetworks/
+
+Download
+----------
+The code can be found here: https://github.com/jcnguyen/research-2015
+This documentation is specificallly for running the Java code for the Louvain 
+method, which is found in "\research-2015\louvain-java-modularity".
+
+The test suite can be found in the Box account under "Graphs". 
+
+Running
+----------
+1. Download the code and test suite (see "Download").
+2. Open the command line.
+3. Change the directory to the src directory of the Louvain Method Java code. 
+   $ cd ../research-2015/louvain-java-modularity/src
+   where ".." is the path to the research folder.
+
+4. To compile, run the following in the command line:
+   $ javac ModularityOptimizer.java
+
+5. To run, 
+   $ java ModularityOptimizer input output metric resolution algorithm n_random_starts n_iterations random_seed print
+
+The command line arguments are as follows:
+input            Input file name. Extension should be .pairs for unweighted 
+                   graphs and .wpairs for weighted graphs.
+output           Output file name. Extension should be .graph.
+metric           Metric 
+                   1 = standard modularity
+                   2 = alternative modularity
+                   3 = silhouette index
+                   4 = performance
+resolution       Value of the resolution parameter
+algorithm        Algorithm for modularity optimization 
+                   1 = original Louvain algorithm
+                   2 = Louvain algorithm with multilevel refinement
+                   3 = SLM algorithm
+n_random_starts  Number of random starts
+n_iterations     Number of iterations per random start
+random_seed      Seed of the random number generator
+print            Whether or not to print output to the console 
+                   0 = no
+                   1 = yes
+
+
+Test Run
+----------
+We run the test case using the Louvain method with modularity with the 
+following arguments:
+    input            ../test/test.pairs
+    output           ../output/test.graph
+    metric           1 = standard modularity
+    resolution       1.0
+    algorithm        1 = original Louvain algorithm
+    n_random_starts  10
+    n_iterations     10
+    random_seed      0
+    print            1 = yes
+
+$ javac ModularityOptimizer.java
+$ java ModularityOptimizer ../test/test.pairs ../output/test.graph 1 1.0 1 10 10 0 1
