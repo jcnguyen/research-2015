@@ -2,11 +2,20 @@ http://www.ludowaltman.nl/slm/
 
 Download
 ----------
-github
-test cases
+The code can be found here: https://github.com/jcnguyen/research-2015
+This documentation is specificallly for louvain-java-modularity.
+
+The test suite can be found in the box account under "Graphs". 
 
 Running
 ----------
+1. Download the code and test suite (see "Download").
+2. Open the command line.
+3. Change the directory to the src directory of the Louvain Method Java code. 
+   ../research-2015/louvain-java-modularity/src
+4. 
+
+
 (ON COMMAND LINE)
 To compile, cd into the src folder and run: javac ModularityOptimizer.java
 
@@ -14,8 +23,8 @@ To run,
 java ModularityOptimizer input output metric resolution algorithm n_random_starts n_iterations random_seed print
 
 
-input            Name of the input file
-output           Name of the output file
+input            Input file name
+output           Output file name
 metric           Metric (1 = standard modularity; 2 = alternative modularity; )
 resolution       Value of the resolution parameter
 algorithm        Algorithm for modularity optimization (1 = original Louvain algorithm; 2 = Louvain algorithm with multilevel refinement; 3 = SLM algorithm)
