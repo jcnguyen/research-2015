@@ -59,5 +59,31 @@ following arguments:
     random_seed      0
     print            1 = yes
 
+Input the following in the command line:
 $ javac ModularityOptimizer.java
 $ java ModularityOptimizer ../test/test.pairs ../output/test.graph 1 1.0 1 10 10 0 1
+
+Expected output:
+1. Output file in "\research-2015\louvain-java-modularity\output"
+2. Command line:
+    -------------------------------------
+    Modularity Optimizer
+    Version 1.3.0
+    by Ludo Waltman and Nees Jan van Eck
+    -------------------------------------
+    Reading input file...
+    Finish reading input file.
+
+    Number of nodes: 7
+    Number of edges: 10
+
+    Running Louvain algorithm...
+
+    [...]
+
+    Maximum modularity in 10 random starts: 0.3550
+    Number of communities: 2
+    Elapsed time: 0 seconds
+
+    Writing output file...
+    Finish writing to output file.
