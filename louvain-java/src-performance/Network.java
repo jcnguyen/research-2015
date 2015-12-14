@@ -37,15 +37,16 @@ public class Network implements Serializable {
     protected double totalEdgeWeightSelfLinks;
 
     /** 
-    * The number of possible edges, if every node were connected to every other node
-    * Initialized to constructors to be nNodes*(nNodes + 1)/2 - this.nNodes, based on
-    * the summation 1+2+3+...+n = n(n+1)/2. We subtract nNodes because our summation is
-    * really 1+2+3+...+(n-1).
+    * The number of possible full (NOT HALF!) edges, if every node were connected to every other node
+    * Initialized to constructors to be n(n-1)/2, where n=nNodes.
+    * Recall the summation 1+2+3+...+n = n(n+1)/2. We subtract n because our summation is
+    * really 1+2+3+...+(n-1), giving us n(n+1)/2 - n ==> n(n+1)-2n/2 ==> n(n-1)/2.
     * 
     * TODO: need to update this value anywhere?
     *
     */
     protected int nPossibleEdges;
+    protected int nPossibleEdges_withSL; // self loops included, simply add nNodes
 
     /**
      * Turns a serialized (byte stream) version of a graph 
@@ -141,6 +142,7 @@ public class Network implements Serializable {
         
         // initialize total possible number of edges
         nPossibleEdges = this.nNodes*(this.nNodes + 1)/2 - this.nNodes;
+        nPossibleEdges_withSL = nPossibleEdges + nNodes;
 
 
     }
@@ -199,6 +201,7 @@ public class Network implements Serializable {
 
                 // initialize total possible number of edges
         nPossibleEdges = this.nNodes*(this.nNodes + 1)/2 - this.nNodes;
+        nPossibleEdges_withSL = nPossibleEdges + nNodes;
     }
 
     /************************END CONSTRUCTORS************************/

@@ -6,11 +6,6 @@
  * @version 1.3.1, 11/23/14
  */
 
-/*
- * APSP contributed by Aakash Hasija
- * at geeksforgeeks.org
- */
-
 import java.util.Random;
 import java.util.Arrays;
 
@@ -22,8 +17,47 @@ public class VOSClusteringTechnique {
     protected Clustering clustering;
     protected double resolution;
 
+    /* FOR PERFORMANCE */
+
+    // adjacency matrix representation of current network
+    protected double[][] adjMatrix;
+
+    // weighting function (in the form of an adj matrix) for nonexistent edges
+    protected double[][] weightsNonexistentEdges; 
+
+    // meaningful maximum
+    private static final double M = 1;
+
+    /** 
+    * v_scalingParam is the scaling parameter that rates the importance of the
+    * weight of intercluster edges (with respect to the weight of the
+    * intra-cluster edges)
+    * 0 <= v_scalingParam <= 1 
+    */
+    private static final double v_scalingParam = 0;
+
+
     /**
-     * This constructor is called where every vertex is in its own cluster.
+    * g_w is the difference of weight that would be counted if no inter-cluster edges were present,
+    * minus the weight that is assigned to the actual inter-cluster edges:
+    * g_w = meaningful maximum M * number of nonexistent edges - sum of weights of all nonexistent edges
+    * Constant for any given network regardless of local shifts 
+    */
+    private double sumWeights_nonexistentEdges = 0;
+    private double g_w;
+
+    private double  f=0,        // intra-cluster density
+                    g=0;        // inter-cluster sparsity
+
+    /*
+    * Number of possible edges, including self loops, multiplied by M
+    * Denominator in performance calculation;
+    * constant for any given network regardless of local shifts
+    */
+    private double denominator; 
+
+    /**
+     * This constructor is called when every vertex is in its own cluster.
      *
      * @param network - object representation of graph
      * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
@@ -37,6 +71,7 @@ public class VOSClusteringTechnique {
         clustering.initSingletonClusters();
 
         this.resolution = resolution;
+        initPerfVariables();
     }
 
     /**
@@ -50,6 +85,8 @@ public class VOSClusteringTechnique {
         this.network = network;
         this.clustering = clustering;
         this.resolution = resolution;
+
+        initPerfVariables();
     }
 
     /**
@@ -281,7 +318,8 @@ public class VOSClusteringTechnique {
     }
 
     /**
-     * 
+     * Runs the original Louvain algorithm
+     *
      * @param random - a random num generator 
      * @return whether or not we updated what nodes are in what communties 
      */
@@ -295,7 +333,6 @@ public class VOSClusteringTechnique {
             return false;
 
         /*see if moving any nodes will increase modularity*/
-        // update = runLocalMovingAlgorithm2(random, modularityFunction);
         update = runLocalMovingAlgorithm(random);
 
 
@@ -316,79 +353,6 @@ public class VOSClusteringTechnique {
         return update;
     }
 
-    public boolean runSmartLocalMovingAlgorithm()
-    {
-        return runSmartLocalMovingAlgorithm(new Random());
-    }
-
-    public boolean runSmartLocalMovingAlgorithm(Random random)
-    {
-        boolean update;
-        int i, j, k;
-        int[] nNodesPerClusterReducedNetwork;
-        int[][] nodePerCluster;
-        Network[] subnetwork;
-        VOSClusteringTechnique VOSClusteringTechnique;
-
-        if (network.nNodes == 1)
-            return false;
-
-        update = runLocalMovingAlgorithm(random);
-
-        if (clustering.nClusters < network.nNodes)
-        {
-            subnetwork = network.createSubnetworks(clustering);
-
-            nodePerCluster = clustering.getNodesPerCluster();
-
-            clustering.nClusters = 0;
-            nNodesPerClusterReducedNetwork = new int[subnetwork.length];
-            for (i = 0; i < subnetwork.length; i++)
-            {
-                VOSClusteringTechnique = new VOSClusteringTechnique(subnetwork[i], resolution);
-
-                VOSClusteringTechnique.runLocalMovingAlgorithm(random);
-
-                for (j = 0; j < subnetwork[i].nNodes; j++)
-                    clustering.cluster[nodePerCluster[i][j]] = clustering.nClusters + VOSClusteringTechnique.clustering.cluster[j];
-                clustering.nClusters += VOSClusteringTechnique.clustering.nClusters;
-                nNodesPerClusterReducedNetwork[i] = VOSClusteringTechnique.clustering.nClusters;
-            }
-
-            VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
-
-            i = 0;
-            for (j = 0; j < nNodesPerClusterReducedNetwork.length; j++)
-                for (k = 0; k < nNodesPerClusterReducedNetwork[j]; k++)
-                {
-                    VOSClusteringTechnique.clustering.cluster[i] = j;
-                    i++;
-                }
-            VOSClusteringTechnique.clustering.nClusters = nNodesPerClusterReducedNetwork.length;
-
-            update |= VOSClusteringTechnique.runSmartLocalMovingAlgorithm(random);
-
-            clustering.mergeClusters(VOSClusteringTechnique.clustering);
-        }
-
-        return update;
-    }
-
-    public boolean runIteratedSmartLocalMovingAlgorithm(int nIterations)
-    {
-        return runIteratedSmartLocalMovingAlgorithm(nIterations, new Random());
-    }
-
-    public boolean runIteratedSmartLocalMovingAlgorithm(int nIterations, Random random)
-    {
-        boolean update;
-        int i;
-
-        update = false;
-        for (i = 0; i < nIterations; i++)
-            update |= runSmartLocalMovingAlgorithm(random);
-        return update;
-    }
 
     public int removeCluster(int cluster)
     {
@@ -471,178 +435,213 @@ public class VOSClusteringTechnique {
      * PERFORMANCE
      ***********************************************************************/
 
-    /**
-    * Calculates total modularity of the graph
-    *
-    */
-    public double COPYcalcModularityFunction() {
-        double qualityFunction;
-        double[] clusterWeight;
-        int i, j, k;
-
-        qualityFunction = 0;
-        /*for each node in network, if neighbors are in the same cluster, adds their edge weight to total*/
-        for (i = 0; i < network.nNodes; i++)
-        {
-            j = clustering.cluster[i];  /*j is the cluster of node i*/
-            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (edge?!) that i has??*/
-                /*if the cluster of the neighbor is the same as cluster of i, add the edge weight of neighbor to quality function*/
-                if (clustering.cluster[network.neighbor[k]] == j) 
-                    qualityFunction += network.edgeWeight[k];  // TODO: does edgeweight take in a vertex or an edge?!
-        }
-        qualityFunction += network.totalEdgeWeightSelfLinks;
-
-        /*each element of clusterWeight stores the total weight of the nodes in that cluster*/
-        clusterWeight = new double[clustering.nClusters];
-        for (i = 0; i < network.nNodes; i++) {
-            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
-        }
-        /*subtract square of total weights of nodes in each cluser from the quality function*/
-        for (i = 0; i < clustering.nClusters; i++) {
-            qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
-        }
-
-        qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
-
-        return qualityFunction;
-    }
-
     /* 
     * Compute the performance of the initial partition of G,
     * in which every node is its own cluster. This is a special 
-    * case of calculating performance. That is, f(G) = 0 
-    * because every node is one clustering and thus there are 
-    * no internal edges within communities. 
+    * case of calculating performance. That is, 
+    * f(G) = the sum of weights of all self loops, 
+    * because every node is its own clustering and thus there are 
+    * no internal edges within communities other than self loops.
     *
-    * g(G) = num_possible_edges - |E|, because at this point
+    * g(G) = nPossibleEdges - |E|, because at this point
     * every nonexistent edge (disregarding loops) between 
     * 2 vertices is between two separate communities, so they
     * count in the g(G) score.
-    * 
-    * If this a weighted graph, we multiply the number of nonexistent 
-    * external edges by the average weight of the nonexistent external edges,
-    * which we calculate from the other weighted edges.
+    *
+    * g_w is the difference of weight that would be counted if no inter-cluster edges were present,
+    * minus the weight that is assigned to the actual inter-cluster edges:
+    * g_w = meaningful maximum M * number of nonexistent edges - sum of weights of all nonexistent edges
+    *
+    * v_scalingParam is the scaling parameter [0,1] that rates the importance of the
+    * weight of intercluster edges (with respect to the weight of the
+    * intra-cluster edges)
     *
     * Finally, we divide g(G) by the total number of possible edges
-    * between all vertices (num_possible_edges).
+    * between all vertices multiplied by the bound on nonexistent edge weight (W).
     *
     * @return perf - performance score
     */
-
     private double initPerformanceFunction() {
 
-        // nPossibleEdges is a property of network, created in the constructors
-        double g = network.nPossibleEdges - network.nEdges;
+        // Look at diagonals in the adjacency matrix, calculating f (sum of self loops)
+        for (int v=0; v<network.nNodes; v++) {
+            f += adjMatrix[v][v];            
+        }
 
-        return g / (double)network.nPossibleEdges;
+        // inter-community sparsity score
+        g = M*(network.nPossibleEdges_withSL - network.nEdges);
 
+        // final performance calculations
+        double numerator = f + g + v_scalingParam*g_w;
+        return numerator / denominator;
     }
 
     /* 
     * @return - the performance score of the current graph partition
     */
-    private double calcPerformanceFunction() {
-        double perf = 0;
-
-        // get network in adjacency matrix representation
-        double[][] adjMatrix = network.getMatrix();
+    public double calcPerformanceFunction() {
+        
+        int u, v;        // vertices
+        double sumWeights_nonexistentEdges = 0;
 
         // for every vertex 
+        for (u = 0; u < network.nNodes; u++) {
 
+            // for all vertices lexicographically equal to or after u (include self loops, exclude duplicates)
+            for (v = u; v < network.nNodes; v++) {
 
-      /* MY PSEUDOCODE:
+                // u and v are in the same community and the edge exists
+                if ((clustering.cluster[u] == clustering.cluster[v]) && (adjMatrix[u][v] != INF)) {
 
-      for every vertex u in the graph 
-        for every vertex v > u (strict inequality to prevent duplicates)
-            if u and v are in the same community
-              if the edge (u,v) exists,
-                f = f + w(u,v)
-              else do nothing
-            else 
-              if the edge between them does not exist, 
-                g = g + w (where w is 1 for unweighted graph, 
-                          otherwise it's the average weight for nonexistent edges)
-              else do nothing
+                    // increase intra-community density 
+                    f += adjMatrix[u][v];
 
-      add f and g
-      divide by num_possible_edges
-      */
+                // u and v are in different communities and the edge does not exist
+                } else if ((clustering.cluster[u] != clustering.cluster[v]) && (adjMatrix[u][v] == INF)) {
 
-        return perf;
+                    // increase inter-community sparsity
+                    g += M;
+                } 
+
+                /* 
+                * ELSE: Where u and v are in the same community, but there is no edge (u,v), OR 
+                * where u and v are in different communities, but there is an edge (u,v),
+                * this is not a "correctly interpreted" edge. So, we don't count it toward our
+                * performance score.
+                */ 
+            }
+        }
+
+        double numerator = f + g + v_scalingParam*g_w;
+        return numerator / denominator;
+
     }
 
+
     /*
-* @param node - the node to be removed
-* @param comm - community containing node
-* @param dnodecomm - number of links from node to comm
-* 
-* @return performance change from removing node from comm
-*/
-private double remove_perf_change(int node, int comm, double dnodecomm) {
-  assert(node>=0 && node<network.nNodes);
-  int change = 0;
-  
-  // look at all possible edges, existent or nonexistent, with one end at node
-  //for(int i=0; i<network.nNodes; i++) {
+    * Computes the potential performance change from removing 
+    * vertex from its current community and putting it into its own community.
+    *
+    * Removing node from comm only changes its relations with
+    * vertices in comm. To all other vertices, it is still just
+    * some vertex in a different community.
+    *
+    * @param vertex - the node to be removed
+    * @param comm - community containing node
+    * @return performance change from removing node from comm
+    */
+    private double removePerfChange(int vertex) {
+        assert(vertex>=0 && vertex<network.nNodes);
+        double numeratorChange = 0;
+        int comm = clustering.cluster[vertex];
 
-      // Removing node from comm only changes its relations with
-      // vertices in comm. To all other vertices, it is still just
-      // some vertex in a different community.
-      //if (n2c[i] == comm) {
+        // look at all possible edges, existent or nonexistent, with one end at node
+        for (int u=0; u<network.nNodes; u++) {
 
-          // since node and vertices v in comm are no longer in the same
-          // community, we increase g(G) for nonexistent edges (node,v),
-         // if (A[node][i] == NO_EDGE) {
-         //     change += 1;    // TODO: change for weighted graphs
-         // } 
+            // self loops go with the vertex, so no change
+            // if node in our target community
+            if (u != vertex && clustering.cluster[u] == comm) {
 
-          // removing node from its community deducts from f(G)
-          // those edges that went from (node, v), where v is a vertex in comm 
-         // else {
-         //     change -= A[node][i];
-         // }
+                // edge (u, vertex) exists and was previously included in the 
+                // intracluster density score, so its contribution must be removed
+                if (adjMatrix[vertex][u] != INF) {
+                    numeratorChange -= adjMatrix[vertex][u];
+                } 
 
-     // }
-  //}
+                // the edge doesn't exist, so increase the intercluster sparsity score
+                else {
+                    numeratorChange += M;
+                }
+            }
+        }
 
-  return (double)change/(double)network.nPossibleEdges;
-}
+        return numeratorChange/denominator;
+    }
 
-/* 
-* computes the potential performance gain
-*
-* TODO: remove some of these inputs?
-* @param node - node to place
-* @param comm - community to put node into
-* @param dnodecomm - number of links from node to comm
-* @param w_degree - node degree
-* @return - change in performance 
-*/
-private double performance_gain(int node, int comm, double dnodecomm, double w_degree) {
-  assert(node>=0 && node<network.nNodes);
-  int change = 0;
-  
-  // look at all possible edges, existent or nonexistent, with one end at node
+    /* 
+    * Computes the potential performance change adding vertex,
+    * currently a community by itself, into comm.
+    *
+    * Adding a node into comm changes its relations with
+    * vertices in comm. To all other vertices, it is still just
+    * some vertex in a different community.
+    *
+    * @param vertex - node to place
+    * @param comm - community to put node into
+    * @return - change in performance 
+    */
+    private double addPerfChange(int vertex, int comm) {
+        assert(vertex>=0 && vertex<network.nNodes);
+        double numeratorChange = 0;
 
+        // look at all possible edges, existent or nonexistent, with one end at node
+        for (int u=0; u<network.nNodes; u++) {
 
-      // Adding a node into comm only changes its relations with
-      // vertices in comm. To all other vertices, it is still just
-      // some vertex in a different community.
+            // self loops go with the vertex, so no change
+            // if node in our target community
+            if (u != vertex && clustering.cluster[u] == comm) {
 
+                // the edge exists, so increase intracluster density score
+                if (adjMatrix[vertex][u] != INF) {
+                    numeratorChange += adjMatrix[vertex][u];
+                } 
 
-          // subtract from g(G) the nonexistent edges (node, v),
-          // where v is in comm. We don't count nonexistent edges
-          // within the community toward our performance score
+                // Subtract from g(G) the nonexistent edges (vertex, u),
+                // where u is in comm. We previously counted this edge in g, but
+                // we don't count nonexistent edges within the community toward performance,
+                // so we must remove its weight
+                else {
+                    numeratorChange -= M;
+                }
+                  
+            }
+        }
 
+        return numeratorChange/denominator;
+    }
 
-          // adding node to comm adds to f(G)
-          // for existent edges (node, v) where v is a vertex in comm
+    /**
+    * Initialize performance variables that are constant for a given network
+    */
+    private void initPerfVariables() {
 
+        // get adjacency matrix representation of current network
+        adjMatrix = network.getMatrix();
 
-  //return (float)change/(float)num_possible_edges;
-  return 1;
-}
+        // initialize weight function for nonexistent edges
+        setWeightFunc_NonexistentEdges();
 
+        // look through nonexistent edge matrix
+        for(int u=0; u < network.nNodes; u++) {
+            for(int v=0; v < network.nNodes; v++) {
 
+                // if the edge is nonexistent, add its weight
+                if (weightsNonexistentEdges[u][v] != INF) {
+                    sumWeights_nonexistentEdges += weightsNonexistentEdges[u][v];
+                }
+            }
+        }
 
+        g_w = M*(network.nPossibleEdges_withSL-network.nEdges) - sumWeights_nonexistentEdges;
+        denominator = ((double)network.nPossibleEdges_withSL) * M;
+    }
+
+    /**
+    * Set the weighting function for nonexistent edges
+    *
+    */
+    private void setWeightFunc_NonexistentEdges() {
+
+        // 1 spot for every nonexistent edge
+        weightsNonexistentEdges = new double[network.nNodes][network.nNodes];
+
+        // initialize all to INF
+        // in this adjacency matrix, INF means the edge exists
+        for (int u=0; u<network.nNodes; u++) {
+            for (int v=u; v<network.nNodes; v++) {
+                weightsNonexistentEdges[u][v] = INF;
+            }
+        }
+        // TODO: set weights for nonexistent edges
+    }
 }
