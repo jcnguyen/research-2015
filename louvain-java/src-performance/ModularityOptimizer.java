@@ -119,11 +119,11 @@ public class ModularityOptimizer {
 
                 // TODO METRIC STUFF HERE
                 if (modularityFunction <=2) {
-                    modularity = VOSClusteringTechnique.calcQualityFunction();
+                    modularity = VOSClusteringTechnique.calcModularityFunction();
                 } else if (modularityFunction == 3) {// silhouette index
                     modularity = VOSClusteringTechnique.calcSilhouetteFunction();
                 } else { // default
-                    modularity = VOSClusteringTechnique.calcQualityFunction();
+                    //modularity = VOSClusteringTechnique.calcQualityFunction();
                 }
 
                 if (printOutput && (nIterations > 1))

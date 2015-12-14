@@ -8,7 +8,7 @@ Download
 ----------
 The code can be found here: https://github.com/jcnguyen/research-2015
 This documentation is specificallly for running the Java code for the Louvain 
-method, which is found in "\research-2015\louvain-java-modularity".
+method, which is found in "\research-2015\louvain-java".
 
 The test suite can be found in the Box account under "Graphs". 
 
@@ -17,7 +17,7 @@ Running
 1. Download the code and test suite (see "Download").
 2. Open the command line.
 3. Change the directory to the src directory of the Louvain Method Java code. 
-   $ cd ../research-2015/louvain-java-modularity/src
+   $ cd ../research-2015/louvain-java/src
    where ".." is the path to the research folder.
 4. To compile,
    $ javac ModularityOptimizer.java

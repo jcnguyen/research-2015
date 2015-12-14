@@ -1,5 +1,5 @@
 firstNeighborIndex
-	-a protected int array
+	- a protected int array
 	- length nNodes + 1
 	- firstNeighborIndex[i]-firstNeighborValue[i-1] = nNeighbors[i-1]
 	- value of last spot of array is |E|, nEdges
