@@ -247,9 +247,9 @@ public class VOSClusteringTechnique {
                 // target cluster
                 l = neighboringCluster[k];
 
-                // calculate modularity change
-                qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
-                
+                // calculate performance change
+                qualityFunction = addPerfChange(j, l);
+
                 // if we've found a better cluster, or if we have found an equivalent cluster
                 // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
@@ -312,9 +312,9 @@ public class VOSClusteringTechnique {
      *
      * @return running Louvain Algorithm with new random num generator as param
      */
-    public boolean runLouvainAlgorithm(int modularityFunction)
+    public boolean runLouvainAlgorithm()
     {
-        return runLouvainAlgorithm(new Random(), modularityFunction);
+        return runLouvainAlgorithm(new Random());
     }
 
     /**
@@ -323,30 +323,31 @@ public class VOSClusteringTechnique {
      * @param random - a random num generator 
      * @return whether or not we updated what nodes are in what communties 
      */
-    public boolean runLouvainAlgorithm(Random random, int modularityFunction) {
+    public boolean runLouvainAlgorithm(Random random) {
         boolean update, update2;
         
-        VOSClusteringTechnique VOSClusteringTechnique;
+        VOSClusteringTechnique new_VOSClusteringTechnique;
 
         /*no update if only one node*/
         if (network.nNodes == 1)
             return false;
 
-        /*see if moving any nodes will increase modularity*/
+        /* Phase 1: see if moving any nodes will increase modularity */
         update = runLocalMovingAlgorithm(random);
 
-
+        /* if we ended up moving any nodes into different communities, begin recursive procedure */
         if (clustering.nClusters < network.nNodes) {
-            VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
+            new_VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
 
-            /*run louvain again to see if another update*/
-            update2 = VOSClusteringTechnique.runLouvainAlgorithm(random, modularityFunction);
+            /*run Louvain again to see if another update*/
+            update2 = new_VOSClusteringTechnique.runLouvainAlgorithm(random);
 
             if (update2) {
                 update = true;
 
-                // updates this instance's clustering such that we can run this iterative loop
-                clustering.mergeClusters(VOSClusteringTechnique.clustering);
+                // Phase 2
+                // updates this instance's clustering with results from running Louvain on next level clustering
+                clustering.mergeClusters(new_VOSClusteringTechnique.clustering);
             }
         }
 
@@ -354,82 +355,7 @@ public class VOSClusteringTechnique {
     }
 
 
-    public int removeCluster(int cluster)
-    {
-        double maxQualityFunction, qualityFunction;
-        double[] clusterWeight, totalEdgeWeightPerCluster;
-        int i, j;
-
-        clusterWeight = new double[clustering.nClusters];
-        totalEdgeWeightPerCluster = new double[clustering.nClusters];
-        for (i = 0; i < network.nNodes; i++)
-        {
-            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
-            if (clustering.cluster[i] == cluster)
-                for (j = network.firstNeighborIndex[i]; j < network.firstNeighborIndex[i + 1]; j++)
-                    totalEdgeWeightPerCluster[clustering.cluster[network.neighbor[j]]] += network.edgeWeight[j];
-        }
-
-        i = -1;
-        maxQualityFunction = 0;
-        for (j = 0; j < clustering.nClusters; j++)
-            if ((j != cluster) && (clusterWeight[j] > 0))
-            {
-                qualityFunction = totalEdgeWeightPerCluster[j] / clusterWeight[j];
-                if (qualityFunction > maxQualityFunction)
-                {
-                    i = j;
-                    maxQualityFunction = qualityFunction;
-                }
-            }
-
-        if (i >= 0)
-        {
-            for (j = 0; j < network.nNodes; j++)
-                if (clustering.cluster[j] == cluster)
-                    clustering.cluster[j] = i;
-            if (cluster == clustering.nClusters - 1)
-                clustering.nClusters = Arrays2.calcMaximum(clustering.cluster) + 1;
-        }
-
-        return i;
-    }
-
-    public void removeSmallClusters(int minNNodesPerCluster)
-    {
-        int i, j, k;
-        int[] nNodesPerCluster;
-        VOSClusteringTechnique VOSClusteringTechnique;
-
-        VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
-
-        nNodesPerCluster = clustering.getNNodesPerCluster();
-
-        do
-        {
-            i = -1;
-            j = minNNodesPerCluster;
-            for (k = 0; k < VOSClusteringTechnique.clustering.nClusters; k++)
-                if ((nNodesPerCluster[k] > 0) && (nNodesPerCluster[k] < j))
-                {
-                    i = k;
-                    j = nNodesPerCluster[k];
-                }
-
-            if (i >= 0)
-            {
-                j = VOSClusteringTechnique.removeCluster(i);
-                if (j >= 0)
-                    nNodesPerCluster[j] += nNodesPerCluster[i];
-                nNodesPerCluster[i] = 0;
-            }
-        }
-        while (i >= 0);
-
-        clustering.mergeClusters(VOSClusteringTechnique.clustering);
-    }
-
-
+    // TODO update code to deal with nodePermutation[i], not just i?
 
     /***********************************************************************
      * PERFORMANCE

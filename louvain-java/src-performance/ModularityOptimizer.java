@@ -109,10 +109,14 @@ public class ModularityOptimizer {
 
             j = 0;
             update = true;
+
+            // run for nIterations times, or until there is no increase in performance
+            // TODO: think this do-while only goes once, because the top level runLouvainAlgorithm
+            // will already maximize performance, and "update" will thus only be true the first time
             do {
                 if (printOutput && (nIterations > 1)) {
                     System.out.format("\tIteration: %d%n", j + 1);
-                    update = VOSClusteringTechnique.runLouvainAlgorithm(random, modularityFunction);
+                    update = VOSClusteringTechnique.runLouvainAlgorithm(random);
                 }
 
                 j++;
@@ -120,10 +124,11 @@ public class ModularityOptimizer {
                 performance = VOSClusteringTechnique.calcPerformanceFunction();
 
                 if (printOutput && (nIterations > 1))
-                    System.out.format("\t1Modularity: %.4f%n", performance);
+                    System.out.format("\tPerformance: %.4f%n", performance);
             }
             while ((j < nIterations) && update);
 
+            // we have found our best clustering
             if (performance > maxPerformance) {
                 clustering = VOSClusteringTechnique.getClustering();
                 maxPerformance = performance;
@@ -131,7 +136,7 @@ public class ModularityOptimizer {
 
             if (printOutput && (nRandomStarts > 1)) {
                 if (nIterations == 1)
-                    System.out.format("\tModularity: %.4f%n", performance);
+                    System.out.format("\tPerformance: %.4f%n", performance);
                 System.out.println();
             }
         }
@@ -142,10 +147,10 @@ public class ModularityOptimizer {
             if (nRandomStarts == 1) {
                 if (nIterations > 1)
                     System.out.println();
-                System.out.format("Modularity: %.4f%n", maxPerformance);
+                System.out.format("Performance: %.4f%n", maxPerformance);
             } else
                 System.out.format(
-                    "Maximum modularity in %d random starts: %.4f%n", 
+                    "Maximum Performance in %d random starts: %.4f%n", 
                     nRandomStarts, maxPerformance);
 
             System.out.format("Number of communities: %d%n", 
