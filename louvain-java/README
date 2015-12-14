@@ -17,7 +17,7 @@ Running
 1. Download the code and test suite (see "Download").
 2. Open the command line.
 3. Change the directory to the src directory of the Louvain Method Java code. 
-   $ cd ../research-2015/louvain-java/src
+   $ cd ../research-2015/louvain-java/src-silhouette
    where ".." is the path to the research folder.
 4. To compile,
    $ javac ModularityOptimizer.java
@@ -64,7 +64,7 @@ $ javac ModularityOptimizer.java
 $ java ModularityOptimizer ../test/test.pairs ../output/test.graph 1 1.0 1 10 10 0 1
 
 Expected output:
-1. Output file in "\research-2015\louvain-java-modularity\output"
+1. Output file in "\research-2015\louvain-java\output"
 2. Command line:
     -------------------------------------
     Modularity Optimizer
