@@ -15,7 +15,8 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class VOSClusteringTechnique {
-    private static final boolean TEST = true;
+    private static final boolean TEST = false;
+    private static final boolean TEST2 = false;
     private static final double INF = Double.POSITIVE_INFINITY;
 
     // the network and its communities
@@ -230,6 +231,7 @@ public class VOSClusteringTechnique {
             // iterate through all the nodes in our randomly determined order
             // if we reach the end, start over again at the beginning (node 0)
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
+
         } 
         while (nStableNodes < network.nNodes);
 
@@ -257,7 +259,7 @@ public class VOSClusteringTechnique {
         boolean update;
         double maxQualityFunction, qualityFunction;
         double[] clusterWeight, edgeWeightPerCluster;
-        double[][] adjMatrix, shortestPath;
+        double[][] shortestPath;
         int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
@@ -268,8 +270,9 @@ public class VOSClusteringTechnique {
 
         update = false;
 
-        clusterWeight = new double[network.nNodes]; /*elements contain the total node weights of everything in that cluster*/
-        nNodesPerCluster = new int[network.nNodes]; /*elements contain num nodes in that cluster*/
+        // initialize the weights of each cluster and the number of nodes in each cluster
+        clusterWeight = new double[network.nNodes];
+        nNodesPerCluster = new int[network.nNodes];
         for (i = 0; i < network.nNodes; i++) {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
             nNodesPerCluster[clustering.cluster[i]]++;
@@ -279,11 +282,12 @@ public class VOSClusteringTechnique {
          as well as what clusters these are*/
         nUnusedClusters = 0;
         unusedCluster = new int[network.nNodes];
-        for (i = 0; i < network.nNodes; i++)
+        for (i = 0; i < network.nNodes; i++) {
             if (nNodesPerCluster[i] == 0) {
                 unusedCluster[nUnusedClusters] = i;
                 nUnusedClusters++;
             }
+        }
 
         nodePermutation = Arrays2.generateRandomPermutation(network.nNodes, random);
 
@@ -292,23 +296,31 @@ public class VOSClusteringTechnique {
         nStableNodes = 0;
         i = 0;
 
-        // TODO comment: note that we do matrix/shortest paths here
-        adjMatrix = network.getMatrix();
-        shortestPath = floydWarshall(adjMatrix, network.nNodes);
+        // compute the shortest distances between every pair of nodes
+        shortestPath = floydWarshall(network.getMatrix(), network.nNodes);
 
         /*stay in loop until a local optimal modularity value is moved, 
         moving any node would not increase it*/
+        int iterationOfWhile = 1;
         do {
+            if (TEST2) {
+                System.out.println("while iteration: " + iterationOfWhile);
+            }
+            iterationOfWhile++;
+
             j = nodePermutation[i]; /*start with some node*/
            
-            // TODO call SI on current clustering with j in current position,
-            // save the original SI to usee for comparison at end
+            // calculate the current SI given this clustering
             maxSI = calcSilhouetteFunction(shortestPath);
             originalSI = maxSI;
+            int originalCuster = clustering.cluster[j]; // save the original cluster of j??
+            if (TEST2) {
+                System.out.println("maxSI: " + maxSI);
+            }
 
-            nNeighboringClusters = 0;
             /*for each neighboring node, find the cluster of that node, 
             find the number of neighboring clusters, find total edge weight for each neighbor cluster */
+            nNeighboringClusters = 0;
             for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++) {
                 l = clustering.cluster[network.neighbor[k]];
                 if (edgeWeightPerCluster[l] == 0) {
@@ -328,9 +340,6 @@ public class VOSClusteringTechnique {
             }
 
             bestCluster = -1;
-
-            // save the original cluster of j??
-            int originalCuster = clustering.cluster[j];
 
             /*simulate adding j to each neighboring cluster, 
             see if any of these give a better quality function, 
@@ -366,18 +375,35 @@ public class VOSClusteringTechnique {
                 if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && (l < bestCluster))) {
                     bestCluster = l;
                     maxSI = qualityFunction;
+
+                    if (TEST2) {
+                        System.out.println("bestCluster = l: " + l);
+                    }
                 }
                 edgeWeightPerCluster[l] = 0;
             }
-            if (maxSI == originalSI) {  // TODO if best cluster is original, do something 
+            Double aMaxSI = (Double) maxSI;
+            if (TEST2) {
+                    System.out.println("aMaxSI: " + aMaxSI);
+                    System.out.println("aMaxSI.isNaN(): " + aMaxSI.isNaN());
+            }
+            if (aMaxSI.isNaN() || maxSI == originalSI) {  // TODO if best cluster is original, do something 
                 bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster??
                 nUnusedClusters--;
-            }
+
+                if (TEST2) {
+                    System.out.println("bestCluster = unused: " + bestCluster);
+                }
+
+            } 
 
             // TODO what exactly do we need to do for this with updating clustering
             // put j into best cluster in clustering:
 
             /*add j into the best cluster it should be in*/
+            if (TEST2) {
+                System.out.println("bestCluster, j: " + bestCluster + ", " + j);
+            }
             clusterWeight[bestCluster] += network.nodeWeight[j];
             nNodesPerCluster[bestCluster]++;
             /*if it ends up in original cluster, update stable nodes*/
@@ -394,6 +420,10 @@ public class VOSClusteringTechnique {
             clustering.setCluster(j, bestCluster);
 
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
+
+
+            System.out.println("nStableNodes, nNodes: " + nStableNodes + ", " + network.nNodes);
+            
         }
         while (nStableNodes < network.nNodes);
 
@@ -441,8 +471,8 @@ public class VOSClusteringTechnique {
 
         /*see if moving any nodes will increase modularity*/
         // TODO METRIC STUFF HERE
-        // update = runLocalMovingAlgorithm2(random, modularityFunction);
-        update = runLocalMovingAlgorithm(random);
+        update = runLocalMovingAlgorithm2(random, modularityFunction);
+        // update = runLocalMovingAlgorithm(random);
 
 
         if (clustering.nClusters < network.nNodes) {
@@ -754,6 +784,8 @@ public class VOSClusteringTechnique {
         silhouetteIndicesPerCluster = new double[nClusters];
 
         // iterate through the clusters
+
+        int cumulativeNNodes = 0;
         for (c = 0; c < nClusters; c++) {
             nNodesInClusterC = nNodesPerCluster[c];
 
@@ -785,8 +817,8 @@ public class VOSClusteringTechnique {
                     distance = 0.0;
                     for (i = 0; i < nNodesInClusterC; i++) {
                         k = nodesPerCluster[c][i];
-                        if (j != k) {
-                            distance += shortestPath[j][k]; // TODO ERROR: j here wants global, but our j is local
+                        if ((j + cumulativeNNodes) != k) {
+                            distance += shortestPath[j + cumulativeNNodes][k];
                         }
                     }
                     averageInnerDistance = distance / (nNodesInClusterC - 1);
@@ -809,7 +841,7 @@ public class VOSClusteringTechnique {
                         distance = 0;
                         for (i = 0; i < nNodesInClusterC2; i++) {
                             k = nodesPerCluster[c2][i];
-                            distance += shortestPath[j][k];
+                            distance += shortestPath[j + cumulativeNNodes][k];
                         }
                         averageOuterDistances[c2] = distance / (
                             nNodesInClusterC2);
@@ -844,6 +876,8 @@ public class VOSClusteringTechnique {
             if (TEST) {
                 System.out.println("    silhouetteIndicesPerCluster[c]: " + silhouetteIndicesPerCluster[c]);
             }
+
+            cumulativeNNodes += nNodesInClusterC;
         }
 
         // get the silhouette of entire graph
@@ -894,12 +928,15 @@ public class VOSClusteringTechnique {
             }
         }
         
-        for (int jj = 0; jj < nNodes; jj++) {
-            for (int kk = 0; kk < nNodes; kk++) {
-                System.out.print(distances[jj][kk] + ", ");
+        if (TEST) {
+            for (int jj = 0; jj < nNodes; jj++) {
+                for (int kk = 0; kk < nNodes; kk++) {
+                    System.out.print(distances[jj][kk] + ", ");
+                }
+                System.out.println();
             }
-            System.out.println();
         }
+
         return distances;
     }
 
