@@ -7,14 +7,15 @@
  */
 
 /*
- * APSP contributed by Aakash Hasija
- * at geeksforgeeks.org
+ * Floyd-Warshall algorithm for APSP problem
+ * contributed by Aakash Hasija at geeksforgeeks.org
  */
 
 import java.util.Random;
 import java.util.Arrays;
 
 public class VOSClusteringTechnique {
+    private static final boolean TEST = true;
     private static final double INF = Double.POSITIVE_INFINITY;
 
     // the network and its communities
@@ -28,8 +29,7 @@ public class VOSClusteringTechnique {
      * @param network - object representation of graph
      * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
      */
-    public VOSClusteringTechnique(Network network, double resolution)
-    {
+    public VOSClusteringTechnique(Network network, double resolution) {
         this.network = network;
 
         // on initialization, every node is in its own community
@@ -45,8 +45,7 @@ public class VOSClusteringTechnique {
      * @param clustering - object representation of the communities in graph
      * @param resolution - granularity level at which communities are detected
      */
-    public VOSClusteringTechnique(Network network, Clustering clustering, double resolution)
-    {
+    public VOSClusteringTechnique(Network network, Clustering clustering, double resolution) {
         this.network = network;
         this.clustering = clustering;
         this.resolution = resolution;
@@ -56,8 +55,7 @@ public class VOSClusteringTechnique {
      * 
      * @return network - object representation of a graph
      */
-    public Network getNetwork()
-    {
+    public Network getNetwork() {
         return network;
     }
 
@@ -65,8 +63,7 @@ public class VOSClusteringTechnique {
      * 
      * @return clustering - object representation of the communities in graph
      */
-    public Clustering getClustering()
-    {
+    public Clustering getClustering() {
         return clustering;
     }
 
@@ -74,8 +71,7 @@ public class VOSClusteringTechnique {
      * 
      * @return resolution - granularity level at which communities are detected
      */
-    public double getResolution()
-    {
+    public double getResolution() {
         return resolution;
     }
 
@@ -83,8 +79,7 @@ public class VOSClusteringTechnique {
      * 
      * @param network - object representation of graph
      */
-    public void setNetwork(Network network)
-    {
+    public void setNetwork(Network network) {
         this.network = network;
     }
 
@@ -92,8 +87,7 @@ public class VOSClusteringTechnique {
      * 
      * @param clustering - object representation of the communities in graph 
      */
-    public void setClustering(Clustering clustering)
-    {
+    public void setClustering(Clustering clustering) {
         this.clustering = clustering;
     }
     
@@ -101,8 +95,7 @@ public class VOSClusteringTechnique {
      * 
      * @param resolution - granularity level at which communities are detected 
      */
-    public void setResolution(double resolution)
-    {
+    public void setResolution(double resolution) {
         this.resolution = resolution;
     }
 
@@ -110,8 +103,7 @@ public class VOSClusteringTechnique {
      * 
      * @return runs the local moving algorithm, with new random num generator as input
      */
-    public boolean runLocalMovingAlgorithm()
-    {
+    public boolean runLocalMovingAlgorithm() {
         return runLocalMovingAlgorithm(new Random());
     }
 
@@ -126,15 +118,13 @@ public class VOSClusteringTechnique {
      * @param random - a random num generator 
      * @return whether or not we updated what nodes are in what communties 
      */
-    public boolean runLocalMovingAlgorithm(Random random)
-    {
+    public boolean runLocalMovingAlgorithm(Random random) {
         boolean update;
         double maxQualityFunction, qualityFunction;
         double[] clusterWeight, edgeWeightPerCluster;
         int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
-        /*don't need to run alg if only 1 node*/ 
         if (network.nNodes == 1)
             return false;
 
@@ -142,8 +132,7 @@ public class VOSClusteringTechnique {
 
         clusterWeight = new double[network.nNodes]; /*elements contain the total node weights of everything in that cluster*/
         nNodesPerCluster = new int[network.nNodes]; /*elements contain num nodes in that cluster*/
-        for (i = 0; i < network.nNodes; i++)
-        {
+        for (i = 0; i < network.nNodes; i++) {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
             nNodesPerCluster[clustering.cluster[i]]++;
         }
@@ -167,19 +156,16 @@ public class VOSClusteringTechnique {
 
         /*stay in loop until a local optimal modularity value is moved, 
         moving any node would not increase it*/
-        do
-        {
+        do {
             j = nodePermutation[i]; /*start with some node*/
 
             nNeighboringClusters = 0;
 
             /* for each neighboring node of j, find the cluster of that node, 
             find the number of neighboring clusters, find total edge weight for each neighbor cluster */
-            for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++)
-            {
+            for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++) {
                 l = clustering.cluster[network.neighbor[k]];
-                if (edgeWeightPerCluster[l] == 0)
-                {
+                if (edgeWeightPerCluster[l] == 0) {
                     neighboringCluster[nNeighboringClusters] = l;
                     nNeighboringClusters++;
                 }
@@ -223,9 +209,7 @@ public class VOSClusteringTechnique {
             }
 
             // TODO: if no improvement, why do we mess with unused clusters?
-            if (maxQualityFunction == 0)
-
-            {
+            if (maxQualityFunction == 0) {
                 bestCluster = unusedCluster[nUnusedClusters - 1];
                 nUnusedClusters--;
             }
@@ -237,8 +221,7 @@ public class VOSClusteringTechnique {
             /*if it ends up in original cluster, update stable nodes*/
             if (bestCluster == clustering.cluster[j]) 
                 nStableNodes++;
-            else /*j was moved to a new cluster that is better*/
-            {
+            else { /*j was moved to a new cluster that is better*/
                 clustering.cluster[j] = bestCluster;
                 nStableNodes = 1;
                 update = true;
@@ -247,7 +230,7 @@ public class VOSClusteringTechnique {
             // iterate through all the nodes in our randomly determined order
             // if we reach the end, start over again at the beginning (node 0)
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
-        }
+        } 
         while (nStableNodes < network.nNodes);
 
         /*update nunmber of clusters that exist now, and
@@ -255,8 +238,7 @@ public class VOSClusteringTechnique {
         newCluster = new int[network.nNodes];
         clustering.nClusters = 0;
         for (i = 0; i < network.nNodes; i++)
-            if (nNodesPerCluster[i] > 0)
-            {
+            if (nNodesPerCluster[i] > 0) {
                 newCluster[i] = clustering.nClusters;
                 clustering.nClusters++;
             }
@@ -280,8 +262,7 @@ public class VOSClusteringTechnique {
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
         double maxSI, originalSI;
-
-        /*don't need to run alg if only 1 node*/ 
+ 
         if (network.nNodes == 1)
             return false;
 
@@ -391,8 +372,6 @@ public class VOSClusteringTechnique {
             if (maxSI == originalSI) {  // TODO if best cluster is original, do something 
                 bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster??
                 nUnusedClusters--;
-
-
             }
 
             // TODO what exactly do we need to do for this with updating clustering
@@ -435,15 +414,14 @@ public class VOSClusteringTechnique {
     }
 
 /*****************************************************************************
-    IN PROGRESS
+    END IN PROGRESS
 ******************************************************************************/
 
     /**
      *
      * @return running Louvain Algorithm with new random num generator as param
      */
-    public boolean runLouvainAlgorithm(int modularityFunction)
-    {
+    public boolean runLouvainAlgorithm(int modularityFunction) {
         return runLouvainAlgorithm(new Random(), modularityFunction);
     }
 
@@ -489,8 +467,7 @@ public class VOSClusteringTechnique {
      * @param maxNInterations - max iterations you want to run Louvain
      * @return run the algorithm 
      */
-    public boolean runIteratedLouvainAlgorithm(int maxNIterations, int modularityFunction)
-    {
+    public boolean runIteratedLouvainAlgorithm(int maxNIterations, int modularityFunction) {
         return runIteratedLouvainAlgorithm(maxNIterations, new Random(), modularityFunction);
     }
 
@@ -500,14 +477,12 @@ public class VOSClusteringTechnique {
      * @param random - random number generator 
      * @return run the algorithm 
      */
-    public boolean runIteratedLouvainAlgorithm(int maxNIterations, Random random, int modularityFunction)
-    {
+    public boolean runIteratedLouvainAlgorithm(int maxNIterations, Random random, int modularityFunction) {
         boolean update;
         int i;
 
         i = 0;
-        do
-        {
+        do {
             update = runLouvainAlgorithm(random, modularityFunction);
             i++;
         }
@@ -515,13 +490,11 @@ public class VOSClusteringTechnique {
         return ((i > 1) || update);
     }
 
-    public boolean runLouvainAlgorithmWithMultilevelRefinement()
-    {
+    public boolean runLouvainAlgorithmWithMultilevelRefinement() {
         return runLouvainAlgorithmWithMultilevelRefinement(new Random());
     }
 
-    public boolean runLouvainAlgorithmWithMultilevelRefinement(Random random)
-    {
+    public boolean runLouvainAlgorithmWithMultilevelRefinement(Random random) {
         boolean update, update2;
         VOSClusteringTechnique VOSClusteringTechnique;
 
@@ -530,14 +503,12 @@ public class VOSClusteringTechnique {
 
         update = runLocalMovingAlgorithm(random);
 
-        if (clustering.nClusters < network.nNodes)
-        {
+        if (clustering.nClusters < network.nNodes) {
             VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
 
             update2 = VOSClusteringTechnique.runLouvainAlgorithmWithMultilevelRefinement(random);
 
-            if (update2)
-            {
+            if (update2) {
                 update = true;
 
                 clustering.mergeClusters(VOSClusteringTechnique.clustering);
@@ -549,19 +520,16 @@ public class VOSClusteringTechnique {
         return update;
     }
 
-    public boolean runIteratedLouvainAlgorithmWithMultilevelRefinement(int maxNIterations)
-    {
+    public boolean runIteratedLouvainAlgorithmWithMultilevelRefinement(int maxNIterations) {
         return runIteratedLouvainAlgorithmWithMultilevelRefinement(maxNIterations, new Random());
     }
 
-    public boolean runIteratedLouvainAlgorithmWithMultilevelRefinement(int maxNIterations, Random random)
-    {
+    public boolean runIteratedLouvainAlgorithmWithMultilevelRefinement(int maxNIterations, Random random) {
         boolean update;
         int i;
 
         i = 0;
-        do
-        {
+        do {
             update = runLouvainAlgorithmWithMultilevelRefinement(random);
             i++;
         }
@@ -569,13 +537,11 @@ public class VOSClusteringTechnique {
         return ((i > 1) || update);
     }
 
-    public boolean runSmartLocalMovingAlgorithm()
-    {
+    public boolean runSmartLocalMovingAlgorithm() {
         return runSmartLocalMovingAlgorithm(new Random());
     }
 
-    public boolean runSmartLocalMovingAlgorithm(Random random)
-    {
+    public boolean runSmartLocalMovingAlgorithm(Random random) {
         boolean update;
         int i, j, k;
         int[] nNodesPerClusterReducedNetwork;
@@ -588,16 +554,14 @@ public class VOSClusteringTechnique {
 
         update = runLocalMovingAlgorithm(random);
 
-        if (clustering.nClusters < network.nNodes)
-        {
+        if (clustering.nClusters < network.nNodes) {
             subnetwork = network.createSubnetworks(clustering);
 
             nodePerCluster = clustering.getNodesPerCluster();
 
             clustering.nClusters = 0;
             nNodesPerClusterReducedNetwork = new int[subnetwork.length];
-            for (i = 0; i < subnetwork.length; i++)
-            {
+            for (i = 0; i < subnetwork.length; i++) {
                 VOSClusteringTechnique = new VOSClusteringTechnique(subnetwork[i], resolution);
 
                 VOSClusteringTechnique.runLocalMovingAlgorithm(random);
@@ -612,8 +576,7 @@ public class VOSClusteringTechnique {
 
             i = 0;
             for (j = 0; j < nNodesPerClusterReducedNetwork.length; j++)
-                for (k = 0; k < nNodesPerClusterReducedNetwork[j]; k++)
-                {
+                for (k = 0; k < nNodesPerClusterReducedNetwork[j]; k++) {
                     VOSClusteringTechnique.clustering.cluster[i] = j;
                     i++;
                 }
@@ -627,13 +590,11 @@ public class VOSClusteringTechnique {
         return update;
     }
 
-    public boolean runIteratedSmartLocalMovingAlgorithm(int nIterations)
-    {
+    public boolean runIteratedSmartLocalMovingAlgorithm(int nIterations) {
         return runIteratedSmartLocalMovingAlgorithm(nIterations, new Random());
     }
 
-    public boolean runIteratedSmartLocalMovingAlgorithm(int nIterations, Random random)
-    {
+    public boolean runIteratedSmartLocalMovingAlgorithm(int nIterations, Random random) {
         boolean update;
         int i;
 
@@ -643,16 +604,14 @@ public class VOSClusteringTechnique {
         return update;
     }
 
-    public int removeCluster(int cluster)
-    {
+    public int removeCluster(int cluster) {
         double maxQualityFunction, qualityFunction;
         double[] clusterWeight, totalEdgeWeightPerCluster;
         int i, j;
 
         clusterWeight = new double[clustering.nClusters];
         totalEdgeWeightPerCluster = new double[clustering.nClusters];
-        for (i = 0; i < network.nNodes; i++)
-        {
+        for (i = 0; i < network.nNodes; i++) {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
             if (clustering.cluster[i] == cluster)
                 for (j = network.firstNeighborIndex[i]; j < network.firstNeighborIndex[i + 1]; j++)
@@ -662,18 +621,15 @@ public class VOSClusteringTechnique {
         i = -1;
         maxQualityFunction = 0;
         for (j = 0; j < clustering.nClusters; j++)
-            if ((j != cluster) && (clusterWeight[j] > 0))
-            {
+            if ((j != cluster) && (clusterWeight[j] > 0)) {
                 qualityFunction = totalEdgeWeightPerCluster[j] / clusterWeight[j];
-                if (qualityFunction > maxQualityFunction)
-                {
+                if (qualityFunction > maxQualityFunction) {
                     i = j;
                     maxQualityFunction = qualityFunction;
                 }
             }
 
-        if (i >= 0)
-        {
+        if (i >= 0) {
             for (j = 0; j < network.nNodes; j++)
                 if (clustering.cluster[j] == cluster)
                     clustering.cluster[j] = i;
@@ -684,8 +640,7 @@ public class VOSClusteringTechnique {
         return i;
     }
 
-    public void removeSmallClusters(int minNNodesPerCluster)
-    {
+    public void removeSmallClusters(int minNNodesPerCluster) {
         int i, j, k;
         int[] nNodesPerCluster;
         VOSClusteringTechnique VOSClusteringTechnique;
@@ -694,19 +649,16 @@ public class VOSClusteringTechnique {
 
         nNodesPerCluster = clustering.getNNodesPerCluster();
 
-        do
-        {
+        do {
             i = -1;
             j = minNNodesPerCluster;
             for (k = 0; k < VOSClusteringTechnique.clustering.nClusters; k++)
-                if ((nNodesPerCluster[k] > 0) && (nNodesPerCluster[k] < j))
-                {
+                if ((nNodesPerCluster[k] > 0) && (nNodesPerCluster[k] < j)) {
                     i = k;
                     j = nNodesPerCluster[k];
                 }
 
-            if (i >= 0)
-            {
+            if (i >= 0) {
                 j = VOSClusteringTechnique.removeCluster(i);
                 if (j >= 0)
                     nNodesPerCluster[j] += nNodesPerCluster[i];
@@ -723,24 +675,23 @@ public class VOSClusteringTechnique {
      ***********************************************************************/
 
     /**
-     * Only called by Modularity Optimizer, to calculate the modularity of the final
-     * community groupings.
+     * Calculates the modularity score of the final community graph.
+     *
+     * Note: only called by ModularityOptimizer to calculate the modularity of 
+     * the final clustering/community graph.
      * 
-     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     * @return the modularity score of the community graph
      */
-    public double calcModularityFunction() 
-
-    {
+    public double calcModularityFunction() {
         double qualityFunction;
         double[] clusterWeight;
         int i, j, k;
 
-        qualityFunction = 0;
         /*for each node in network, if neighbors are in the same cluster, adds their edge weight to total*/
-        for (i = 0; i < network.nNodes; i++)
-        {
+        qualityFunction = 0;
+        for (i = 0; i < network.nNodes; i++) {
             j = clustering.cluster[i];  /*j is the cluster of node i*/
-            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++) /*for every neighbor (e    dge?!) that i has??*/
+            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++)
                 /*if the cluster of the neighbor is the same as cluster of i, add the edge weight of neighbor to quality function*/
                 if (clustering.cluster[network.neighbor[k]] == j) 
                     qualityFunction += network.edgeWeight[k];  // TODO: does edgeweight take in a vertex or an edge?!
@@ -766,196 +717,190 @@ public class VOSClusteringTechnique {
      * SILHOUETTE INDEX
      ***********************************************************************/
 
+    /**
+     * Calculates the silhouette index score of the final community graph.
+     *
+     * Note: only called by ModularityOptimizer to calculate the modularity of 
+     * the final clustering/community graph.
+     * 
+     * @return the silhouette index score of the community graph
+     */
     public double calcSilhouetteFunction() {
         return calcSilhouetteFunction(floydWarshall(network.getMatrix(), network.nNodes));
     }
 
-    /**
-     * 
-     * @return qualityFunction - calculating the silhouette metric value for the graph
-     */
+    // c = current cluster
+    // c2 = other cluster
+    // j = node in cluster c
+    // i = iterator for other nodes (either in cluster c or cluster c2) 
+    // k = node in other cluster at i
     public double calcSilhouetteFunction(double[][] shortestPath) {
-        int i, j, k, c, n; // iterators
-        int nodeK; // other node
-        int numCommunities = clustering.nClusters;
-        int[] numNodesInCluster = clustering.getNNodesPerCluster();
-        int[][] nodesInCluster = clustering.getNodesPerCluster();
+        int c, c2, i, j, k;
+        int nClusters, nNodesInClusterC, nNodesInClusterC2;
+        int[] nNodesPerCluster;
+        int[][] nodesPerCluster;
 
-        double averageInnerDistance;
-        double currentDistance = 0;
-        int sizeOfCommunityN;
-        int sizeOfCommunity;
-        double minOfAverageOutsideDistance;
-        double maxOfDistances;
-        double communitySilhouette;
-        double globalSilhouetteIndex = 0;
+        double averageInnerDistance, distance, minAverageOuterDistance;
+        double[] averageOuterDistances;
 
-        double[] allCommunitySilhouettes = new double[numCommunities];
+        double silhouetteIndexGlobal;
+        double[] silhouetteIndicesPerCluster;
+        double[] silhouetteWidths;
 
-        //for every community
-        for (c = 0; c < numCommunities; c++) {
+        nClusters = clustering.nClusters;
+        nNodesPerCluster = clustering.getNNodesPerCluster();
+        nodesPerCluster = clustering.getNodesPerCluster();
 
-            System.out.println("-----------------------------------------------------------------"); // TODO
-            System.out.println("LOOKING AT COMMUNITY: " + c); // TODO
-            
-            sizeOfCommunity = numNodesInCluster[c];
+        silhouetteIndicesPerCluster = new double[nClusters];
 
-            // stores the silhouette for each vertex in this community
-            double[] silhouetteWidth = new double[sizeOfCommunity];
+        // iterate through the clusters
+        for (c = 0; c < nClusters; c++) {
+            nNodesInClusterC = nNodesPerCluster[c];
 
-            //for every node in community c
-            for(i = 0; i < sizeOfCommunity; i++) {
+            if (TEST) {
+                System.out.println();
+                System.out.println("COMMUNITYID: " + c);
+                System.out.println("-----------------------------------------");
+                System.out.println("nNodesInClusterC: " + nNodesInClusterC);
+            }
 
-                averageInnerDistance = 0.0;
+            // calculate the silhouette for every vertex j in cluster c
+            if (TEST) {
+                System.out.println("1. calculating silhouette of vertex j in cluster " + c);
+            }
+            silhouetteWidths = new double[nNodesInClusterC];
+            for(j = 0; j < nNodesInClusterC; j++) {
+                if (TEST) {
+                    System.out.println("    node " + j);
+                }
 
-                //find avg of shortest distance between v_i and every other vertex in same community
-                // System.out.println("sizeOfCommunity: " + sizeOfCommunity); // TODO delete
-                if (sizeOfCommunity == 1) { //singleton
+                // calculate the average of the shortest distances between 
+                // vertex j and every other vertex k in the same cluster
+                if (TEST) {
+                    System.out.println("        -calculating average inner distance");
+                }
+                if (nNodesInClusterC == 1) { //singleton
                     averageInnerDistance = 1.0;
                 }  else {
-                    for (k = 0; k < sizeOfCommunity; k++) { // all node in community
-                        nodeK = nodesInCluster[c][k];
-                        if (i != nodeK) {
-                            averageInnerDistance += shortestPath[i][nodeK];
+                    distance = 0.0;
+                    for (i = 0; i < nNodesInClusterC; i++) {
+                        k = nodesPerCluster[c][i];
+                        if (j != k) {
+                            distance += shortestPath[j][k]; // TODO ERROR: j here wants global, but our j is local
                         }
                     }
-                    averageInnerDistance = averageInnerDistance/(sizeOfCommunity-1);
+                    averageInnerDistance = distance / (nNodesInClusterC - 1);
                 } 
-
-                // System.out.println("avgInnerDistance: " + silhouetteWidth[i]); // TODO delete
-
-                // finds distance between vertex i and every vertex in different community
-                double[] distanceOptions = new double[numCommunities]; // note: sizeOfCommunity is size of current community
-                distanceOptions[c] = INF;
-                // TODO delete, this prints out distanceOptions
-                System.out.print("initial distanceOptions: ");
-                for (int jj = 0; jj < distanceOptions.length; jj++) {
-                    System.out.print(distanceOptions[jj] + ", ");
+                if (TEST) {
+                    System.out.println("            averageInnerDistance: " + averageInnerDistance);
                 }
-                System.out.println();
 
-                for (n = 0; n < numCommunities; n++) {
-                    currentDistance = 0;
-
-                    // for every other community
-                    if (n != c) {
-                        sizeOfCommunityN = numNodesInCluster[n];
-
-                        for (k = 0; k < sizeOfCommunityN; k++) {
-                            nodeK = nodesInCluster[n][k];
-                            currentDistance += shortestPath[i][nodeK];
-                            System.out.println("shortestPath[i][nodeK] = " + shortestPath[i][nodeK]); // TODO delete
-
+                // calculate the minimum average distance between vertex j 
+                // and the vertices in each cluster c2
+                if (TEST) {
+                    System.out.println("        -calculating minimum outer distance");
+                }
+                averageOuterDistances = new double[nClusters];
+                for (c2 = 0; c2 < nClusters; c2++) {
+                    if (c2 == c) {
+                        averageOuterDistances[c] = INF;
+                    } else {
+                        nNodesInClusterC2 = nNodesPerCluster[c2];
+                        distance = 0;
+                        for (i = 0; i < nNodesInClusterC2; i++) {
+                            k = nodesPerCluster[c2][i];
+                            distance += shortestPath[j][k];
                         }
-
-                        System.out.println("currentDistance before division = " + currentDistance); // TODO delete
-                        System.out.println("sizeOfCommunityN = " + sizeOfCommunityN); // TODO delete
-
-                        currentDistance = currentDistance/(sizeOfCommunityN);
-                        System.out.println("currentDistance after division = " + currentDistance); // TODO delete
-
-                        distanceOptions[n] = currentDistance;
-                        System.out.println("distanceOptions[n] = " + distanceOptions[n]); // TODO delete
-
+                        averageOuterDistances[c2] = distance / (
+                            nNodesInClusterC2);
                     }
                 }
-
-                // TODO delete, this prints out distanceOptions
-                System.out.print("distanceOptions: ");
-                for (int jj = 0; jj < distanceOptions.length; jj++) {
-                    System.out.print(distanceOptions[jj] + ", ");
-                }
-                System.out.println();
-
-                // get the min of all the average distances
-                minOfAverageOutsideDistance = Arrays2.calcMinimum(distanceOptions);
-
-                // get the max between the average distance within and
-                // min average distance
-                if (averageInnerDistance > minOfAverageOutsideDistance) {
-                    maxOfDistances = averageInnerDistance;
-                } else {
-                    maxOfDistances = minOfAverageOutsideDistance;
+                minAverageOuterDistance = Arrays2.calcMinimum(
+                    averageOuterDistances);
+                if (TEST) {
+                    System.out.print("            averageOuterDistances: ");
+                    for (int jj = 0; jj < averageOuterDistances.length; jj++) {
+                        System.out.print(averageOuterDistances[jj] + ", ");
+                    }
+                    System.out.println();
+                    System.out.println("            minAverageOuterDistance: " + minAverageOuterDistance);
                 }
 
-                // System.out.println("minOfAverageOutsideDistance " + minOfAverageOutsideDistance); // TODO delete, b_i^j
-                // System.out.println("averageInnerDistance " + averageInnerDistance); // TODO delete, a_i^j
-                // System.out.println("maxOfDistances " + maxOfDistances); // TODO delete
-                silhouetteWidth[i] = ((minOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances); 
+                // calculate the silhouette width value
+                silhouetteWidths[j] = (
+                    (minAverageOuterDistance - averageInnerDistance) / 
+                    (Math.max(averageInnerDistance, minAverageOuterDistance))); 
+                if (TEST) {
+                    System.out.println("           silhouetteWidths[j]: " + silhouetteWidths[j]);
+                }
             }
 
-            // calculate the silhouette width for the entire community
-            communitySilhouette = 0;
-            for (k=0;k<sizeOfCommunity;k++) {
-                communitySilhouette += silhouetteWidth[k];
+            // calculate the silhouette index of the entire cluster c
+            if (TEST) {
+                System.out.println("2. calculate silhouette of entire cluster " + c);
             }
-
-            // System.out.println("communitySilhouette " + communitySilhouette); // TODO delete
-            allCommunitySilhouettes[c] = communitySilhouette/sizeOfCommunity;
+            silhouetteIndicesPerCluster[c] = Arrays2.calcSum(silhouetteWidths
+                ) / nNodesInClusterC;
+            if (TEST) {
+                System.out.println("    silhouetteIndicesPerCluster[c]: " + silhouetteIndicesPerCluster[c]);
+            }
         }
 
         // get the silhouette of entire graph
-        for (k=0;k<numCommunities;k++) {
-            globalSilhouetteIndex += allCommunitySilhouettes[k];
-            System.out.println("allCommunitySilhouette at " + k + ", " + allCommunitySilhouettes[k]); // TODO delete
+        silhouetteIndexGlobal = Arrays2.calcSum(
+            silhouetteIndicesPerCluster) / nClusters;
 
+        if (TEST) {
+            System.out.println();
+            System.out.println("silhouetteIndexGlobal: " + silhouetteIndexGlobal);
         }
-
-        // System.out.println("calcSilhouetteFunction, distance " + globalSilhouetteIndex); // TODO delete
-        return globalSilhouetteIndex/numCommunities;
+        return silhouetteIndexGlobal;
     }
 
-
+    /**
+     * Calculates the distance of shortest path between all vertices.
+     *
+     * @param graph   a matrix representing the input network
+     * @param nNodes  the number of vertices/nodes in the network
+     * @return a matrix of shortest path distances
+     */
     public double[][] floydWarshall(double[][] graph, int nNodes) {
-        double[][] dist;
-        int i, j, k;
+        double[][] distances; // the solution matrix
+        int i, j, k; // iterators
 
-        dist = new double[nNodes][nNodes];
+        distances = new double[nNodes][nNodes];
  
-        /* Initialize the solution matrix same as input graph matrix.
-           Or we can say the initial values of shortest distances
-           are based on shortest paths considering no intermediate
-           vertex. */
+        // initialize the solution matrix to the input graph matrix
         for (i = 0; i < nNodes; i++) {
             for (j = 0; j < nNodes; j++) {
-                if (i == j) {
-                    dist[i][j] = 0;
+                if (i == j) { // diagonal
+                    distances[i][j] = 0;
                 } else {
-                    dist[i][j] = graph[i][j];
+                    distances[i][j] = graph[i][j];
                 }
             }
         }
- 
-        /* Add all vertices one by one to the set of intermediate
-           vertices.
-          ---> Before start of a iteration, we have shortest
-               distances between all pairs of vertices such that
-               the shortest distances consider only the vertices in
-               set {0, 1, 2, .. k-1} as intermediate vertices.
-          ----> After the end of a iteration, vertex no. k is added
-                to the set of intermediate vertices and the set
-                becomes {0, 1, 2, .. k} */
-        for (k = 0; k < nNodes; k++)
-        {
-            // Pick all vertices as source one by one
-            for (i = 0; i < nNodes; i++)
-            {
-                // Pick all vertices as destination for the
-                // above picked source
-                for (j = 0; j < nNodes; j++)
-                {
-                    // If vertex k is on the shortest path from
-                    // i to j, then update the value of dist[i][j]
-                    if (dist[i][k] + dist[k][j] < dist[i][j])
-                        dist[i][j] = dist[i][k] + dist[k][j];
+
+        // calculate the shortest distance between vertices i and j, 
+        // given an intermediate vertex k
+        for (k = 0; k < nNodes; k++) { // intermediate vertex
+            for (i = 0; i < nNodes; i++) { // source vertex
+                for (j = 0; j < nNodes; j++) { // destination vertex, given source vertex
+                    // if vertex k is on the shortest path from
+                    // i to j, then update the value of distances[i][j]
+                    if (distances[i][k] + distances[k][j] < distances[i][j])
+                        distances[i][j] = distances[i][k] + distances[k][j];
                 }
             }
         }
         
-        return dist;
+        for (int jj = 0; jj < nNodes; jj++) {
+            for (int kk = 0; kk < nNodes; kk++) {
+                System.out.print(distances[jj][kk] + ", ");
+            }
+            System.out.println();
+        }
+        return distances;
     }
-
-
-
 
 }
