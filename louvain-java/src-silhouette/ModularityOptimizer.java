@@ -53,11 +53,10 @@ public class ModularityOptimizer {
             randomSeed = Long.parseLong(args[7]);
             printOutput = (Integer.parseInt(args[8]) > 0);
         } else {
-            // TODO change 
             console = System.console();
             inputFileName = console.readLine("Input file name: ");
             outputFileName = console.readLine("Output file name: ");
-            modularityFunction = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): ")); 
+            modularityFunction = Integer.parseInt(console.readLine("Metric function (1 = standard; 2 = alternative; 3 = silhouette; 4 = performance): ")); 
             resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g., 1.0): "));
             algorithm = Integer.parseInt(console.readLine("Algorithm (1 = Louvain; 2 = Louvain with multilevel refinement; 3 = smart local moving): "));
             nRandomStarts = Integer.parseInt(console.readLine("Number of random starts (e.g., 10): "));
@@ -118,13 +117,13 @@ public class ModularityOptimizer {
                 j++;
 
                 // TODO METRIC STUFF HERE
-                if (modularityFunction <=2) {
-                    modularity = VOSClusteringTechnique.calcModularityFunction();
-                } else if (modularityFunction == 3) {// silhouette index
-                    modularity = VOSClusteringTechnique.calcSilhouetteFunction();
-                } else { // default
-                    //modularity = VOSClusteringTechnique.calcQualityFunction();
-                }
+                // if (modularityFunction <=2) {
+                //     modularity = VOSClusteringTechnique.calcModularityFunction();
+                // } else if (modularityFunction == 3) {// silhouette index
+                modularity = VOSClusteringTechnique.calcSilhouetteFunction();
+                // } else { // default
+                    // modularity = VOSClusteringTechnique.calcModularityFunction();
+                // }
 
                 if (printOutput && (nIterations > 1))
                     System.out.format("\t1Modularity: %.4f%n", modularity);
@@ -249,7 +248,6 @@ public class ModularityOptimizer {
         // set firstNeighborIndex[i]-firstNeighborValue[i-1] = nNeighbors[i-1]
 
         // finds number of half-edges
-        // TODO what's the purpose of firstNeighborIndex?
         firstNeighborIndex = new int[nNodes + 1];
         nEdges = 0;
         for (i = 0; i < nNodes; i++) {
@@ -257,12 +255,6 @@ public class ModularityOptimizer {
             nEdges += nNeighbors[i];
         }
         firstNeighborIndex[nNodes] = nEdges;
-
-        // TODO delete: prints out firstNeighborIndex
-        // System.out.println("index firstNeighborIndex");
-        // for (int jj = 0; jj < nNodes + 1; jj++) {
-        //     System.out.println(jj + " " + firstNeighborIndex[jj]);
-        // }
 
         // computes the neighbor array and weight of each half-edge
         // i'th spot in neighbor is the destination vertex d of the edge between v_c and d,
@@ -323,7 +315,7 @@ public class ModularityOptimizer {
         bufferedWriter = new BufferedWriter(new FileWriter(fileName));
 
         for (i = 0; i < nNodes; i++) {
-            bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i))); // TODO output written here. change to: i + Integer.toString(clustering.getCluster(i))
+            bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i)));
             bufferedWriter.newLine();
         }
 

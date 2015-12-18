@@ -55,7 +55,7 @@ public class Clustering implements Cloneable, Serializable {
     public Clustering(int nNodes) {
         this.nNodes = nNodes;
         cluster = new int[nNodes];
-        nClusters = 1; // there is a single cluster
+        nClusters = 1;
     }
 
     /** 

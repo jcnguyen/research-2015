@@ -148,13 +148,11 @@ public class VOSClusteringTechnique {
             nNodesPerCluster[clustering.cluster[i]]++;
         }
 
-        /*keep track of the num clusters with no nodes in them,
-         as well as what clusters these are*/
+        /* an unusedCluster is an array that keeps track of clusters with no nodes in them */
         nUnusedClusters = 0;
         unusedCluster = new int[network.nNodes];
         for (i = 0; i < network.nNodes; i++)
-            if (nNodesPerCluster[i] == 0)
-            {
+            if (nNodesPerCluster[i] == 0) {
                 unusedCluster[nUnusedClusters] = i;
                 nUnusedClusters++;
             }
@@ -192,8 +190,7 @@ public class VOSClusteringTechnique {
             if the cluster became empty, add it to unusedClusters */
             clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
             nNodesPerCluster[clustering.cluster[j]]--;
-            if (nNodesPerCluster[clustering.cluster[j]] == 0)
-            {
+            if (nNodesPerCluster[clustering.cluster[j]] == 0) {
                 unusedCluster[nUnusedClusters] = clustering.cluster[j];
                 nUnusedClusters++;
             }
@@ -270,168 +267,176 @@ public class VOSClusteringTechnique {
         return update;
     }
 
-    // public boolean runLocalMovingAlgorithm2(Random random, int modularityFunction) {
-    //     boolean update;
-    //     double maxQualityFunction, qualityFunction;
-    //     double[] clusterWeight, edgeWeightPerCluster;
-    //     double[][] adjMatrix, shortestPath;
-    //     int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
-    //     int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
+/*******************************************************************
+    IN PROGRESS
+********************************************************************/
 
-    //     int maxSI, originalSI;
+    public boolean runLocalMovingAlgorithm2(Random random, int modularityFunction) {
+        boolean update;
+        double maxQualityFunction, qualityFunction;
+        double[] clusterWeight, edgeWeightPerCluster;
+        double[][] adjMatrix, shortestPath;
+        int bestCluster, i, j, k, l, nNeighboringClusters, nStableNodes, nUnusedClusters;
+        int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
-    //     /*don't need to run alg if only 1 node*/ 
-    //     if (network.nNodes == 1)
-    //         return false;
+        double maxSI, originalSI;
 
-    //     update = false;
+        /*don't need to run alg if only 1 node*/ 
+        if (network.nNodes == 1)
+            return false;
 
-    //     clusterWeight = new double[network.nNodes]; /*elements contain the total node weights of everything in that cluster*/
-    //     nNodesPerCluster = new int[network.nNodes]; /*elements contain num nodes in that cluster*/
-    //     for (i = 0; i < network.nNodes; i++) {
-    //         clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
-    //         nNodesPerCluster[clustering.cluster[i]]++;
-    //     }
+        update = false;
 
-    //     /*keep track of the num clusters with no nodes in them,
-    //      as well as what clusters these are*/
-    //     nUnusedClusters = 0;
-    //     unusedCluster = new int[network.nNodes];
-    //     for (i = 0; i < network.nNodes; i++)
-    //         if (nNodesPerCluster[i] == 0) {
-    //             unusedCluster[nUnusedClusters] = i;
-    //             nUnusedClusters++;
-    //         }
+        clusterWeight = new double[network.nNodes]; /*elements contain the total node weights of everything in that cluster*/
+        nNodesPerCluster = new int[network.nNodes]; /*elements contain num nodes in that cluster*/
+        for (i = 0; i < network.nNodes; i++) {
+            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+            nNodesPerCluster[clustering.cluster[i]]++;
+        }
 
-    //     nodePermutation = Arrays2.generateRandomPermutation(network.nNodes, random);
+        /*keep track of the num clusters with no nodes in them,
+         as well as what clusters these are*/
+        nUnusedClusters = 0;
+        unusedCluster = new int[network.nNodes];
+        for (i = 0; i < network.nNodes; i++)
+            if (nNodesPerCluster[i] == 0) {
+                unusedCluster[nUnusedClusters] = i;
+                nUnusedClusters++;
+            }
 
-    //     edgeWeightPerCluster = new double[network.nNodes];
-    //     neighboringCluster = new int[network.nNodes - 1];
-    //     nStableNodes = 0;
-    //     i = 0;
+        nodePermutation = Arrays2.generateRandomPermutation(network.nNodes, random);
 
-    //     // TODO comment: note that we do matrix/shortest paths here
-    //     adjMatrix = network.getMatrix();
-    //     shortestPath = floydWarshall(adjMatrix, network.nNodes);
+        edgeWeightPerCluster = new double[network.nNodes];
+        neighboringCluster = new int[network.nNodes - 1];
+        nStableNodes = 0;
+        i = 0;
 
-    //     /*stay in loop until a local optimal modularity value is moved, 
-    //     moving any node would not increase it*/
-    //     do {
-    //         j = nodePermutation[i]; /*start with some node*/
+        // TODO comment: note that we do matrix/shortest paths here
+        adjMatrix = network.getMatrix();
+        shortestPath = floydWarshall(adjMatrix, network.nNodes);
+
+        /*stay in loop until a local optimal modularity value is moved, 
+        moving any node would not increase it*/
+        do {
+            j = nodePermutation[i]; /*start with some node*/
            
-    //         // TODO call SI on current clustering with j in current position,
-    //         // save the original SI to usee for comparison at end
-    //         maxSI = calcSilhouetteFunction(shortestPath);
-    //         originalSI = maxSI;
+            // TODO call SI on current clustering with j in current position,
+            // save the original SI to usee for comparison at end
+            maxSI = calcSilhouetteFunction(shortestPath);
+            originalSI = maxSI;
 
-    //         nNeighboringClusters = 0;
-    //         /*for each neighboring node, find the cluster of that node, 
-    //         find the number of neighboring clusters, find total edge weight for each neighbor cluster */
-    //         for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++) {
-    //             l = clustering.cluster[network.neighbor[k]];
-    //             if (edgeWeightPerCluster[l] == 0) {
-    //                 neighboringCluster[nNeighboringClusters] = l;
-    //                 nNeighboringClusters++;
-    //             }
-    //             edgeWeightPerCluster[l] += network.edgeWeight[k];
-    //         }
+            nNeighboringClusters = 0;
+            /*for each neighboring node, find the cluster of that node, 
+            find the number of neighboring clusters, find total edge weight for each neighbor cluster */
+            for (k = network.firstNeighborIndex[j]; k < network.firstNeighborIndex[j + 1]; k++) {
+                l = clustering.cluster[network.neighbor[k]];
+                if (edgeWeightPerCluster[l] == 0) {
+                    neighboringCluster[nNeighboringClusters] = l;
+                    nNeighboringClusters++;
+                }
+                edgeWeightPerCluster[l] += network.edgeWeight[k];
+            }
 
-    //         /*remove j from its cluster. update number nodes in cluster and
-    //         see if cluster became empty, update*/
-    //         clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
-    //         nNodesPerCluster[clustering.cluster[j]]--;
-    //         if (nNodesPerCluster[clustering.cluster[j]] == 0) {
-    //             unusedCluster[nUnusedClusters] = clustering.cluster[j];
-    //             nUnusedClusters++;
-    //         }
+            /*remove j from its cluster. update number nodes in cluster and
+            see if cluster became empty, update*/
+            clusterWeight[clustering.cluster[j]] -= network.nodeWeight[j]; 
+            nNodesPerCluster[clustering.cluster[j]]--;
+            if (nNodesPerCluster[clustering.cluster[j]] == 0) {
+                unusedCluster[nUnusedClusters] = clustering.cluster[j];
+                nUnusedClusters++;
+            }
 
-    //         bestCluster = -1;
-    //         //maxQualityFunction = 0;
+            bestCluster = -1;
 
-    //         // save the original cluster of j??
-    //         int originalCuster = clustering.cluster[j];
+            // save the original cluster of j??
+            int originalCuster = clustering.cluster[j];
 
-    //         /*simulate adding j to each neighboring cluster, 
-    //         see if any of these give a better quality function, 
-    //         find one that gives the best quality function that j should go in*/
-    //         for (k = 0; k < nNeighboringClusters; k++) {
-    //             // TODO figure out what variables to change to accurately simulate adding j into cluster k
-    //             // TODO find the new SI
-    //             // TODO compage new and old SI. If new is greater, than that is the best cluster, update the current best SI
-    //             // TODO somehow make sure to undo the variable stuff of adding j to cluster k
-    //             l = neighboringCluster[k];
+            /*simulate adding j to each neighboring cluster, 
+            see if any of these give a better quality function, 
+            find one that gives the best quality function that j should go in*/
+            for (k = 0; k < nNeighboringClusters; k++) {
+                // DONE
+                //  TODO figure out what variables to change to accurately simulate adding j into cluster k
+                //  TODO find the new SI
+                //  TODO compage new and old SI. If new is greater, than that is the best cluster, update the current best SI
+                //  TODO somehow make sure to undo the variable stuff of adding j to cluster k
+                // END DONE
+                l = neighboringCluster[k];
 
-    //             // move j into cluster l (TODO: is l the same index here as for cluster?? )
-    //             clustering.setCluster(j, l);
+                // move j into cluster l (TODO: is l the same index here as for cluster?? )
+                clustering.setCluster(j, l);
 
-    //             // TODO METRIC STUFF HERE
-    //            // if (modularityFunction <= 2) { // modularity
-    //              //   qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
-    //             //} else if (modularityFunction == 3) { // silhouette index
-    //               //  qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
-    //             //}
+                // TODO METRIC STUFF HERE
+               // if (modularityFunction <= 2) { // modularity
+                 //   qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                //} else if (modularityFunction == 3) { // silhouette index
+                  //  qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; // TODO IMPORTANT MODULARITY CALC HERE
+                //}
 
-    //             qualityFunction = calcSilhouetteFunction(shortestPath);
-    //             if (modularityFunction <= 2) { // modularity
-    //                 qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
-    //             } else if (modularityFunction == 3) { // silhouette index
-    //                 qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
-    //             } else { // default
-    //                 qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
-    //             }
+                qualityFunction = calcSilhouetteFunction(shortestPath);
+                if (modularityFunction <= 2) { // modularity
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
+                } else if (modularityFunction == 3) { // silhouette index
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution;
+                } else { // default
+                    qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
+                }
 
-    //             if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && (l < bestCluster))) {
-    //                 bestCluster = l;
-    //                 maxSI = qualityFunction;
-    //             }
-    //             edgeWeightPerCluster[l] = 0;
-    //         }
-    //         if (maxSI == originalSI) {  // TODO if best cluster is original, do something 
-    //             bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster??
-    //             nUnusedClusters--;
+                if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && (l < bestCluster))) {
+                    bestCluster = l;
+                    maxSI = qualityFunction;
+                }
+                edgeWeightPerCluster[l] = 0;
+            }
+            if (maxSI == originalSI) {  // TODO if best cluster is original, do something 
+                bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster??
+                nUnusedClusters--;
 
-    //             // move j back to original cluster
-    //             clustering.setCluster(j, originalCluster);
 
-    //         }
+            }
 
-    //         // TODO what exactly do we need to do for this with updating clustering
-    //         // put j into best cluster in clustering:
+            // TODO what exactly do we need to do for this with updating clustering
+            // put j into best cluster in clustering:
 
-    //         /*add j into the best cluster it should be in*/
-    //         clusterWeight[bestCluster] += network.nodeWeight[j];
-    //         nNodesPerCluster[bestCluster]++;
-    //         /*if it ends up in original cluster, update stable nodes*/
-    //         if (bestCluster == clustering.cluster[j]) 
-    //             nStableNodes++;
-    //         else { /*j was moved to a new cluster that is better*/
-    //             clustering.cluster[j] = bestCluster;
-    //             nStableNodes = 1;
-    //             update = true;
+            /*add j into the best cluster it should be in*/
+            clusterWeight[bestCluster] += network.nodeWeight[j];
+            nNodesPerCluster[bestCluster]++;
+            /*if it ends up in original cluster, update stable nodes*/
+            if (bestCluster == clustering.cluster[j]) {
+                nStableNodes++;
+            } else { /*j was moved to a new cluster that is better*/
+                clustering.cluster[j] = bestCluster;
+                nStableNodes = 1;
+                update = true;
 
-    //             // TODO : put k into this new cluster
-    //             clustering.setCluster(j, bestCluster);
-    //         }
+            }
 
-    //         i = (i < network.nNodes - 1) ? (i + 1) : 0;
-    //     }
-    //     while (nStableNodes < network.nNodes);
+            // TODO : put j into this new cluster
+            clustering.setCluster(j, bestCluster);
 
-    //     /*update nunmber of clusters that exist now, and
-    //     what nodes are in what cluster*/
-    //     newCluster = new int[network.nNodes];
-    //     clustering.nClusters = 0;
-    //     for (i = 0; i < network.nNodes; i++)
-    //         if (nNodesPerCluster[i] > 0) {
-    //             newCluster[i] = clustering.nClusters;
-    //             clustering.nClusters++;
-    //         }
-    //     for (i = 0; i < network.nNodes; i++) {
-    //         clustering.cluster[i] = newCluster[clustering.cluster[i]];
-    //     }
+            i = (i < network.nNodes - 1) ? (i + 1) : 0;
+        }
+        while (nStableNodes < network.nNodes);
 
-    //     return update;
-    // }
+        /*update nunmber of clusters that exist now, and
+        what nodes are in what cluster*/
+        newCluster = new int[network.nNodes];
+        clustering.nClusters = 0;
+        for (i = 0; i < network.nNodes; i++)
+            if (nNodesPerCluster[i] > 0) {
+                newCluster[i] = clustering.nClusters;
+                clustering.nClusters++;
+            }
+        for (i = 0; i < network.nNodes; i++) {
+            clustering.cluster[i] = newCluster[clustering.cluster[i]];
+        }
+
+        return update;
+    }
+
+/*****************************************************************************
+    IN PROGRESS
+******************************************************************************/
 
     /**
      *
@@ -457,6 +462,7 @@ public class VOSClusteringTechnique {
             return false;
 
         /*see if moving any nodes will increase modularity*/
+        // TODO METRIC STUFF HERE
         // update = runLocalMovingAlgorithm2(random, modularityFunction);
         update = runLocalMovingAlgorithm(random);
 
@@ -722,7 +728,6 @@ public class VOSClusteringTechnique {
      * 
      * @return qualityFunction - calculating the metric (modularity in this case) for the graph
      */
-
     public double calcModularityFunction() 
 
     {
@@ -767,12 +772,9 @@ public class VOSClusteringTechnique {
 
     /**
      * 
-     * @return qualityFunction - calculating the metric (modularity in this case) for the graph
+     * @return qualityFunction - calculating the silhouette metric value for the graph
      */
-    // TODO
-    // public double calcQualityFunction()
-    public double calcSilhouetteFunction(double[][] shortestPath)
-    {
+    public double calcSilhouetteFunction(double[][] shortestPath) {
         int i, j, k, c, n; // iterators
         int nodeK; // other node
         int numCommunities = clustering.nClusters;
@@ -790,13 +792,11 @@ public class VOSClusteringTechnique {
 
         double[] allCommunitySilhouettes = new double[numCommunities];
 
-        // TODO delete
-        for (int jj = 0; jj < numNodesInCluster.length; jj++) {
-            System.out.println("index: " + jj + " " + numNodesInCluster[jj] + " ");
-        }
-
         //for every community
         for (c = 0; c < numCommunities; c++) {
+
+            System.out.println("-----------------------------------------------------------------"); // TODO
+            System.out.println("LOOKING AT COMMUNITY: " + c); // TODO
             
             sizeOfCommunity = numNodesInCluster[c];
 
@@ -825,8 +825,15 @@ public class VOSClusteringTechnique {
                 // System.out.println("avgInnerDistance: " + silhouetteWidth[i]); // TODO delete
 
                 // finds distance between vertex i and every vertex in different community
-                double[] distanceOptions = new double[sizeOfCommunity];
-                distanceOptions[c] = 0;
+                double[] distanceOptions = new double[numCommunities]; // note: sizeOfCommunity is size of current community
+                distanceOptions[c] = INF;
+                // TODO delete, this prints out distanceOptions
+                System.out.print("initial distanceOptions: ");
+                for (int jj = 0; jj < distanceOptions.length; jj++) {
+                    System.out.print(distanceOptions[jj] + ", ");
+                }
+                System.out.println();
+
                 for (n = 0; n < numCommunities; n++) {
                     currentDistance = 0;
 
@@ -837,11 +844,28 @@ public class VOSClusteringTechnique {
                         for (k = 0; k < sizeOfCommunityN; k++) {
                             nodeK = nodesInCluster[n][k];
                             currentDistance += shortestPath[i][nodeK];
+                            System.out.println("shortestPath[i][nodeK] = " + shortestPath[i][nodeK]); // TODO delete
+
                         }
+
+                        System.out.println("currentDistance before division = " + currentDistance); // TODO delete
+                        System.out.println("sizeOfCommunityN = " + sizeOfCommunityN); // TODO delete
+
                         currentDistance = currentDistance/(sizeOfCommunityN);
+                        System.out.println("currentDistance after division = " + currentDistance); // TODO delete
+
                         distanceOptions[n] = currentDistance;
+                        System.out.println("distanceOptions[n] = " + distanceOptions[n]); // TODO delete
+
                     }
                 }
+
+                // TODO delete, this prints out distanceOptions
+                System.out.print("distanceOptions: ");
+                for (int jj = 0; jj < distanceOptions.length; jj++) {
+                    System.out.print(distanceOptions[jj] + ", ");
+                }
+                System.out.println();
 
                 // get the min of all the average distances
                 minOfAverageOutsideDistance = Arrays2.calcMinimum(distanceOptions);
@@ -854,8 +878,10 @@ public class VOSClusteringTechnique {
                     maxOfDistances = minOfAverageOutsideDistance;
                 }
 
+                // System.out.println("minOfAverageOutsideDistance " + minOfAverageOutsideDistance); // TODO delete, b_i^j
+                // System.out.println("averageInnerDistance " + averageInnerDistance); // TODO delete, a_i^j
+                // System.out.println("maxOfDistances " + maxOfDistances); // TODO delete
                 silhouetteWidth[i] = ((minOfAverageOutsideDistance - averageInnerDistance)/maxOfDistances); 
-                // System.out.println("SI at " + i + ": " + silhouetteWidth[i]); TOOD delete
             }
 
             // calculate the silhouette width for the entire community
@@ -864,14 +890,18 @@ public class VOSClusteringTechnique {
                 communitySilhouette += silhouetteWidth[k];
             }
 
+            // System.out.println("communitySilhouette " + communitySilhouette); // TODO delete
             allCommunitySilhouettes[c] = communitySilhouette/sizeOfCommunity;
         }
 
         // get the silhouette of entire graph
         for (k=0;k<numCommunities;k++) {
             globalSilhouetteIndex += allCommunitySilhouettes[k];
+            System.out.println("allCommunitySilhouette at " + k + ", " + allCommunitySilhouettes[k]); // TODO delete
+
         }
 
+        // System.out.println("calcSilhouetteFunction, distance " + globalSilhouetteIndex); // TODO delete
         return globalSilhouetteIndex/numCommunities;
     }
 
@@ -921,7 +951,7 @@ public class VOSClusteringTechnique {
                 }
             }
         }
- 
+        
         return dist;
     }
 
