@@ -1,0 +1,113 @@
+-------------------------------------
+Modularity Optimizer
+Version 1.3.0
+by Ludo Waltman and Nees Jan van Eck
+-------------------------------------
+Reading input file...
+Finish reading input file.
+
+Number of nodes: 7
+Number of edges: 10
+
+Running Louvain algorithm...
+
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 1
+
+ITERATION DO-WHILE: 1
+------------------------------------------
+nStableNodes: 1
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 2
+
+ITERATION DO-WHILE: 2
+------------------------------------------
+nStableNodes: 2
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 3
+
+ITERATION DO-WHILE: 3
+------------------------------------------
+nStableNodes: 3
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 4
+
+ITERATION DO-WHILE: 4
+------------------------------------------
+nStableNodes: 4
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 5
+
+ITERATION DO-WHILE: 5
+------------------------------------------
+nStableNodes: 5
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 6
+
+ITERATION DO-WHILE: 6
+------------------------------------------
+nStableNodes: 6
+    -initial: (maxSI, originalSI): (0.0, 0.0)
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.16666666666666666
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -updating nStableNodes
+        -bestCluster is original: nStableNodes++: 7
+	1Modularity: 0.0000
+
+Modularity: 0.0000
+Number of communities: 7
+Elapsed time: 0 seconds
+
+Writing output file...
+Finish writing to output file.

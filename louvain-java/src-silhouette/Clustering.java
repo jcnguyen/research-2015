@@ -149,8 +149,9 @@ public class Clustering implements Cloneable, Serializable {
         int[] nNodesPerCluster;
 
         nNodesPerCluster = new int[nClusters];
-        for (i = 0; i < nNodes; i++)
+        for (i = 0; i < nNodes; i++) {
             nNodesPerCluster[cluster[i]]++;
+        }
         return nNodesPerCluster;
     }
 
@@ -190,6 +191,11 @@ public class Clustering implements Cloneable, Serializable {
     public void setCluster(int node, int cluster) {
         this.cluster[node] = cluster;
         nClusters = Math.max(nClusters, cluster + 1);
+    }
+
+    public void setCluster2(int node, int cluster) {
+        this.cluster[node] = cluster;
+        nClusters--;
     }
 
     /**

@@ -311,14 +311,17 @@ public class VOSClusteringTechnique {
                 System.out.println("------------------------------------------");
                 System.out.println("nStableNodes: " + nStableNodes);
             }
+            nDoWhileIterations++;
 
-            j = nodePermutation[i]; // start with a random vertex j
+            // TODO change back
+            // j = nodePermutation[i]; // start with a random vertex j
+            j = 0;
            
             // calculate the SI given this current clustering
             maxSI = calcSilhouetteFunction(shortestPath);
             originalSI = maxSI;
             if (TEST2) {
-                System.out.println("    -maxSI: " + maxSI);
+                System.out.println("    -initial: (maxSI, originalSI): (" + maxSI + ", " + originalSI + ")");
             }
 
             // get the neighboring clusters of vertex j and the edge weights of those clusters
@@ -377,7 +380,7 @@ public class VOSClusteringTechnique {
                 edgeWeightPerCluster[l] = 0;
             }
             Double aMaxSI = (Double) maxSI;
-            if (maxSI == originalSI || aMaxSI.isNaN()) {  // best cluster is original
+            if (bestCluster == -1 || aMaxSI.isNaN()) {  // best cluster is original
                 if (TEST2) {
                     System.out.println("        -bestCluster is original: from " + bestCluster + " to " + unusedCluster[nUnusedClusters - 1]);
                     System.out.println("        -maxSI not updated: " + maxSI);
@@ -389,27 +392,29 @@ public class VOSClusteringTechnique {
 
             // add vertex j to the cluster that gives the best SI and
             // update structures accordingly
+            if (TEST2) {
+                System.out.println("    -updating nStableNodes");
+            }
+            clustering.setCluster(j, bestCluster);
             clusterWeight[bestCluster] += network.nodeWeight[j];
             nNodesPerCluster[bestCluster]++;
             if (bestCluster == clustering.cluster[j]) { // vertex j is in original cluster
                 nStableNodes++;
                 if (TEST2) {
-                    System.out.println("    -bestCluster is original: nStableNodes++: " + nStableNodes);
+                    System.out.println("        -bestCluster is original: nStableNodes++: " + nStableNodes);
                 }
             } else { // vertex j is in one of its neighboring clusters
                 clustering.cluster[j] = bestCluster;
                 nStableNodes = 1;
                 update = true;
                 if (TEST2) {
-                    System.out.println("    -bestCluster is neighbor: nStableNodes = 1: " + nStableNodes);
+                    System.out.println("        -bestCluster is neighbor: nStableNodes = 1: " + nStableNodes);
                 }
             }
-            clustering.setCluster(j, bestCluster);
 
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
-            nDoWhileIterations++;
         }
-        while (nStableNodes < network.nNodes && nDoWhileIterations < 1);
+        while (nStableNodes < network.nNodes);
 
         // update structures to reflect the new clustering
         newCluster = new int[network.nNodes];
@@ -749,7 +754,7 @@ public class VOSClusteringTechnique {
     // k = node in other cluster at i
     public double calcSilhouetteFunction(double[][] shortestPath) {
         int c, c2, i, j, k;
-        int nClusters, nNodesInClusterC, nNodesInClusterC2;
+        int cumulativeNNodes, nClusters, nNodesInClusterC, nNodesInClusterC2, nEmptyClusters;
         int[] nNodesPerCluster;
         int[][] nodesPerCluster;
 
@@ -757,41 +762,44 @@ public class VOSClusteringTechnique {
         double[] averageOuterDistances;
 
         double silhouetteIndexGlobal;
-        double[] silhouetteIndicesPerCluster;
+        double[] silhouetteIndexPerCluster;
         double[] silhouetteWidths;
 
         nClusters = clustering.nClusters;
         nNodesPerCluster = clustering.getNNodesPerCluster();
         nodesPerCluster = clustering.getNodesPerCluster();
 
-        silhouetteIndicesPerCluster = new double[nClusters];
+        silhouetteIndexPerCluster = new double[nClusters];
+
+        if (TEST) {
+            System.out.println("________________________________________________________");
+        }
 
         // iterate through the clusters
-
-        int cumulativeNNodes = 0;
+        cumulativeNNodes = 0;
+        nEmptyClusters = 0;
         for (c = 0; c < nClusters; c++) {
             nNodesInClusterC = nNodesPerCluster[c];
 
             if (TEST) {
                 System.out.println();
-                System.out.println("COMMUNITYID: " + c);
+                System.out.println("CLUSTER " + c);
                 System.out.println("-----------------------------------------");
                 System.out.println("nNodesInClusterC: " + nNodesInClusterC);
             }
 
-            // calculate the silhouette for every vertex j in cluster c
+            // calculate the silhouette index of the entire cluster c
             if (TEST) {
                 System.out.println("1. calculating silhouette of vertex j in cluster " + c);
             }
-
-            // calculate the silhouette index of the entire cluster c
             if (nNodesInClusterC == 0) {
-                silhouetteIndicesPerCluster[c] = 0;
+                silhouetteIndexPerCluster[c] = 0;
+                nEmptyClusters++;
             } else {
                 silhouetteWidths = new double[nNodesInClusterC];
                 for(j = 0; j < nNodesInClusterC; j++) {
                     if (TEST) {
-                        System.out.println("    node " + j);
+                        System.out.println("    node " + (j + cumulativeNNodes));
                     }
 
                     // calculate the average of the shortest distances between 
@@ -849,22 +857,22 @@ public class VOSClusteringTechnique {
                         (minAverageOuterDistance - averageInnerDistance) / 
                         (Math.max(averageInnerDistance, minAverageOuterDistance))); 
                     if (TEST) {
-                        System.out.println("           silhouetteWidths[j]: " + silhouetteWidths[j]);
+                        System.out.println("            silhouetteWidths[j]: " + silhouetteWidths[j]);
                     }
                 }
-                silhouetteIndicesPerCluster[c] = Arrays2.calcSum(silhouetteWidths) / nNodesInClusterC;
+                silhouetteIndexPerCluster[c] = Arrays2.calcSum(silhouetteWidths) / nNodesInClusterC;
             }
 
             if (TEST) {
                 System.out.println("2. calculate silhouette of entire cluster " + c);
-                System.out.println("    silhouetteIndicesPerCluster[c]: " + silhouetteIndicesPerCluster[c]);
+                System.out.println("    silhouetteIndexPerCluster[c]: " + silhouetteIndexPerCluster[c]);
             }
 
             cumulativeNNodes += nNodesInClusterC;
         }
 
         // get the silhouette of entire graph
-        silhouetteIndexGlobal = Arrays2.calcSum(silhouetteIndicesPerCluster) / nClusters;
+        silhouetteIndexGlobal = Arrays2.calcSum(silhouetteIndexPerCluster) / (nClusters - nEmptyClusters);
 
         if (TEST) {
             System.out.println();

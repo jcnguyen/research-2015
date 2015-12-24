@@ -13,1608 +13,4082 @@ Running Louvain algorithm...
 
 	Random start: 1
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 2
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 3
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 4
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 5
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 6
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 7
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 8
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 9
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 3 to cluster 1
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 3 to cluster 5
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 3 to cluster 6
-        -qualityFunction: -0.2857142857142857
-        -bestCluster is original: from -1 to 3
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 	Random start: 10
 	Iteration: 1
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 2
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 0 to cluster 1
-        -qualityFunction: 0.0
-    -adding vertex 0 to cluster 2
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 0
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 3
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 4
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 6 to cluster 3
-        -qualityFunction: -0.2857142857142857
-    -adding vertex 6 to cluster 4
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 6 to cluster 5
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 6
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 5
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 6
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 7
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 4 to cluster 3
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 5
-        -qualityFunction: 0.0
-    -adding vertex 4 to cluster 6
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 4
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 8
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 5 to cluster 3
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 5 to cluster 4
-        -qualityFunction: 0.0
-    -adding vertex 5 to cluster 6
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 5
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 9
+silhouetteIndexGlobal: 0.0
+________________________________________________________
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 1 to cluster 0
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 2
-        -qualityFunction: 0.0
-    -adding vertex 1 to cluster 3
-        -qualityFunction: -0.14285714285714285
-        -bestCluster is original: from -1 to 1
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
-	1Modularity: 0.0000
-	Iteration: 10
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
 
-ITERATION DO-WHILE: 0
-------------------------------------------
-nStableNodes: 0
-    -maxSI: 0.0
-    -adding vertex 2 to cluster 0
-        -qualityFunction: -0.14285714285714285
-    -adding vertex 2 to cluster 1
-        -qualityFunction: 0.0
-        -bestCluster is original: from -1 to 2
-        -maxSI not updated: 0.0
-    -bestCluster is neighbor: nStableNodes = 1: 1
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.5, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.5, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 0
+1. calculating silhouette of vertex j in cluster 0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, Infinity, 0.5, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 0.5
+            silhouetteWidths[j]: -0.5
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 2
+1. calculating silhouette of vertex j in cluster 2
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 2.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 0.0, Infinity, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 0.0
+            silhouetteWidths[j]: -1.0
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: -0.5
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: -0.16666666666666666
+________________________________________________________
+
+CLUSTER 0
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 0
+    node 0
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: Infinity, 1.0, 1.0, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 0
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 1
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 1
+    node 1
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, Infinity, 1.0, 1.0, 2.0, 2.0, 2.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 1
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 2
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 2
+    node 2
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 1.0, 1.0, Infinity, 2.0, 3.0, 3.0, 3.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 2
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 3
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 3
+    node 3
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 2.0, 1.0, 2.0, Infinity, 1.0, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 3
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 4
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 4
+    node 4
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, Infinity, 1.0, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 4
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 5
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 5
+    node 5
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, Infinity, 1.0, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 5
+    silhouetteIndexPerCluster[c]: 0.0
+
+CLUSTER 6
+-----------------------------------------
+nNodesInClusterC: 1
+1. calculating silhouette of vertex j in cluster 6
+    node 6
+        -calculating average inner distance
+            averageInnerDistance: 1.0
+        -calculating minimum outer distance
+            averageOuterDistances: 3.0, 2.0, 3.0, 1.0, 1.0, 1.0, Infinity, 
+            minAverageOuterDistance: 1.0
+            silhouetteWidths[j]: 0.0
+2. calculate silhouette of entire cluster 6
+    silhouetteIndexPerCluster[c]: 0.0
+
+silhouetteIndexGlobal: 0.0
 	1Modularity: 0.0000
 
 Maximum modularity in 10 random starts: 0.0000
