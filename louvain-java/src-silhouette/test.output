@@ -1,0 +1,1625 @@
+-------------------------------------
+Modularity Optimizer
+Version 1.3.0
+by Ludo Waltman and Nees Jan van Eck
+-------------------------------------
+Reading input file...
+Finish reading input file.
+
+Number of nodes: 7
+Number of edges: 10
+
+Running Louvain algorithm...
+
+	Random start: 1
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 2
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 3
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 4
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 5
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 6
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 7
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 8
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 9
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 3 to cluster 1
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 3 to cluster 5
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 3 to cluster 6
+        -qualityFunction: -0.2857142857142857
+        -bestCluster is original: from -1 to 3
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+	Random start: 10
+	Iteration: 1
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 2
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 0 to cluster 1
+        -qualityFunction: 0.0
+    -adding vertex 0 to cluster 2
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 0
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 3
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 4
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 6 to cluster 3
+        -qualityFunction: -0.2857142857142857
+    -adding vertex 6 to cluster 4
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 6 to cluster 5
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 6
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 5
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 6
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 7
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 4 to cluster 3
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 5
+        -qualityFunction: 0.0
+    -adding vertex 4 to cluster 6
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 4
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 8
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 5 to cluster 3
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 5 to cluster 4
+        -qualityFunction: 0.0
+    -adding vertex 5 to cluster 6
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 5
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 9
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 1 to cluster 0
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 2
+        -qualityFunction: 0.0
+    -adding vertex 1 to cluster 3
+        -qualityFunction: -0.14285714285714285
+        -bestCluster is original: from -1 to 1
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+	Iteration: 10
+
+ITERATION DO-WHILE: 0
+------------------------------------------
+nStableNodes: 0
+    -maxSI: 0.0
+    -adding vertex 2 to cluster 0
+        -qualityFunction: -0.14285714285714285
+    -adding vertex 2 to cluster 1
+        -qualityFunction: 0.0
+        -bestCluster is original: from -1 to 2
+        -maxSI not updated: 0.0
+    -bestCluster is neighbor: nStableNodes = 1: 1
+	1Modularity: 0.0000
+
+Maximum modularity in 10 random starts: 0.0000
+Number of communities: 7
+Elapsed time: 0 seconds
+
+Writing output file...
+Finish writing to output file.

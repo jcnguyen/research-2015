@@ -100,6 +100,32 @@ public class Arrays2 {
     }
 
     /**
+     * Determines the minimum value of an array.
+     * Accounts for NaN.
+     *
+     * @param value  the array
+     * @return the minimum vallue of the array
+     **/
+    public static double calcMinimum2(double[] value) {
+        double minimum;
+        int i;
+
+        for (i = 0; i < value.length; i++) {
+            if (((Double) value[i]).isNaN()) {
+                value[i] = Double.POSITIVE_INFINITY;
+            }
+        }
+
+        minimum = value[0];
+        for (i = 1; i < value.length; i++) {
+            minimum = Math.min(minimum, value[i]);
+        }
+
+        return minimum;
+    }
+
+
+    /**
      * Determines the maximum value of a double array.
      *
      * @param value  the array
