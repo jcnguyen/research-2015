@@ -303,25 +303,24 @@ public class VOSClusteringTechnique {
         shortestPath = floydWarshall(network.getMatrix(), network.nNodes);
 
         // compute the clustering that achieves the optimal metric value
+        boolean bestClusterIsOriginal = false;
         int nDoWhileIterations = 0;
         do {
+
+            j = nodePermutation[i]; // start with a random vertex j
+           
             if (TEST2) {
                 System.out.println();
-                System.out.println("ITERATION DO-WHILE: " + nDoWhileIterations);
                 System.out.println("------------------------------------------");
-                System.out.println("nStableNodes: " + nStableNodes);
+                System.out.println("ITERATION " + nDoWhileIterations + "; nStableNodes is " + nStableNodes + "; current vertex is " + j);
+                nDoWhileIterations++;
             }
-            nDoWhileIterations++;
 
-            // TODO change back
-            // j = nodePermutation[i]; // start with a random vertex j
-            j = 0;
-           
             // calculate the SI given this current clustering
             maxSI = calcSilhouetteFunction(shortestPath);
             originalSI = maxSI;
             if (TEST2) {
-                System.out.println("    -initial: (maxSI, originalSI): (" + maxSI + ", " + originalSI + ")");
+                System.out.println("    -initial SI: " + maxSI);
             }
 
             // get the neighboring clusters of vertex j and the edge weights of those clusters
@@ -369,7 +368,7 @@ public class VOSClusteringTechnique {
                 //     qualityFunction = edgeWeightPerCluster[l] - network.nodeWeight[j] * clusterWeight[l] * resolution; 
                 // }
 
-                if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && (l < bestCluster))) { // best cluster is neighboring cluster l
+                if ((qualityFunction > maxSI) || ((qualityFunction == maxSI) && ( (l < bestCluster) || (bestCluster == -1) ))) { // best cluster is neighboring cluster l
                     if (TEST2) {
                         System.out.println("        -bestCluster updated: from " + bestCluster + " to " + l);
                         System.out.println("        -maxSI updated from " + maxSI + " to " + qualityFunction);
@@ -388,6 +387,7 @@ public class VOSClusteringTechnique {
 
                 bestCluster = unusedCluster[nUnusedClusters - 1]; // TODO should this just be originalCluster?? - yes, but we'll just use the given code to be consistent
                 nUnusedClusters--;
+                bestClusterIsOriginal = true;
             } 
 
             // add vertex j to the cluster that gives the best SI and
@@ -395,10 +395,9 @@ public class VOSClusteringTechnique {
             if (TEST2) {
                 System.out.println("    -updating nStableNodes");
             }
-            clustering.setCluster(j, bestCluster);
             clusterWeight[bestCluster] += network.nodeWeight[j];
             nNodesPerCluster[bestCluster]++;
-            if (bestCluster == clustering.cluster[j]) { // vertex j is in original cluster
+            if (bestClusterIsOriginal) { // vertex j is in original cluster
                 nStableNodes++;
                 if (TEST2) {
                     System.out.println("        -bestCluster is original: nStableNodes++: " + nStableNodes);
@@ -411,6 +410,7 @@ public class VOSClusteringTechnique {
                     System.out.println("        -bestCluster is neighbor: nStableNodes = 1: " + nStableNodes);
                 }
             }
+            clustering.setCluster(j, bestCluster);
 
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
         }
