@@ -17,8 +17,14 @@ import java.util.Random;
 
 public class ModularityOptimizer {
 
+    private static final int MODULARITY_STANDARD = 1;
+    private static final int MODULARITY_ALTERNATIVE = 2;
+    private static final int SILHOUETTE_INDEX = 3;
+
     /** 
-     * The main sequence. TODO
+     * The main sequence. 
+
+     * Runs the complete algorithm to maximize the metric score.
      *
      * @param  args         expects 9 arguments
      * @throws IOException  occurs if there's an input or output error
@@ -27,8 +33,8 @@ public class ModularityOptimizer {
         boolean printOutput, update;
         Clustering clustering;
         Console console;
-        double modularity, maxModularity, resolution, resolution2;
-        int algorithm, i, j, modularityFunction, nIterations, nRandomStarts;
+        double metricValue, maxMetricValue, resolution, resolution2;
+        int algorithm, i, j, metricFunction, nIterations, nRandomStarts;
         long beginTime, endTime, randomSeed;
         Network network;
         Random random;
@@ -45,7 +51,7 @@ public class ModularityOptimizer {
         if (args.length == 9) {
             inputFileName = args[0];
             outputFileName = args[1];
-            modularityFunction = Integer.parseInt(args[2]);
+            metricFunction = Integer.parseInt(args[2]);
             resolution = Double.parseDouble(args[3]);
             algorithm = Integer.parseInt(args[4]);
             nRandomStarts = Integer.parseInt(args[5]);
@@ -56,8 +62,8 @@ public class ModularityOptimizer {
             console = System.console();
             inputFileName = console.readLine("Input file name: ");
             outputFileName = console.readLine("Output file name: ");
-            modularityFunction = Integer.parseInt(console.readLine("Metric function (1 = standard; 2 = alternative; 3 = silhouette; 4 = performance): ")); 
-            resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g., 1.0): "));
+            metricFunction = Integer.parseInt(console.readLine("Metric function (1 = modularity standard; 2 = modularity alternative; 3 = silhouette index; 4 = performance): ")); 
+            resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g. 1.0): "));
             algorithm = Integer.parseInt(console.readLine("Algorithm (1 = Louvain; 2 = Louvain with multilevel refinement; 3 = smart local moving): "));
             nRandomStarts = Integer.parseInt(console.readLine("Number of random starts (e.g., 10): "));
             nIterations = Integer.parseInt(console.readLine("Number of iterations (e.g., 10): "));
@@ -68,7 +74,7 @@ public class ModularityOptimizer {
 
         // read input file
         if (printOutput) System.out.println("Reading input file...");
-        network = readInputFile(inputFileName, modularityFunction);
+        network = readInputFile(inputFileName, metricFunction);
         if (printOutput) System.out.println("Finish reading input file.");
 
         // print network characteristics
@@ -81,19 +87,22 @@ public class ModularityOptimizer {
                 ((algorithm == 1) ? "Louvain algorithm" : 
                 ((algorithm == 2) ? "Louvain algorithm with multilevel refinement" : 
                 "smart local moving algorithm")) + "...");
+            System.out.println("with metric " + 
+                ((metricFunction == MODULARITY_ALTERNATIVE) ? "alternative modularity" : 
+                ((metricFunction == SILHOUETTE_INDEX) ? "silhouette index" : 
+                "standard modularity")));
             System.out.println();
         }
 
-        // calculate resolution based on modularity function
-        resolution2 = ((modularityFunction != 2) ? 
+        // calculate resolution based on metric function
+        resolution2 = ((metricFunction != MODULARITY_ALTERNATIVE) ? 
             (resolution / (2 * network.getTotalEdgeWeight() + 
                 network.totalEdgeWeightSelfLinks)) : 
             resolution);
 
-        // TODO comment  
         beginTime = System.currentTimeMillis();
         clustering = null;
-        maxModularity = Double.NEGATIVE_INFINITY;
+        maxMetricValue = Double.NEGATIVE_INFINITY;
         random = new Random(randomSeed);
 
         for (i = 0; i < nRandomStarts; i++) {
@@ -108,36 +117,37 @@ public class ModularityOptimizer {
                 if (printOutput && (nIterations > 1))
                     System.out.format("\tIteration: %d%n", j + 1);
 
+                // run the algorithm
                 if (algorithm == 1)
-                    update = VOSClusteringTechnique.runLouvainAlgorithm(random, modularityFunction);
+                    update = VOSClusteringTechnique.runLouvainAlgorithm(random, metricFunction);
                 else if (algorithm == 2)
                     update = VOSClusteringTechnique.runLouvainAlgorithmWithMultilevelRefinement(random);
                 else if (algorithm == 3)
                     VOSClusteringTechnique.runSmartLocalMovingAlgorithm(random);
                 j++;
 
-                // TODO METRIC STUFF HERE
-                // if (modularityFunction <=2) {
-                //     modularity = VOSClusteringTechnique.calcModularityFunction();
-                // } else if (modularityFunction == 3) {// silhouette index
-                modularity = VOSClusteringTechnique.calcSilhouetteFunction();
-                // } else { // default
-                    // modularity = VOSClusteringTechnique.calcModularityFunction();
-                // }
+                // calculate the metric score of the final clustering
+                if (metricFunction == MODULARITY_STANDARD || metricFunction == MODULARITY_ALTERNATIVE) {
+                    metricValue = VOSClusteringTechnique.calcModularityFunction();
+                } else if (metricFunction == SILHOUETTE_INDEX) {
+                    metricValue = VOSClusteringTechnique.calcSilhouetteFunction();
+                } else { 
+                    metricValue = VOSClusteringTechnique.calcModularityFunction();
+                }
 
                 if (printOutput && (nIterations > 1))
-                    System.out.format("\t1Modularity: %.4f%n", modularity);
+                    System.out.format("\t1Metric value: %.4f%n", metricValue);
             }
             while ((j < nIterations) && update);
 
-            if (modularity > maxModularity) {
+            if (metricValue > maxMetricValue) {
                 clustering = VOSClusteringTechnique.getClustering();
-                maxModularity = modularity;
+                maxMetricValue = metricValue;
             }
 
             if (printOutput && (nRandomStarts > 1)) {
                 if (nIterations == 1)
-                    System.out.format("\tModularity: %.4f%n", modularity);
+                    System.out.format("\tMetric value: %.4f%n", metricValue);
                 System.out.println();
             }
         }
@@ -148,11 +158,12 @@ public class ModularityOptimizer {
             if (nRandomStarts == 1) {
                 if (nIterations > 1)
                     System.out.println();
-                System.out.format("Modularity: %.4f%n", maxModularity);
-            } else
+                System.out.format("Metric value: %.4f%n", maxMetricValue);
+            } else {
                 System.out.format(
-                    "Maximum modularity in %d random starts: %.4f%n", 
-                    nRandomStarts, maxModularity);
+                    "Maximum metric value in %d random starts: %.4f%n", 
+                    nRandomStarts, maxMetricValue);
+            }
 
             System.out.format("Number of communities: %d%n", 
                 clustering.getNClusters());
@@ -168,19 +179,16 @@ public class ModularityOptimizer {
     }
 
     /** 
-     * Constructs a network based on the modularity function and 
-     * an input file that contains the list of edges.
+     * Construct a network based on the metric function and an input file that 
+     * contains the list of edges.
      *
-     * @param  fileName            the input file
-     * // TODO change this param
-     * @param  modularityFunction  1 for standard modularity function
-     *                             2 for alternative modularity function
-     * @throws IOException         occurs if there's an input or output error
-     * @return a network based on the input file and the chosen modularity 
-     *         function
+     * @param  fileName        the input file
+     * @param  metricFunction  the metric function
+     * @throws IOException     occurs if there's an input or output error
+     * @return a network based on the input file and the chosen metric function
      **/
-    private static Network readInputFile(String fileName, int modularityFunction
-        ) throws IOException {
+    private static Network readInputFile(
+        String fileName, int metricFunction) throws IOException {
 
         BufferedReader bufferedReader;
         double[] edgeWeight1, edgeWeight2, nodeWeight;
@@ -196,11 +204,11 @@ public class ModularityOptimizer {
             nLines++;
         bufferedReader.close();
 
-        // read in the start and end nodes of each line and 
+        // read in the start and destination nodes of each line and 
         // compute the total number of nodes
         bufferedReader = new BufferedReader(new FileReader(fileName));
-        node1 = new int[nLines];    // first column 
-        node2 = new int[nLines];    // second column
+        node1 = new int[nLines]; // first column 
+        node2 = new int[nLines]; // second column
         edgeWeight1 = new double[nLines];
         i = -1;
         for (j = 0; j < nLines; j++) {
@@ -210,7 +218,7 @@ public class ModularityOptimizer {
             start = Integer.parseInt(splittedLine[0]);
             destination = Integer.parseInt(splittedLine[1]);
 
-            // enforce the starting node is lower than the dest node
+            // enforce that the start node is lower than the destination node
             if (start < destination) {
                 node1[j] = start;
                 node2[j] = destination;
@@ -220,22 +228,18 @@ public class ModularityOptimizer {
             }
 
             // update the counter of number of nodes
-            // i keeps track of the max 
+            // i keeps track of the max node
             if (node1[j] > i)
                 i = node1[j];
             if (node2[j] > i)
                 i = node2[j];
 
-            // if there's a 3rd argument in the line, we know we have edge weights
-            // store weights in edgeWeight1
+            // store edge weights, if any
             edgeWeight1[j] = (splittedLine.length > 2) ? Double.parseDouble(
                 splittedLine[2]) : 1;
         }
         nNodes = i + 1;
         bufferedReader.close();
-
-        /** DONE READING INPUT - 
-        now calculate useful information about the graph **/
 
         // compute the number of neighbors each node has
         nNeighbors = new int[nNodes];
@@ -243,9 +247,6 @@ public class ModularityOptimizer {
             nNeighbors[node1[i]]++;
             nNeighbors[node2[i]]++;
         }
-
-        // count the number of edges
-        // set firstNeighborIndex[i]-firstNeighborValue[i-1] = nNeighbors[i-1]
 
         // finds number of half-edges
         firstNeighborIndex = new int[nNodes + 1];
@@ -257,19 +258,10 @@ public class ModularityOptimizer {
         firstNeighborIndex[nNodes] = nEdges;
 
         // computes the neighbor array and weight of each half-edge
-        // i'th spot in neighbor is the destination vertex d of the edge between v_c and d,
-        // where v_c is the vertex corresponding to the "chunk" of neighbor that contains i
-        // i'th spot in edgeWeight2 is the weight of the edge indicated in 
         neighbor = new int[nEdges];
         edgeWeight2 = new double[nEdges];
-
-        // initialize nNeighbors to 0
         Arrays.fill(nNeighbors, 0);
-
-        // for every edge, in the order given in the input file
-        // initialize 
         for (i = 0; i < nLines; i++) {
-
             j = firstNeighborIndex[node1[i]] + nNeighbors[node1[i]];
             neighbor[j] = node2[i];
             edgeWeight2[j] = edgeWeight1[i];
@@ -281,11 +273,11 @@ public class ModularityOptimizer {
             nNeighbors[node2[i]]++;
         }
 
-        // construct the network based on the modularity function
-        if (modularityFunction != 2) // standard modularity function
+        // construct the network based on the metric function
+        if (metricFunction != MODULARITY_ALTERNATIVE) {
             network = new Network(
                 nNodes, firstNeighborIndex, neighbor, edgeWeight2);
-        else { // alternative modularity function
+        } else {
             nodeWeight = new double[nNodes];
             Arrays.fill(nodeWeight, 1);
             network = new Network(
@@ -302,23 +294,20 @@ public class ModularityOptimizer {
      * @param  clustering   the clusters to write out
      * @throws IOException  occurs if there's an input or output error
      **/
-    private static void writeOutputFile(String fileName, Clustering clustering
-        ) throws IOException {
+    private static void writeOutputFile(
+        String fileName, Clustering clustering) throws IOException {
 
         BufferedWriter bufferedWriter;
         int i, nNodes;
 
         nNodes = clustering.getNNodes();
-
         clustering.orderClustersByNNodes();
-
         bufferedWriter = new BufferedWriter(new FileWriter(fileName));
-
         for (i = 0; i < nNodes; i++) {
-            bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i)));
+            bufferedWriter.write(
+                i + " " + Integer.toString(clustering.getCluster(i)));
             bufferedWriter.newLine();
         }
-
         bufferedWriter.close();
     }
 }

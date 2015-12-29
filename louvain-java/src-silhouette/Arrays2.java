@@ -6,6 +6,10 @@
  * @author Ludo Waltman
  * @author Nees Jan van Eck
  * @version 1.3.1, 11/17/14
+ *
+ * @author Complex Network Research
+ *         http://research.pomona.edu/complexnetworks/
+ * @version 11/18/15
  */
 
 import java.util.Arrays;
@@ -14,7 +18,7 @@ import java.util.Random;
 public class Arrays2 {
 
     /**
-     * Calculates the sum of the values of an array.
+     * Calculate the sum of the values of an array.
      *
      * @param value  the array
      * @return the sum of the array
@@ -30,7 +34,7 @@ public class Arrays2 {
     }
 
     /**
-     * Calculates the sum of the values between two indices in an array.
+     * Calculate the sum of the values between two indices in an array.
      *
      * @param value       the array
      * @param beginIndex  the beginning index to start the sum (included)
@@ -48,7 +52,7 @@ public class Arrays2 {
     }
 
     /**
-     * Calculates the average of the values in an array.
+     * Calculate the average of the values in an array.
      *
      * @param value  the array
      * @return the average of the array
@@ -65,7 +69,7 @@ public class Arrays2 {
     }
 
     /**
-     * Determines the median value of an array.
+     * Determine the median value of an array.
      *
      * @param value  the array
      * @return the median value of the array
@@ -79,12 +83,13 @@ public class Arrays2 {
         if (sortedValue.length % 2 == 1)
             median = sortedValue[(sortedValue.length - 1) / 2];
         else
-            median = (sortedValue[sortedValue.length / 2 - 1] + sortedValue[sortedValue.length / 2]) / 2;
+            median = (sortedValue[sortedValue.length / 2 - 1] + 
+                sortedValue[sortedValue.length / 2]) / 2;
         return median;
     }
 
     /**
-     * Determines the minimum value of an array.
+     * Determine the minimum value of an array.
      *
      * @param value  the array
      * @return the minimum vallue of the array
@@ -100,8 +105,8 @@ public class Arrays2 {
     }
 
     /**
-     * Determines the minimum value of an array.
-     * Accounts for NaN.
+     * Determine the minimum value of an array.
+     * Accounts for NaN such that NaN < someDouble returns false.
      *
      * @param value  the array
      * @return the minimum vallue of the array
@@ -157,7 +162,8 @@ public class Arrays2 {
     }
 
     /**
-     * Generates a new array of permutations with integer values [0, size of new array).
+     * Generates a new array of permutations with 
+     * integer values [0, size of new array).
      *
      * @param nElements  the size of the new array
      * @return an array of permutations
@@ -167,7 +173,8 @@ public class Arrays2 {
     }
 
     /**
-     * Generates a new array of permutations with integer values [0, size of new array).
+     * Generates a new array of permutations with 
+     * integer values [0, size of new array).
      *
      * @param nElements  the size of the new array
      * @param random     the random generator

@@ -1,11 +1,24 @@
 /**
  * Clustering.java
  *
- * A clustering is the set of all the clusters of a network. 
+ * A clustering is the set of all the clusters in a network. 
+ *
+ * For example, given the following network:
+ *          0------3---4 
+ *         / \     |   |
+ *        1---2    5---6
+ *  Initially, each node is in its own cluster: 
+ *    Clustering = {cluster0 = {0}, cluster1 = {1}, ..., cluster6 = {6}}
+ *  The final clustering is computed as
+ *    Clustering  = {cluster0 = {0, 1, 2}, cluster1 = {3, 4, 5, 6}}
  *
  * @author Ludo Waltman
  * @author Nees Jan van Eck
  * @version 1.3.1 11/17/14
+ *
+ * @author Complex Network Research
+ *         http://research.pomona.edu/complexnetworks/
+ * @version 11/18/15
  */
 
 import java.io.FileInputStream;
@@ -25,7 +38,7 @@ public class Clustering implements Cloneable, Serializable {
     protected int[] cluster; // the cluster that each node i belongs to
 
     /**
-     * Loads a clustering off of a file.
+     * Load a clustering off of a file.
      * 
      * @param  fileName                the file that contains the clustering
      * @throws ClassNotFoundException  occurs if a class is unable to load a 
@@ -39,16 +52,14 @@ public class Clustering implements Cloneable, Serializable {
 
         objectInputStream = new ObjectInputStream(
             new FileInputStream(fileName));
-
         clustering = (Clustering)objectInputStream.readObject();
-
         objectInputStream.close();
 
         return clustering;
     }
 
     /** 
-     * Constructs a clustering using a defined number of nodes.
+     * Construct a clustering using a defined number of nodes.
      * 
      * @param nNodes  the number of nodes in the network
      **/
@@ -59,7 +70,7 @@ public class Clustering implements Cloneable, Serializable {
     }
 
     /** 
-     * Constructs a clustering using a defined cluster.
+     * Construct a clustering using a defined cluster.
      * 
      * @param cluster  the cluster used to construct this clustering
      **/
@@ -70,7 +81,8 @@ public class Clustering implements Cloneable, Serializable {
     }
 
     /**
-     * Creates a shallow copy of this clustering instance. 
+     * Create a shallow copy of this clustering instance. 
+     *
      * That is, if the clone clustering is modified, then the modification is 
      * reflected in this clustering. But if this clustering is modified, then
      * the modification is not reflected in the clone. 
@@ -86,14 +98,13 @@ public class Clustering implements Cloneable, Serializable {
             clonedClustering = (Clustering)super.clone();
             clonedClustering.cluster = getClusters();
             return clonedClustering;
-        }
-        catch (CloneNotSupportedException e) {
+        } catch (CloneNotSupportedException e) {
             return null;
         }
     }
 
     /**
-     * Saves this clustering into a file.
+     * Save this clustering into a file.
      *
      * @param  fileName     the file where this clustering is saved
      * @throws IOException  occurs if there's an input or output error
@@ -103,9 +114,7 @@ public class Clustering implements Cloneable, Serializable {
 
         objectOutputStream = new ObjectOutputStream(
             new FileOutputStream(fileName));
-
         objectOutputStream.writeObject(this);
-
         objectOutputStream.close();
     }
 
@@ -131,7 +140,7 @@ public class Clustering implements Cloneable, Serializable {
     }
 
     /**
-     * Gets the cluster that the node is in.
+     * Get the cluster that the node is in.
      *
      * @param  node  the node
      * @return the cluster in which node belongs
@@ -193,11 +202,6 @@ public class Clustering implements Cloneable, Serializable {
         nClusters = Math.max(nClusters, cluster + 1);
     }
 
-    public void setCluster2(int node, int cluster) {
-        this.cluster[node] = cluster;
-        nClusters--;
-    }
-
     /**
      * Set each node as its own cluster (all clusters are singletons)
      **/
@@ -236,8 +240,8 @@ public class Clustering implements Cloneable, Serializable {
              * Compare the number of nodes of this cluster to another cluster
              *
              * @param  clusterNNodes  the cluster to compare to against
-             * @return 1 if compared cluster has more nodes than this cluster
-             *        -1 if compared cluster has less nodes than this cluster
+             * @return 1 if compared cluster has more nodes than this cluster,
+             *        -1 if compared cluster has less nodes than this cluster,
              *         0 if the number of nodes in both clusters are equal
              **/
             public int compareTo(ClusterNNodes clusterNNodes) {
@@ -286,20 +290,3 @@ public class Clustering implements Cloneable, Serializable {
         nClusters = clustering.nClusters;
     }
 }
-
-
-
-/**
- A clustering contains all the clusters in the graph at that time.
-
-       0------3---4 
-      / \     |   |
-     1   2    5---6
-   t = 0: each node is in its own cluster
-     cluster = |0|1|2|3|4|5|6| // values = cluster ID
-                0 1 2 3 4 5 6  // indices = node ID
-
-   t = 1: cluster0 = {0, 1, 2}, cluster1 = {3, 4, 5, 6}
-     cluster = |0|0|0|1|1|1|1|
-                0 1 2 3 4 5 6    
- **/
