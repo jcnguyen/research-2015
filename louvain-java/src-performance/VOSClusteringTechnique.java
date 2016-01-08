@@ -20,6 +20,7 @@ public class VOSClusteringTechnique {
     /* FOR PERFORMANCE */
 
     // adjacency matrix representation of current network
+    // TODO: update
     protected double[][] adjMatrix;
 
     // weighting function (in the form of an adj matrix) for nonexistent edges
@@ -46,8 +47,6 @@ public class VOSClusteringTechnique {
     private double sumWeights_nonexistentEdges = 0;
     private double g_w;
 
-    private double  f=0,        // intra-cluster density
-                    g=0;        // inter-cluster sparsity
 
     /*
     * Number of possible edges, including self loops, multiplied by M
@@ -253,7 +252,7 @@ public class VOSClusteringTechnique {
                 // if we've found a better cluster, or if we have found an equivalent cluster
                 // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
-
+                    System.out.println("found perf increase of: " + qualityFunction + " moving " + j + " into cluster " + l);
                     bestCluster = l;
                     maxQualityFunction = qualityFunction;
                 }
@@ -262,7 +261,7 @@ public class VOSClusteringTechnique {
                 edgeWeightPerCluster[l] = 0;
             }
 
-            // TODO: if no improvement, why do we mess with unused clusters?
+            // messing with unused clusters bc if we move ourselves into another community, our previous community becomes unused
             if (maxQualityFunction == 0)
 
             {
@@ -337,6 +336,8 @@ public class VOSClusteringTechnique {
 
         /* if we ended up moving any nodes into different communities, begin recursive procedure */
         if (clustering.nClusters < network.nNodes) {
+
+            // Phase 2: recursive call the next pass of the algorithm
             new_VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
 
             /*run Louvain again to see if another update*/
@@ -345,9 +346,9 @@ public class VOSClusteringTechnique {
             if (update2) {
                 update = true;
 
-                // Phase 2
-                // updates this instance's clustering with results from running Louvain on next level clustering
+                // Merge results from the next level deep recursive call into this call
                 clustering.mergeClusters(new_VOSClusteringTechnique.clustering);
+
             }
         }
 
@@ -365,9 +366,9 @@ public class VOSClusteringTechnique {
     * Compute the performance of the initial partition of G,
     * in which every node is its own cluster. This is a special 
     * case of calculating performance. That is, 
-    * f(G) = the sum of weights of all self loops, 
+    * f(G) = 0, 
     * because every node is its own clustering and thus there are 
-    * no internal edges within communities other than self loops.
+    * no internal edges within communities.
     *
     * g(G) = nPossibleEdges - |E|, because at this point
     * every nonexistent edge (disregarding loops) between 
@@ -388,14 +389,11 @@ public class VOSClusteringTechnique {
     * @return perf - performance score
     */
     private double initPerformanceFunction() {
-
-        // Look at diagonals in the adjacency matrix, calculating f (sum of self loops)
-        for (int v=0; v<network.nNodes; v++) {
-            f += adjMatrix[v][v];            
-        }
+        double  f=0,        // intra-cluster density
+                g=0;        // inter-cluster sparsity
 
         // inter-community sparsity score
-        g = M*(network.nPossibleEdges_withSL - network.nEdges);
+        g = M*(network.nPossibleEdges() - network.nEdges);
 
         // final performance calculations
         double numerator = f + g + v_scalingParam*g_w;
@@ -408,13 +406,15 @@ public class VOSClusteringTechnique {
     public double calcPerformanceFunction() {
         
         int u, v;        // vertices
+        double  f=0,        // intra-cluster density
+                g=0;        // inter-cluster sparsity
         double sumWeights_nonexistentEdges = 0;
 
         // for every vertex 
         for (u = 0; u < network.nNodes; u++) {
 
-            // for all vertices lexicographically equal to or after u (include self loops, exclude duplicates)
-            for (v = u; v < network.nNodes; v++) {
+            // for all vertices lexicographically equal to or after u (exclude self loops and duplicates)
+            for (v = u+1; v < network.nNodes; v++) {
 
                 // u and v are in the same community and the edge exists
                 if ((clustering.cluster[u] == clustering.cluster[v]) && (adjMatrix[u][v] != INF)) {
@@ -439,6 +439,8 @@ public class VOSClusteringTechnique {
         }
 
         double numerator = f + g + v_scalingParam*g_w;
+        System.out.println("numerator" + numerator);
+        System.out.println("denominator" + denominator);
         return numerator / denominator;
 
     }
@@ -464,7 +466,7 @@ public class VOSClusteringTechnique {
         // look at all possible edges, existent or nonexistent, with one end at node
         for (int u=0; u<network.nNodes; u++) {
 
-            // self loops go with the vertex, so no change
+            // ignore self loops
             // if node in our target community
             if (u != vertex && clustering.cluster[u] == comm) {
 
@@ -503,7 +505,7 @@ public class VOSClusteringTechnique {
         // look at all possible edges, existent or nonexistent, with one end at node
         for (int u=0; u<network.nNodes; u++) {
 
-            // self loops go with the vertex, so no change
+            // ignore self loops
             // if node in our target community
             if (u != vertex && clustering.cluster[u] == comm) {
 
@@ -548,8 +550,8 @@ public class VOSClusteringTechnique {
             }
         }
 
-        g_w = M*(network.nPossibleEdges_withSL-network.nEdges) - sumWeights_nonexistentEdges;
-        denominator = ((double)network.nPossibleEdges_withSL) * M;
+        g_w = M*(network.nPossibleEdges()-network.nEdges) - sumWeights_nonexistentEdges;
+        denominator = ((double)network.nPossibleEdges()) * M;
     }
 
     /**
@@ -570,4 +572,17 @@ public class VOSClusteringTechnique {
         }
         // TODO: set weights for nonexistent edges
     }
+
+    private void printAdjMatrix() {
+
+        for(int u=0; u < adjMatrix.length; u++) {
+            for(int v=0; v < adjMatrix.length; v++) {
+                System.out.print(adjMatrix[u][v]);
+            }
+            System.out.println();
+    }
+
+        
+    }
+
 }

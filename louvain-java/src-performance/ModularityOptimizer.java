@@ -89,6 +89,11 @@ public class ModularityOptimizer {
             System.out.println();
         }
 
+        // Print the performance of the unaltered graph
+        VOSClusteringTechnique = new VOSClusteringTechnique(network, resolution);
+        System.out.println("\n" + "Performance of unaltered graph:  " +
+                VOSClusteringTechnique.calcPerformanceFunction() + "\n");
+
 
         /** 
         * Run the Louvain algorithm nRandomStarts times,

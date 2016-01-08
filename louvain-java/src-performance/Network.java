@@ -36,18 +36,6 @@ public class Network implements Serializable {
     // the total weight of all self loops in the graph
     protected double totalEdgeWeightSelfLinks;
 
-    /** 
-    * The number of possible full (NOT HALF!) edges, if every node were connected to every other node
-    * Initialized to constructors to be n(n-1)/2, where n=nNodes.
-    * Recall the summation 1+2+3+...+n = n(n+1)/2. We subtract n because our summation is
-    * really 1+2+3+...+(n-1), giving us n(n+1)/2 - n ==> n(n+1)-2n/2 ==> n(n-1)/2.
-    * 
-    * TODO: need to update this value anywhere?
-    *
-    */
-    protected int nPossibleEdges;
-    protected int nPossibleEdges_withSL; // self loops included, simply add nNodes
-
     /**
      * Turns a serialized (byte stream) version of a graph 
      * into a Network object
@@ -140,10 +128,6 @@ public class Network implements Serializable {
 
         this.nodeWeight = (nodeWeight != null) ? (double[])nodeWeight.clone() : getTotalEdgeWeightPerNode();
         
-        // initialize total possible number of edges
-        nPossibleEdges = this.nNodes*(this.nNodes + 1)/2 - this.nNodes;
-        nPossibleEdges_withSL = nPossibleEdges + nNodes;
-
 
     }
 
@@ -198,10 +182,6 @@ public class Network implements Serializable {
         // if we're given info about node weights, store that
         // otherwise, the weight per node is the sum of the weights of the edges
         this.nodeWeight = (nodeWeight != null) ? (double[])nodeWeight.clone() : getTotalEdgeWeightPerNode();
-
-                // initialize total possible number of edges
-        nPossibleEdges = this.nNodes*(this.nNodes + 1)/2 - this.nNodes;
-        nPossibleEdges_withSL = nPossibleEdges + nNodes;
     }
 
     /************************END CONSTRUCTORS************************/
@@ -227,6 +207,18 @@ public class Network implements Serializable {
      */
     public int getNNodes() {
         return nNodes;
+    }
+
+    /**
+     * The number of possible full (NOT HALF!) edges, if every node were connected to every other node
+     * Initialized to constructors to be n(n-1)/2, where n=nNodes.
+     * Recall the summation 1+2+3+...+n = n(n+1)/2. We subtract n because our summation is
+     * really 1+2+3+...+(n-1), giving us n(n+1)/2 - n ==> n(n+1)-2n/2 ==> n(n-1)/2.
+     * @return the number of nodes
+     */
+    public int nPossibleEdges() {
+
+        return (nNodes*(nNodes-1))/2;
     }
 
     /**
@@ -847,5 +839,6 @@ public class Network implements Serializable {
 
         return matrix;
     }
+
 
 }

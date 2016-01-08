@@ -1,0 +1,4 @@
+The Louvain method uses self loops to store the weights of edges within communities. Performance does not account for self loops. I considered modifying the performance equation to include self loops by increasing the denominator by n (one for every possible self loop). This would penalize networks with fewer self loops. In the end, I decided against modifying the performance equation because this would essentially be creating a new metric that outputs a different (almost always lower) score for any given graph. Instead, we run Louvain with performance, ignoring self loops as the original performance equation dictates. This means that when we evaluate networks past the first pass, we don’t take the self loops into account, but we are still evaluating based on edges between individual nodes. This is the desired functionality.
+
+To run:
+java ModularityOptimizer ../test/perf_test.pairs ../output/perf_test.graph 1 1.0 1 1 10 0 1
