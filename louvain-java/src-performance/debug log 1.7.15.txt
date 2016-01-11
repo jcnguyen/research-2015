@@ -207,3 +207,12 @@ As discussed in an earlier blog post, there are versions of performance that dea
 Self-loops are but sums of existent edge weights. Given this, they may be many times larger than the M given for the original graph. We have two choices here:
 1) Update M for later passes of the Louvain algorithm, setting M to the max weight of all edges (including self loops). The reasoning here is that we are in effect creating a new graph on every pass, so keeping the old value of M doesn’t make sense.
 2) Introduce an M_s that is the meaningful bound for self-loop weights. The reasoning behind this would be that it doesn’t make sense to increase M to bound the self-loop weights, as this would drastically affect (reduce) the influence of non-self-loop edges. So we introduce
+
+———————
+Even if we modify the algorithm to deal with self-loops, the self-loops will always count toward the f-score (correctly-interpreted intra-community edges). That is, since a node is at least in a community by itself, and the self-loops follow the nodes around, even when a node changes communities, the existence (or not) of an attached self-loop will not affect performance.
+
+So, we give up on the idea of modifying performance to account for self-loops. Such a change would be useless, as it would not make any difference in how Louvain assesses potential moves, and thus would not fix the problem of going “too deep” into community condensations. Remember that this is the root problem: information from previous clusterings is not preserved or used in the condensed graphs, so Louvain is combining nodes that shouldn’t be combined. The Louvain algorithm is essentially unable to test for when it has achieved a maximum performance score (the point at which moving nodes would not create a positive increase in performance).
+
+In an effort to reintroduce some awareness of max performance, I propose the following:
+1) Allow Louvain to run, using weighted performance, to completion.
+2) For every level of recursive evaluation, we remember the score. That is, if we had stopped at level x, what would the performance score of the overall graph be? We keep track of all these potential scores and return the clustering with the highest score - not necessarily the clustering that Louvain ended on.
