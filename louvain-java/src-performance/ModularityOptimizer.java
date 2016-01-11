@@ -28,7 +28,7 @@ public class ModularityOptimizer {
         Clustering clustering;
         Console console;
         double performance, maxPerformance, resolution, resolution2;
-        int algorithm, i, j, modularityFunction, nIterations, nRandomStarts;
+        int meaningfulMaxM, i, j, metricToUse, nIterations, nRandomStarts;
         long beginTime, endTime, randomSeed;
         Network network;
         Random random;
@@ -45,13 +45,9 @@ public class ModularityOptimizer {
         if (args.length == 9) {
             inputFileName = args[0];
             outputFileName = args[1];
-
-            // change to "metric"
-            modularityFunction = Integer.parseInt(args[2]);
+            metricToUse = Integer.parseInt(args[2]);
             resolution = Double.parseDouble(args[3]);
-
-            // this parameter is useless, can only do regular Louvain
-            algorithm = Integer.parseInt(args[4]);
+            meaningfulMaxM = Integer.parseInt(args[4]);
             nRandomStarts = Integer.parseInt(args[5]);
             nIterations = Integer.parseInt(args[6]);
             randomSeed = Long.parseLong(args[7]);
@@ -61,9 +57,9 @@ public class ModularityOptimizer {
             console = System.console();
             inputFileName = console.readLine("Input file name: ");
             outputFileName = console.readLine("Output file name: ");
-            modularityFunction = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): ")); 
+            metricToUse = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): ")); 
             resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g., 1.0): "));
-            algorithm = Integer.parseInt(console.readLine("Algorithm (1 = Louvain; 2 = Louvain with multilevel refinement; 3 = smart local moving): "));
+            meaningfulMaxM = Integer.parseInt(console.readLine("Meangingful maximum M of edge weights: "));
             nRandomStarts = Integer.parseInt(console.readLine("Number of random starts (e.g., 10): "));
             nIterations = Integer.parseInt(console.readLine("Number of iterations (e.g., 10): "));
             randomSeed = Long.parseLong(console.readLine("Random seed (e.g., 0): "));
@@ -81,16 +77,13 @@ public class ModularityOptimizer {
             System.out.println();
             System.out.format("Number of nodes: %d%n", network.getNNodes());
             System.out.format("Number of edges: %d%n", network.getNEdges());
-            System.out.println();
-            System.out.println("Running " + 
-                ((algorithm == 1) ? "Louvain algorithm" : 
-                ((algorithm == 2) ? "Louvain algorithm with multilevel refinement" : 
-                "smart local moving algorithm")) + "...");
+            System.out.println("Running Louvain algorithm - performance");
+            System.out.println("Meaningful maximum M: " + meaningfulMaxM);
             System.out.println();
         }
 
         // Print the performance of the unaltered graph
-        VOSClusteringTechnique = new VOSClusteringTechnique(network, resolution);
+        VOSClusteringTechnique = new VOSClusteringTechnique(meaningfulMaxM, network, resolution);
         System.out.println("\n" + "Performance of unaltered graph:  " +
                 VOSClusteringTechnique.calcPerformanceFunction() + "\n");
 
@@ -110,7 +103,7 @@ public class ModularityOptimizer {
             if (printOutput && (nRandomStarts > 1))
                 System.out.format("\tRandom start: %d%n", i + 1);
 
-            VOSClusteringTechnique = new VOSClusteringTechnique(network, resolution);
+            VOSClusteringTechnique = new VOSClusteringTechnique(meaningfulMaxM, network, resolution);
 
             j = 0;
             update = true;
@@ -177,7 +170,7 @@ public class ModularityOptimizer {
      *
      * @param  fileName            the input file
      * // TODO change this param
-     * @param  modularityFunction  1 for standard modularity function
+     * @param  metricToUse  1 for standard modularity function
      *                             2 for alternative modularity function
      * @throws IOException         occurs if there's an input or output error
      * @return a network based on the input file and the chosen modularity 

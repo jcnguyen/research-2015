@@ -1,0 +1,209 @@
+Terminal output from 1/7/15
+
+Input: java ModularityOptimizer ../test/simple_perf_test.pairs ../output/perf_test.graph 1 1.0 1 1 10 0 1
+
+The content of simple_perf_test.pairs is:
+0 1
+0 2
+1 2
+2 3
+
+Problem 1: Note that we start with each node in its own community; there are 4 communities. After the first iteration, the “number of communities” immediately goes to 1. Each iteration should only move one node, so the number of communities should decrease by one. My hypothesis is that the code that checks the impact to performance from moving one node into another cluster is actually moving the node, or that the loop that controls checking performance has some misplaced braces. 
+
+Problem 2: We are seeing found perf increase of: 1.0 moving x into cluster y. This number is too high and is not possible. Performance is upper bounded (inclusive) of +1, and the graph’s overall perf score is already positive.
+
+Problem 3: Performance is not improving across iterations, yet the algorithm is still running. Misplaced brace problem?
+
+Good things: Performance of the unaltered graph and performance of the final graph, where all the nodes are in the same community, are correct (verified via hand calculations).
+
+
+
+————————————————————————
+Reading input file...
+Finish reading input file.
+
+Number of nodes: 4
+Number of edges: 4
+
+Running Louvain algorithm...
+
+numerator 2.0
+denominator 6.0
+number of communities: 4
+
+Performance of unaltered graph:  0.3333333333333333
+
+	Iteration: 1
+found perf increase of: 0.16666666666666666 moving 0 into cluster 1
+found perf increase of: 0.16666666666666666 moving 3 into cluster 2
+found perf increase of: 0.16666666666666666 moving 1 into cluster 1
+found perf increase of: 0.3333333333333333 moving 2 into cluster 1
+found perf increase of: 0.3333333333333333 moving 0 into cluster 1
+found perf increase of: 0.3333333333333333 moving 1 into cluster 1
+found perf increase of: 1.0 moving 0 into cluster 1
+found perf increase of: 1.0 moving 1 into cluster 1
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 2
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.5 moving 2 into cluster 0
+found perf increase of: 0.16666666666666666 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 1.0 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 0
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 3
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.5 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 1
+found perf increase of: 1.0 moving 1 into cluster 1
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 4
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.16666666666666666 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 1.0 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 0
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 5
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 1
+found perf increase of: 1.0 moving 1 into cluster 1
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 6
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.16666666666666666 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 1
+found perf increase of: 1.0 moving 1 into cluster 1
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 7
+found perf increase of: 0.16666666666666666 moving 0 into cluster 0
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 1.0 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 0
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 8
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 1.0 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 0
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 9
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.5 moving 2 into cluster 0
+found perf increase of: 0.16666666666666666 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 1.0 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 0
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+	Iteration: 10
+found perf increase of: 0.5 moving 2 into cluster 0
+found perf increase of: 0.16666666666666666 moving 0 into cluster 0
+found perf increase of: 0.16666666666666666 moving 1 into cluster 0
+found perf increase of: 0.3333333333333333 moving 2 into cluster 0
+found perf increase of: 0.3333333333333333 moving 0 into cluster 0
+found perf increase of: 0.3333333333333333 moving 1 into cluster 0
+found perf increase of: 1.0 moving 1 into cluster 0
+found perf increase of: 1.0 moving 0 into cluster 0
+numerator 4.0
+denominator 6.0
+number of communities: 1
+	Performance: 0.6667
+
+Performance: 0.6667
+Number of communities: 1
+Elapsed time: 0 seconds
+
+Writing output file...
+Finish writing to output file.
+
+==============
+
+After printing current state of the graph, we get that 
+
+	Iteration: 1
+found perf increase of: 0.16666666666666666 moving 0 into cluster 1
+found perf increase of: 0.16666666666666666 moving 3 into cluster 2
+found perf increase of: 0.16666666666666666 moving 1 into cluster 1
+found perf increase of: 0.3333333333333333 moving 2 into cluster 1
+found perf increase of: 0.3333333333333333 moving 0 into cluster 1
+found perf increase of: 0.3333333333333333 moving 1 into cluster 1
+found perf increase of: 1.0 moving 0 into cluster 1
+found perf increase of: 1.0 moving 1 into cluster 1
+numerator 4.0
+denominator 6.0
+number of communities: 1
+communities:
+0 0
+1 0
+2 0
+3 0
+
+
+This is really weird because we never consider moving any nodes into cluster 0, but we’ve moved everything into cluster 0.
+
+
+——
+Modifying performance to look at self loops
+
+In phase 2 of each pass, the Louvain algorithm creates a collapsed version G’ of the current clustering G. Nodes in a community C in G are represented as a single vertex V_c in G’. Information about the weights of intra-community edges in C in G is preserved in a self loop (edge): (V_c, V_c), where the weight of (V_c, V_c) is equal to the sum of the weights of all edges in C. In subsequent passes, the Louvain-modularity algorithm uses the self-loop weights in its calculations. That is, self-loops count as intra-community weight in the graph created at the start of every pass, in which every vertex is its own community. In this way, self-loop weights actually play a very significant role in modularity calculations. 
+
+
+Unfortunately, performance doesn’t account for self-loops. This causes a significant problem; in a connected graph, Louvain-performance will, on each pass, always see improvement by adding vertices to clusterings. By ignoring self-loops, Louvain-performance does not know when to stop clustering, and will result in putting all the vertices into one community. For example:
+EXAMPLE
+
+
+We propose a modified version of performance that accounts for weighted self-loops. We draw upon how modularity deals with self-loops, and how performance deals with weighted non-self-loop edges to design this modified algorithm. 
+
+Modularity’s normalization factor relies on the sum of all edge weights. Naturally, this sum includes the weights of self-loops. 
+
+As discussed in an earlier blog post, there are versions of performance that deal with weighted edges. These equations rely on a meaningful maximum M, dependent on the data set, that meaningfully upper bounds the edge weights.
+
+Self-loops are but sums of existent edge weights. Given this, they may be many times larger than the M given for the original graph. We have two choices here:
+1) Update M for later passes of the Louvain algorithm, setting M to the max weight of all edges (including self loops). The reasoning here is that we are in effect creating a new graph on every pass, so keeping the old value of M doesn’t make sense.
+2) Introduce an M_s that is the meaningful bound for self-loop weights. The reasoning behind this would be that it doesn’t make sense to increase M to bound the self-loop weights, as this would drastically affect (reduce) the influence of non-self-loop edges. So we introduce

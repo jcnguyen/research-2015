@@ -840,5 +840,24 @@ public class Network implements Serializable {
         return matrix;
     }
 
+    /**
+    * Method called by VOSClusteringTechnique's initPerfVariables()'s
+    * If any edge weights are higher than M, set them to M
+    * Necessary for performance calculations 
+    *
+    * @param M - the meaningful maximum of edge weights
+    * @return true if an edge weight was adjusted, false if no change
+    */
+    public boolean adjustEdgeWeights(double M) {
+        boolean changeMade = false;
+        for (int e=0; e < edgeWeight.length; e++) {
+            if (edgeWeight[e] > M) {
+                edgeWeight[e] = M;
+                changeMade = true;
+            }
+        }
+        return changeMade;
+    }
+
 
 }

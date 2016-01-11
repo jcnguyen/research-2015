@@ -26,8 +26,8 @@ public class VOSClusteringTechnique {
     // weighting function (in the form of an adj matrix) for nonexistent edges
     protected double[][] weightsNonexistentEdges; 
 
-    // meaningful maximum
-    private static final double M = 1;
+    // meaningful maximum of edge weights
+    private static double M;
 
     /** 
     * v_scalingParam is the scaling parameter that rates the importance of the
@@ -61,7 +61,7 @@ public class VOSClusteringTechnique {
      * @param network - object representation of graph
      * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
      */
-    public VOSClusteringTechnique(Network network, double resolution)
+    public VOSClusteringTechnique(double maxM, Network network, double resolution)
     {
         this.network = network;
 
@@ -70,7 +70,7 @@ public class VOSClusteringTechnique {
         clustering.initSingletonClusters();
 
         this.resolution = resolution;
-        initPerfVariables();
+        initPerfVariables(maxM);
     }
 
     /**
@@ -79,13 +79,13 @@ public class VOSClusteringTechnique {
      * @param clustering - object representation of the communities in graph
      * @param resolution - granularity level at which communities are detected
      */
-    public VOSClusteringTechnique(Network network, Clustering clustering, double resolution)
+    public VOSClusteringTechnique(double maxM, Network network, Clustering clustering, double resolution)
     {
         this.network = network;
         this.clustering = clustering;
         this.resolution = resolution;
 
-        initPerfVariables();
+        initPerfVariables(maxM);
     }
 
     /**
@@ -162,8 +162,8 @@ public class VOSClusteringTechnique {
      * @param random - a random num generator 
      * @return whether or not we updated what nodes are in what communties 
      */
-    public boolean runLocalMovingAlgorithm(Random random)
-    {
+    public boolean runLocalMovingAlgorithm(Random random) {
+        System.out.println("runLocalMovingAlgorithm() called");
         boolean update;
         double maxQualityFunction, qualityFunction;
         double[] clusterWeight, edgeWeightPerCluster;
@@ -203,11 +203,11 @@ public class VOSClusteringTechnique {
         nStableNodes = 0;
         i = 0;
 
-        /*stay in loop until a local optimal modularity value is moved, 
-        moving any node would not increase it*/
-        do
-        {
+        /*stay in loop until a local optimal performance value is found, 
+        and moving any node would not increase it*/
+        do {
             j = nodePermutation[i]; /*start with some node*/
+            //System.out.println("do loop " + i + "; looking at node " + j);
 
             nNeighboringClusters = 0;
 
@@ -251,8 +251,8 @@ public class VOSClusteringTechnique {
 
                 // if we've found a better cluster, or if we have found an equivalent cluster
                 // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
+                System.out.println("move " + j + " into " + l + ": " + qualityFunction);
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
-                    System.out.println("found perf increase of: " + qualityFunction + " moving " + j + " into cluster " + l);
                     bestCluster = l;
                     maxQualityFunction = qualityFunction;
                 }
@@ -261,23 +261,25 @@ public class VOSClusteringTechnique {
                 edgeWeightPerCluster[l] = 0;
             }
 
+
             // messing with unused clusters bc if we move ourselves into another community, our previous community becomes unused
             if (maxQualityFunction == 0)
-
             {
                 bestCluster = unusedCluster[nUnusedClusters - 1];
                 nUnusedClusters--;
             }
-
             /*add j into the best cluster it should be in*/
             clusterWeight[bestCluster] += network.nodeWeight[j];
             nNodesPerCluster[bestCluster]++;
 
             /*if it ends up in original cluster, update stable nodes*/
-            if (bestCluster == clustering.cluster[j]) 
+            if (bestCluster == clustering.cluster[j]) {
                 nStableNodes++;
-            else /*j was moved to a new cluster that is better*/
-            {
+                System.out.println("NO MOVE");
+            } else {
+                
+                System.out.println("MOVING " + j + " from " + clustering.cluster[j] + " to " + bestCluster + ": " + maxQualityFunction);
+                /*j was moved to a new cluster that is better*/
                 clustering.cluster[j] = bestCluster;
                 nStableNodes = 1;
                 update = true;
@@ -286,22 +288,26 @@ public class VOSClusteringTechnique {
             // iterate through all the nodes in our randomly determined order
             // if we reach the end, start over again at the beginning (node 0)
             i = (i < network.nNodes - 1) ? (i + 1) : 0;
-        }
-        while (nStableNodes < network.nNodes);
+            //System.out.println("nNodes is " + network.nNodes);
 
-        /*update nunmber of clusters that exist now, and
+        } while (nStableNodes < network.nNodes);
+
+        /*update number of clusters that exist now, and
         what nodes are in what cluster*/
         newCluster = new int[network.nNodes];
         clustering.nClusters = 0;
-        for (i = 0; i < network.nNodes; i++)
-            if (nNodesPerCluster[i] > 0)
-            {
+        for (i = 0; i < network.nNodes; i++) {
+            if (nNodesPerCluster[i] > 0) {
                 newCluster[i] = clustering.nClusters;
                 clustering.nClusters++;
             }
+        }
         for (i = 0; i < network.nNodes; i++) {
             clustering.cluster[i] = newCluster[clustering.cluster[i]];
         }
+        System.out.println("after updating clusters");
+        double perf = calcPerformanceFunction();
+        System.out.println("perf: " + perf);
 
         return update;
     }
@@ -323,6 +329,7 @@ public class VOSClusteringTechnique {
      * @return whether or not we updated what nodes are in what communties 
      */
     public boolean runLouvainAlgorithm(Random random) {
+        System.out.println("\n\nrunLouvainAlgorithm() called");
         boolean update, update2;
         
         VOSClusteringTechnique new_VOSClusteringTechnique;
@@ -338,7 +345,7 @@ public class VOSClusteringTechnique {
         if (clustering.nClusters < network.nNodes) {
 
             // Phase 2: recursive call the next pass of the algorithm
-            new_VOSClusteringTechnique = new VOSClusteringTechnique(network.createReducedNetwork(clustering), resolution);
+            new_VOSClusteringTechnique = new VOSClusteringTechnique(M, network.createReducedNetwork(clustering), resolution);
 
             /*run Louvain again to see if another update*/
             update2 = new_VOSClusteringTechnique.runLouvainAlgorithm(random);
@@ -347,6 +354,7 @@ public class VOSClusteringTechnique {
                 update = true;
 
                 // Merge results from the next level deep recursive call into this call
+                System.out.println("merging clusterings");
                 clustering.mergeClusters(new_VOSClusteringTechnique.clustering);
 
             }
@@ -439,8 +447,10 @@ public class VOSClusteringTechnique {
         }
 
         double numerator = f + g + v_scalingParam*g_w;
-        System.out.println("numerator" + numerator);
-        System.out.println("denominator" + denominator);
+        System.out.println("num/denom " + numerator + "/" + denominator);
+        System.out.print(clustering.getNClusters() + " ");
+        print_current_communities();
+
         return numerator / denominator;
 
     }
@@ -531,7 +541,13 @@ public class VOSClusteringTechnique {
     /**
     * Initialize performance variables that are constant for a given network
     */
-    private void initPerfVariables() {
+    private void initPerfVariables(double maxM) {
+
+        // initialize the meaningful maximum M of edge weights
+        this.M = maxM;
+
+        // adjust the network: if any edge weights are greater than M,
+        System.out.println("Adjusted an edge weight: " + network.adjustEdgeWeights(M));
 
         // get adjacency matrix representation of current network
         adjMatrix = network.getMatrix();
@@ -573,6 +589,9 @@ public class VOSClusteringTechnique {
         // TODO: set weights for nonexistent edges
     }
 
+    /**
+    * Prints the adjacency matrix
+    */
     private void printAdjMatrix() {
 
         for(int u=0; u < adjMatrix.length; u++) {
@@ -580,9 +599,21 @@ public class VOSClusteringTechnique {
                 System.out.print(adjMatrix[u][v]);
             }
             System.out.println();
+        }
     }
 
-        
+    /**
+    * Prints to console the nodes and their corresponding communities
+    */
+    private void print_current_communities() {
+        int nNodes = clustering.getNNodes();
+
+        clustering.orderClustersByNNodes();
+
+        System.out.println("communities: ");
+        for (int i = 0; i < nNodes; i++) {
+            System.out.println(i + " " + Integer.toString(clustering.getCluster(i)));
+        }
     }
 
 }
