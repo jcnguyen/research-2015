@@ -31,7 +31,7 @@ public class VOSClusteringTechnique {
     * intra-cluster edges)
     * 0 <= v_scalingParam <= 1 
     */
-    private static final double v_scalingParam = 0;
+    private static double v_scalingParam;
 
     /*
     * Number of possible edges, including self loops, multiplied by M
@@ -46,7 +46,7 @@ public class VOSClusteringTechnique {
      * @param network - object representation of graph
      * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
      */
-    public VOSClusteringTechnique(double maxM, Network network, double resolution)
+    public VOSClusteringTechnique(double v_scalingParam, double maxM, Network network, double resolution)
     {
         this.network = network;
 
@@ -55,7 +55,7 @@ public class VOSClusteringTechnique {
         clustering.initSingletonClusters();
 
         this.resolution = resolution;
-        initPerfVariables(maxM);
+        initPerfVariables(v_scalingParam, maxM);
     }
 
     /**
@@ -64,13 +64,13 @@ public class VOSClusteringTechnique {
      * @param clustering - object representation of the communities in graph
      * @param resolution - granularity level at which communities are detected
      */
-    public VOSClusteringTechnique(double maxM, Network network, Clustering clustering, double resolution)
+    public VOSClusteringTechnique(double v_scalingParam, double maxM, Network network, Clustering clustering, double resolution)
     {
         this.network = network;
         this.clustering = clustering;
         this.resolution = resolution;
 
-        initPerfVariables(maxM);
+        initPerfVariables(v_scalingParam, maxM);
     }
 
     /**
@@ -236,7 +236,6 @@ public class VOSClusteringTechnique {
 
                 // if we've found a better cluster, or if we have found an equivalent cluster
                 // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
-                System.out.println("move " + j + " into " + l + ": " + qualityFunction);
                 if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
                     bestCluster = l;
                     maxQualityFunction = qualityFunction;
@@ -259,10 +258,8 @@ public class VOSClusteringTechnique {
             /*if it ends up in original cluster, update stable nodes*/
             if (bestCluster == clustering.cluster[j]) {
                 nStableNodes++;
-                System.out.println("NO MOVE");
             } else {
                 
-                System.out.println("MOVING " + j + " from " + clustering.cluster[j] + " to " + bestCluster + ": " + maxQualityFunction);
                 /*j was moved to a new cluster that is better*/
                 clustering.cluster[j] = bestCluster;
                 nStableNodes = 1;
@@ -288,7 +285,6 @@ public class VOSClusteringTechnique {
         for (i = 0; i < network.nNodes; i++) {
             clustering.cluster[i] = newCluster[clustering.cluster[i]];
         }
-        System.out.println("after updating clusters");
         double perf = calcPerformanceFunction();
         System.out.println("perf: " + perf);
 
@@ -329,7 +325,7 @@ public class VOSClusteringTechnique {
         if (clustering.nClusters < network.nNodes) {
 
             // Phase 2: recursively call the next pass of the algorithm
-            new_VOSClusteringTechnique = new VOSClusteringTechnique(M, network.createReducedNetwork(clustering), resolution);
+            new_VOSClusteringTechnique = new VOSClusteringTechnique(v_scalingParam, M, network.createReducedNetwork(clustering), resolution);
 
             /*run Louvain again to see if another update*/
             update2 = new_VOSClusteringTechnique.runLouvainAlgorithm(random);
@@ -347,9 +343,6 @@ public class VOSClusteringTechnique {
         return update;
     }
 
-
-    // TODO update code to deal with nodePermutation[i], not just i?
-
     /***********************************************************************
      * PERFORMANCE
      ***********************************************************************/
@@ -364,7 +357,7 @@ public class VOSClusteringTechnique {
                 g=0;        // inter-cluster sparsity
 
         // used in calculating g_w
-        int numPossibleIntercommEdges = 0;
+        int numIntercommEdges = 0;
         double sumWeightIntercommEdges = 0;
 
         // for every vertex 
@@ -383,13 +376,15 @@ public class VOSClusteringTechnique {
 
                 // u and v are in different communities
                 } else if (clustering.cluster[u] != clustering.cluster[v]) {
-                    numPossibleIntercommEdges++;    // for g_w
 
                     // inter-community edge doesn't exist, so increase inter-community sparsity score
                     if (adjMatrix[u][v] == INF) {
                         g += M;
-                    } else {
-                        sumWeightIntercommEdges += adjMatrix[u][v]; // for g_w
+                    } else {        
+
+                        // edge exists: do calculations for g_w: inter-community edges
+                        numIntercommEdges++; 
+                        sumWeightIntercommEdges += adjMatrix[u][v];
                     }
                 } 
 
@@ -406,7 +401,8 @@ public class VOSClusteringTechnique {
         * g_w is the difference of weight that would be counted if no inter-cluster edges were present,
         * minus the weight that is assigned to the actual inter-cluster edges:
         */
-        double g_w = M*numPossibleIntercommEdges - sumWeightIntercommEdges;
+        double g_w = M*numIntercommEdges - sumWeightIntercommEdges;
+
         double numerator = f + g + v_scalingParam*g_w;
         System.out.println("num/denom " + numerator + "/" + denominator);
         print_current_communities();
@@ -449,10 +445,14 @@ public class VOSClusteringTechnique {
                     // increase intracluster density score
                     numeratorChange += adjMatrix[vertex][u];
 
+                    // part of g_w: subtract 1, scaled, from the count of inter-community edges
+                    numeratorChange -= v_scalingParam*M;
+
                     // part of g_w: subtract the weight, scaled, from 
                     // the sum total of weight of the intra-cluster edges,
                     // which is itself subtracted from the numerator. so, add.
                     numeratorChange += v_scalingParam*adjMatrix[vertex][u];
+    
                 } 
 
                 // subtract from g(G) the nonexistent edges (vertex, u),
@@ -462,10 +462,6 @@ public class VOSClusteringTechnique {
                 else {
                     numeratorChange -= M;
                 }
-
-                // part of g_w: subtract 1, scaled, from the count of inter-community edges
-                numeratorChange -= v_scalingParam*M;
-                  
             }
         }
 
@@ -476,12 +472,15 @@ public class VOSClusteringTechnique {
     /**
     * Initialize performance variables that are constant for a given network
     */
-    private void initPerfVariables(double maxM) {
+    private void initPerfVariables(double v_scalingParam, double maxM) {
+
+        // initialize scaling parameter
+        this.v_scalingParam = v_scalingParam;
 
         // initialize the meaningful maximum M of edge weights, and ensure no edge
         // weights are greater than M
         this.M = maxM;
-        System.out.println("Adjusted an edge weight: " + network.adjustEdgeWeights(M));
+        network.adjustEdgeWeights(M);
 
         // get adjacency matrix representation of current network
         adjMatrix = network.getMatrix();

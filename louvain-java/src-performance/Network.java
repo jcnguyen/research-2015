@@ -852,6 +852,7 @@ public class Network implements Serializable {
         boolean changeMade = false;
         for (int e=0; e < edgeWeight.length; e++) {
             if (edgeWeight[e] > M) {
+                System.out.println("Adjusted weight of edge " + e + " from " + edgeWeight[e] + " to " + M);
                 edgeWeight[e] = M;
                 changeMade = true;
             }

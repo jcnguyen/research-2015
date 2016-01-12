@@ -28,7 +28,7 @@ public class ModularityOptimizer {
         Clustering clustering;
         Console console;
         double performance, maxPerformance, resolution, resolution2;
-        int meaningfulMaxM, i, j, metricToUse, nIterations, nRandomStarts;
+        int meaningfulMaxM, i, j, v_scalingParam, nIterations, nRandomStarts;
         long beginTime, endTime, randomSeed;
         Network network;
         Random random;
@@ -45,7 +45,7 @@ public class ModularityOptimizer {
         if (args.length == 9) {
             inputFileName = args[0];
             outputFileName = args[1];
-            metricToUse = Integer.parseInt(args[2]);
+            v_scalingParam = Integer.parseInt(args[2]);
             resolution = Double.parseDouble(args[3]);
             meaningfulMaxM = Integer.parseInt(args[4]);
             nRandomStarts = Integer.parseInt(args[5]);
@@ -53,11 +53,10 @@ public class ModularityOptimizer {
             randomSeed = Long.parseLong(args[7]);
             printOutput = (Integer.parseInt(args[8]) > 0);
         } else {
-            // TODO change 
             console = System.console();
             inputFileName = console.readLine("Input file name: ");
             outputFileName = console.readLine("Output file name: ");
-            metricToUse = Integer.parseInt(console.readLine("Modularity function (1 = standard; 2 = alternative): ")); 
+            v_scalingParam = Integer.parseInt(console.readLine("Scaling parameter (0 to 1; rates the importance of the weight of inter-cluster edges, with respect to the weight of intra-cluster edges): ")); 
             resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g., 1.0): "));
             meaningfulMaxM = Integer.parseInt(console.readLine("Meangingful maximum M of edge weights: "));
             nRandomStarts = Integer.parseInt(console.readLine("Number of random starts (e.g., 10): "));
@@ -83,7 +82,7 @@ public class ModularityOptimizer {
         }
 
         // Print the performance of the unaltered graph
-        VOSClusteringTechnique = new VOSClusteringTechnique(meaningfulMaxM, network, resolution);
+        VOSClusteringTechnique = new VOSClusteringTechnique(v_scalingParam, meaningfulMaxM, network, resolution);
         System.out.println("\n" + "Performance of unaltered graph:  " +
                 VOSClusteringTechnique.calcPerformanceFunction() + "\n");
 
@@ -103,7 +102,7 @@ public class ModularityOptimizer {
             if (printOutput && (nRandomStarts > 1))
                 System.out.format("\tRandom start: %d%n", i + 1);
 
-            VOSClusteringTechnique = new VOSClusteringTechnique(meaningfulMaxM, network, resolution);
+            VOSClusteringTechnique = new VOSClusteringTechnique(v_scalingParam, meaningfulMaxM, network, resolution);
 
             j = 0;
             update = true;
@@ -170,8 +169,6 @@ public class ModularityOptimizer {
      *
      * @param  fileName            the input file
      * // TODO change this param
-     * @param  metricToUse  1 for standard modularity function
-     *                             2 for alternative modularity function
      * @throws IOException         occurs if there's an input or output error
      * @return a network based on the input file and the chosen modularity 
      *         function
