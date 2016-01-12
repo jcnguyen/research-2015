@@ -8,9 +8,24 @@
 
 import java.util.Random;
 import java.util.Arrays;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class VOSClusteringTechnique {
+    // to denote nonexistent edges in the adjacency matrix
     private static final double INF = Double.POSITIVE_INFINITY;
+
+    // keep track of what recursive level we're on
+    public static int level = 0;
+
+    // govern where to print to
+    private static final int TO_CONSOLE = 0;
+    private static final int TO_TREE = 1;
+    private static final int TO_CONSOLE_AND_TREE = 2;
+    private static String fileName;
 
     // the network and its communities
     protected Network network;
@@ -46,15 +61,15 @@ public class VOSClusteringTechnique {
      * @param network - object representation of graph
      * @param resolution - granularity level at which communities are detected, 1.0 for standard modularity-based community detection
      */
-    public VOSClusteringTechnique(double v_scalingParam, double maxM, Network network, double resolution)
-    {
-        this.network = network;
+    public VOSClusteringTechnique(double v_scalingParam, double maxM, Network network, double resolution, String fileName) {
 
         // on initialization, every node is in its own community
         clustering = new Clustering(network.nNodes);
         clustering.initSingletonClusters();
 
         this.resolution = resolution;
+        this.network = network;
+        this.fileName = fileName;
         initPerfVariables(v_scalingParam, maxM);
     }
 
@@ -64,12 +79,12 @@ public class VOSClusteringTechnique {
      * @param clustering - object representation of the communities in graph
      * @param resolution - granularity level at which communities are detected
      */
-    public VOSClusteringTechnique(double v_scalingParam, double maxM, Network network, Clustering clustering, double resolution)
-    {
+    public VOSClusteringTechnique(double v_scalingParam, double maxM, Network network, Clustering clustering, 
+                                    double resolution, String fileName) {
         this.network = network;
         this.clustering = clustering;
         this.resolution = resolution;
-
+        this.fileName = fileName;
         initPerfVariables(v_scalingParam, maxM);
     }
 
@@ -148,7 +163,6 @@ public class VOSClusteringTechnique {
      * @return whether or not we updated what nodes are in what communties 
      */
     public boolean runLocalMovingAlgorithm(Random random) {
-        System.out.println("runLocalMovingAlgorithm() called");
         boolean update;
         double maxQualityFunction, qualityFunction;
         double[] clusterWeight, edgeWeightPerCluster;
@@ -192,7 +206,6 @@ public class VOSClusteringTechnique {
         and moving any node would not increase it*/
         do {
             j = nodePermutation[i]; /*start with some node*/
-            //System.out.println("do loop " + i + "; looking at node " + j);
 
             nNeighboringClusters = 0;
 
@@ -236,7 +249,8 @@ public class VOSClusteringTechnique {
 
                 // if we've found a better cluster, or if we have found an equivalent cluster
                 // that ranks higher in our tie breaking algorithm (alphanumeric ordering)
-                if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) && (l < bestCluster))) {
+                if ((qualityFunction > maxQualityFunction) || ((qualityFunction == maxQualityFunction) 
+                                                            && (l < bestCluster))) {
                     bestCluster = l;
                     maxQualityFunction = qualityFunction;
                 }
@@ -245,7 +259,7 @@ public class VOSClusteringTechnique {
             }
 
 
-            // messing with unused clusters bc if we move ourselves into another community, our previous community becomes unused
+            // if we move ourselves into another community, our previous community becomes unused
             if (maxQualityFunction == 0) {
                 bestCluster = unusedCluster[nUnusedClusters - 1];
                 nUnusedClusters--;
@@ -285,8 +299,6 @@ public class VOSClusteringTechnique {
         for (i = 0; i < network.nNodes; i++) {
             clustering.cluster[i] = newCluster[clustering.cluster[i]];
         }
-        double perf = calcPerformanceFunction();
-        System.out.println("perf: " + perf);
 
         return update;
     }
@@ -308,7 +320,9 @@ public class VOSClusteringTechnique {
      * @return whether or not we updated what nodes are in what communties 
      */
     public boolean runLouvainAlgorithm(Random random) {
-        System.out.println("\n\nrunLouvainAlgorithm() called");
+        System.out.println("\nLevel " + level + " start computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
+        level++;
+        System.out.printf("\tnetwork size: %d nodes, %d edges\n", network.getNNodes(), network.getNEdges());
         boolean update, update2;
         
         VOSClusteringTechnique new_VOSClusteringTechnique;
@@ -320,21 +334,25 @@ public class VOSClusteringTechnique {
         /* Phase 1: see if moving any nodes will increase modularity */
         update = runLocalMovingAlgorithm(random);
 
+        System.out.println("\tend computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
+
+
         /* if we ended up moving any nodes into different communities, 
         begin recursive procedure. same as asking: if (update) {} */
         if (clustering.nClusters < network.nNodes) {
 
             // Phase 2: recursively call the next pass of the algorithm
-            new_VOSClusteringTechnique = new VOSClusteringTechnique(v_scalingParam, M, network.createReducedNetwork(clustering), resolution);
+            new_VOSClusteringTechnique = new VOSClusteringTechnique(v_scalingParam, M, 
+                                            network.createReducedNetwork(clustering), resolution, fileName);
 
             /*run Louvain again to see if another update*/
             update2 = new_VOSClusteringTechnique.runLouvainAlgorithm(random);
 
             if (update2) {
                 update = true;
+                print_current_communities(TO_TREE);
 
                 // Merge results from the next level deep recursive call into this call
-                System.out.println("merging clusterings");
                 clustering.mergeClusters(new_VOSClusteringTechnique.clustering);
 
             }
@@ -402,13 +420,8 @@ public class VOSClusteringTechnique {
         * minus the weight that is assigned to the actual inter-cluster edges:
         */
         double g_w = M*numIntercommEdges - sumWeightIntercommEdges;
-
         double numerator = f + g + v_scalingParam*g_w;
-        System.out.println("num/denom " + numerator + "/" + denominator);
-        print_current_communities();
-
         return numerator / denominator;
-
     }
 
 
@@ -506,15 +519,59 @@ public class VOSClusteringTechnique {
     /**
     * Prints to console the nodes and their corresponding communities
     */
-    private void print_current_communities() {
-        int nNodes = clustering.getNNodes();
+    private void print_current_communities(int whereToPrint) {
 
+        // get info
+        int nNodes = clustering.getNNodes();
         clustering.orderClustersByNNodes();
 
-        System.out.println(clustering.getNClusters() + " communities: ");
-        for (int i = 0; i < nNodes; i++) {
-            System.out.println(i + " " + Integer.toString(clustering.getCluster(i)));
+        // print to console
+        if (whereToPrint == TO_CONSOLE) {
+            for (int i = 0; i < nNodes; i++) {
+                System.out.println(i + " " + Integer.toString(clustering.getCluster(i)));
+            }
+
+        // append to .tree file
+        } else if (whereToPrint == TO_TREE) {
+
+            try {
+                BufferedWriter bufferedWriter;
+                String tree_fileName = fileName + ".tree";
+                bufferedWriter = new BufferedWriter(new FileWriter(tree_fileName, true));
+
+                for (int i = 0; i < nNodes; i++) {
+                    bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i)));
+                    bufferedWriter.newLine();
+                } 
+
+                bufferedWriter.close();
+            } catch (IOException e) {
+
+                System.out.println("Error printing to " + fileName + ": " + e.getMessage());
+            }
+
+        // print to console and append to .tree file
+        } else if (whereToPrint == TO_CONSOLE_AND_TREE) {
+
+            try {
+                BufferedWriter bufferedWriter;
+                String tree_fileName = fileName + ".tree";
+                bufferedWriter = new BufferedWriter(new FileWriter(tree_fileName, true));
+
+                for (int i = 0; i < nNodes; i++) {
+                    System.out.println(i + " " + Integer.toString(clustering.getCluster(i)));
+                    bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i)));
+                    bufferedWriter.newLine();
+                }  
+
+                bufferedWriter.close();
+            } catch (IOException e) {
+
+                System.out.println("Error printing to " + fileName + ": " + e.getMessage());
+            }
+            
         }
+
     }
 
 }
