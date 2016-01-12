@@ -320,12 +320,16 @@ public class VOSClusteringTechnique {
      * @return whether or not we updated what nodes are in what communties 
      */
     public boolean runLouvainAlgorithm(Random random) {
+        boolean update, update2;
+        VOSClusteringTechnique new_VOSClusteringTechnique;
+        
+        /* Print info */
         System.out.println("\nLevel " + level + " start computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
         level++;
         System.out.printf("\tnetwork size: %d nodes, %d edges\n", network.getNNodes(), network.getNEdges());
-        boolean update, update2;
+        System.out.println("Performance of unaltered graph:  " + calcPerformanceFunction());
+        print_current_communities(TO_TREE);
         
-        VOSClusteringTechnique new_VOSClusteringTechnique;
 
         /*no update if only one node*/
         if (network.nNodes == 1)
@@ -350,7 +354,6 @@ public class VOSClusteringTechnique {
 
             if (update2) {
                 update = true;
-                print_current_communities(TO_TREE);
 
                 // Merge results from the next level deep recursive call into this call
                 clustering.mergeClusters(new_VOSClusteringTechnique.clustering);
