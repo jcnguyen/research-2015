@@ -1,0 +1,158 @@
+================================================
+Reading from lesmis.wpairs
+
+n = 254
+Median 2.0
+Min 1.0
+Max 31.0
+IQR of 3.0 is from 1.0 to 4.0
+Fences for outliers:
+	Upper, extreme 13.0
+	Upper, mild 8.5
+	Lower, extreme -8.0
+	Lower, mild -3.5
+Results for outliers:
+	Upper, extreme 6 2.36220472441 %
+	Upper, mild 11 4.33070866142 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from football.wpairs
+
+n = 613
+Median 1.0
+Min 1.0
+Max 2.0
+IQR of 0.0 is from 1.0 to 1.0
+Fences for outliers:
+	Upper, extreme 1.0
+	Upper, mild 1.0
+	Lower, extreme 1.0
+	Lower, mild 1.0
+Results for outliers:
+	Upper, extreme 3 0.489396411093 %
+	Upper, mild 0 0.0 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from netscience.wpairs
+
+n = 2742
+Median 0.333333
+Min 0.0526316
+Max 4.75
+IQR of 0.3 is from 0.2 to 0.5
+Fences for outliers:
+	Upper, extreme 1.4
+	Upper, mild 0.95
+	Lower, extreme -0.7
+	Lower, mild -0.25
+Results for outliers:
+	Upper, extreme 78 2.84463894967 %
+	Upper, mild 290 10.576221736 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from hep-th.wpairs
+
+n = 15751
+Median 0.5
+Min 0.0434783
+Max 34.0111
+IQR of 0.666667 is from 0.333333 to 1.0
+Fences for outliers:
+	Upper, extreme 3.000001
+	Upper, mild 2.0000005
+	Lower, extreme -1.666668
+	Lower, mild -0.6666675
+Results for outliers:
+	Upper, extreme 688 4.3679766364 %
+	Upper, mild 700 4.44416227541 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from astro-ph.wpairs
+
+n = 121251
+Median 0.125
+Min 0.0178571
+Max 16.5
+IQR of 0.2627765 is from 0.05 to 0.3127765
+Fences for outliers:
+	Upper, extreme 1.101106
+	Upper, mild 0.70694125
+	Lower, extreme -0.7383295
+	Lower, mild -0.34416475
+Results for outliers:
+	Upper, extreme 4905 4.04532746122 %
+	Upper, mild 5468 4.50965352863 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from cond-mat.wpairs
+
+n = 47594
+Median 0.333333
+Min 0.0588235
+Max 22.3333
+IQR of 0.332168 is from 0.167832 to 0.5
+Fences for outliers:
+	Upper, extreme 1.496504
+	Upper, mild 0.998252
+	Lower, extreme -0.828672
+	Lower, mild -0.33042
+Results for outliers:
+	Upper, extreme 3880 8.15228810354 %
+	Upper, mild 4706 9.88780098332 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from cond-mat-2003.wpairs
+
+n = 120029
+Median 0.25
+Min 0.0416667
+Max 35.2
+IQR of 0.346154 is from 0.153846 to 0.5
+Fences for outliers:
+	Upper, extreme 1.538462
+	Upper, mild 1.019231
+	Lower, extreme -0.884616
+	Lower, mild -0.365385
+Results for outliers:
+	Upper, extreme 7070 5.89024319123 %
+	Upper, mild 4394 3.66078197769 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
+
+
+================================================
+Reading from cond-mat-2005.wpairs
+
+n = 175693
+Median 0.25
+Min 0.0
+Max 46.0
+IQR of 0.357143 is from 0.142857 to 0.5
+Fences for outliers:
+	Upper, extreme 1.571429
+	Upper, mild 1.0357145
+	Lower, extreme -0.928572
+	Lower, mild -0.3928575
+Results for outliers:
+	Upper, extreme 9875 5.62059956857 %
+	Upper, mild 5938 3.37975901146 %
+	Lower, extreme 0 0.0 %
+	Lower, mild 0 0.0 %
