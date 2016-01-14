@@ -8,6 +8,7 @@
 
 import java.util.Random;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,10 +22,7 @@ public class VOSClusteringTechnique {
     // keep track of what recursive level we're on
     public static int level = 0;
 
-    // govern where to print to
-    private static final int TO_CONSOLE = 0;
-    private static final int TO_TREE = 1;
-    private static final int TO_CONSOLE_AND_TREE = 2;
+    // where to print to
     private static String fileName;
 
     // the network and its communities
@@ -54,6 +52,16 @@ public class VOSClusteringTechnique {
     * constant for any given network regardless of local shifts
     */
     private double denominator; 
+
+    /*
+    * Keep track of the clusterings at each level, in order to later
+    * calculate the level that performance should have stopped at.
+    */
+    private static ArrayList<Clustering> levelClusterings; 
+    private static boolean singleNode;
+    static {
+        levelClusterings = new ArrayList<Clustering>();
+    }
 
     /**
      * This constructor is called when every vertex is in its own cluster.
@@ -170,8 +178,9 @@ public class VOSClusteringTechnique {
         int[] neighboringCluster, newCluster, nNodesPerCluster, nodePermutation, unusedCluster;
 
         /*don't need to run alg if only 1 node*/ 
-        if (network.nNodes == 1)
+        if (network.nNodes == 1) {
             return false;
+        }
 
         update = false;
 
@@ -305,7 +314,6 @@ public class VOSClusteringTechnique {
 
 
     /**
-     *
      * @return running Louvain Algorithm with new random num generator as param
      */
     public boolean runLouvainAlgorithm()
@@ -324,22 +332,27 @@ public class VOSClusteringTechnique {
         VOSClusteringTechnique new_VOSClusteringTechnique;
         
         /* Print info */
-        System.out.println("\nLevel " + level + " start computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
+        System.out.println("\n\tLevel " + level);
         level++;
         System.out.printf("\tnetwork size: %d nodes, %d edges\n", network.getNNodes(), network.getNEdges());
-        System.out.println("Performance of unaltered graph:  " + calcPerformanceFunction());
-        print_current_communities(TO_TREE);
-        
+        System.out.println("\tstart computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
 
         /*no update if only one node*/
-        if (network.nNodes == 1)
+        if (network.nNodes == 1) {
+            System.out.println("\tend computation (1 node): " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
+
+            // remember we hit a single node, for printing to .tree and .perfgraph
+            singleNode = true;
             return false;
+        }
 
         /* Phase 1: see if moving any nodes will increase modularity */
         update = runLocalMovingAlgorithm(random);
 
         System.out.println("\tend computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
-
+        
+        /* Remember the current clustering */
+        levelClusterings.add((Clustering)clustering.clone());
 
         /* if we ended up moving any nodes into different communities, 
         begin recursive procedure. same as asking: if (update) {} */
@@ -361,6 +374,29 @@ public class VOSClusteringTechnique {
             }
         }
 
+        /* keep track of which iteration we're on */
+        if (level > 1) { level--; }
+
+        /* On our lowest level iteration (base case) */
+        if (level == 1) {
+
+            /* Highest level clustering is currently saved. We couldn't add it before because of
+            the recursion's ordering. Add this clustering to the end of the list. */
+            if (singleNode) {
+                System.out.println("single node");
+                int[] oneNodeAr = {0};
+                levelClusterings.add(new Clustering(oneNodeAr));
+            }
+
+            /* Print the communities at each level to a .tree file */
+            print_current_communities();
+
+            /* After we've merged all recursive calls and built up the record of clusterings 
+            at each level, we calculate the  level at which the algorithm should've stopped 
+            to maximize performance. Print the result to a .perfgraph file. */
+            bestOverallClustering();
+        }
+
         return update;
     }
 
@@ -369,9 +405,19 @@ public class VOSClusteringTechnique {
      ***********************************************************************/
 
     /* 
+    * Overloaded method - calculating performance function for the current clustering
     * @return - the performance score of the current graph partition
     */
     public double calcPerformanceFunction() {
+        return calcPerformanceFunction(this.clustering);
+    }
+
+    /* 
+    * @param network - network to calculate on
+    * @param clust - network's clustering
+    * @return - the performance score of a
+    */
+    public double calcPerformanceFunction(Clustering clust) {
         
         int u, v;        // vertices
         double  f=0,        // intra-cluster density
@@ -388,7 +434,7 @@ public class VOSClusteringTechnique {
             for (v = u+1; v < network.nNodes; v++) {
 
                 // u and v are in the same community
-                if (clustering.cluster[u] == clustering.cluster[v]) {
+                if (clust.cluster[u] == clust.cluster[v]) {
 
                     // intra-community edge exists, so increase intra-community density score
                     if (adjMatrix[u][v] != INF) {
@@ -396,7 +442,7 @@ public class VOSClusteringTechnique {
                     }
 
                 // u and v are in different communities
-                } else if (clustering.cluster[u] != clustering.cluster[v]) {
+                } else if (clust.cluster[u] != clust.cluster[v]) {
 
                     // inter-community edge doesn't exist, so increase inter-community sparsity score
                     if (adjMatrix[u][v] == INF) {
@@ -505,6 +551,65 @@ public class VOSClusteringTechnique {
         denominator = ((double)network.nPossibleEdges()) * M;
     }
 
+    /*
+    * Given the original network and the iterated clusterings at each level,
+    * finds the clustering that gives the best performance. Prints it to a
+    * .perfgraph file.
+    *
+    * @returns the best clustering
+    */
+    public void bestOverallClustering() {
+        int nLevels = levelClusterings.size();
+        double[] levelPerformances = new double[nLevels];
+        Clustering nextLowerClustering;
+
+        /* the first clustering is the lowest level, so there's nothing to merge,
+        but we still calculate performance */
+        levelPerformances[0] = calcPerformanceFunction(levelClusterings.get(0));
+
+        /* at every subsequent level, calculate the merged network and performance */
+        for (int i = 1; i < nLevels; i++) {
+
+            /* copy of clustering at next lowest (unfurled) level; need copy so we 
+            don't overwrite that clustering */
+            nextLowerClustering = (Clustering)levelClusterings.get(i-1).clone();
+
+            /* merge to next lowest level, and save the result */
+            nextLowerClustering.mergeClusters(levelClusterings.get(i));
+            levelClusterings.set(i, nextLowerClustering);
+
+            /* calculate performance for merged and saved clustering */
+            levelPerformances[i] = calcPerformanceFunction(levelClusterings.get(i));
+        }
+
+        /* find maximum performance and corresponding clustering */
+        int indexOfBestClustering = Arrays2.calcMaximumIndex(levelPerformances);
+        Clustering bestClustering = levelClusterings.get(indexOfBestClustering);
+
+        /* print .perfgraph file. does not append */
+        String perfgraph_fileName = fileName + ".perfgraph";
+        try {
+
+            BufferedWriter bufferedWriter;
+            bufferedWriter = new BufferedWriter(new FileWriter(perfgraph_fileName));
+
+            /* print level and perf calculation */
+            bufferedWriter.write("Level " + indexOfBestClustering + " performance: " 
+                                + levelPerformances[indexOfBestClustering]);
+
+            /* print clustering */
+            for (int i = 0; i < bestClustering.getNNodes(); i++) {
+                bufferedWriter.newLine();
+                bufferedWriter.write(i + " " + Integer.toString(bestClustering.getCluster(i)));
+            } 
+
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            System.out.println("Error printing to .perfgraph file: " + e.getMessage());
+        }
+    }
+
 
     /**
     * Prints the adjacency matrix
@@ -520,59 +625,38 @@ public class VOSClusteringTechnique {
     }
 
     /**
-    * Prints to console the nodes and their corresponding communities
+    * Prints to .tree file the communities at each level
+    * Does not append.
     */
-    private void print_current_communities(int whereToPrint) {
+    private void print_current_communities() {
+        Clustering curClustering;
+        int nNodes;
+        int nLevels = levelClusterings.size();
+        String tree_fileName = fileName + ".tree";  
 
-        // get info
-        int nNodes = clustering.getNNodes();
-        clustering.orderClustersByNNodes();
+        try {
 
-        // print to console
-        if (whereToPrint == TO_CONSOLE) {
-            for (int i = 0; i < nNodes; i++) {
-                System.out.println(i + " " + Integer.toString(clustering.getCluster(i)));
-            }
+            BufferedWriter bufferedWriter;
+            bufferedWriter = new BufferedWriter(new FileWriter(tree_fileName));
 
-        // append to .tree file
-        } else if (whereToPrint == TO_TREE) {
+            /* for every level */
+            for (int l = 0; l < nLevels; l++) {
 
-            try {
-                BufferedWriter bufferedWriter;
-                String tree_fileName = fileName + ".tree";
-                bufferedWriter = new BufferedWriter(new FileWriter(tree_fileName, true));
+                /* get the current clustering and its size */
+                curClustering = levelClusterings.get(l);
+                nNodes = curClustering.getNNodes();
 
+                /* write every node in that clustering to the file */
                 for (int i = 0; i < nNodes; i++) {
-                    bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i)));
+                    bufferedWriter.write(i + " " + Integer.toString(curClustering.getCluster(i)));
                     bufferedWriter.newLine();
                 } 
-
-                bufferedWriter.close();
-            } catch (IOException e) {
-
-                System.out.println("Error printing to " + fileName + ": " + e.getMessage());
             }
 
-        // print to console and append to .tree file
-        } else if (whereToPrint == TO_CONSOLE_AND_TREE) {
+            bufferedWriter.close();
 
-            try {
-                BufferedWriter bufferedWriter;
-                String tree_fileName = fileName + ".tree";
-                bufferedWriter = new BufferedWriter(new FileWriter(tree_fileName, true));
-
-                for (int i = 0; i < nNodes; i++) {
-                    System.out.println(i + " " + Integer.toString(clustering.getCluster(i)));
-                    bufferedWriter.write(i + " " + Integer.toString(clustering.getCluster(i)));
-                    bufferedWriter.newLine();
-                }  
-
-                bufferedWriter.close();
-            } catch (IOException e) {
-
-                System.out.println("Error printing to " + fileName + ": " + e.getMessage());
-            }
-            
+        } catch (IOException e) {
+            System.out.println("Error printing to .tree file: " + e.getMessage());
         }
 
     }

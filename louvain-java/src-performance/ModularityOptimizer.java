@@ -79,7 +79,7 @@ public class ModularityOptimizer {
             System.out.format("Number of nodes: %d%n", network.getNNodes());
             System.out.format("Number of edges: %d%n", network.getNEdges());
             System.out.println("Running Louvain algorithm - performance");
-            System.out.println("Sacling parameter V: " + v_scalingParam);
+            System.out.println("Scaling parameter V: " + v_scalingParam);
             System.out.println("Meaningful maximum M: " + meaningfulMaxM);
             System.out.println();
         }
@@ -97,8 +97,9 @@ public class ModularityOptimizer {
         random = new Random(randomSeed);
 
         for (i = 0; i < nRandomStarts; i++) {
-            if (printOutput && (nRandomStarts > 1))
+            if (printOutput && (nRandomStarts > 1)) {
                 System.out.format("\tRandom start: %d%n", i + 1);
+            }
 
             VOSClusteringTechnique = new VOSClusteringTechnique(v_scalingParam, meaningfulMaxM, 
                                                                 network, resolution, outputFileName);
@@ -107,11 +108,9 @@ public class ModularityOptimizer {
             update = true;
 
             // run for nIterations times, or until there is no increase in performance
-            // TODO: think this do-while only goes once, because the top level runLouvainAlgorithm
-            // will already maximize performance, and "update" will thus only be true the first time
             do {
                 if (printOutput && (nIterations > 0)) {
-                    System.out.format("\n\tIteration: %d%n", j + 1);
+                    System.out.format("\nIteration: %d%n", j + 1);
                     VOSClusteringTechnique.level = 0;
                     update = VOSClusteringTechnique.runLouvainAlgorithm(random);
                 }
@@ -121,36 +120,23 @@ public class ModularityOptimizer {
                 performance = VOSClusteringTechnique.calcPerformanceFunction();
 
                 if (printOutput && (nIterations > 0))
-                    System.out.format("\tPerformance: %.4f%n", performance);
+                    System.out.format("\nIteration %d performance: %.4f%n", j, performance);
 
-            }
-            while ((j < nIterations) && update);
+            } while ((j < nIterations) && update);
 
             // we have found our best clustering
             if (performance > maxPerformance) {
                 clustering = VOSClusteringTechnique.getClustering();
                 maxPerformance = performance;
             }
-
-            if (printOutput && (nRandomStarts > 1)) {
-                if (nIterations == 1)
-                    System.out.format("\tPerformance: %.4f%n", performance);
-                System.out.println();
-            }
         }
+
         endTime = System.currentTimeMillis();
 
         // print end-of-algorithm information
         if (printOutput) {
-            if (nRandomStarts == 1) {
-                if (nIterations > 1)
-                    System.out.println();
-                System.out.format("Performance: %.4f%n", maxPerformance);
-            } else
-                System.out.format(
-                    "Maximum Performance in %d random starts: %.4f%n", 
+            System.out.format("\nMaximum performance in %d random starts: %.4f%n", 
                     nRandomStarts, maxPerformance);
-
             System.out.format("Number of communities: %d%n", 
                 clustering.getNClusters());
             System.out.format("Elapsed time: %d seconds%n", 
@@ -169,7 +155,6 @@ public class ModularityOptimizer {
      * an input file that contains the list of edges.
      *
      * @param  fileName            the input file
-     * // TODO change this param
      * @throws IOException         occurs if there's an input or output error
      * @return a network based on the input file and the chosen modularity 
      *         function
@@ -318,4 +303,6 @@ public class ModularityOptimizer {
 
         bufferedWriter.close();
     }
+
+
 }

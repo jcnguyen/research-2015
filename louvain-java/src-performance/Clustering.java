@@ -25,7 +25,7 @@ public class Clustering implements Cloneable, Serializable {
     protected int[] cluster; // the cluster that each node i belongs to
 
     /**
-     * Loads a clustering off of a file.
+     * Loads a clustering off of a serialized file.
      * 
      * @param  fileName                the file that contains the clustering
      * @throws ClassNotFoundException  occurs if a class is unable to load a 
@@ -279,6 +279,7 @@ public class Clustering implements Cloneable, Serializable {
             cluster[i] = clustering.cluster[cluster[i]];
         nClusters = clustering.nClusters;
     }
+
 }
 
 

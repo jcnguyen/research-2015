@@ -131,6 +131,30 @@ public class Arrays2 {
     }
 
     /**
+     * Determines the index of the maximum value of a double array.
+     *
+     * @param value  the array
+     * @return the index of the maximum value of the array
+     **/
+    public static int calcMaximumIndex(double[] value) {
+        double maximum;
+        int i, maxIndex;
+
+        // set up
+        maxIndex = 0;
+        maximum = value[0];
+
+        for (i = 1; i < value.length; i++) {
+            if (value[i] > maximum) {
+                maximum = value[i];
+                maxIndex = i;
+            }
+        }
+
+        return maxIndex;
+    }
+
+    /**
      * Generates a new array of permutations with integer values [0, size of new array).
      *
      * @param nElements  the size of the new array
