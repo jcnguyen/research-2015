@@ -145,9 +145,9 @@ public class ModularityOptimizer {
         }
 
         // write to output file
-        if (printOutput) System.out.println("Writing output file...");
+        if (printOutput) System.out.println("Writing to .graph...");
         writeOutputFile(outputFileName, clustering);
-        if (printOutput) System.out.println("Finish writing to output file.");
+        if (printOutput) System.out.println("Finish writing to .graph.");
     }
 
     /** 

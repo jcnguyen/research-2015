@@ -332,7 +332,7 @@ public class VOSClusteringTechnique {
         VOSClusteringTechnique new_VOSClusteringTechnique;
         
         /* Print info */
-        System.out.println("\n\tLevel " + level);
+        System.out.println("\n\tPass " + level);
         level++;
         System.out.printf("\tnetwork size: %d nodes, %d edges\n", network.getNNodes(), network.getNEdges());
         System.out.println("\tstart computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
@@ -383,7 +383,6 @@ public class VOSClusteringTechnique {
             /* Highest level clustering is currently saved. We couldn't add it before because of
             the recursion's ordering. Add this clustering to the end of the list. */
             if (singleNode) {
-                System.out.println("single node");
                 int[] oneNodeAr = {0};
                 levelClusterings.add(new Clustering(oneNodeAr));
             }
@@ -539,13 +538,30 @@ public class VOSClusteringTechnique {
         // initialize scaling parameter
         this.v_scalingParam = v_scalingParam;
 
-        // initialize the meaningful maximum M of edge weights, and ensure no edge
-        // weights are greater than M
-        this.M = maxM;
-        network.adjustEdgeWeights(M);
-
         // get adjacency matrix representation of current network
         adjMatrix = network.getMatrix();
+
+        /* Initialize the meaningful maximum M of edge weights for this pass
+        of the Louvain algorithm.
+
+        If we're in the initial call of the algorithm, we use the M passed
+        in from the command line. If we're in later calls of the algorithm,
+        there may be some edges (ignoring self loops) that are greater than M, 
+        because the weights of edges (u,v) in the condensed community are the 
+        sum of inter-community edges between those communities represented 
+        by u and v. */
+
+        if (level == 0) {
+            this.M = maxM;
+
+            /* if any weights are higher than M, set them equal to M*/
+            network.adjustEdgeWeights(M); 
+        } else {
+
+            /* if we need to set a higher M, setM will return that higher M. 
+            otherwise, this statement is equivalent to this.M = maxM */
+            this.M = setMtoMax(M);
+        }
 
         // calculate denominator (number of possible edges * meaningful maximum M)
         denominator = ((double)network.nPossibleEdges()) * M;
@@ -556,9 +572,9 @@ public class VOSClusteringTechnique {
     * finds the clustering that gives the best performance. Prints it to a
     * .perfgraph file.
     *
-    * @returns the best clustering
     */
     public void bestOverallClustering() {
+        System.out.println("\nCalculating the best overall clustering for all passes...");
         int nLevels = levelClusterings.size();
         double[] levelPerformances = new double[nLevels];
         Clustering nextLowerClustering;
@@ -586,10 +602,14 @@ public class VOSClusteringTechnique {
         int indexOfBestClustering = Arrays2.calcMaximumIndex(levelPerformances);
         Clustering bestClustering = levelClusterings.get(indexOfBestClustering);
 
+        System.out.format("Best clustering is Pass %d with performance: %.4f%n", 
+                    indexOfBestClustering, levelPerformances[indexOfBestClustering]);
+
         /* print .perfgraph file. does not append */
         String perfgraph_fileName = fileName + ".perfgraph";
         try {
 
+            System.out.println("Writing to " + perfgraph_fileName + "...");
             BufferedWriter bufferedWriter;
             bufferedWriter = new BufferedWriter(new FileWriter(perfgraph_fileName));
 
@@ -604,6 +624,8 @@ public class VOSClusteringTechnique {
             } 
 
             bufferedWriter.close();
+            System.out.println("Finished writing to " + perfgraph_fileName + ".");
+
 
         } catch (IOException e) {
             System.out.println("Error printing to .perfgraph file: " + e.getMessage());
@@ -636,6 +658,7 @@ public class VOSClusteringTechnique {
 
         try {
 
+            System.out.println("\nWriting to " + tree_fileName + "...");
             BufferedWriter bufferedWriter;
             bufferedWriter = new BufferedWriter(new FileWriter(tree_fileName));
 
@@ -654,11 +677,41 @@ public class VOSClusteringTechnique {
             }
 
             bufferedWriter.close();
+            System.out.println("Finished writing to " + tree_fileName + ".");
 
         } catch (IOException e) {
             System.out.println("Error printing to .tree file: " + e.getMessage());
         }
 
+    }
+
+    /*
+    * Method called by initPerfVariables().
+    * If any edge weights (not self loops) are higher than M,
+    * set M to the highest edge weight.
+    *
+    * @pre - adjacency matrix already generated
+    * @post - M updated, adjMatrix unchanged
+    */
+    private double setMtoMax(double origM) {
+        double newM = origM;
+
+        // All edges except self-loops, no repeats
+        for (int u=0; u<network.nNodes; u++) {
+            for (int v=u+1; v<network.nNodes; v++) {
+
+                // keep track of max edge weight
+                if (adjMatrix[u][v] > newM) {
+                    newM = adjMatrix[u][v];
+                }
+            }
+        }
+
+        if (newM > origM) {
+            System.out.println("\tUpdated M from " + origM + " to " + newM);
+        }
+
+        return newM;
     }
 
 }
