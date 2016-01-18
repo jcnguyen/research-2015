@@ -36,7 +36,7 @@ public class VOSClusteringTechnique {
     protected double[][] adjMatrix;
 
     // meaningful maximum of edge weights
-    private static double M;
+    private double M;
 
     /** 
     * v_scalingParam is the scaling parameter that rates the importance of the
@@ -560,7 +560,7 @@ public class VOSClusteringTechnique {
 
             /* if we need to set a higher M, setM will return that higher M. 
             otherwise, this statement is equivalent to this.M = maxM */
-            this.M = setMtoMax(M);
+            this.M = setMtoMax(maxM);
         }
 
         // calculate denominator (number of possible edges * meaningful maximum M)
@@ -701,7 +701,7 @@ public class VOSClusteringTechnique {
             for (int v=u+1; v<network.nNodes; v++) {
 
                 // keep track of max edge weight
-                if (adjMatrix[u][v] > newM) {
+                if (adjMatrix[u][v] != INF && adjMatrix[u][v] > newM) {
                     newM = adjMatrix[u][v];
                 }
             }

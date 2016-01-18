@@ -1,0 +1,35 @@
+
+Unweighted
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/karate.pairs" ../output-perf/karate 1 1.0 1 1 1 0 1 &> ../output-perf/karate.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/adjnoun.pairs" ../output-perf/adjnoun 1 1.0 1 1 1 0 1 &> ../output-perf/adjnoun.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/power.pairs" ../output-perf/power 1 1.0 1 1 1 0 1 &> ../output-perf/power.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/oregon1_010414.pairs" ../output-perf/oregon1_010414 1 1.0  1 1 1 0 1 &> ../output-perf/oregon1_010414.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/oregon1_010421.pairs" ../output-perf/oregon1_010421 1 1.0 1 1 1 0 1 &> ../output-perf/oregon1_010421.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/oregon1_010428.pairs" ../output-perf/oregon1_010428 1 1.0 1 1 1 0 1 &> ../output-perf/oregon1_010428.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/oregon1_010505.pairs" ../output-perf/oregon1_010505 1 1.0 1 1 1 0 1 &> ../output-perf/oregon1_010505.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/oregon1_010512.pairs" ../output-perf/oregon1_010512 1 1.0 1 1 1 0 1 &> ../output-perf/oregon1_010512.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/oregon1_010519.pairs" ../output-perf/oregon1_010519 1 1.0 1 1 1 0 1 &> ../output-perf/oregon1_010519.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/as-22july06.pairs" ../output-perf/as-22july06 1 1.0 1 1 1 0 1 &> ../output-perf/as-22july06.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/email-Enron.pairs" ../output-perf/email-Enron 1 1.0 1 1 1 0 1 &> ../output-perf/email-Enron.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/loc-gowalla_edges.pairs" ../output-perf/loc-gowalla_edges 1 1.0 1 1 1 0 1 &> ../output-perf/loc-gowalla_edges.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/com-dblp.ungraph.pairs" ../output-perf/com-dblp.ungraph 1 1.0 1 1 1 0 1 &> ../output-perf/com-dblp.ungraph.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/com-amazon.ungraph.pairs" ../output-perf/com-amazon.ungraph 1 1.0 1 1 1 0 1 &> ../output-perf/com-amazon.ungraph.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/roadNet-PA.pairs" ../output-perf/roadNet-PA 1 1.0 1 1 1 0 1 &> ../output-perf/roadNet-PA.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/roadNet-TX.pairs" ../output-perf/roadNet-TX 1 1.0 1 1 1 0 1 &> ../output-perf/roadNet-TX.info
+
+java ModularityOptimizer "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/roadNet-CA.pairs" ../output-perf/roadNet-CA 1 1.0 1 1 1 0 1 &> ../output-perf/roadNet-CA.info

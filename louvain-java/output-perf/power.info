@@ -1,0 +1,52 @@
+-------------------------------------
+Modularity Optimizer
+Version 1.3.0
+by Ludo Waltman and Nees Jan van Eck
+-------------------------------------
+Reading input file...
+Finish reading input file.
+
+Number of nodes: 4941
+Number of edges: 6594
+Running Louvain algorithm - performance
+Scaling parameter V: 1
+Meaningful maximum M: 1
+
+
+Iteration: 1
+
+	Pass 0
+	network size: 4941 nodes, 6594 edges
+	start computation: 01/18/2016 15:10:25
+	end computation: 01/18/2016 15:10:26
+	Updated M from 1.0 to Infinity
+
+	Pass 1
+	network size: 2922 nodes, 4116 edges
+	start computation: 01/18/2016 15:10:26
+	end computation: 01/18/2016 15:10:26
+
+Writing to ../output-perf/power.tree...
+Finished writing to ../output-perf/power.tree.
+
+Calculating the best overall clustering for all passes...
+Best clustering is Pass 0 with performance: NaN
+Writing to ../output-perf/power.perfgraph...
+Finished writing to ../output-perf/power.perfgraph.
+
+Writing to ../output-perf/power.tree...
+Finished writing to ../output-perf/power.tree.
+
+Calculating the best overall clustering for all passes...
+Best clustering is Pass 0 with performance: Infinity
+Writing to ../output-perf/power.perfgraph...
+Finished writing to ../output-perf/power.perfgraph.
+
+Iteration 1 performance: Infinity
+
+Maximum performance in 1 random starts: Infinity
+Number of communities: 2922
+Elapsed time: 1 seconds
+
+Writing to .graph...
+Finish writing to .graph.
