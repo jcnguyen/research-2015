@@ -90,6 +90,8 @@ Expected output:
     Scaling parameter V: 1
     Meaningful maximum M: 1
 
+    Performance of unaltered graph: 0.3333333333333333
+
     Iteration: 1
 
 	Pass 0
