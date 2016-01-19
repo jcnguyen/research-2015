@@ -19,8 +19,12 @@ public class VOSClusteringTechnique {
     // to denote nonexistent edges in the adjacency matrix
     private static final double INF = Double.POSITIVE_INFINITY;
 
-    // keep track of what recursive level we're on
-    public static int level = 0;
+    // keep track of if we're on the first call of the algorithm
+    // used in setting M
+    public static boolean firstPass;
+
+    // count the numbers of passes
+    public static int pass;
 
     // where to print to
     private static String fileName;
@@ -59,8 +63,12 @@ public class VOSClusteringTechnique {
     */
     private static ArrayList<Clustering> levelClusterings; 
     private static boolean singleNode;
+
+    /* Initialize static variables only once */
     static {
         levelClusterings = new ArrayList<Clustering>();
+        pass = 0;
+        firstPass = true;
     }
 
     /**
@@ -332,8 +340,8 @@ public class VOSClusteringTechnique {
         VOSClusteringTechnique new_VOSClusteringTechnique;
         
         /* Print info */
-        System.out.println("\n\tPass " + level);
-        level++;
+        System.out.println("\n\tPass " + pass);
+        pass++;
         System.out.printf("\tnetwork size: %d nodes, %d edges\n", network.getNNodes(), network.getNEdges());
         System.out.println("\tstart computation: " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
 
@@ -372,28 +380,6 @@ public class VOSClusteringTechnique {
                 clustering.mergeClusters(new_VOSClusteringTechnique.clustering);
 
             }
-        }
-
-        /* keep track of which iteration we're on */
-        if (level > 1) { level--; }
-
-        /* On our lowest level iteration (base case) */
-        if (level == 1) {
-
-            /* Highest level clustering is currently saved. We couldn't add it before because of
-            the recursion's ordering. Add this clustering to the end of the list. */
-            if (singleNode) {
-                int[] oneNodeAr = {0};
-                levelClusterings.add(new Clustering(oneNodeAr));
-            }
-
-            /* Print the communities at each level to a .tree file */
-            print_current_communities();
-
-            /* After we've merged all recursive calls and built up the record of clusterings 
-            at each level, we calculate the  level at which the algorithm should've stopped 
-            to maximize performance. Print the result to a .perfgraph file. */
-            bestOverallClustering();
         }
 
         return update;
@@ -551,11 +537,12 @@ public class VOSClusteringTechnique {
         sum of inter-community edges between those communities represented 
         by u and v. */
 
-        if (level == 0) {
+        if (firstPass) {
             this.M = maxM;
 
             /* if any weights are higher than M, set them equal to M*/
             network.adjustEdgeWeights(M); 
+            firstPass = false;
         } else {
 
             /* if we need to set a higher M, setM will return that higher M. 
@@ -574,6 +561,15 @@ public class VOSClusteringTechnique {
     *
     */
     public void bestOverallClustering() {
+
+        /* If we condensed into a single clustering at the end, it hasn't yet been saved
+         because the method returns before adding it to levelClusterings. We now
+         add this clustering to the end of the list. */
+        if (singleNode) {
+            int[] oneNodeAr = {0};
+            levelClusterings.add(new Clustering(oneNodeAr));
+        }
+
         System.out.println("\nCalculating the best overall clustering for all passes...");
         int nLevels = levelClusterings.size();
         double[] levelPerformances = new double[nLevels];
@@ -630,6 +626,7 @@ public class VOSClusteringTechnique {
         } catch (IOException e) {
             System.out.println("Error printing to .perfgraph file: " + e.getMessage());
         }
+
     }
 
 
@@ -650,7 +647,7 @@ public class VOSClusteringTechnique {
     * Prints to .tree file the communities at each level
     * Does not append.
     */
-    private void print_current_communities() {
+    public void printClusteringsToTree() {
         Clustering curClustering;
         int nNodes;
         int nLevels = levelClusterings.size();

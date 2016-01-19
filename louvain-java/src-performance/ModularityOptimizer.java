@@ -107,11 +107,15 @@ public class ModularityOptimizer {
             j = 0;
             update = true;
 
+            // Print performance of unaltered graph once
+            if (i == 0) {
+                System.out.println("Performance of unaltered graph: " + VOSClusteringTechnique.calcPerformanceFunction());
+            }
+
             // run for nIterations times, or until there is no increase in performance
             do {
                 if (printOutput && (nIterations > 0)) {
                     System.out.format("\nIteration: %d%n", j + 1);
-                    VOSClusteringTechnique.level = 0;
                     update = VOSClusteringTechnique.runLouvainAlgorithm(random);
                 }
 
@@ -129,6 +133,12 @@ public class ModularityOptimizer {
                 clustering = VOSClusteringTechnique.getClustering();
                 maxPerformance = performance;
             }
+
+            /* Print all clusterings to .tree file */
+            VOSClusteringTechnique.printClusteringsToTree();
+
+            /* Find the best clustering and print it to .perfgraph */
+            VOSClusteringTechnique.bestOverallClustering();
         }
 
         endTime = System.currentTimeMillis();

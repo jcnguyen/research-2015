@@ -107,6 +107,8 @@ Expected output:
 	start computation: 01/18/2016 14:09:15
 	end computation (1 node): 01/18/2016 14:09:15
 
+    Iteration 1 performance: 0.6667
+
     Writing to ../output/test.tree...
     Finished writing to ../output/test.tree.
 
@@ -114,8 +116,6 @@ Expected output:
     Best clustering is Pass 0 with performance: 0.8333
     Writing to ../output/test.perfgraph...
     Finished writing to ../output/test.perfgraph.
-
-    Iteration 1 performance: 0.6667
 
     Maximum performance in 1 random starts: 0.6667
     Number of communities: 1
