@@ -71,9 +71,8 @@ $ java ModularityOptimizer ../test/test.pairs ../output-perf/test 1 1.0 M 1 1 0 
 Expected output:
 1. Output files in “/research-2015/louvain-java/output”:
 	1. test.graph: final clustering output
-	2. test.perfgraph: after Louvain runs to completion, we calculate the performance score for each of the intermediate clusterings. We find the clustering with the best performance score. The score and clustering are printed here.
-	3. test.tree: the intermediate clusterings.
-	4. test.info: to save a record of the command line output (see below), add &> test.info at the end.
+	2. test.tree: the intermediate clusterings.
+	3. test.info: to save a record of the command line output (see below), add &> test.info at the end.
 
 2. Command line:
     -------------------------------------

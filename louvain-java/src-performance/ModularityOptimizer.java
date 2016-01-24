@@ -27,8 +27,9 @@ public class ModularityOptimizer {
         boolean printOutput, update, adjustedEdgeWeights=false;
         Clustering clustering;
         Console console;
-        double performance, maxPerformance, resolution, resolution2;
-        int meaningfulMaxM, i, j, v_scalingParam, nIterations, nRandomStarts;
+        double performance, maxPerformance, resolution, resolution2, 
+            meaningfulMaxM, v_scalingParam;
+        int i, j, nIterations, nRandomStarts;
         long beginTime, endTime, randomSeed;
         Network network;
         Random random;
@@ -45,9 +46,9 @@ public class ModularityOptimizer {
         if (args.length == 9) {
             inputFileName = args[0];
             outputFileName = args[1];
-            v_scalingParam = Integer.parseInt(args[2]);
+            v_scalingParam = Double.parseDouble(args[2]);
             resolution = Double.parseDouble(args[3]);
-            meaningfulMaxM = Integer.parseInt(args[4]);
+            meaningfulMaxM = Double.parseDouble(args[4]);
             nRandomStarts = Integer.parseInt(args[5]);
             nIterations = Integer.parseInt(args[6]);
             randomSeed = Long.parseLong(args[7]);
@@ -56,11 +57,11 @@ public class ModularityOptimizer {
             console = System.console();
             inputFileName = console.readLine("Input file path/name: ");
             outputFileName = console.readLine("Output file path/name (without file extension): ");
-            v_scalingParam = Integer.parseInt(console.readLine("Scaling parameter V (0 to 1; rates the" + 
+            v_scalingParam = Double.parseDouble(console.readLine("Scaling parameter V (0 to 1; rates the" + 
                                                             " importance of the weight of inter-cluster edges," + 
                                                             " with respect to the weight of intra-cluster edges): ")); 
             resolution = Double.parseDouble(console.readLine("Resolution parameter (e.g., 1.0): "));
-            meaningfulMaxM = Integer.parseInt(console.readLine("Meaningful maximum M of edge weights: "));
+            meaningfulMaxM = Double.parseDouble(console.readLine("Meaningful maximum M of edge weights: "));
             nRandomStarts = Integer.parseInt(console.readLine("Number of random starts (e.g., 10): "));
             nIterations = Integer.parseInt(console.readLine("Number of iterations (e.g., 10): "));
             randomSeed = Long.parseLong(console.readLine("Random seed (e.g., 0): "));
