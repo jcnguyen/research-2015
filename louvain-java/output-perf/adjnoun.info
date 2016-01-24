@@ -12,318 +12,109 @@ Running Louvain algorithm - performance
 Scaling parameter V: 1
 Meaningful maximum M: 1
 
+Performance of unaltered graph: 0.9316280566280566
 
 Iteration: 1
 
 	Pass 0
 	network size: 112 nodes, 425 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 8.0
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
+	Updated M from 1.0 to 8.0
 
 	Pass 1
 	network size: 57 nodes, 224 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 10.0
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
+	Updated M from 8.0 to 10.0
 
 	Pass 2
 	network size: 54 nodes, 155 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 13.0
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
+	Updated M from 10.0 to 13.0
 
 	Pass 3
 	network size: 52 nodes, 127 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 11.0
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 4
 	network size: 51 nodes, 119 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 13.0
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 5
-	network size: 49 nodes, 100 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 11.0
+	network size: 50 nodes, 108 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 6
-	network size: 48 nodes, 94 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 11.0
+	network size: 49 nodes, 100 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 7
-	network size: 47 nodes, 90 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 11.0
+	network size: 48 nodes, 94 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 8
-	network size: 46 nodes, 88 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 10.0
+	network size: 47 nodes, 90 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 9
-	network size: 45 nodes, 83 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 9.0
+	network size: 46 nodes, 88 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 10
-	network size: 44 nodes, 80 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 9.0
+	network size: 45 nodes, 83 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 11
-	network size: 43 nodes, 74 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 8.0
+	network size: 44 nodes, 80 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 12
-	network size: 41 nodes, 66 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 7.0
+	network size: 43 nodes, 74 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 13
-	network size: 40 nodes, 65 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 7.0
+	network size: 42 nodes, 70 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 14
-	network size: 39 nodes, 55 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 7.0
+	network size: 41 nodes, 66 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 15
-	network size: 38 nodes, 51 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 6.0
+	network size: 40 nodes, 65 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 16
-	network size: 37 nodes, 50 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 6.0
+	network size: 39 nodes, 61 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 17
-	network size: 36 nodes, 48 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 7.0
+	network size: 38 nodes, 51 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
 	Pass 18
-	network size: 34 nodes, 43 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 6.0
+	network size: 37 nodes, 50 edges
+	start computation: 01/18/2016 22:30:44
+	end computation: 01/18/2016 22:30:44
 
-	Pass 19
-	network size: 33 nodes, 42 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 6.0
-
-	Pass 20
-	network size: 32 nodes, 40 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 6.0
-
-	Pass 21
-	network size: 31 nodes, 38 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 22
-	network size: 30 nodes, 36 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 23
-	network size: 29 nodes, 34 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 24
-	network size: 28 nodes, 33 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 25
-	network size: 27 nodes, 30 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 26
-	network size: 26 nodes, 29 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 27
-	network size: 25 nodes, 27 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 28
-	network size: 24 nodes, 26 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 29
-	network size: 23 nodes, 25 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 30
-	network size: 22 nodes, 23 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 5.0
-
-	Pass 31
-	network size: 21 nodes, 20 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 4.0
-
-	Pass 32
-	network size: 20 nodes, 19 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 4.0
-
-	Pass 33
-	network size: 19 nodes, 18 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 3.0
-
-	Pass 34
-	network size: 18 nodes, 17 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 3.0
-
-	Pass 35
-	network size: 17 nodes, 16 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 3.0
-
-	Pass 36
-	network size: 16 nodes, 15 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 3.0
-
-	Pass 37
-	network size: 15 nodes, 14 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 3.0
-
-	Pass 38
-	network size: 14 nodes, 13 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 2.0
-
-	Pass 39
-	network size: 13 nodes, 12 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 2.0
-
-	Pass 40
-	network size: 12 nodes, 11 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 2.0
-
-	Pass 41
-	network size: 11 nodes, 10 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 2.0
-
-	Pass 42
-	network size: 10 nodes, 9 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 2.0
-
-	Pass 43
-	network size: 9 nodes, 8 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 44
-	network size: 8 nodes, 7 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 45
-	network size: 7 nodes, 6 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 46
-	network size: 6 nodes, 5 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 47
-	network size: 5 nodes, 4 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 48
-	network size: 4 nodes, 3 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 49
-	network size: 3 nodes, 2 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-	Updated M from 0.0 to 1.0
-
-	Pass 50
-	network size: 2 nodes, 1 edges
-	start computation: 01/18/2016 15:14:37
-	end computation: 01/18/2016 15:14:37
-
-	Pass 51
-	network size: 1 nodes, 0 edges
-	start computation: 01/18/2016 15:14:37
-	end computation (1 node): 01/18/2016 15:14:37
+Iteration 1 performance: 0.7188
 
 Writing to ../output-perf/adjnoun.tree...
 Finished writing to ../output-perf/adjnoun.tree.
@@ -333,10 +124,8 @@ Best clustering is Pass 0 with performance: 0.9432
 Writing to ../output-perf/adjnoun.perfgraph...
 Finished writing to ../output-perf/adjnoun.perfgraph.
 
-Iteration 1 performance: 0.0684
-
-Maximum performance in 1 random starts: 0.0684
-Number of communities: 1
+Maximum performance in 1 random starts: 0.7188
+Number of communities: 37
 Elapsed time: 0 seconds
 
 Writing to .graph...

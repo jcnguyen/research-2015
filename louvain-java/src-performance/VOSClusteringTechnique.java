@@ -21,7 +21,13 @@ public class VOSClusteringTechnique {
 
     // keep track of if we're on the first call of the algorithm
     // used in setting M
-    public static boolean firstPass;
+    private static boolean firstPass;
+
+    // keep track of if we adjusted any edge weights in the networks
+    private static boolean adjustedEdgeWeights;
+
+    // the original network
+    private Network origNetwork;
 
     // count the numbers of passes
     public static int pass;
@@ -33,8 +39,6 @@ public class VOSClusteringTechnique {
     protected Network network;
     protected Clustering clustering;
     protected double resolution;
-
-    /* FOR PERFORMANCE */
 
     // adjacency matrix representation of current network
     protected double[][] adjMatrix;
@@ -69,6 +73,7 @@ public class VOSClusteringTechnique {
         levelClusterings = new ArrayList<Clustering>();
         pass = 0;
         firstPass = true;
+        adjustedEdgeWeights = false;
     }
 
     /**
@@ -540,9 +545,16 @@ public class VOSClusteringTechnique {
         if (firstPass) {
             this.M = maxM;
 
-            /* if any weights are higher than M, set them equal to M*/
-            network.adjustEdgeWeights(M); 
+            /* save the original network, which we'll need for later performance
+            calculations if we alter the input network by adjusting edge weights */
+            origNetwork = new Network(network.getNNodes(), network.getNodeWeights(), network.getEdges(), network.getEdgeWeights());
+
+            /* if any weights are higher than M, set them equal to M.
+            adjustedEdgeWeights gets set to true if an edge weight is lowered */
+            adjustedEdgeWeights = network.adjustEdgeWeights(M); 
+
             firstPass = false;
+
         } else {
 
             /* if we need to set a higher M, setM will return that higher M. 
@@ -571,6 +583,16 @@ public class VOSClusteringTechnique {
         }
 
         System.out.println("\nCalculating the best overall clustering for all passes...");
+
+        /* If we had to alter the original network due to the M value inputted on the 
+        command line, we need to revert back to the original network in order to
+        accurately calculate performances based on the original network. */
+        if (adjustedEdgeWeights) {
+            System.out.println("Reverting to original network");
+            network = origNetwork;            
+            adjMatrix = origNetwork.getMatrix();
+        }
+
         int nLevels = levelClusterings.size();
         double[] levelPerformances = new double[nLevels];
         Clustering nextLowerClustering;
@@ -608,10 +630,6 @@ public class VOSClusteringTechnique {
             System.out.println("Writing to " + perfgraph_fileName + "...");
             BufferedWriter bufferedWriter;
             bufferedWriter = new BufferedWriter(new FileWriter(perfgraph_fileName));
-
-            /* print level and perf calculation */
-            bufferedWriter.write("Level " + indexOfBestClustering + " performance: " 
-                                + levelPerformances[indexOfBestClustering]);
 
             /* print clustering */
             for (int i = 0; i < bestClustering.getNNodes(); i++) {

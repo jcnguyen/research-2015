@@ -1,0 +1,70 @@
+football-lm-perf-maxM
+Meila (2003): 1.54198037364
+Normalized mutual information, Danon et al (2005): 0.758713638549
+Split-join distance, van Dongen (2000): 71.0
+Rand index, Rand (1971): 0.948436308162
+Adjusted Rand index, Hubert and Arabie (1986) 0.51872246696
+
+
+football-lm-perf-maxM-opt
+Meila (2003): 2.27860422831
+Normalized mutual information, Danon et al (2005): 0.68189429624
+Split-join distance, van Dongen (2000): 102.0
+Rand index, Rand (1971): 0.919908466819
+Adjusted Rand index, Hubert and Arabie (1986) 0.00665735491374
+
+
+football-lm-perf-rehoM
+Meila (2003): 0.596444005873
+Normalized mutual information, Danon et al (2005): 0.877229546095
+Split-join distance, van Dongen (2000): 29.0
+Rand index, Rand (1971): 0.958352402746
+Adjusted Rand index, Hubert and Arabie (1986) 0.743046261193
+
+
+football-lm-perf-rehoM-opt
+Meila (2003): 0.66234413417
+Normalized mutual information, Danon et al (2005): 0.87323105714
+Split-join distance, van Dongen (2000): 36.0
+Rand index, Rand (1971): 0.964607170099
+Adjusted Rand index, Hubert and Arabie (1986) 0.725992941358
+
+
+football-lm-silhouette
+Meila (2003): 2.93275027736
+Normalized mutual information, Danon et al (2005): 0.535664770102
+Split-join distance, van Dongen (2000): 148.0
+Rand index, Rand (1971): 0.9058733791
+Adjusted Rand index, Hubert and Arabie (1986) 0.00353013960165
+
+
+football-lm-modularity
+Meila (2003): 0.721797623223
+Normalized mutual information, Danon et al (2005): 0.847492008817
+Split-join distance, van Dongen (2000): 30.0
+Rand index, Rand (1971): 0.958657513349
+Adjusted Rand index, Hubert and Arabie (1986) 0.744524970083
+
+
+football-lm-coverage
+Meila (2003): 1.12366691718
+Normalized mutual information, Danon et al (2005): 0.740551461186
+Split-join distance, van Dongen (2000): 55.0
+Rand index, Rand (1971): 0.900228832952
+Adjusted Rand index, Hubert and Arabie (1986) 0.526876202269
+
+
+football-cnm-modularity
+Meila (2003): 1.11229629644
+Normalized mutual information, Danon et al (2005): 0.743409673424
+Split-join distance, van Dongen (2000): 56.0
+Rand index, Rand (1971): 0.902974828375
+Adjusted Rand index, Hubert and Arabie (1986) 0.535952345227
+
+
+football-cnm-coverage
+Meila (2003): 1.37115183147
+Normalized mutual information, Danon et al (2005): 0.656285925549
+Split-join distance, van Dongen (2000): 69.0
+Rand index, Rand (1971): 0.835545385202
+Adjusted Rand index, Hubert and Arabie (1986) 0.388112375573

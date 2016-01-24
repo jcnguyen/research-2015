@@ -6,14 +6,14 @@ by Ludo Waltman and Nees Jan van Eck
 Reading input file...
 Finish reading input file.
 
-Number of nodes: 196591
-Number of edges: 1900654
+Number of nodes: 65535
+Number of edges: 22748
 Running Louvain algorithm - performance
 Scaling parameter V: 1
 Meaningful maximum M: 1
 
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 	at Network.getMatrix(Network.java:825)
-	at VOSClusteringTechnique.initPerfVariables(VOSClusteringTechnique.java:533)
-	at VOSClusteringTechnique.<init>(VOSClusteringTechnique.java:94)
+	at VOSClusteringTechnique.initPerfVariables(VOSClusteringTechnique.java:528)
+	at VOSClusteringTechnique.<init>(VOSClusteringTechnique.java:89)
 	at ModularityOptimizer.main(ModularityOptimizer.java:104)

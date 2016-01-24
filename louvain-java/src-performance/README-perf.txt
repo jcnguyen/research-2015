@@ -28,7 +28,7 @@ Running
 The command line arguments are as follows:
 input            Input file name. Extension should be .pairs for unweighted 
                    graphs and .wpairs for weighted graphs.
-output           Output file name. Extension should be .graph.
+output           Output file name. No extension - the algorithm will append the file endings.
 v	       	  V is the scaling parameter that rates the importance of the
     		    weight of intercluster edges (with respect to the weight of 
 		    the intra-cluster edges). Can be between 0 and 1, inclusive.

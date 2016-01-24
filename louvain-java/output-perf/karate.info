@@ -12,120 +12,52 @@ Running Louvain algorithm - performance
 Scaling parameter V: 1
 Meaningful maximum M: 1
 
+Performance of unaltered graph: 0.8609625668449198
 
 Iteration: 1
 
 	Pass 0
 	network size: 34 nodes, 78 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 5.0
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
+	Updated M from 1.0 to 5.0
 
 	Pass 1
 	network size: 20 nodes, 29 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 5.0
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
 	Pass 2
 	network size: 19 nodes, 24 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 3.0
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
 	Pass 3
 	network size: 18 nodes, 21 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 4.0
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
 	Pass 4
-	network size: 15 nodes, 14 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 4.0
+	network size: 17 nodes, 19 edges
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
 	Pass 5
-	network size: 14 nodes, 13 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 3.0
+	network size: 16 nodes, 17 edges
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
 	Pass 6
-	network size: 13 nodes, 12 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
+	network size: 15 nodes, 16 edges
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
 	Pass 7
-	network size: 12 nodes, 11 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
+	network size: 14 nodes, 15 edges
+	start computation: 01/18/2016 22:30:38
+	end computation: 01/18/2016 22:30:38
 
-	Pass 8
-	network size: 11 nodes, 10 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 9
-	network size: 10 nodes, 9 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 10
-	network size: 9 nodes, 8 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 11
-	network size: 8 nodes, 7 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 12
-	network size: 7 nodes, 6 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 13
-	network size: 6 nodes, 5 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 14
-	network size: 5 nodes, 4 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 15
-	network size: 4 nodes, 3 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 2.0
-
-	Pass 16
-	network size: 3 nodes, 2 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-	Updated M from 0.0 to 1.0
-
-	Pass 17
-	network size: 2 nodes, 1 edges
-	start computation: 01/18/2016 15:14:24
-	end computation: 01/18/2016 15:14:24
-
-	Pass 18
-	network size: 1 nodes, 0 edges
-	start computation: 01/18/2016 15:14:24
-	end computation (1 node): 01/18/2016 15:14:24
+Iteration 1 performance: 0.7344
 
 Writing to ../output-perf/karate.tree...
 Finished writing to ../output-perf/karate.tree.
@@ -135,10 +67,8 @@ Best clustering is Pass 0 with performance: 0.9055
 Writing to ../output-perf/karate.perfgraph...
 Finished writing to ../output-perf/karate.perfgraph.
 
-Iteration 1 performance: 0.1390
-
-Maximum performance in 1 random starts: 0.1390
-Number of communities: 1
+Maximum performance in 1 random starts: 0.7344
+Number of communities: 14
 Elapsed time: 0 seconds
 
 Writing to .graph...
