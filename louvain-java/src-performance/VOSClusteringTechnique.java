@@ -24,7 +24,7 @@ public class VOSClusteringTechnique {
     private static boolean firstPass;
 
     // keep track of if we adjusted any edge weights in the networks
-    private static boolean adjustedEdgeWeights;
+    public static boolean adjustedEdgeWeights;
 
     // the original network
     private Network origNetwork;
@@ -354,7 +354,7 @@ public class VOSClusteringTechnique {
         if (network.nNodes == 1) {
             System.out.println("\tend computation (1 node): " + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
 
-            // remember we hit a single node, for printing to .tree and .perfgraph
+            // remember we hit a single node, for printing to .tree and optimized .graph
             singleNode = true;
             return false;
         }
@@ -569,7 +569,7 @@ public class VOSClusteringTechnique {
     /*
     * Given the original network and the iterated clusterings at each level,
     * finds the clustering that gives the best performance. Prints it to a
-    * .perfgraph file.
+    * .graph file.
     *
     */
     public void bestOverallClustering() {
@@ -620,11 +620,16 @@ public class VOSClusteringTechnique {
         int indexOfBestClustering = Arrays2.calcMaximumIndex(levelPerformances);
         Clustering bestClustering = levelClusterings.get(indexOfBestClustering);
 
-        System.out.format("Best clustering is Pass %d with performance: %.4f%n", 
-                    indexOfBestClustering, levelPerformances[indexOfBestClustering]);
+        /* file to print to, depending on if M = max of edge weights, or if we
+        removed extreme high outliers (reho) */
+        String perfgraph_fileName = fileName + "-lm-performance";
+        if (adjustedEdgeWeights) {
+            perfgraph_fileName = perfgraph_fileName + "-rehoM" + "-opt" + ".graph";
+        } else {
+            perfgraph_fileName = perfgraph_fileName + "-maxM" + "-opt" + ".graph";
+        }
 
-        /* print .perfgraph file. does not append */
-        String perfgraph_fileName = fileName + ".perfgraph";
+        /* print graph file. does not append */
         try {
 
             System.out.println("Writing to " + perfgraph_fileName + "...");
@@ -642,7 +647,7 @@ public class VOSClusteringTechnique {
 
 
         } catch (IOException e) {
-            System.out.println("Error printing to .perfgraph file: " + e.getMessage());
+            System.out.println("Error printing to " + perfgraph_fileName + ": " + e.getMessage());
         }
 
     }
@@ -669,7 +674,15 @@ public class VOSClusteringTechnique {
         Clustering curClustering;
         int nNodes;
         int nLevels = levelClusterings.size();
-        String tree_fileName = fileName + ".tree";  
+
+        /* file to print to, depending on if M = max of edge weights, or if we
+        removed extreme high outliers (reho) */
+        String tree_fileName = fileName + "-lm-performance";
+        if (adjustedEdgeWeights) {
+            tree_fileName = tree_fileName + "-rehoM" + ".tree";
+        } else {
+            tree_fileName = tree_fileName + "-maxM" + ".tree";
+        }
 
         try {
 
@@ -695,7 +708,7 @@ public class VOSClusteringTechnique {
             System.out.println("Finished writing to " + tree_fileName + ".");
 
         } catch (IOException e) {
-            System.out.println("Error printing to .tree file: " + e.getMessage());
+            System.out.println("Error printing to " + tree_fileName + ": " + e.getMessage());
         }
 
     }

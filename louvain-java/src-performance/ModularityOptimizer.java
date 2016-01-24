@@ -24,7 +24,7 @@ public class ModularityOptimizer {
      * @throws IOException  occurs if there's an input or output error
      **/
     public static void main(String[] args) throws IOException {
-        boolean printOutput, update;
+        boolean printOutput, update, adjustedEdgeWeights=false;
         Clustering clustering;
         Console console;
         double performance, maxPerformance, resolution, resolution2;
@@ -137,8 +137,12 @@ public class ModularityOptimizer {
             /* Print all clusterings to .tree file */
             VOSClusteringTechnique.printClusteringsToTree();
 
-            /* Find the best clustering and print it to .perfgraph */
+            /* Find the best clustering and print it */
             VOSClusteringTechnique.bestOverallClustering();
+
+            /* Are we in the M = max or M = remove high outliers case? */
+            adjustedEdgeWeights = VOSClusteringTechnique.adjustedEdgeWeights;
+
         }
 
         endTime = System.currentTimeMillis();
@@ -156,7 +160,7 @@ public class ModularityOptimizer {
 
         // write to output file
         if (printOutput) System.out.println("Writing to .graph...");
-        writeOutputFile(outputFileName, clustering);
+        writeOutputFile(outputFileName, clustering, adjustedEdgeWeights);
         if (printOutput) System.out.println("Finish writing to .graph.");
     }
 
@@ -292,8 +296,8 @@ public class ModularityOptimizer {
      * @param  clustering   the clusters to write out
      * @throws IOException  occurs if there's an input or output error
      **/
-    private static void writeOutputFile(String fileName, Clustering clustering
-        ) throws IOException {
+    private static void writeOutputFile(String fileName, Clustering clustering,
+        boolean adjustedEdgeWeights) throws IOException {
 
         BufferedWriter bufferedWriter;
         int i, nNodes;
@@ -303,7 +307,12 @@ public class ModularityOptimizer {
         clustering.orderClustersByNNodes();
 
         // writing to the .graph: final communities output
-        fileName = fileName + ".graph";
+        if (adjustedEdgeWeights) {
+            fileName = fileName +  "-lm-performance" + "-rehoM" + ".graph";
+        } else {
+            fileName = fileName +  "-lm-performance" + "-maxM" + ".graph";
+        }
+
         bufferedWriter = new BufferedWriter(new FileWriter(fileName));
 
         for (i = 0; i < nNodes; i++) {
