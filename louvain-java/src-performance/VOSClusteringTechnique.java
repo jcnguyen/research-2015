@@ -629,6 +629,10 @@ public class VOSClusteringTechnique {
             perfgraph_fileName = perfgraph_fileName + "-maxM" + "-opt" + ".graph";
         }
 
+        /* print to console (and .info file) */
+        System.out.format("Best clustering at pass %d with performance: %.4f%n", 
+            indexOfBestClustering, levelPerformances[indexOfBestClustering]);
+
         /* print graph file. does not append */
         try {
 
@@ -643,7 +647,7 @@ public class VOSClusteringTechnique {
             } 
 
             bufferedWriter.close();
-            System.out.println("Finished writing to " + perfgraph_fileName + ".");
+            System.out.println("Finished writing best overall clustering to " + perfgraph_fileName + ".");
 
 
         } catch (IOException e) {
