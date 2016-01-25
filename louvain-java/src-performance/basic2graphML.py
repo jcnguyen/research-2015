@@ -20,8 +20,8 @@ numEdges = 613
 #inputCommunitySuffix = ".graph"
 
 
-inputGraph = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/football.wpairs"
-inputComm = "../output-perf/football-rehoM.perfgraph"
+inputGraph = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/karate.pairs"
+inputComm = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Data/lm-performance/karate-lm-performance"
 outfilePath = "../output-perf/football-rehoM-opt.graphml"
 
 #
