@@ -1,0 +1,54 @@
+karate-lm-perf-maxM
+Meila (2003): 1.84351062936
+Normalized mutual information, Danon et al (2005): 0.259874482177
+Split-join distance, van Dongen (2000): 22.0
+Rand index, Rand (1971): 0.522281639929
+Adjusted Rand index, Hubert and Arabie (1986) 0.034671392249
+
+
+karate-lm-perf-maxM-opt
+Meila (2003): 2.11101796386
+Normalized mutual information, Danon et al (2005): 0.395790348211
+Split-join distance, van Dongen (2000): 24.0
+Rand index, Rand (1971): 0.561497326203
+Adjusted Rand index, Hubert and Arabie (1986) 0.101277693119
+
+
+karate-lm-silhouette
+Meila (2003): 1.10740333185
+Normalized mutual information, Danon et al (2005): 0.428105780526
+Split-join distance, van Dongen (2000): 11.0
+Rand index, Rand (1971): 0.727272727273
+Adjusted Rand index, Hubert and Arabie (1986) 0.450116276835
+
+
+karate-lm-modularity
+Meila (2003): 0.758174170492
+Normalized mutual information, Danon et al (2005): 0.617467197477
+Split-join distance, van Dongen (2000): 11.0
+Rand index, Rand (1971): 0.770053475936
+Adjusted Rand index, Hubert and Arabie (1986) 0.53449373806
+
+
+karate-lm-coverage
+Meila (2003): 0.507102311257
+Normalized mutual information, Danon et al (2005): 0.699488160981
+Split-join distance, van Dongen (2000): 7.0
+Rand index, Rand (1971): 0.852049910873
+Adjusted Rand index, Hubert and Arabie (1986) 0.702155015256
+
+
+karate-cnm-modularity
+Meila (2003): 0.532114957198
+Normalized mutual information, Danon et al (2005): 0.692467326873
+Split-join distance, van Dongen (2000): 10.0
+Rand index, Rand (1971): 0.841354723708
+Adjusted Rand index, Hubert and Arabie (1986) 0.680255902864
+
+
+karate-cnm-coverage
+Meila (2003): 0.507102311257
+Normalized mutual information, Danon et al (2005): 0.699488160981
+Split-join distance, van Dongen (2000): 7.0
+Rand index, Rand (1971): 0.852049910873
+Adjusted Rand index, Hubert and Arabie (1986) 0.702155015256
