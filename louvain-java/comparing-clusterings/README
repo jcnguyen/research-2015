@@ -1,23 +1,9 @@
-README for igraph_compare_clustering.py
+README for compare_clustering_stats.py
 
-=== COMMAND LINE INPUT ===
-python igraph_compare_clustering.py input_network first_clustering second_clustering verbose
-
-Details:
-	input_network: file containing an edgelist (with or without weights) representing network (.wpairs, .pairs)
-	first_clustering: file containig one clustering of the input_network (.graph, .perfgraph)
-	second_clustering: another clustering of the input_network, to be compared to first_clustering (.graph, .perfgraph)
-	verbose: if 1, will print the input network and two clusterings
-
-=== COMMAND LINE OUTPUT ===
-EXAMPLE:
-	Reading input network from file... finished reading input network.
-	Reading and forming clusterings... done creating clusterings.
-	Meila (2003): 1.37115183147
-	Normalized mutual information, Danon et al (2005): 0.656285925549
-	Split-join distance, van Dongen (2000): 69.0
-	Rand index, Rand (1971): 0.835545385202
-	Adjusted Rand index, Hubert and Arabie (1986) 0.388112375573
+=== SUMMARY ===
+Takes in an input network and two clusterings of that network.
+Computes the Meila, NMI, split-join distance, Rand index, and adjusted Rand index.
+Prints scores in tab-delimited format and CSV to the command line.
 
 === INDEXES ===
 Meila index
@@ -29,7 +15,7 @@ Normalized mutual information
 - Between 0 and 1; higher is better (1 --> identical communities)
 
 Split-join distance
-- van Dongen (2000)
+- Dongen (2000)
 - lower is better
 - couldn't find PDF of van Dongen S: Performance criteria for graph clustering and Markov cluster experiments. Technical Report INS-R0012, National Research Institute for Mathematics and Computer Science in the Netherlands, Amsterdam, May 2000.
 
@@ -41,4 +27,49 @@ Adjusted Rand index
 - Normalized difference between Rand Index and its expected value under the null hypothesis
 - Expected between 0 and 1; 1 is better (1 --> identical communities)
 - Can be negative in extreme mismatches
+
+=== COMMAND LINE INPUT ===
+python compare_clustering_stats.py input_network first_clustering second_clustering verbose
+
+Details:
+	input_network: file containing an edgelist (with or without weights) representing network (.wpairs, .pairs)
+	first_clustering: file containig one clustering of the input_network (.graph, .perfgraph)
+	second_clustering: another clustering of the input_network, to be compared to first_clustering (.graph, .perfgraph)
+	verbose: if 1, will print the input network and two clusterings, and will label the statistic output
+
+=== COMMAND LINE OUTPUT (not verbose) ===
+EXAMPLE:
+	Reading input network from file... finished reading input network.
+	Reading and forming clusterings... done creating clusterings.
+
+	Separated by tabs:
+	1.84351062936	0.259874482177	22.0	0.522281639929	0.034671392249
+
+	CSV format:
+	1.84351062936,0.259874482177,22.0,0.522281639929,0.034671392249
+
+=== COMMAND LINE OUTPUT (verbose) ===
+EXAMPLE:
+	Reading input network from file... 
+	[input network here]
+	finished reading input network.
+	Reading and forming clusterings... done creating clusterings.
+	[first clustering here]
+	[second clustering here]
+
+	Separated by tabs:
+	1.84351062936	0.259874482177	22.0	0.522281639929	0.034671392249
+
+	CSV format:
+	1.84351062936,0.259874482177,22.0,0.522281639929,0.034671392249
+
+	Meila (2003): 1.84351062936
+	Normalized mutual information, Danon et al (2005): 0.259874482177
+	Split-join distance, van Dongen (2000): 22.0
+	Rand index, Rand (1971): 0.522281639929
+	Adjusted Rand index, Hubert and Arabie (1986) 0.034671392249
+
+=== OUTPUT FORMATS ===
+	Tab-delimited format can be pasted (w/o other formatting) in a spreadsheet and will automatically be put into separate cells. CSV can be read as a spreadsheet.
+
 

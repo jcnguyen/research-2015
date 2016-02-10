@@ -1,97 +1,93 @@
 import sys
 import string
-
+from sets import Set
 #
 # Converts from input graph and communities to graphML format
 #
 
 #
-# The following may need to be modified for each run
+# The following needs to be modified for each run
 #
 
-#dir = "../output-perf"
-#graphName = "football-maxM"
-numNodes = 115
-numEdges = 613
-#algorithmName = "-LP-"
-#metricName = "performance"
-#
-#inputGraphSuffix = ".txt"
-#inputCommunitySuffix = ".graph"
+numNodes = 34
+numEdges = 78
 
+# UNCOMMENT ONE OF THESE
+# alg = "lm"
+# metrics = Set(['modularity', 'silhouette', 'coverage', 'performance-maxM', 'performance-maxM-opt'])
 
-inputGraph = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/karate.pairs"
-inputComm = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Data/lm-performance/karate-lm-performance"
-outfilePath = "../output-perf/football-rehoM-opt.graphml"
+alg = "cnm"
+metrics = Set(['modularity', 'coverage'])
 
-#
-# The rest of the file should not need to be modified
-#
+for metric in metrics:
+	inputGraph = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Graphs/karate.pairs"
 
-# outputSuffix = ".graphML"
+	metric_no_suffix = metric.split('-')[0]
+	inputComm = "/Users/christina_tong/Box Sync/ComplexNetworks-CREU/Data/" + alg + "-" + \
+		metric_no_suffix + "/karate-" + alg + "-" + metric + ".graph"
+	outfilePath = "./temp-gml/karate-" + alg + "-" + metric + ".graphml"
 
+	#
+	# The rest of the file should not need to be modified
+	#
+	infileGraph = open(inputGraph, "rU")
+	infileCommunity = open(inputComm, "rU")
+	outfile = open(outfilePath, "w")
 
+	try:
+	    communities = infileCommunity.readlines()
+	    graph = infileGraph.readlines()
+	finally:
+	    infileGraph.close()
+	    infileCommunity.close()
 
-#infileGraph = open(dir+graphName+inputGraphSuffix, "rU")
-#infileCommunity = open(dir+graphName+algorithmName+metricName+inputCommunitySuffix, "rU")
-infileGraph = open(inputGraph, "rU")
-infileCommunity = open(inputComm, "rU")
-outfile = open(outfilePath, "w")
+	xmlHeader = "<?xml version= \"1.0\" encoding= \"UTF-8\"?> "
 
-try:
-    communities = infileCommunity.readlines()
-    graph = infileGraph.readlines()
-finally:
-    infileGraph.close()
-    infileCommunity.close()
+	graphMLHeader = """
+	<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\"  
+	    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
+	    xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">
+	"""
 
-xmlHeader = "<?xml version= \"1.0\" encoding= \"UTF-8\"?> "
+	graphHeader = "  <graph id=\"G\" edgedefault=\"undirected\">\n"
 
-graphMLHeader = """
-<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\"  
-    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
-    xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">
-"""
+	# key for community identification
+	keyHeader = """
+	  <key id=\"community\" for=\"node\" attr.name=\"community\" attr.type=\"int\">
+	    <default>0</default>
+	  </key>
+	"""
 
-graphHeader = "  <graph id=\"G\" edgedefault=\"undirected\">\n"
+	# Reading in the community information into dict
+	communityDict = {}
+	for l in communities:
+	    info = l.split()
+	    communityDict[info[0]] = info[1] 
 
-# key for community identification
-keyHeader = """
-  <key id=\"community\" for=\"node\" attr.name=\"community\" attr.type=\"int\">
-    <default>0</default>
-  </key>
-"""
+	# Processing files, writing output
 
-# Reading in the community information into dict
-communityDict = {}
-for l in communities:
-    info = l.split()
-    communityDict[info[0]] = info[1] 
+	outfile.write(xmlHeader)
+	outfile.write(graphMLHeader)
+	outfile.write(keyHeader)
 
-# Processing files, writing output
+	outfile.write(graphHeader)
 
-outfile.write(xmlHeader)
-outfile.write(graphMLHeader)
-outfile.write(keyHeader)
+	edgeCount = 0
+	for i in range(numNodes):
+	    outfile.write("  <node id=\"n" + str(i) + "\">\n")
+	    outfile.write("    <data key=\"community\">" + communityDict[str(i)] + "</data>\n")
+	    outfile.write("  </node>\n")
+	    
+	for e in graph:
+	    edge = e.split()
+	    outfile.write("  <edge id=\"e"+str(edgeCount)+"\" source=\"n"+edge[0]+"\" target=\"n"+edge[1]+"\"/>\n")
+	    edgeCount = edgeCount + 1
 
-outfile.write(graphHeader)
+	outfile.write("</graph>\n")
+	outfile.write("</graphml>\n")
 
-edgeCount = 0
-for i in range(numNodes):
-    outfile.write("  <node id=\"n" + str(i) + "\">\n")
-    outfile.write("    <data key=\"community\">" + communityDict[str(i)] + "</data>\n")
-    outfile.write("  </node>\n")
-    
-for e in graph:
-    edge = e.split()
-    outfile.write("  <edge id=\"e"+str(edgeCount)+"\" source=\"n"+edge[0]+"\" target=\"n"+edge[1]+"\"/>\n")
-    edgeCount = edgeCount + 1
+	if edgeCount != numEdges:
+	    print "number of lines in file != number of edges expected"
 
-outfile.write("</graph>\n")
-outfile.write("</graphml>\n")
-
-if edgeCount != numEdges:
-    print "number of lines in file != number of edges expected"
-
-# clean up
-outfile.close()
+	# clean up
+	outfile.close()

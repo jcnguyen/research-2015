@@ -9,8 +9,8 @@ if len(sys.argv) == 5:
 	v_raw = sys.argv[4]
 else:
 	input_network_path = raw_input("Input network edgefile (.pairs, .wpairs): ")
-	first_clustering_path = raw_input("Clustering 1 (.graph, .perfgraph): ")
-	second_clustering_path = raw_input("Clustering 2 (.graph, .perfgraph): ")
+	first_clustering_path = raw_input("Clustering 1 (.graph): ")
+	second_clustering_path = raw_input("Clustering 2 (.graph): ")
 	v_raw = raw_input("Verbose? (0 or 1): ")
 
 if int(v_raw) == 1:
@@ -19,7 +19,7 @@ else:
 	verbosity = False
 
 ############ INPUT NETWORK ############
-print "Reading input network from file...",
+print "\nReading input network from file...",
 # read in the network: no names, weights if present, and undirected
 input_network = igraph.Graph.Read_Ncol(input_network_path, names=False, weights="if_present", directed=False)
 if verbosity:
@@ -63,8 +63,15 @@ split_join = igraph.compare_communities(first_clustering, second_clustering, met
 rand = igraph.compare_communities(first_clustering, second_clustering, method='rand', remove_none=False)
 adj_rand = igraph.compare_communities(first_clustering, second_clustering, method='adjusted_rand', remove_none=False)
 
-print "Meila (2003):", vi
-print "Normalized mutual information, Danon et al (2005):", nmi
-print "Split-join distance, van Dongen (2000):", split_join
-print "Rand index, Rand (1971):", rand
-print "Adjusted Rand index, Hubert and Arabie (1986)", adj_rand
+print "\nSeparated by tabs:"
+print str(vi) + "\t" + str(nmi) + "\t" + str(split_join) + "\t" + str(rand) + "\t" + str(adj_rand)
+
+print "\nCSV format:"
+print str(vi) + "," + str(nmi) + "," + str(split_join) + "," + str(rand) + "," + str(adj_rand) + "\n"
+
+if verbosity:
+	print "Meila (2003):", vi
+	print "Normalized mutual information, Danon et al (2005):", nmi
+	print "Split-join distance, van Dongen (2000):", split_join
+	print "Rand index, Rand (1971):", rand
+	print "Adjusted Rand index, Hubert and Arabie (1986)", adj_rand
