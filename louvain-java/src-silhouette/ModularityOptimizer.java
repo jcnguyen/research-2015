@@ -83,11 +83,11 @@ public class ModularityOptimizer {
             System.out.format("Number of nodes: %d%n", network.getNNodes());
             System.out.format("Number of edges: %d%n", network.getNEdges());
             System.out.println();
-            System.out.println("Running " + 
+            System.out.print("Running " + 
                 ((algorithm == 1) ? "Louvain algorithm" : 
                 ((algorithm == 2) ? "Louvain algorithm with multilevel refinement" : 
-                "smart local moving algorithm")) + "...");
-            System.out.println("with metric " + 
+                "smart local moving algorithm")));
+            System.out.println(" with metric " + 
                 ((metricFunction == MODULARITY_ALTERNATIVE) ? "alternative modularity" : 
                 ((metricFunction == SILHOUETTE_INDEX) ? "silhouette index" : 
                 "standard modularity")));
@@ -115,7 +115,7 @@ public class ModularityOptimizer {
             update = true;
             do {
                 if (printOutput && (nIterations > 1))
-                    System.out.format("\tIteration: %d%n", j + 1);
+                    System.out.format("\tIteration %d", (j + 1));
 
                 // run the algorithm
                 if (algorithm == 1)
@@ -136,7 +136,7 @@ public class ModularityOptimizer {
                 }
 
                 if (printOutput && (nIterations > 1))
-                    System.out.format("\t1Metric value: %.4f%n", metricValue);
+                    System.out.format("\tMetric value: %.4f%n", metricValue);
             }
             while ((j < nIterations) && update);
 

@@ -1,0 +1,22 @@
+-------------------------------------
+Modularity Optimizer
+Version 1.3.0
+by Ludo Waltman and Nees Jan van Eck
+-------------------------------------
+Reading input file...
+Finish reading input file.
+
+Number of nodes: 7
+Number of edges: 10
+
+Running Louvain algorithm with metric standard modularity
+
+	Iteration 1	Metric value: 0.3550
+	Iteration 2	Metric value: 0.3550
+
+Metric value: 0.3550
+Number of communities: 2
+Elapsed time: 0 seconds
+
+Writing output file...
+Finish writing to output file.

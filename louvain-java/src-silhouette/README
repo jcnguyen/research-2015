@@ -61,10 +61,10 @@ following arguments:
 
 Input the following in the command line:
 $ javac ModularityOptimizer.java
-$ java ModularityOptimizer ../test/test.pairs ../output/test.graph 1 1.0 1 1 10 0 1
+$ java ModularityOptimizer ../test/test.pairs ../output/test.graph 1 1.0 1 1 10 0 1 > ../output/test.info
 
 Expected output:
-1. Output file in "\research-2015\louvain-java\output"
+1. Two output files with extensions .pairs and .info in "\research-2015\louvain-java\output"
 2. Command line:
     -------------------------------------
     Modularity Optimizer
@@ -77,11 +77,12 @@ Expected output:
     Number of nodes: 7
     Number of edges: 10
 
-    Running Louvain algorithm...
+    Running Louvain algorithm with metric standard modularity
 
-    [...]
+      Iteration 1 Metric value: 0.3550
+      Iteration 2 Metric value: 0.3550
 
-    Maximum modularity in 10 random starts: 0.3550
+    Metric value: 0.3550
     Number of communities: 2
     Elapsed time: 0 seconds
 
