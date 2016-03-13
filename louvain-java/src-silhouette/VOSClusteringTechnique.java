@@ -19,7 +19,7 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class VOSClusteringTechnique {
-    private static final boolean TEST = false;
+    private static final boolean TEST = true;
     private static final boolean TEST2 = false;
 
     // metric functions
@@ -697,10 +697,10 @@ public class VOSClusteringTechnique {
                     }
                     minAverageOuterDistance = Arrays2.calcMinimum2(averageOuterDistances);
                     if (TEST) {
-                        System.out.print("            averageOuterDistances: ");
-                        for (int jj = 0; jj < averageOuterDistances.length; jj++) {
-                            System.out.print(averageOuterDistances[jj] + ", ");
-                        }
+                        // System.out.print("            averageOuterDistances: ");
+                        // for (int jj = 0; jj < averageOuterDistances.length; jj++) {
+                        //     System.out.print(averageOuterDistances[jj] + ", ");
+                        // }
                         System.out.println();
                         System.out.println("            minAverageOuterDistance: " + minAverageOuterDistance);
                     }
