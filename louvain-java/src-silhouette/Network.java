@@ -22,6 +22,7 @@ import java.util.Random;
 public class Network implements Serializable {
     private static final long serialVersionUID = 1;
     private static final double INF = Double.POSITIVE_INFINITY;
+
     protected int nNodes;
     protected int nEdges;
     protected double[] nodeWeight;
