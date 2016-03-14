@@ -26,8 +26,10 @@ public class VOSClusteringTechnique {
     private static final int MODULARITY_STANDARD = 1;
     private static final int MODULARITY_ALTERNATIVE = 2;
     private static final int SILHOUETTE_INDEX = 3;
-
+//TODO
     private static final double INF = Double.POSITIVE_INFINITY;
+    // private static final double INF = 10000000;
+
 
     protected Network network;
     protected Clustering clustering;
@@ -571,6 +573,8 @@ public class VOSClusteringTechnique {
             for (j = 0; j < nNodes; j++) {
                 if (i == j) { // diagonal
                     distances[i][j] = 0;
+                } else if (graph[i][j] == INF) {
+                    distances[i][j] = 1000000000;
                 } else {
                     distances[i][j] = graph[i][j];
                 }
@@ -584,11 +588,22 @@ public class VOSClusteringTechnique {
                 for (j = 0; j < nNodes; j++) { 
                     // if vertex k is on the shortest path from
                     // i to j, then update the value of distances[i][j]
-                    if (distances[i][k] + distances[k][j] < distances[i][j])
+                    if (distances[i][k] + distances[k][j] < distances[i][j]) {
                         distances[i][j] = distances[i][k] + distances[k][j];
+                    }
                 }
             }
         }
+
+//TODO
+        // for (int zi = 0; zi < nNodes; zi++) { 
+        //     for (int zj = 0; zj < nNodes; zj++) { 
+        //         System.out.println("distances[i][k]: " + distances[zi][zj]);
+        //     }
+        //     System.out.println();
+        // }
+
+
 
         return distances;
     }
@@ -691,10 +706,22 @@ public class VOSClusteringTechnique {
                             for (i = 0; i < nNodesInClusterC2; i++) {
                                 k = nodesPerCluster[c2][i];
                                 distance += shortestPath[j + cumulativeNNodes][k];
+//TODO
+                                // System.out.println("shortestpath[j + cumul][k]: " + shortestPath[j + cumulativeNNodes][k]); // TODO
                             }
                             averageOuterDistances[c2] = distance / (nNodesInClusterC2);
+
+//TODO 
+                            // System.out.println("-------------------\nDISTANCE: " + distance);
+
                         }
                     }
+//TODO
+                    // System.out.println("AVGOUTERDISTANCES");
+                    // for(int zi = 0; zi < averageOuterDistances.length; zi++) {
+                    //     System.out.println(averageOuterDistances[zi]);
+                    // }
+
                     minAverageOuterDistance = Arrays2.calcMinimum2(averageOuterDistances);
                     if (TEST) {
                         System.out.print("            averageOuterDistances: ");
@@ -709,6 +736,10 @@ public class VOSClusteringTechnique {
                     silhouetteWidths[j] = (
                         (minAverageOuterDistance - averageInnerDistance) / 
                         (Math.max(averageInnerDistance, minAverageOuterDistance))); 
+//TODO
+                    // System.out.println("    minAverageOuterDistance: " + minAverageOuterDistance);
+                    // System.out.println("    averageInnerDistance: " + averageInnerDistance + "\n");
+
                     if (TEST) {
                         System.out.println("            silhouetteWidths[j]: " + silhouetteWidths[j]);
                     }
@@ -726,6 +757,15 @@ public class VOSClusteringTechnique {
 
         // get the silhouette of entire graph
         silhouetteIndexGlobal = Arrays2.calcSum(silhouetteIndexPerCluster) / (nClusters - nEmptyClusters);
+//TODO
+        // System.out.println("\nPRINTING SHIT");
+        // for(int zi = 0; zi < silhouetteIndexPerCluster.length; zi++) {
+        //     System.out.println(silhouetteIndexPerCluster[zi]);
+        // }
+        // System.out.println("calcSum " + Arrays2.calcSum(silhouetteIndexPerCluster));
+        // System.out.println("nClusters " + nClusters);
+        // System.out.println("nEmptyClusters " + nEmptyClusters);
+
 
         if (TEST) {
             System.out.println();
