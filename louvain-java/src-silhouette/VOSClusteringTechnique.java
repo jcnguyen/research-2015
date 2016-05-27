@@ -19,7 +19,7 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class VOSClusteringTechnique {
-    private static final boolean TEST = true;
+    private static final boolean TEST = false;
     private static final boolean TEST2 = false;
 
     // metric functions
@@ -411,12 +411,12 @@ public class VOSClusteringTechnique {
         for (i = 0; i < network.nNodes; i++) {
             clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
         }
-   
+
         // calculate the modularity score
         for (i = 0; i < clustering.nClusters; i++) {
             qualityFunction -= clusterWeight[i] * clusterWeight[i] * resolution;
         }
-        qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
+        qualityFunction /= (2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks);
 
         return qualityFunction;
     }
@@ -706,28 +706,16 @@ public class VOSClusteringTechnique {
                             for (i = 0; i < nNodesInClusterC2; i++) {
                                 k = nodesPerCluster[c2][i];
                                 distance += shortestPath[j + cumulativeNNodes][k];
-//TODO
-                                // System.out.println("shortestpath[j + cumul][k]: " + shortestPath[j + cumulativeNNodes][k]); // TODO
+
                             }
                             averageOuterDistances[c2] = distance / (nNodesInClusterC2);
 
-//TODO 
-                            // System.out.println("-------------------\nDISTANCE: " + distance);
-
                         }
                     }
-//TODO
-                    // System.out.println("AVGOUTERDISTANCES");
-                    // for(int zi = 0; zi < averageOuterDistances.length; zi++) {
-                    //     System.out.println(averageOuterDistances[zi]);
-                    // }
 
                     minAverageOuterDistance = Arrays2.calcMinimum2(averageOuterDistances);
                     if (TEST) {
-                        // System.out.print("            averageOuterDistances: ");
-                        // for (int jj = 0; jj < averageOuterDistances.length; jj++) {
-                        //     System.out.print(averageOuterDistances[jj] + ", ");
-                        // }
+
                         System.out.println();
                         System.out.println("            minAverageOuterDistance: " + minAverageOuterDistance);
                     }
@@ -736,9 +724,6 @@ public class VOSClusteringTechnique {
                     silhouetteWidths[j] = (
                         (minAverageOuterDistance - averageInnerDistance) / 
                         (Math.max(averageInnerDistance, minAverageOuterDistance))); 
-//TODO
-                    // System.out.println("    minAverageOuterDistance: " + minAverageOuterDistance);
-                    // System.out.println("    averageInnerDistance: " + averageInnerDistance + "\n");
 
                     if (TEST) {
                         System.out.println("            silhouetteWidths[j]: " + silhouetteWidths[j]);
@@ -757,15 +742,6 @@ public class VOSClusteringTechnique {
 
         // get the silhouette of entire graph
         silhouetteIndexGlobal = Arrays2.calcSum(silhouetteIndexPerCluster) / (nClusters - nEmptyClusters);
-//TODO
-        // System.out.println("\nPRINTING SHIT");
-        // for(int zi = 0; zi < silhouetteIndexPerCluster.length; zi++) {
-        //     System.out.println(silhouetteIndexPerCluster[zi]);
-        // }
-        // System.out.println("calcSum " + Arrays2.calcSum(silhouetteIndexPerCluster));
-        // System.out.println("nClusters " + nClusters);
-        // System.out.println("nEmptyClusters " + nEmptyClusters);
-
 
         if (TEST) {
             System.out.println();
@@ -936,6 +912,36 @@ public class VOSClusteringTechnique {
         }
 
         return update;
+    }
+
+    /***********************************************************************
+     * COVERAGE
+     ***********************************************************************/
+
+    public double calcCoverageFunction() {
+        double qualityFunction;
+        double[] clusterWeight;
+        int i, j, k;
+
+        // calculate the total edge weight of the network
+        qualityFunction = 0;
+        for (i = 0; i < network.nNodes; i++) {
+            j = clustering.cluster[i];
+            for (k = network.firstNeighborIndex[i]; k < network.firstNeighborIndex[i + 1]; k++)
+                if (clustering.cluster[network.neighbor[k]] == j) 
+                    qualityFunction += network.edgeWeight[k];
+        }
+        qualityFunction += network.totalEdgeWeightSelfLinks;
+
+        // store the total node weight of each cluster
+        clusterWeight = new double[clustering.nClusters];
+        for (i = 0; i < network.nNodes; i++) {
+            clusterWeight[clustering.cluster[i]] += network.nodeWeight[i];
+        }
+   
+        qualityFunction /= 2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks;
+
+        return qualityFunction;
     }
 
 }

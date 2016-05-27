@@ -8,46 +8,34 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MetricScoreCalculator {
-
     public static void main(String[] args) throws IOException {
-
-        String inputFileName
-        int metricFunction;
-        double resolution;
-        Network network;
-        VOSClusteringTechnique VOSClusteringTechnique;
 
         System.out.println("-------------------------------------");
         System.out.println("Metric Score Calculator");
         System.out.println("-------------------------------------");
 
         // read in the arguments
-        inputFileName = args[0];
-        metricFunction = Integer.parseInt(args[1]);
-        resolution = Double.parseDouble(args[2]);
+        String inputFileName = args[0];
+        String clusteringFileName = args[1];
 
-        // read input file
-        network = readInputFile(inputFileName, metricFunction);
+        // read files
+        Network network = readInputFile(inputFileName);
+        Clustering clustering = readClusteringFile(clusteringFileName);
+        double resolution = 1/(2 * network.getTotalEdgeWeight() + network.totalEdgeWeightSelfLinks);
 
         // calculate metric scores
-        VOSClusteringTechnique = new VOSClusteringTechnique(network, resolution);
-// TODO
-		VOSClusteringTechnique.calcModularityFunction();
-        VOSClusteringTechnique.calcSilhouetteFunction();
+        VOSClusteringTechnique VOSClusteringTechnique = new VOSClusteringTechnique(network, clustering, resolution);
+		double coverage = VOSClusteringTechnique.calcCoverageFunction();
+		double modularity = VOSClusteringTechnique.calcModularityFunction();
+        double silhouette = VOSClusteringTechnique.calcSilhouetteFunction();
+
+        System.out.println("coverage:   " + coverage);
+        System.out.println("modularity: " + modularity);
+        System.out.println("silhouette: " + silhouette);
 
     }
 
-    /** 
-     * Construct a network based on the metric function and an input file that 
-     * contains the list of edges.
-     *
-     * @param  fileName        the input file
-     * @param  metricFunction  the metric function
-     * @throws IOException     occurs if there's an input or output error
-     * @return a network based on the input file and the chosen metric function
-     **/
-    private static Network readInputFile(
-        String fileName, int metricFunction) throws IOException {
+    private static Network readInputFile(String fileName) throws IOException {
 
         BufferedReader bufferedReader;
         double[] edgeWeight1, edgeWeight2, nodeWeight;
@@ -133,17 +121,42 @@ public class MetricScoreCalculator {
         }
 
         // construct the network based on the metric function
-        if (metricFunction != MODULARITY_ALTERNATIVE) {
-            network = new Network(
+        network = new Network(
                 nNodes, firstNeighborIndex, neighbor, edgeWeight2);
-        } else {
-            nodeWeight = new double[nNodes];
-            Arrays.fill(nodeWeight, 1);
-            network = new Network(
-                nNodes, nodeWeight, firstNeighborIndex, neighbor, edgeWeight2);
-        }
-
+        
         return network;
+
+    }
+
+    private static Clustering readClusteringFile(
+    	String fileName) throws IOException {
+
+        BufferedReader bufferedReader;
+
+        // get the number of lines in the file
+        bufferedReader = new BufferedReader(new FileReader(fileName));
+        int nLines = 0;
+        while (bufferedReader.readLine() != null)
+            nLines++;
+        bufferedReader.close();
+
+        // get the clustering
+        bufferedReader = new BufferedReader(new FileReader(fileName));
+        int[] cluster = new int[nLines];
+        int node;
+        int community;
+        String[] splittedLine;
+        for (int i = 0; i < nLines; i++) {
+        	splittedLine = bufferedReader.readLine().split(" ");
+            node = Integer.parseInt(splittedLine[0]);
+            community = Integer.parseInt(splittedLine[1]);
+            cluster[node] = community;
+        }
+        bufferedReader.close();
+
+    	Clustering clustering = new Clustering(cluster);
+
+    	return clustering;
 
     }
 
