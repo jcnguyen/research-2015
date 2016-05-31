@@ -7,8 +7,7 @@ http://research.pomona.edu/complexnetworks/
 Download
 ----------
 The code can be found here: https://github.com/jcnguyen/research-2015
-This documentation is specificallly for running the Java code for the Louvain 
-method, which is found in "\research-2015\louvain-java".
+This documentation is specificallly for running the Java code for the Louvain method, which is found in "\research-2015\louvain-java".
 
 The test suite can be found in the Box account under "Graphs". 
 

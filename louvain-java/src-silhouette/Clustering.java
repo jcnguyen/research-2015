@@ -161,6 +161,7 @@ public class Clustering implements Cloneable, Serializable {
         for (i = 0; i < nNodes; i++) {
             nNodesPerCluster[cluster[i]]++;
         }
+
         return nNodesPerCluster;
     }
 
@@ -214,7 +215,7 @@ public class Clustering implements Cloneable, Serializable {
     }
 
     /**
-     * Order the clusters in increasing order of number of nodes.
+     * Order the clusters in decreasing order of number of nodes.
      **/
     public void orderClustersByNNodes() {
 
