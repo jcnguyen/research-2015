@@ -3,6 +3,7 @@ INPUTS
 input_file             File that contains the list of edges (.pairs or .wpairs)
 clustering_file        File that contains the list of node-community pairs (.graph)
 mVal                   The m value (see "Metric Score Evaluation Data" sheet for values)
+
 RUNNING
 --------------------
 To compile:
@@ -19,14 +20,12 @@ TEST RUN
 Terminal input:
 
 	$ javac MetricScoreCalculator.java
-	$ java MetricScoreCalculator ~/Downloads/ground-truth/karate/karate.pairs ~/Downloads/ground-truth/karate/karate-lm-silhouette.graph 
+	$ java MetricScoreCalculator ~/Downloads/ground-truth/karate/karate.pairs ~/Downloads/ground-truth/karate/karate-lm-silhouette.graph 1 
 
 Terminal output:
 
 	-------------------------------------
 	Metric Score Calculator
 	-------------------------------------
-	coverage:   0.717948717948718
-	modularity: 0.2790927021696252
-	silhouette: 0.023668630613909947
+	performance: 0.7112299465240641
 
