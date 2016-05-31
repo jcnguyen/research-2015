@@ -23,7 +23,6 @@ public class ModularityOptimizer {
 
     /** 
      * The main sequence. 
-
      * Runs the complete algorithm to maximize the metric score.
      *
      * @param  args         expects 9 arguments
@@ -160,15 +159,11 @@ public class ModularityOptimizer {
                     System.out.println();
                 System.out.format("Metric value: %.4f%n", maxMetricValue);
             } else {
-                System.out.format(
-                    "Maximum metric value in %d random starts: %.4f%n", 
-                    nRandomStarts, maxMetricValue);
+                System.out.format("Maximum metric value in %d random starts: %.4f%n", nRandomStarts, maxMetricValue);
             }
 
-            System.out.format("Number of communities: %d%n", 
-                clustering.getNClusters());
-            System.out.format("Elapsed time: %d seconds%n", 
-                Math.round((endTime - beginTime) / 1000.0));
+            System.out.format("Number of communities: %d%n", clustering.getNClusters());
+            System.out.format("Elapsed time: %d seconds%n", Math.round((endTime - beginTime) / 1000.0));
             System.out.println();
         }
 
@@ -176,6 +171,19 @@ public class ModularityOptimizer {
         if (printOutput) System.out.println("Writing output file...");
         writeOutputFile(outputFileName, clustering);
         if (printOutput) System.out.println("Finish writing to output file.");
+
+        // because writeOutputFile reorders the clustering, the SI score t be recalculated to reflect the reordered clusters
+        if (metricFunction == SILHOUETTE_INDEX) {
+            Network nt = readInputFile(inputFileName, metricFunction);
+            Clustering cl = readClusteringFile(outputFileName);
+            double res = 1/(2 * nt.getTotalEdgeWeight() + nt.totalEdgeWeightSelfLinks);
+            VOSClusteringTechnique vos = new VOSClusteringTechnique(nt, cl, res);
+
+            // calculate metric scores
+            double silhouette = vos.calcSilhouetteFunction();
+            System.out.println();
+            System.out.format("SI value after reordering clusters: %.4f%n", silhouette);
+        }
     }
 
     /** 
@@ -309,5 +317,43 @@ public class ModularityOptimizer {
             bufferedWriter.newLine();
         }
         bufferedWriter.close();
+    }
+
+    /** 
+     * Construct a clustering based on a file.
+     *
+     * @param  fileName        the clustering file
+     * @throws IOException     occurs if there's an input or output error
+     * @return a clustering based on the cluster file
+     **/
+    private static Clustering readClusteringFile(String fileName) throws IOException {
+
+        BufferedReader bufferedReader;
+
+        // get the number of lines in the file
+        bufferedReader = new BufferedReader(new FileReader(fileName));
+        int nLines = 0;
+        while (bufferedReader.readLine() != null)
+            nLines++;
+        bufferedReader.close();
+
+        // get the clustering
+        bufferedReader = new BufferedReader(new FileReader(fileName));
+        int[] cluster = new int[nLines];
+        int node;
+        int community;
+        String[] splittedLine;
+        for (int i = 0; i < nLines; i++) {
+            splittedLine = bufferedReader.readLine().split(" ");
+            node = Integer.parseInt(splittedLine[0]);
+            community = Integer.parseInt(splittedLine[1]);
+            cluster[node] = community;
+        }
+        bufferedReader.close();
+
+        Clustering clustering = new Clustering(cluster);
+
+        return clustering;
+
     }
 }

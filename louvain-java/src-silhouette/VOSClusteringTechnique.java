@@ -26,10 +26,7 @@ public class VOSClusteringTechnique {
     private static final int MODULARITY_STANDARD = 1;
     private static final int MODULARITY_ALTERNATIVE = 2;
     private static final int SILHOUETTE_INDEX = 3;
-//TODO
     private static final double INF = Double.POSITIVE_INFINITY;
-    // private static final double INF = 10000000;
-
 
     protected Network network;
     protected Clustering clustering;
@@ -594,16 +591,6 @@ public class VOSClusteringTechnique {
                 }
             }
         }
-
-//TODO
-        // for (int zi = 0; zi < nNodes; zi++) { 
-        //     for (int zj = 0; zj < nNodes; zj++) { 
-        //         System.out.println("distances[i][k]: " + distances[zi][zj]);
-        //     }
-        //     System.out.println();
-        // }
-
-
 
         return distances;
     }

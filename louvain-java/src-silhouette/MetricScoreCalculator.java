@@ -8,6 +8,15 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MetricScoreCalculator {
+
+	/** 
+     * The main sequence. 
+     * Calculates the coverage, modularity, and silhouette index 
+     * scores of a community graph.
+     *
+     * @param  args         expects 2 arguments
+     * @throws IOException  occurs if there's an input or output error
+     **/
     public static void main(String[] args) throws IOException {
 
         System.out.println("-------------------------------------");
@@ -35,6 +44,14 @@ public class MetricScoreCalculator {
 
     }
 
+    /** 
+     * Construct a network based on the input file that 
+     * contains the list of edges.
+     *
+     * @param  fileName        the input file
+     * @throws IOException     occurs if there's an input or output error
+     * @return a network based on the input file
+     **/
     private static Network readInputFile(String fileName) throws IOException {
 
         BufferedReader bufferedReader;
@@ -128,8 +145,14 @@ public class MetricScoreCalculator {
 
     }
 
-    private static Clustering readClusteringFile(
-    	String fileName) throws IOException {
+	/** 
+     * Construct a clustering based on a file.
+     *
+     * @param  fileName        the clustering file
+     * @throws IOException     occurs if there's an input or output error
+     * @return a clustering based on the cluster file
+     **/
+    private static Clustering readClusteringFile(String fileName) throws IOException {
 
         BufferedReader bufferedReader;
 
@@ -157,7 +180,7 @@ public class MetricScoreCalculator {
     	Clustering clustering = new Clustering(cluster);
 
     	return clustering;
-
+    	
     }
 
 }
